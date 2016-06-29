@@ -12,4 +12,9 @@
         <item name="android:textColorSecondary">#fff</item>
     </style>
 
+    <style name="ClickEffect">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+    </style>
+
 </resources>

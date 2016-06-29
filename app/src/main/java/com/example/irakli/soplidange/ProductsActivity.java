@@ -44,7 +44,7 @@ public class ProductsActivity extends AppCompatActivity {
         return true;
     }
 
-    private void initToolbar(){
+    private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_id);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -53,10 +53,12 @@ public class ProductsActivity extends AppCompatActivity {
         actionBar.setTitle("");
     }
 
-    private void initGridRecycleView(){
+    private void initGridRecycleView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(gridLayoutManager);
     }
+
+
 
 }
