@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.irakli.soplidange.R;
+import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -19,11 +20,12 @@ import java.util.ArrayList;
  */
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyViewHolder>{
 
-    ArrayList<String> productImagesList;
+    ArrayList<ProductModel> productModels;
     Context context;
 
-    public ProductsAdapter(ArrayList<String> productImagesList, Context context) {
-        this.productImagesList = productImagesList;
+    public ProductsAdapter(ArrayList<ProductModel> productModels, Context context) {
+
+        this.productModels = productModels;
         this.context = context;
     }
 
@@ -37,24 +39,57 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(holder.productImageView);
-//        holder.productImageView.setText(productImagesList.get(position));
+        Picasso.with(context)
+                .load(productModels.get(position).getImg())
+                .resize(300, 300)
+                .centerCrop()
+                .into(holder.productImageView);
+        double price = productModels.get(position).getPrice();
+        holder.setModel(productModels.get(position));
+        holder.productPriceView.setText( String.valueOf(price)+"GEL");
+        holder.productNameView.setText(productModels.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return productImagesList.size();
+        return productModels.size();
     }
 
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         ImageView productImageView;
+        TextView productNameView;
+        TextView productPriceView;
+        ProductModel model;
+
+        void setModel(ProductModel model) {
+            this.model = model;
+        }
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            productImageView = (ImageView) itemView.findViewById(R.id.recycler_grid_view_id);
+            productImageView = (ImageView) itemView.findViewById(R.id.image_id);
+            productNameView = (TextView) itemView.findViewById(R.id.product_name_id);
+            productPriceView = (TextView) itemView.findViewById(R.id.price_id);
+
+            productImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null){
+                        listener.onClick((model));
+                    }
+                }
+            });
         }
+    }
+
+    private MyClickListener listener;
+    public void setMyClickListener(MyClickListener listener) {
+        this.listener = listener;
+    }
+    public interface MyClickListener {
+        void onClick(ProductModel model);
     }
 }

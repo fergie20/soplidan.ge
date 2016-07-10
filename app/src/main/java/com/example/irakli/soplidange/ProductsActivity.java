@@ -8,15 +8,18 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.ArrayAdapter;
 
 import com.example.irakli.soplidange.ExampleData.ExampleData;
+import com.example.irakli.soplidange.ExampleData.ProductData;
 import com.example.irakli.soplidange.adapters.ProductsAdapter;
+import com.example.irakli.soplidange.dialog.ProductDetailDialog;
+import com.example.irakli.soplidange.models.ProductModel;
 
 import java.util.ArrayList;
 
 public class ProductsActivity extends AppCompatActivity {
     Toolbar toolbar;
-    ArrayList<String> productImagesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +29,25 @@ public class ProductsActivity extends AppCompatActivity {
         initToolbar();
         initGridRecycleView();
 
-        productImagesList = new ArrayList<>();
-        for (int i = 0; i < ExampleData.productImages.length; i++) {
-            productImagesList.add(ExampleData.productImages[i]);
+
+        ArrayList <ProductModel>productModels = new ArrayList<>();
+
+        for (int i = 0; i < ProductData.id.length; i++) {
+            ProductModel productModel = new ProductModel(ProductData.categories[i],ProductData.name[i],ProductData.description[i],ProductData.img[i],ProductData.id[i],ProductData.recource[i],ProductData.price[i]);
+            productModels.add(productModel);
         }
 
-        ProductsAdapter productsAdapter = new ProductsAdapter(productImagesList, getApplicationContext());
+        ProductsAdapter productsAdapter = new ProductsAdapter(productModels, getApplicationContext());
+        productsAdapter.setMyClickListener(new ProductsAdapter.MyClickListener() {
+            @Override
+            public void onClick(ProductModel model) {
+                ProductDetailDialog dialog = new ProductDetailDialog();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("model",model);
+                dialog.setArguments(bundle);
+                dialog.show(getFragmentManager(),"dialog");
+            }
+        });
         RecyclerView gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
         gridRecycler.setAdapter(productsAdapter);
     }
