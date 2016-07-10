@@ -4,20 +4,28 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CheckoutActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
     TextView productPriceView;
-    TextView minusTextView;
-    TextView plusTextView;
-    TextView quantityView;
+    ImageView minusTextView;
+    ImageView plusTextView;
+    EditText quantityView;
     TextView sumView;
+    String checkQuantity;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +33,7 @@ public class CheckoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checkout);
 
         initToolbar();
+        calculateSum();
 
     }
 
@@ -45,31 +54,88 @@ public class CheckoutActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
     }
 
-//    private void calculateSum() {
-//        productPriceView = (TextView) findViewById(R.id.product_price_id);
-//        minusTextView = (TextView) findViewById(R.id.minus_id);
-//        plusTextView = (TextView) findViewById(R.id.plus_id);
-//        quantityView = (TextView) findViewById(R.id.quantity_id);
-//        sumView = (TextView) findViewById(R.id.sum_id);
-//
-//        plusTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int productPrice;
-//                int productPriceMultiplied = 0;
-//
-//                productPrice = Integer.parseInt((String) productPriceView.getText());
-//
-//                if (productPriceMultiplied == 0){
-//                    productPriceMultiplied = productPrice * 2;
-//                }else {
-//                    productPriceMultiplied += productPrice;
-//                }
-//
-//                sumView.setText(productPriceMultiplied);
-//            }
-//        });
-//
-//    }
+
+
+    private void calculateSum( ) {
+        productPriceView = (TextView) findViewById(R.id.product_price_id);
+        minusTextView = (ImageView) findViewById(R.id.minus_id);
+        plusTextView = (ImageView) findViewById(R.id.plus_id);
+        quantityView = (EditText) findViewById(R.id.quantity_id);
+        sumView = (TextView) findViewById(R.id.sum_id);
+        quantityView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                int productPrice =  Integer.parseInt((String) productPriceView.getText());
+//                int quontity = Integer.parseInt((String) charSequence);
+//                int sum = productPrice*quontity;
+//                sumView.setText(sum+"");
+//                Toast.makeText(getApplicationContext(), charSequence, Toast.LENGTH_LONG).show();
+
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String input = String.valueOf(editable);
+                int productPrice =  Integer.parseInt((String) productPriceView.getText());
+                if(editable != null && !input.isEmpty()) {
+                    int quontity = Integer.parseInt(input);
+                    int sum = productPrice * quontity;
+                    sumView.setText(sum + "");
+                }else{
+                    quantityView.setText("0");
+                }
+                //Toast.makeText(getApplicationContext(), editable, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        plusTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int productPrice;
+                int quantity;
+                checkQuantity = quantityView.getText().toString();
+                quantity = Integer.parseInt((String) checkQuantity);
+
+                quantity++;
+               // Toast.makeText(getApplicationContext(), "daechira" + checkQuantity, Toast.LENGTH_LONG).show();
+
+
+                 quantityView.setText(quantity+"");
+
+
+            }
+        });
+        minusTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int productPrice;
+                int quantity;
+                checkQuantity = quantityView.getText().toString();
+                quantity = Integer.parseInt((String) checkQuantity);
+
+                if (quantity >= 2) {
+                    quantity--;
+
+                    quantityView.setText(quantity + "");
+
+
+                } else {
+                    sumView.setText("0");
+                    quantityView.setText("0");
+
+                }
+
+
+            }
+        });
+
+    }
 
 }

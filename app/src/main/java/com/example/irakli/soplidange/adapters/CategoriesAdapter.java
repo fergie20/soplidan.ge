@@ -1,12 +1,18 @@
 package com.example.irakli.soplidange.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.irakli.soplidange.CheckoutActivity;
 import com.example.irakli.soplidange.R;
 
 import java.util.ArrayList;
@@ -34,9 +40,24 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.categoryNameView.setText(categoriesList.get(position));
+        holder.categoryNameView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // Toast.makeText(context, "daechira" + position, Toast.LENGTH_LONG).show();
+                int cat_id = (position);
+                Intent transport = new Intent(context, CheckoutActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("cat_id", cat_id);
+                transport.putExtra("Extra", bundle);
+                transport.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(transport);
+            }
+        });
+
     }
+
 
     @Override
     public int getItemCount() {
