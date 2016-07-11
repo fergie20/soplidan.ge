@@ -1,10 +1,7 @@
 package com.example.irakli.soplidange;
 
-<<<<<<< Updated upstream
 import android.os.Bundle;
-=======
 import android.content.Context;
->>>>>>> Stashed changes
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -54,18 +51,18 @@ public class CheckoutActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             model = (ProductModel) extras.getSerializable("model");
+            Picasso.with(getApplicationContext())
+                    .load(model.getImg())
+                    .resize(300, 300)
+                    .centerCrop()
+                    .into(image);
+
+            name.setText(model.getName());
+
+            productPriceView.setText(String.valueOf(model.getPrice()));
 
         }
 
-        Picasso.with(context)
-                .load(model.getImg())
-                .resize(300, 300)
-                .centerCrop()
-                .into(image);
-
-        name.setText(model.getName());
-
-        productPriceView.setText(String.valueOf(model.getPrice()));
 
 
         calculateSum();
