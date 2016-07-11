@@ -1,6 +1,7 @@
 package com.example.irakli.soplidange.dialog;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.irakli.soplidange.CheckoutActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
@@ -21,7 +23,6 @@ import java.text.NumberFormat;
  * Created by GeoLab on 7/10/16.
  */
 public class ProductDetailDialog extends DialogFragment {
-    TextView productPriceView;
     ImageView minusTextView;
     ImageView plusTextView;
     EditText quantityView;
@@ -43,10 +44,23 @@ public class ProductDetailDialog extends DialogFragment {
         TextView name = (TextView) rootView.findViewById(R.id.dialog_name_id);
         name.setText(model.getName());
         TextView price = (TextView) rootView.findViewById(R.id.dialog_price_id);
-        price.setText(String.valueOf(model.getPrice())+" GEL");
+        price.setText(String.valueOf(model.getPrice()) + " GEL");
         TextView description = (TextView) rootView.findViewById(R.id.dialog_description_id);
         description.setText(model.getDescription());
+        Button addbutton = (Button) rootView.findViewById(R.id.dialog_addbutton_id);
+
         calculateSum();
+
+        addbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), CheckoutActivity.class);
+
+                i.putExtra("model",model);
+                startActivity(i);
+            }
+        });
+
 
 
         return rootView;

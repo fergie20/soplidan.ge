@@ -1,6 +1,10 @@
 package com.example.irakli.soplidange;
 
+<<<<<<< Updated upstream
 import android.os.Bundle;
+=======
+import android.content.Context;
+>>>>>>> Stashed changes
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,27 +18,57 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.irakli.soplidange.models.ProductModel;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
+import java.text.NumberFormat;
+
 public class CheckoutActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-
     TextView productPriceView;
     ImageView minusTextView;
     ImageView plusTextView;
     EditText quantityView;
     TextView sumView;
     String checkQuantity;
-
+    ProductModel model;
+    Context context;
+    SingletonDemo singletonDemo;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+        TextView name = (TextView) findViewById(R.id.checkout_name_id);
+        ImageView image = (ImageView) findViewById(R.id.checkout_image_id);
+
 
         initToolbar();
-        calculateSum();
 
+        find();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            model = (ProductModel) extras.getSerializable("model");
+
+        }
+
+        Picasso.with(context)
+                .load(model.getImg())
+                .resize(300, 300)
+                .centerCrop()
+                .into(image);
+
+        name.setText(model.getName());
+
+        productPriceView.setText(String.valueOf(model.getPrice()));
+
+
+        calculateSum();
     }
 
     @Override
@@ -69,11 +103,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
     private void calculateSum( ) {
-        productPriceView = (TextView) findViewById(R.id.product_price_id);
-        minusTextView = (ImageView) findViewById(R.id.minus_id);
-        plusTextView = (ImageView) findViewById(R.id.plus_id);
-        quantityView = (EditText) findViewById(R.id.quantity_id);
-        sumView = (TextView) findViewById(R.id.sum_id);
+        find();
         quantityView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -89,18 +119,21 @@ public class CheckoutActivity extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(), charSequence, Toast.LENGTH_LONG).show();
 
 
-
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
                 String input = String.valueOf(editable);
-                int productPrice =  Integer.parseInt((String) productPriceView.getText());
-                if(editable != null && !input.isEmpty()) {
+                double productPrice = Double.parseDouble((String) productPriceView.getText());
+                if (editable != null && !input.isEmpty()) {
                     int quontity = Integer.parseInt(input);
-                    int sum = productPrice * quontity;
-                    sumView.setText(sum + "");
-                }else{
+
+                    double sum = productPrice * quontity;
+                    NumberFormat nf = NumberFormat.getInstance(); // get instance
+                    nf.setMaximumFractionDigits(3); // set decimal places
+                    String s = nf.format(sum);
+                    sumView.setText(s + "");
+                } else {
                     quantityView.setText("0");
                 }
                 //Toast.makeText(getApplicationContext(), editable, Toast.LENGTH_LONG).show();
@@ -116,10 +149,10 @@ public class CheckoutActivity extends AppCompatActivity {
                 quantity = Integer.parseInt((String) checkQuantity);
 
                 quantity++;
-               // Toast.makeText(getApplicationContext(), "daechira" + checkQuantity, Toast.LENGTH_LONG).show();
+                // Toast.makeText(getApplicationContext(), "daechira" + checkQuantity, Toast.LENGTH_LONG).show();
 
 
-                 quantityView.setText(quantity+"");
+                quantityView.setText(quantity + "");
 
 
             }
@@ -147,7 +180,13 @@ public class CheckoutActivity extends AppCompatActivity {
 
             }
         });
-
+    }
+    private void find(){
+        productPriceView = (TextView) findViewById(R.id.product_price_id);
+        minusTextView = (ImageView) findViewById(R.id.minus_id);
+        plusTextView = (ImageView) findViewById(R.id.plus_id);
+        quantityView = (EditText) findViewById(R.id.quantity_id);
+        sumView = (TextView) findViewById(R.id.sum_id);
     }
 
 }
