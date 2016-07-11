@@ -1,18 +1,18 @@
 package com.example.irakli.soplidange;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class CheckoutActivity extends AppCompatActivity {
 
@@ -42,6 +42,9 @@ public class CheckoutActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
 
+        MenuItem checkListIcon = menu.findItem(R.id.check_list_id);
+        checkListIcon.setVisible(false);
+
         return true;
     }
 
@@ -54,6 +57,15 @@ public class CheckoutActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                super. onBackPressed();
+                return true;
+        }
+        return (super.onOptionsItemSelected(menuItem));
+    }
 
 
     private void calculateSum( ) {

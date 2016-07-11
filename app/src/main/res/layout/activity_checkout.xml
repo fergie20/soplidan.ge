@@ -59,7 +59,9 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/quantity_id"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/ic_remove_black_24dp"
+                android:padding="2dp"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/ic_remove_white_24dp"
                 style="@style/ClickEffect"/>
 
             <EditText
@@ -81,7 +83,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_add_black_24dp"
+                android:padding="2dp"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/ic_add_white_24dp"
                 style="@style/ClickEffect"/>
 
         </RelativeLayout>
@@ -109,10 +113,12 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/activity_vertical_margin"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:text="5 GEL"/>
+            android:text="5 GEL"
+            />
     </RelativeLayout>
 
 

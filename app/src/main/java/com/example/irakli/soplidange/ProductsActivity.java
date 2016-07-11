@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 import com.example.irakli.soplidange.ExampleData.ExampleData;
@@ -58,6 +59,16 @@ public class ProductsActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.menu, menu);
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                super. onBackPressed();
+                return true;
+        }
+        return (super.onOptionsItemSelected(menuItem));
     }
 
     private void initToolbar() {

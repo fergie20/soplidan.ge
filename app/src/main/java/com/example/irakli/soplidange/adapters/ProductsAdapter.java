@@ -41,8 +41,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Picasso.with(context)
                 .load(productModels.get(position).getImg())
-                .resize(300, 300)
-                .centerCrop()
                 .into(holder.productImageView);
         double price = productModels.get(position).getPrice();
         holder.setModel(productModels.get(position));
