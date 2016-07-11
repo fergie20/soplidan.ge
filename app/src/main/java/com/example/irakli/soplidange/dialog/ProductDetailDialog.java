@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.irakli.soplidange.CheckoutActivity;
 import com.example.irakli.soplidange.R;
+import com.example.irakli.soplidange.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
@@ -55,10 +56,10 @@ public class ProductDetailDialog extends DialogFragment {
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), CheckoutActivity.class);
+                model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
 
-                i.putExtra("model",model);
-                startActivity(i);
+               SingletonTest.getInstance().addProduct(model.getId(),model);
+
             }
         });
 
@@ -143,6 +144,7 @@ public class ProductDetailDialog extends DialogFragment {
                     quantityView.setText("0");
 
                 }
+
 
 
             }

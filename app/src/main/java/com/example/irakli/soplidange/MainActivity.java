@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity{
         CategoriesAdapter myAdapter = new CategoriesAdapter(categoriesList, getApplicationContext());
         recyclerView.setAdapter(myAdapter);
 
+
+
     }
 
     @Override

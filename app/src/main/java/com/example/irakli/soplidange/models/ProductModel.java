@@ -8,6 +8,9 @@ import java.io.Serializable;
 public class ProductModel implements Serializable {
     private String categories,name,description,img;
     private int id;
+    private int recource;
+    private double price;
+    private int quontity;
 
     public ProductModel(String categories, String name, String description, String img, int id, int recource, double price) {
         this.categories = categories;
@@ -17,6 +20,14 @@ public class ProductModel implements Serializable {
         this.id = id;
         this.recource = recource;
         this.price = price;
+    }
+
+    public int getQuontity() {
+        return quontity;
+    }
+
+    public void setQuontity(int quontity) {
+        this.quontity = quontity;
     }
 
     public String getDescription() {
@@ -75,6 +86,5 @@ public class ProductModel implements Serializable {
         this.price = price;
     }
 
-    private int recource;
-    private double price;
+
 }

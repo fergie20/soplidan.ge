@@ -32,9 +32,6 @@ public class CheckoutActivity extends AppCompatActivity {
     TextView sumView;
     String checkQuantity;
     ProductModel model;
-    Context context;
-    SingletonDemo singletonDemo;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +45,9 @@ public class CheckoutActivity extends AppCompatActivity {
 
         find();
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            model = (ProductModel) extras.getSerializable("model");
+       model= SingletonTest.getInstance().getProduct(2);
+
+
             Picasso.with(getApplicationContext())
                     .load(model.getImg())
                     .resize(300, 300)
@@ -61,11 +58,12 @@ public class CheckoutActivity extends AppCompatActivity {
 
             productPriceView.setText(String.valueOf(model.getPrice()));
 
-        }
+
 
 
 
         calculateSum();
+
     }
 
     @Override
