@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.irakli.soplidange.CheckoutActivity;
 import com.example.irakli.soplidange.R;
@@ -58,8 +59,9 @@ public class ProductDetailDialog extends DialogFragment {
             public void onClick(View view) {
                 model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
 
-               SingletonTest.getInstance().addProduct(model.getId(),model);
-
+               SingletonTest.getInstance().addProduct(model.getId(), model);
+                Toast.makeText(getActivity(), "daemata kalatas", Toast.LENGTH_LONG).show();
+                dismiss();
             }
         });
 

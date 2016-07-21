@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -60,6 +61,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
         TextView productNameView;
         TextView productPriceView;
         ProductModel model;
+        ImageView plus;
+        ImageView minus;
+        TextView quantityView;
 
         void setModel(ProductModel model) {
             this.model = model;
@@ -67,10 +71,50 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            plus = (ImageView) itemView.findViewById(R.id.grid_plus_id);
+            minus = (ImageView) itemView.findViewById(R.id.grid_minus_id);
+            quantityView = (TextView) itemView.findViewById(R.id.grid_text_id);
 
             productImageView = (ImageView) itemView.findViewById(R.id.image_id);
             productNameView = (TextView) itemView.findViewById(R.id.product_name_id);
             productPriceView = (TextView) itemView.findViewById(R.id.price_id);
+
+            plus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int quantity;
+                    quantity = Integer.parseInt((String) quantityView.getText().toString());
+
+                    quantity++;
+                    // Toast.makeText(getApplicationContext(), "daechira" + checkQuantity, Toast.LENGTH_LONG).show();
+
+
+                    quantityView.setText(quantity + "");
+
+
+                }
+            });
+
+            minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int quantity;
+                    quantity = Integer.parseInt((String) quantityView.getText().toString());
+
+                    if (quantity >= 2) {
+                        quantity--;
+
+                        quantityView.setText(quantity + "");
+
+
+                    } else {
+                        quantityView.setText("0");
+
+                    }
+
+
+                }
+            });
 
             productImageView.setOnClickListener(new View.OnClickListener() {
                 @Override

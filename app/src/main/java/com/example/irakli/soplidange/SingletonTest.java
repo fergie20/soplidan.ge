@@ -38,4 +38,8 @@ public class SingletonTest {
         return cartMap.get(id);
     }
 
+    public HashMap<Integer, ProductModel> getCartMap(){
+        return cartMap;
+    }
+
 }

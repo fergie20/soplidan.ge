@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,13 +16,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.irakli.soplidange.adapters.CategoriesAdapter;
+import com.example.irakli.soplidange.adapters.CheckoutAdapter;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class CheckoutActivity extends AppCompatActivity {
 
@@ -32,11 +39,19 @@ public class CheckoutActivity extends AppCompatActivity {
     TextView sumView;
     String checkQuantity;
     ProductModel model;
+    RecyclerView recyclerView;
+    HashMap<Integer,ProductModel> cartMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+
+        cartMap = SingletonTest.getInstance().getCartMap();
+
+        initToolbar();
+        initRecyclerView();
         TextView name = (TextView) findViewById(R.id.checkout_name_id);
         ImageView image = (ImageView) findViewById(R.id.checkout_image_id);
 
@@ -45,24 +60,15 @@ public class CheckoutActivity extends AppCompatActivity {
 
         find();
 
-       model= SingletonTest.getInstance().getProduct(2);
+        ArrayList<ProductModel> cartArray = new ArrayList<>();
+        Iterator<Integer> itr = cartMap.keySet().iterator();
+        while(itr.hasNext()){
+            cartArray.add(cartMap.get(itr.next()));
+        }
 
+        CheckoutAdapter myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
+        recyclerView.setAdapter(myAdapter);
 
-            Picasso.with(getApplicationContext())
-                    .load(model.getImg())
-                    .resize(300, 300)
-                    .centerCrop()
-                    .into(image);
-
-            name.setText(model.getName());
-
-            productPriceView.setText(String.valueOf(model.getPrice()));
-
-
-
-
-
-        calculateSum();
 
     }
 
@@ -99,6 +105,20 @@ public class CheckoutActivity extends AppCompatActivity {
 
     private void calculateSum( ) {
         find();
+        String input = String.valueOf(quantityView.getText());
+        double productPrice = Double.parseDouble((String) productPriceView.getText());
+        if (!input.isEmpty()) {
+            int quontity = Integer.parseInt(input);
+
+            double sum = productPrice * quontity;
+            NumberFormat nf = NumberFormat.getInstance(); // get instance
+            nf.setMaximumFractionDigits(3); // set decimal places
+            String s = nf.format(sum);
+            sumView.setText(s + "");
+        } else {
+            quantityView.setText("0");
+        }
+
         quantityView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -183,5 +203,9 @@ public class CheckoutActivity extends AppCompatActivity {
         quantityView = (EditText) findViewById(R.id.quantity_id);
         sumView = (TextView) findViewById(R.id.sum_id);
     }
-
+    private void initRecyclerView() {
+        recyclerView = (RecyclerView) findViewById(R.id.checkout_recycler);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+    }
 }

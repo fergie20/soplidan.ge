@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:gravity="center"
+        android:background="@color/background"
+
+        android:id="@+id/checkout_layout_id"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:padding="10dp"
+            android:id="@+id/checkout_image_id"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <RelativeLayout
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/checkout_name_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                android:text="პროდუქტის სახელი" />
+
+            <TextView
+                android:id="@+id/product_price_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="8dp"
+                android:textSize="13sp"
+                android:textColor="@android:color/black"
+                android:text="5 GEL" />
+
+
+
+            <ImageView
+                android:padding="7dp"
+                android:id="@+id/minus_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/quantity_id"
+                android:layout_centerVertical="true"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/ic_remove_white_24dp"
+                style="@style/ClickEffect"/>
+
+            <EditText
+                android:id="@+id/quantity_id"
+                android:layout_width="46dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/plus_id"
+                android:background="@drawable/text_view_border"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:text="7" />
+
+            <ImageView
+                android:padding="7dp"
+                android:id="@+id/plus_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/ic_add_white_24dp"
+                style="@style/ClickEffect"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

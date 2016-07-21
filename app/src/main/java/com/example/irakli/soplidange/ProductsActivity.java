@@ -9,7 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.ExampleData.ProductData;
@@ -21,14 +25,22 @@ import java.util.ArrayList;
 
 public class ProductsActivity extends AppCompatActivity {
     Toolbar toolbar;
+    ImageButton plus;
+    ImageButton minus;
+    TextView quantityView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
+
         initToolbar();
         initGridRecycleView();
+        plus = (ImageButton) findViewById(R.id.grid_plus_id);
+        minus = (ImageButton) findViewById(R.id.grid_minus_id);
+        quantityView = (TextView) findViewById(R.id.grid_text_id);
+
 
 
         ArrayList <ProductModel>productModels = new ArrayList<>();
@@ -85,7 +97,5 @@ public class ProductsActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(gridLayoutManager);
     }
-
-
 
 }
