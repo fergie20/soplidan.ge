@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.irakli.soplidange.R;
+import com.example.irakli.soplidange.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
@@ -86,7 +88,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                     quantity = Integer.parseInt((String) quantityView.getText().toString());
 
                     quantity++;
-                    // Toast.makeText(getApplicationContext(), "daechira" + checkQuantity, Toast.LENGTH_LONG).show();
+                    model.setQuontity(Integer.parseInt(quantityView.getText().toString())+1);
+
+                    SingletonTest.getInstance().addProduct(model.getId(), model);
+                     Toast.makeText(context, "daemata kalatashi", Toast.LENGTH_LONG).show();
 
 
                     quantityView.setText(quantity + "");
@@ -105,6 +110,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                         quantity--;
 
                         quantityView.setText(quantity + "");
+                        Toast.makeText(context, "ganaxlda kalata", Toast.LENGTH_LONG).show();
+
 
 
                     } else {

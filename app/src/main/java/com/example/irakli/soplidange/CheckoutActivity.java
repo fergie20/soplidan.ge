@@ -1,5 +1,6 @@
 package com.example.irakli.soplidange;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.content.Context;
 import android.support.v7.app.ActionBar;
@@ -68,6 +69,11 @@ public class CheckoutActivity extends AppCompatActivity {
 
         CheckoutAdapter myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
         recyclerView.setAdapter(myAdapter);
+
+        Intent intent = getIntent();
+        String sum = intent.getStringExtra("sum");
+        sumView.setText(sum);
+
 
 
     }

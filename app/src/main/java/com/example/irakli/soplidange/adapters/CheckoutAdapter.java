@@ -1,6 +1,7 @@
 package com.example.irakli.soplidange.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,11 +10,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.irakli.soplidange.CheckoutActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,7 +49,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                 .load(cartMap.get(position).getImg())
                 .into(holder.productImageView);
         double price = cartMap.get(position).getPrice();
-        holder.productPriceView.setText( String.valueOf(price)+"GEL");
+        holder.productPriceView.setText( String.valueOf(price)+"");
         holder.productNameView.setText(cartMap.get(position).getName());
         holder.quantityView.setText(cartMap.get(position).getQuontity() + "");
         holder.minusView.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +73,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         holder.plusView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 int quantity;
                 quantity = Integer.parseInt((String) holder.quantityView.getText().toString());
 
@@ -77,8 +82,47 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
 
 
                 holder.quantityView.setText(quantity + "");
+
+                String input = String.valueOf(holder.quantityView.getText().toString());
+                double productPrice = Double.parseDouble((String) holder.productPriceView.getText());
+
+                int quontity = Integer.parseInt(input);
+
+
+
+                double sum = productPrice * quontity;
+                NumberFormat nf = NumberFormat.getInstance(); // get instance
+                nf.setMaximumFractionDigits(3); // set decimal places
+                String result = nf.format(sum);
+                 Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
             }
+
+
         });
+
+        for (int i = 0; i < cartMap.size(); i++) {
+            String input = String.valueOf(holder.quantityView.getText().toString());
+            double productPrice = Double.parseDouble((String) holder.productPriceView.getText());
+
+                int quontity = Integer.parseInt(input);
+
+
+
+                double sum = productPrice * quontity;
+                NumberFormat nf = NumberFormat.getInstance(); // get instance
+                nf.setMaximumFractionDigits(3); // set decimal places
+     //          String result = nf.format(sum);
+               // sumView.setText(s + "");
+
+
+        }
+//        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+//        Intent intent = new Intent(context, CheckoutActivity.class);
+//        intent.putExtra("sum", result);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//        context.startActivity(intent);
     }
 
     @Override
