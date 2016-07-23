@@ -40,7 +40,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         Picasso.with(context)
                 .load(cartMap.get(position).getImg())
                 .into(holder.productImageView);
@@ -48,6 +48,37 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         holder.productPriceView.setText( String.valueOf(price)+"GEL");
         holder.productNameView.setText(cartMap.get(position).getName());
         holder.quantityView.setText(cartMap.get(position).getQuontity() + "");
+        holder.minusView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int quantity;
+                quantity = Integer.parseInt((String) holder.quantityView.getText().toString());
+
+                if (quantity >= 2) {
+                    quantity--;
+
+                    holder.quantityView.setText(quantity + "");
+
+
+                } else {
+                    holder.quantityView.setText("0");
+
+                }
+            }
+        });
+        holder.plusView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int quantity;
+                quantity = Integer.parseInt((String) holder.quantityView.getText().toString());
+
+                quantity++;
+                // Toast.makeText(getApplicationContext(), "daechira" + checkQuantity, Toast.LENGTH_LONG).show();
+
+
+                holder.quantityView.setText(quantity + "");
+            }
+        });
     }
 
     @Override
@@ -62,6 +93,8 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         TextView productNameView;
         TextView productPriceView;
         EditText quantityView;
+        ImageView plusView;
+        ImageView minusView;
 
 
         public MyViewHolder(View itemView) {
@@ -71,6 +104,8 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
             productNameView = (TextView) itemView.findViewById(R.id.checkout_name_id);
             productPriceView = (TextView) itemView.findViewById(R.id.product_price_id);
             quantityView = (EditText) itemView.findViewById(R.id.quantity_id);
+            plusView = (ImageView) itemView.findViewById(R.id.plus_id);
+            minusView = (ImageView) itemView.findViewById(R.id.minus_id);
 
         }
     }
