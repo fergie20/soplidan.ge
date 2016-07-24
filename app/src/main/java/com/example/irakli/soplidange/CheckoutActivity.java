@@ -72,12 +72,17 @@ public class CheckoutActivity extends AppCompatActivity {
 
                 @Override
                 public void onClick(double price) {
-                    sumView.setText((totalPrice + price) + "");
-                    totalPrice = totalPrice + price;}
+                    NumberFormat nf = NumberFormat.getInstance(); // get instance
+                    nf.setMaximumFractionDigits(3); // set decimal places
+                    String s = nf.format(totalPrice + price);
+                    sumView.setText((s + "GEL"));
+                    totalPrice = totalPrice + price;
+                }
             });
-
-        sumView.setText((totalPrice+""));
-
+        NumberFormat nf = NumberFormat.getInstance(); // get instance
+        nf.setMaximumFractionDigits(3); // set decimal places
+        String s = nf.format(totalPrice );
+        sumView.setText((s + "GEL"));
     }
 
     private double totalPrice;
@@ -87,6 +92,7 @@ public class CheckoutActivity extends AppCompatActivity {
         double price = 0;
         for (int i = 0; i < products.size(); i++) {
             price += products.get(i).getPrice() * products.get(i).getQuontity();
+
         }
 
         return price;

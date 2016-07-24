@@ -58,7 +58,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         holder.setMyModel(cartMap.get(position));
 
 
-        holder.productPriceView.setText( String.valueOf(price)+"");
+        holder.productPriceView.setText( String.valueOf(price)+" GEL");
         holder.productNameView.setText(cartMap.get(position).getName());
         holder.quantityView.setText(cartMap.get(position).getQuontity() + "");
     }

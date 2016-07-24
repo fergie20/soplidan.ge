@@ -52,6 +52,8 @@ public class ProductDetailDialog extends DialogFragment {
         description.setText(model.getDescription());
         Button addbutton = (Button) rootView.findViewById(R.id.dialog_addbutton_id);
 
+
+
         calculateSum();
 
         addbutton.setOnClickListener(new View.OnClickListener() {
@@ -72,43 +74,25 @@ public class ProductDetailDialog extends DialogFragment {
     private void calculateSum() {
         minusTextView = (ImageView) rootView.findViewById(R.id.dialog_minus_id);
         plusTextView = (ImageView) rootView.findViewById(R.id.dialog_plus_id);
-        quantityView = (TextView) rootView.findViewById(R.id.dialog_quantity_id);
         sumView = (TextView) rootView.findViewById(R.id.dialog_price_id);
+        quantityView = (TextView) rootView.findViewById(R.id.dialog_quantity_id);
+        if (SingletonTest.getInstance().getProduct(model.getId()) != null) {
+            quantityView.setText(SingletonTest.getInstance().getProduct(model.getId()).getQuontity() + "");
+        }
+        double productPrice;
+        int quantity;
+        double sum;
+        productPrice = model.getPrice();
+        checkQuantity = quantityView.getText().toString();
+        quantity = Integer.parseInt((String) checkQuantity);
+        sum = productPrice * quantity;
 
-//        quantityView.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-////                int productPrice =  Integer.parseInt((String) productPriceView.getText());
-////                int quontity = Integer.parseInt((String) charSequence);
-////                int sum = productPrice*quontity;
-////                sumView.setText(sum+"");
-////                Toast.makeText(getApplicationContext(), charSequence, Toast.LENGTH_LONG).show();
-//
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//                String input = String.valueOf(editable);
-//                if (editable != null && !input.isEmpty()) {
-//                    int quontity = Integer.parseInt(input);
-//
-//                    double sum = model.getPrice() * quontity;
-//                    NumberFormat nf = NumberFormat.getInstance(); // get instance
-//                    nf.setMaximumFractionDigits(3); // set decimal places
-//                    String s = nf.format(sum);
-//                    sumView.setText(s+" GEL");
-//                } else {
-//                    quantityView.setText("0");
-//                }
-//                //Toast.makeText(getApplicationContext(), editable, Toast.LENGTH_LONG).show();
-//            }
-//        });
+        NumberFormat nf = NumberFormat.getInstance(); // get instance
+        nf.setMaximumFractionDigits(3); // set decimal places
+        String s = nf.format(sum);
+
+        sumView.setText(s+" GEL");
+
 
         plusTextView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -25,8 +25,8 @@ import java.util.ArrayList;
 
 public class ProductsActivity extends AppCompatActivity {
     Toolbar toolbar;
-    ImageButton plus;
-    ImageButton minus;
+    ImageView plus;
+    ImageView minus;
     TextView quantityView;
 
     @Override
@@ -37,8 +37,8 @@ public class ProductsActivity extends AppCompatActivity {
 
         initToolbar();
         initGridRecycleView();
-        plus = (ImageButton) findViewById(R.id.grid_plus_id);
-        minus = (ImageButton) findViewById(R.id.grid_minus_id);
+        plus = (ImageView) findViewById(R.id.grid_plus_id);
+        minus = (ImageView) findViewById(R.id.grid_minus_id);
         quantityView = (TextView) findViewById(R.id.grid_text_id);
 
 
