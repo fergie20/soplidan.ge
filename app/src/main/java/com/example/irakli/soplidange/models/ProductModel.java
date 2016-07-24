@@ -22,6 +22,10 @@ public class ProductModel implements Serializable {
         this.price = price;
     }
 
+    public double getSumPrice(){
+        return  price*2;
+    }
+
     public int getQuontity() {
         return quontity;
     }

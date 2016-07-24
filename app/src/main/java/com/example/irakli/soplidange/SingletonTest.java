@@ -23,12 +23,11 @@ public class SingletonTest {
     }
 
     public void addProduct(Integer productId, ProductModel model){
-            cartMap.put(productId, model);
+        cartMap.put(productId, model);
     }
 
     public void removeProduct(String product){
-        if(cartMap.containsKey(product))
-            cartMap.remove(product);
+        cartMap.remove(product);
     }
 
     public int getNumberOfItems(){

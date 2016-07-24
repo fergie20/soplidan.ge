@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.irakli.soplidange.CheckoutActivity;
 import com.example.irakli.soplidange.R;
+import com.example.irakli.soplidange.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
@@ -28,6 +32,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
 
     ArrayList<ProductModel> cartMap;
     Context context;
+    boolean check = false;
 
     public CheckoutAdapter(ArrayList<ProductModel> cartMap, Context context) {
 
@@ -43,86 +48,19 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         return myViewHolder;
     }
 
+    private double oldPrice;
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Picasso.with(context)
                 .load(cartMap.get(position).getImg())
                 .into(holder.productImageView);
         double price = cartMap.get(position).getPrice();
+        holder.setMyModel(cartMap.get(position));
+
+
         holder.productPriceView.setText( String.valueOf(price)+"");
         holder.productNameView.setText(cartMap.get(position).getName());
         holder.quantityView.setText(cartMap.get(position).getQuontity() + "");
-        holder.minusView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int quantity;
-                quantity = Integer.parseInt((String) holder.quantityView.getText().toString());
-
-                if (quantity >= 2) {
-                    quantity--;
-
-                    holder.quantityView.setText(quantity + "");
-
-
-                } else {
-                    holder.quantityView.setText("0");
-
-                }
-            }
-        });
-        holder.plusView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                int quantity;
-                quantity = Integer.parseInt((String) holder.quantityView.getText().toString());
-
-                quantity++;
-                // Toast.makeText(getApplicationContext(), "daechira" + checkQuantity, Toast.LENGTH_LONG).show();
-
-
-                holder.quantityView.setText(quantity + "");
-
-                String input = String.valueOf(holder.quantityView.getText().toString());
-                double productPrice = Double.parseDouble((String) holder.productPriceView.getText());
-
-                int quontity = Integer.parseInt(input);
-
-
-
-                double sum = productPrice * quontity;
-                NumberFormat nf = NumberFormat.getInstance(); // get instance
-                nf.setMaximumFractionDigits(3); // set decimal places
-                String result = nf.format(sum);
-                 Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-
-            }
-
-
-        });
-
-        for (int i = 0; i < cartMap.size(); i++) {
-            String input = String.valueOf(holder.quantityView.getText().toString());
-            double productPrice = Double.parseDouble((String) holder.productPriceView.getText());
-
-                int quontity = Integer.parseInt(input);
-
-
-
-                double sum = productPrice * quontity;
-                NumberFormat nf = NumberFormat.getInstance(); // get instance
-                nf.setMaximumFractionDigits(3); // set decimal places
-     //          String result = nf.format(sum);
-               // sumView.setText(s + "");
-
-
-        }
-//        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-//        Intent intent = new Intent(context, CheckoutActivity.class);
-//        intent.putExtra("sum", result);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//
-//        context.startActivity(intent);
     }
 
     @Override
@@ -136,21 +74,106 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         ImageView productImageView;
         TextView productNameView;
         TextView productPriceView;
-        EditText quantityView;
+        TextView quantityView;
         ImageView plusView;
         ImageView minusView;
-
-
+        private ProductModel model;
+        private double oldPrice;
+        public void setMyModel(ProductModel model ){
+            this.model = model;
+        }
         public MyViewHolder(View itemView) {
             super(itemView);
 
             productImageView = (ImageView) itemView.findViewById(R.id.checkout_image_id);
             productNameView = (TextView) itemView.findViewById(R.id.checkout_name_id);
             productPriceView = (TextView) itemView.findViewById(R.id.product_price_id);
-            quantityView = (EditText) itemView.findViewById(R.id.quantity_id);
+            quantityView = (TextView) itemView.findViewById(R.id.quantity_id);
             plusView = (ImageView) itemView.findViewById(R.id.plus_id);
             minusView = (ImageView) itemView.findViewById(R.id.minus_id);
 
+            plusView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int quantity;
+                    quantity = Integer.parseInt((String) quantityView.getText().toString());
+
+                    quantity++;
+                    quantityView.setText(quantity + "");
+                    model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
+
+                    SingletonTest.getInstance().addProduct(model.getId(), model);
+
+                    oldPrice = model.getPrice();
+                    listener.onClick(oldPrice);
+                }
+            });
+            minusView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int quantity;
+                    quantity = Integer.parseInt((String) quantityView.getText().toString());
+
+                    if (quantity >= 1) {
+                        quantity--;
+
+                        quantityView.setText(quantity + "");
+                        double newQuantity = Double.parseDouble(quantityView.getText().toString());
+                        SingletonTest.getInstance().addProduct(model.getId(), model);
+                        if (newQuantity <= 0) {
+                            cartMap.remove(model);
+                            notifyDataSetChanged();
+                            SingletonTest.getInstance().getCartMap().remove(model.getId());
+
+                            model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
+
+                            oldPrice = model.getPrice();
+                            listener.onClick(-oldPrice);
+                            return;
+                        }
+
+                        model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
+
+                        SingletonTest.getInstance().addProduct(model.getId(), model);
+                        oldPrice = model.getPrice();
+                        listener.onClick(-oldPrice);
+
+
+                    }
+                }
+            });
+
+//            quantityView.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable editable) {
+//
+//
+//                        oldPrice = model.getPrice();
+//                        listener.onClick(oldPrice);
+//
+//
+//                    }
+//
+//            });
+
         }
+
+    }
+    private MyClickListener listener;
+    public void setMyPriceUpdateListener(MyClickListener listener){
+        this.listener = listener;
+    }
+    public interface MyClickListener {
+        void onClick(double price);
     }
 }

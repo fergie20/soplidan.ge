@@ -2,7 +2,6 @@ package com.example.irakli.soplidange;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,18 +16,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.irakli.soplidange.adapters.CategoriesAdapter;
 import com.example.irakli.soplidange.adapters.CheckoutAdapter;
 import com.example.irakli.soplidange.models.ProductModel;
-import com.squareup.picasso.Picasso;
 
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class CheckoutActivity extends AppCompatActivity {
 
@@ -36,7 +31,7 @@ public class CheckoutActivity extends AppCompatActivity {
     TextView productPriceView;
     ImageView minusTextView;
     ImageView plusTextView;
-    EditText quantityView;
+    TextView quantityView;
     TextView sumView;
     String checkQuantity;
     ProductModel model;
@@ -61,22 +56,42 @@ public class CheckoutActivity extends AppCompatActivity {
 
         find();
 
-        ArrayList<ProductModel> cartArray = new ArrayList<>();
-        Iterator<Integer> itr = cartMap.keySet().iterator();
-        while(itr.hasNext()){
-            cartArray.add(cartMap.get(itr.next()));
+        final ArrayList<ProductModel> cartArray = new ArrayList<>();
+        for (Integer integer : cartMap.keySet()) {
+            cartArray.add(cartMap.get(integer));
         }
 
         CheckoutAdapter myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
         recyclerView.setAdapter(myAdapter);
 
-        Intent intent = getIntent();
-        String sum = intent.getStringExtra("sum");
-        sumView.setText(sum);
+
+        totalPrice = getTotalPrice(cartArray);
 
 
+            myAdapter.setMyPriceUpdateListener(new CheckoutAdapter.MyClickListener() {
+
+                @Override
+                public void onClick(double price) {
+                    sumView.setText((totalPrice + price) + "");
+                    totalPrice = totalPrice + price;}
+            });
+
+        sumView.setText((totalPrice+""));
 
     }
+
+    private double totalPrice;
+
+
+    private double getTotalPrice(ArrayList<ProductModel> products){
+        double price = 0;
+        for (int i = 0; i < products.size(); i++) {
+            price += products.get(i).getPrice() * products.get(i).getQuontity();
+        }
+
+        return price;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,104 +124,104 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
 
-    private void calculateSum( ) {
-        find();
-        String input = String.valueOf(quantityView.getText());
-        double productPrice = Double.parseDouble((String) productPriceView.getText());
-        if (!input.isEmpty()) {
-            int quontity = Integer.parseInt(input);
-
-            double sum = productPrice * quontity;
-            NumberFormat nf = NumberFormat.getInstance(); // get instance
-            nf.setMaximumFractionDigits(3); // set decimal places
-            String s = nf.format(sum);
-            sumView.setText(s + "");
-        } else {
-            quantityView.setText("0");
-        }
-
-        quantityView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                int productPrice =  Integer.parseInt((String) productPriceView.getText());
-//                int quontity = Integer.parseInt((String) charSequence);
-//                int sum = productPrice*quontity;
-//                sumView.setText(sum+"");
-//                Toast.makeText(getApplicationContext(), charSequence, Toast.LENGTH_LONG).show();
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String input = String.valueOf(editable);
-                double productPrice = Double.parseDouble((String) productPriceView.getText());
-                if (editable != null && !input.isEmpty()) {
-                    int quontity = Integer.parseInt(input);
-
-                    double sum = productPrice * quontity;
-                    NumberFormat nf = NumberFormat.getInstance(); // get instance
-                    nf.setMaximumFractionDigits(3); // set decimal places
-                    String s = nf.format(sum);
-                    sumView.setText(s + "");
-                } else {
-                    quantityView.setText("0");
-                }
-                //Toast.makeText(getApplicationContext(), editable, Toast.LENGTH_LONG).show();
-            }
-        });
-
-        plusTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int productPrice;
-                int quantity;
-                checkQuantity = quantityView.getText().toString();
-                quantity = Integer.parseInt((String) checkQuantity);
-
-                quantity++;
-                // Toast.makeText(getApplicationContext(), "daechira" + checkQuantity, Toast.LENGTH_LONG).show();
-
-
-                quantityView.setText(quantity + "");
-
-
-            }
-        });
-        minusTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int productPrice;
-                int quantity;
-                checkQuantity = quantityView.getText().toString();
-                quantity = Integer.parseInt((String) checkQuantity);
-
-                if (quantity >= 2) {
-                    quantity--;
-
-                    quantityView.setText(quantity + "");
-
-
-                } else {
-                    sumView.setText("0");
-                    quantityView.setText("0");
-
-                }
-
-
-            }
-        });
-    }
+//    private void calculateSum( ) {
+//        find();
+//        String input = String.valueOf(quantityView.getText());
+//        double productPrice = Double.parseDouble((String) productPriceView.getText());
+//        if (!input.isEmpty()) {
+//            int quontity = Integer.parseInt(input);
+//
+//            double sum = productPrice * quontity;
+//            NumberFormat nf = NumberFormat.getInstance(); // get instance
+//            nf.setMaximumFractionDigits(3); // set decimal places
+//            String s = nf.format(sum);
+//            sumView.setText(s + "");
+//        } else {
+//            quantityView.setText("0");
+//        }
+//
+//        quantityView.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+////                int productPrice =  Integer.parseInt((String) productPriceView.getText());
+////                int quontity = Integer.parseInt((String) charSequence);
+////                int sum = productPrice*quontity;
+////                sumView.setText(sum+"");
+////                Toast.makeText(getApplicationContext(), charSequence, Toast.LENGTH_LONG).show();
+//
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                String input = String.valueOf(editable);
+//                double productPrice = Double.parseDouble((String) productPriceView.getText());
+//                if (editable != null && !input.isEmpty()) {
+//                    int quontity = Integer.parseInt(input);
+//
+//                    double sum = productPrice * quontity;
+//                    NumberFormat nf = NumberFormat.getInstance(); // get instance
+//                    nf.setMaximumFractionDigits(3); // set decimal places
+//                    String s = nf.format(sum);
+//                    sumView.setText(s + "");
+//                } else {
+//                    quantityView.setText("0");
+//                }
+//                //Toast.makeText(getApplicationContext(), editable, Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//        plusTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int productPrice;
+//                int quantity;
+//                checkQuantity = quantityView.getText().toString();
+//                quantity = Integer.parseInt((String) checkQuantity);
+//
+//                quantity++;
+//                // Toast.makeText(getApplicationContext(), "daechira" + checkQuantity, Toast.LENGTH_LONG).show();
+//
+//
+//                quantityView.setText(quantity + "");
+//
+//
+//            }
+//        });
+//        minusTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int productPrice;
+//                int quantity;
+//                checkQuantity = quantityView.getText().toString();
+//                quantity = Integer.parseInt((String) checkQuantity);
+//
+//                if (quantity >= 2) {
+//                    quantity--;
+//
+//                    quantityView.setText(quantity + "");
+//
+//
+//                } else {
+//                    sumView.setText("0");
+//                    quantityView.setText("0");
+//
+//                }
+//
+//
+//            }
+//        });
+//    }
     private void find(){
         productPriceView = (TextView) findViewById(R.id.product_price_id);
         minusTextView = (ImageView) findViewById(R.id.minus_id);
         plusTextView = (ImageView) findViewById(R.id.plus_id);
-        quantityView = (EditText) findViewById(R.id.quantity_id);
+        quantityView = (TextView) findViewById(R.id.quantity_id);
         sumView = (TextView) findViewById(R.id.sum_id);
     }
     private void initRecyclerView() {

@@ -47,7 +47,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                 .into(holder.productImageView);
         double price = productModels.get(position).getPrice();
         holder.setModel(productModels.get(position));
-        holder.productPriceView.setText( String.valueOf(price)+"GEL");
+        holder.setSavedQuantity();
+        holder.productPriceView.setText(String.valueOf(price)+"GEL");
         holder.productNameView.setText(productModels.get(position).getName());
     }
 
@@ -71,6 +72,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
             this.model = model;
         }
 
+        private void setSavedQuantity(){
+            if (SingletonTest.getInstance().getProduct(model.getId()) != null) {
+                quantityView.setText(SingletonTest.getInstance().getProduct(model.getId()).getQuontity() + "");
+            }
+        }
+
         public MyViewHolder(View itemView) {
             super(itemView);
             plus = (ImageView) itemView.findViewById(R.id.grid_plus_id);
@@ -85,18 +92,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                 @Override
                 public void onClick(View view) {
                     int quantity;
-                    quantity = Integer.parseInt((String) quantityView.getText().toString());
+                    quantity = Integer.parseInt(quantityView.getText().toString());
 
                     quantity++;
-                    model.setQuontity(Integer.parseInt(quantityView.getText().toString())+1);
+
+                    model.setQuontity(Integer.parseInt(quantityView.getText().toString()) + 1);
 
                     SingletonTest.getInstance().addProduct(model.getId(), model);
-                     Toast.makeText(context, "daemata kalatashi", Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(context, "daemata kalatashi", Toast.LENGTH_LONG).show();
 
                     quantityView.setText(quantity + "");
-
-
                 }
             });
 
@@ -118,7 +123,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                         quantityView.setText("0");
 
                     }
-
 
                 }
             });

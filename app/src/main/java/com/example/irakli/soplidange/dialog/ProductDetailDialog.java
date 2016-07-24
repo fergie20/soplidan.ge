@@ -28,7 +28,7 @@ import java.text.NumberFormat;
 public class ProductDetailDialog extends DialogFragment {
     ImageView minusTextView;
     ImageView plusTextView;
-    EditText quantityView;
+    TextView quantityView;
     TextView sumView;
     String checkQuantity;
     View rootView;
@@ -59,7 +59,7 @@ public class ProductDetailDialog extends DialogFragment {
             public void onClick(View view) {
                 model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
 
-               SingletonTest.getInstance().addProduct(model.getId(), model);
+                SingletonTest.getInstance().addProduct(model.getId(), model);
                 Toast.makeText(getActivity(), "daemata kalatas", Toast.LENGTH_LONG).show();
                 dismiss();
             }
@@ -72,57 +72,67 @@ public class ProductDetailDialog extends DialogFragment {
     private void calculateSum() {
         minusTextView = (ImageView) rootView.findViewById(R.id.dialog_minus_id);
         plusTextView = (ImageView) rootView.findViewById(R.id.dialog_plus_id);
-        quantityView = (EditText) rootView.findViewById(R.id.dialog_quantity_id);
+        quantityView = (TextView) rootView.findViewById(R.id.dialog_quantity_id);
         sumView = (TextView) rootView.findViewById(R.id.dialog_price_id);
 
-        quantityView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                int productPrice =  Integer.parseInt((String) productPriceView.getText());
-//                int quontity = Integer.parseInt((String) charSequence);
-//                int sum = productPrice*quontity;
-//                sumView.setText(sum+"");
-//                Toast.makeText(getApplicationContext(), charSequence, Toast.LENGTH_LONG).show();
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String input = String.valueOf(editable);
-                if (editable != null && !input.isEmpty()) {
-                    int quontity = Integer.parseInt(input);
-
-                    double sum = model.getPrice() * quontity;
-                    NumberFormat nf = NumberFormat.getInstance(); // get instance
-                    nf.setMaximumFractionDigits(3); // set decimal places
-                    String s = nf.format(sum);
-                    sumView.setText(s+" GEL");
-                } else {
-                    quantityView.setText("0");
-                }
-                //Toast.makeText(getApplicationContext(), editable, Toast.LENGTH_LONG).show();
-            }
-        });
+//        quantityView.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+////                int productPrice =  Integer.parseInt((String) productPriceView.getText());
+////                int quontity = Integer.parseInt((String) charSequence);
+////                int sum = productPrice*quontity;
+////                sumView.setText(sum+"");
+////                Toast.makeText(getApplicationContext(), charSequence, Toast.LENGTH_LONG).show();
+//
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                String input = String.valueOf(editable);
+//                if (editable != null && !input.isEmpty()) {
+//                    int quontity = Integer.parseInt(input);
+//
+//                    double sum = model.getPrice() * quontity;
+//                    NumberFormat nf = NumberFormat.getInstance(); // get instance
+//                    nf.setMaximumFractionDigits(3); // set decimal places
+//                    String s = nf.format(sum);
+//                    sumView.setText(s+" GEL");
+//                } else {
+//                    quantityView.setText("0");
+//                }
+//                //Toast.makeText(getApplicationContext(), editable, Toast.LENGTH_LONG).show();
+//            }
+//        });
 
         plusTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int productPrice;
+                double productPrice;
                 int quantity;
+                double sum;
+                productPrice = model.getPrice();
+
                 checkQuantity = quantityView.getText().toString();
                 quantity = Integer.parseInt((String) checkQuantity);
 
                 quantity++;
+
+                sum = productPrice * quantity;
+
+                NumberFormat nf = NumberFormat.getInstance(); // get instance
+                    nf.setMaximumFractionDigits(3); // set decimal places
+                    String s = nf.format(sum);
+
+                sumView.setText(s+" GEL");
                 // Toast.makeText(getApplicationContext(), "daechira" + checkQuantity, Toast.LENGTH_LONG).show();
-
-
                 quantityView.setText(quantity + "");
+
 
 
             }
@@ -130,13 +140,23 @@ public class ProductDetailDialog extends DialogFragment {
         minusTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int productPrice;
+                double productPrice;
                 int quantity;
+                double sum;
+                productPrice = model.getPrice();
                 checkQuantity = quantityView.getText().toString();
                 quantity = Integer.parseInt((String) checkQuantity);
 
                 if (quantity >= 2) {
                     quantity--;
+
+                    sum = productPrice * quantity;
+
+                    NumberFormat nf = NumberFormat.getInstance(); // get instance
+                    nf.setMaximumFractionDigits(3); // set decimal places
+                    String s = nf.format(sum);
+
+                    sumView.setText(s+" GEL");
 
                     quantityView.setText(quantity + "");
 
