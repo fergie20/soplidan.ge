@@ -1,25 +1,19 @@
 package com.example.irakli.soplidange;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.irakli.soplidange.adapters.CheckoutAdapter;
 import com.example.irakli.soplidange.models.ProductModel;
-
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
