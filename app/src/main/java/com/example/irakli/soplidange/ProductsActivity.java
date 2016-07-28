@@ -9,13 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.ExampleData.ProductData;
 import com.example.irakli.soplidange.adapters.ProductsAdapter;
 import com.example.irakli.soplidange.dialog.ProductDetailDialog;

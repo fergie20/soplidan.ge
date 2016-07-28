@@ -23,7 +23,7 @@ public class SingletonTest {
     }
 
     public void addProduct(Integer productId, ProductModel model){
-        cartMap.put(productId, model);
+           cartMap.put(productId, model);
     }
 
     public void removeProduct(String product){

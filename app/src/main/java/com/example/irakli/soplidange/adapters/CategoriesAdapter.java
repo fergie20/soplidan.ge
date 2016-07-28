@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irakli.soplidange.CheckoutActivity;
+import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
             public void onClick(View view) {
                // Toast.makeText(context, "daechira" + position, Toast.LENGTH_LONG).show();
                 int cat_id = (position);
-                Intent transport = new Intent(context, CheckoutActivity.class);
+                Intent transport = new Intent(context, ProductsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("cat_id", cat_id);
                 transport.putExtra("Extra", bundle);

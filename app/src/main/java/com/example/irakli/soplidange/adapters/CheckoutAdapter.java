@@ -1,29 +1,17 @@
 package com.example.irakli.soplidange.adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.irakli.soplidange.CheckoutActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
-
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Irakli on 24.06.2016.
@@ -32,7 +20,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
 
     ArrayList<ProductModel> cartMap;
     Context context;
-    boolean check = false;
 
     public CheckoutAdapter(ArrayList<ProductModel> cartMap, Context context) {
 
@@ -48,11 +35,12 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         return myViewHolder;
     }
 
-    private double oldPrice;
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Picasso.with(context)
                 .load(cartMap.get(position).getImg())
+                .resize(100, 100)
+                .centerCrop()
                 .into(holder.productImageView);
         double price = cartMap.get(position).getPrice();
         holder.setMyModel(cartMap.get(position));
@@ -82,6 +70,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         public void setMyModel(ProductModel model ){
             this.model = model;
         }
+
         public MyViewHolder(View itemView) {
             super(itemView);
 
