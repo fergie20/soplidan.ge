@@ -115,6 +115,15 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                         quantity--;
 
                         quantityView.setText(quantity + "");
+
+                        int newQuantity = Integer.parseInt(quantityView.getText().toString());
+                        SingletonTest.getInstance().addProduct(model.getId(), model);
+
+                        if (newQuantity <= 1) {
+
+                            SingletonTest.getInstance().getCartMap().remove(model.getId());
+
+                        }
                         Toast.makeText(context, "ganaxlda kalata", Toast.LENGTH_LONG).show();
 
 

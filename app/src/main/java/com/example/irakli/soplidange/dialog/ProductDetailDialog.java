@@ -62,7 +62,16 @@ public class ProductDetailDialog extends DialogFragment {
                 model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
 
                 SingletonTest.getInstance().addProduct(model.getId(), model);
-                Toast.makeText(getActivity(), "daemata kalatas", Toast.LENGTH_LONG).show();
+
+                double newQuantity = Double.parseDouble(quantityView.getText().toString());
+                SingletonTest.getInstance().addProduct(model.getId(), model);
+                if (newQuantity <= 0) {
+
+                    SingletonTest.getInstance().getCartMap().remove(model.getId());
+
+
+                }
+                Toast.makeText(getActivity(), "ganaxlda kalata", Toast.LENGTH_LONG).show();
                 dismiss();
             }
         });

@@ -41,4 +41,6 @@ public class SingletonTest {
         return cartMap;
     }
 
+    public void removeProduct(int id, ProductModel model) {
+    }
 }

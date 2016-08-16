@@ -42,7 +42,7 @@ public class ProductsActivity extends AppCompatActivity {
         ArrayList <ProductModel> productModels = new ArrayList<>();
 
         for (int i = 0; i < ProductData.id.length; i++) {
-            ProductModel productModel = new ProductModel(ProductData.categories[i],ProductData.name[i],ProductData.description[i],ProductData.img[i],ProductData.id[i],ProductData.recource[i],ProductData.price[i]);
+            ProductModel productModel = new ProductModel(ProductData.categories[i],ProductData.name[i],ProductData.description[i],ProductData.img[i],ProductData.id[i],ProductData.recource[i],ProductData.price[i],ProductData.categories[i]);
             productModels.add(productModel);
         }
 

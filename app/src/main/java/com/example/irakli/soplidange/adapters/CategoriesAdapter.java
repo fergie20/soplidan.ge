@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.irakli.soplidange.CheckoutActivity;
 import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
+import com.example.irakli.soplidange.models.CategoryModel;
 
 import java.util.ArrayList;
 
@@ -23,11 +24,11 @@ import java.util.ArrayList;
  */
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.MyViewHolder>{
 
-    private ArrayList<String> categoriesList;
+    private ArrayList<CategoryModel> categoriesList;
     private Context context;
 
 
-    public CategoriesAdapter(ArrayList<String> categoriesList, Context context) {
+    public CategoriesAdapter(ArrayList<CategoryModel> categoriesList, Context context) {
         this.categoriesList = categoriesList;
         this.context = context;
     }
@@ -42,7 +43,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.categoryNameView.setText(categoriesList.get(position));
+        holder.categoryNameView.setText( categoriesList.get(position).getCategory());
         holder.categoryNameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -11,8 +11,9 @@ public class ProductModel implements Serializable {
     private int recource;
     private double price;
     private int quontity;
+    private String status;
 
-    public ProductModel(String categories, String name, String description, String img, int id, int recource, double price) {
+    public ProductModel(String categories, String name, String description, String img, int id, int recource, double price, String status) {
         this.categories = categories;
         this.name = name;
         this.description = description;
@@ -20,6 +21,7 @@ public class ProductModel implements Serializable {
         this.id = id;
         this.recource = recource;
         this.price = price;
+        this.status=status;
     }
 
     public double getSumPrice(){
@@ -32,6 +34,14 @@ public class ProductModel implements Serializable {
 
     public void setQuontity(int quontity) {
         this.quontity = quontity;
+    }
+
+    public String isStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getDescription() {
