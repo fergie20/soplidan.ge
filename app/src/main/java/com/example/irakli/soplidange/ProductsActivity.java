@@ -1,5 +1,6 @@
 package com.example.irakli.soplidange;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -37,8 +38,6 @@ public class ProductsActivity extends AppCompatActivity {
         minus = (ImageView) findViewById(R.id.grid_minus_id);
         quantityView = (TextView) findViewById(R.id.grid_text_id);
 
-
-
         ArrayList <ProductModel> productModels = new ArrayList<>();
 
         for (int i = 0; i < ProductData.id.length; i++) {
@@ -75,11 +74,15 @@ public class ProductsActivity extends AppCompatActivity {
             case android.R.id.home:
                 super. onBackPressed();
                 return true;
+            case R.id.check_list_id:
+                Intent checkoutActivityIntent = new Intent(getApplicationContext() ,CheckoutActivity.class);
+                startActivity(checkoutActivityIntent);
+                break;
         }
         return (super.onOptionsItemSelected(menuItem));
     }
 
-    private void initToolbar() {
+     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_id);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

@@ -117,8 +117,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                         quantityView.setText(quantity + "");
                         Toast.makeText(context, "ganaxlda kalata", Toast.LENGTH_LONG).show();
 
-
-
                     } else {
                         quantityView.setText("0");
 

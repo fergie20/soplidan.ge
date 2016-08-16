@@ -119,6 +119,9 @@ public class CheckoutActivity extends AppCompatActivity {
             case android.R.id.home:
                 super. onBackPressed();
                 return true;
+//            case R.id.search_id:
+//                Intent productsAdapterIntent = new Intent(getApplicationContext(), ProductsActivity.class);
+//                startActivity(productsAdapterIntent);
         }
         return (super.onOptionsItemSelected(menuItem));
     }
