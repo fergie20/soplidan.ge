@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     ArrayList<String> categoriesList;
+    private RequestQueue requestQueue;
 
 
     @Override
@@ -149,8 +151,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-
-         Volley.newRequestQueue(this).add(jsonRequest);
-
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(jsonRequest);
     }
 }

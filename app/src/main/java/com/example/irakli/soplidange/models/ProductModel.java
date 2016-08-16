@@ -6,14 +6,14 @@ import java.io.Serializable;
  * Created by GeoLab on 7/10/16.
  */
 public class ProductModel implements Serializable {
-    private String categories,name,description,img;
+    private String categories,name,description,img, product_code;
     private int id;
     private int recource;
     private double price;
     private int quontity;
     private String status;
 
-    public ProductModel(String categories, String name, String description, String img, int id, int recource, double price, String status) {
+    public ProductModel(String categories, String name, String description, String img, int id, int recource, double price, String status, String product_code) {
         this.categories = categories;
         this.name = name;
         this.description = description;
@@ -22,6 +22,15 @@ public class ProductModel implements Serializable {
         this.recource = recource;
         this.price = price;
         this.status=status;
+        this.product_code=product_code;
+    }
+
+    public String getProduct_code() {
+        return product_code;
+    }
+
+    public void setProduct_code(String product_code) {
+        this.product_code = product_code;
     }
 
     public double getSumPrice(){
@@ -32,17 +41,18 @@ public class ProductModel implements Serializable {
         return quontity;
     }
 
-    public void setQuontity(int quontity) {
-        this.quontity = quontity;
-    }
-
-    public String isStatus() {
+    public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public void setQuontity(int quontity) {
+        this.quontity = quontity;
+    }
+
 
     public String getDescription() {
         return description;

@@ -48,11 +48,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
             @Override
             public void onClick(View view) {
                // Toast.makeText(context, "daechira" + position, Toast.LENGTH_LONG).show();
-                int cat_id = (position);
+                int cat_id = categoriesList.get(position).getCategory_id();
+                String category = categoriesList.get(position).getCategory();
                 Intent transport = new Intent(context, ProductsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("cat_id", cat_id);
-                transport.putExtra("Extra", bundle);
+                bundle.putInt("category_id", cat_id);
+                bundle.putString("category", category);
+                transport.putExtra("categories", bundle);
                 transport.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(transport);
             }

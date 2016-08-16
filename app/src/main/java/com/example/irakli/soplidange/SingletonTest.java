@@ -42,5 +42,6 @@ public class SingletonTest {
     }
 
     public void removeProduct(int id, ProductModel model) {
+
     }
 }
