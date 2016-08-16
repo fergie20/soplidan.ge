@@ -1,5 +1,6 @@
 package com.example.irakli.soplidange;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -64,6 +65,7 @@ public class ProductsActivity extends AppCompatActivity {
         initToolbar();
         initGridRecycleView();
 
+<<<<<<< HEAD
         Bundle bundle = getIntent().getBundleExtra("categories");
         category_id = bundle.getInt("category_id");
         category = bundle.getString("category");
@@ -73,6 +75,14 @@ public class ProductsActivity extends AppCompatActivity {
         plus = (ImageView) findViewById(R.id.grid_plus_id);
         minus = (ImageView) findViewById(R.id.grid_minus_id);
         quantityView = (TextView) findViewById(R.id.grid_text_id);
+=======
+        ArrayList <ProductModel> productModels = new ArrayList<>();
+
+        for (int i = 0; i < ProductData.id.length; i++) {
+            ProductModel productModel = new ProductModel(ProductData.categories[i],ProductData.name[i],ProductData.description[i],ProductData.img[i],ProductData.id[i],ProductData.recource[i],ProductData.price[i]);
+            productModels.add(productModel);
+        }
+>>>>>>> origin/master
 
         
     }
@@ -91,11 +101,15 @@ public class ProductsActivity extends AppCompatActivity {
             case android.R.id.home:
                 super. onBackPressed();
                 return true;
+            case R.id.check_list_id:
+                Intent checkoutActivityIntent = new Intent(getApplicationContext() ,CheckoutActivity.class);
+                startActivity(checkoutActivityIntent);
+                break;
         }
         return (super.onOptionsItemSelected(menuItem));
     }
 
-    private void initToolbar() {
+     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_id);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
