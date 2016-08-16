@@ -78,25 +78,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-<<<<<<< HEAD
         switch (item.getItemId()) {
             case R.id.search_id:
                 Intent intent = new Intent(getApplicationContext(), ProductsActivity.class);
                 startActivity(intent);
                 break;
-=======
-        switch (item.getItemId()){
-//            case R.id.search_id:
-//                Intent intent = new Intent(getApplicationContext(), ProductsActivity.class);
-//                startActivity(intent);
-//                break;
->>>>>>> origin/master
-            case R.id.check_list_id:
-                Intent intent1 = new Intent(getApplicationContext(), CheckoutActivity.class);
-                startActivity(intent1);
-                break;
-        }
-        return true;
+                case R.id.check_list_id:
+                    Intent intent1 = new Intent(getApplicationContext(), CheckoutActivity.class);
+                    startActivity(intent1);
+                    break;
+            }
+            return true;
     }
 
     private void initToolbar() {

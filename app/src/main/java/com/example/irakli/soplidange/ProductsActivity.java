@@ -65,7 +65,6 @@ public class ProductsActivity extends AppCompatActivity {
         initToolbar();
         initGridRecycleView();
 
-<<<<<<< HEAD
         Bundle bundle = getIntent().getBundleExtra("categories");
         category_id = bundle.getInt("category_id");
         category = bundle.getString("category");
@@ -75,14 +74,6 @@ public class ProductsActivity extends AppCompatActivity {
         plus = (ImageView) findViewById(R.id.grid_plus_id);
         minus = (ImageView) findViewById(R.id.grid_minus_id);
         quantityView = (TextView) findViewById(R.id.grid_text_id);
-=======
-        ArrayList <ProductModel> productModels = new ArrayList<>();
-
-        for (int i = 0; i < ProductData.id.length; i++) {
-            ProductModel productModel = new ProductModel(ProductData.categories[i],ProductData.name[i],ProductData.description[i],ProductData.img[i],ProductData.id[i],ProductData.recource[i],ProductData.price[i]);
-            productModels.add(productModel);
-        }
->>>>>>> origin/master
 
         
     }
@@ -142,7 +133,7 @@ public class ProductsActivity extends AppCompatActivity {
                                 int main_category = curObj.getInt("main_category");
                                 if(main_category==category_id){
                                     product = curObj.getString("product");
-                                    description = "seo_name";
+                                    description = "some description blabla blaa.sndadncadbcjadbcakhbchkabdcf.";
                                     JSONObject main_pair = curObj.getJSONObject("main_pair");
                                     JSONObject detaild = main_pair.getJSONObject("detailed");
                                     image_path = detaild.getString("image_path");
