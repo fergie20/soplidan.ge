@@ -1,11 +1,18 @@
 package com.example.irakli.soplidange;
 
+import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
@@ -14,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -39,12 +47,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+
+
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
     Toolbar toolbar;
     RecyclerView recyclerView;
     ArrayList<String> categoriesList;
     private RequestQueue requestQueue;
-
+   // LinearLayout layout;
+    CategoriesAdapter myAdapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,36 +66,56 @@ public class MainActivity extends AppCompatActivity {
 
         initToolbar();
         initRecyclerView();
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
         getJSONInfo();
 
-//        categoriesList = new ArrayList<>();
-//
-//        // Fetch example data
-//        for (int i = 0; i < ExampleData.categories.length; i++) {
-//            categoriesList.add(ExampleData.categories[i]);
-//        }
-//
-//        CategoriesAdapter myAdapter = new CategoriesAdapter(categoriesList, getApplicationContext());
-//        recyclerView.setAdapter(myAdapter);
+
 
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu, menu);
 
-        return true;
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_id)
+                .getActionView();
+        if (null != searchView) {
+            searchView.setSearchableInfo(searchManager
+                    .getSearchableInfo(getComponentName()));
+            searchView.setIconifiedByDefault(false);
+        }
+
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+            public boolean onQueryTextChange(String newText) {
+
+//                Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
+//                int_query.putExtra("query",newText);
+//                startActivity(int_query);
+
+                return false;
+            }
+
+            public boolean onQueryTextSubmit(String query) {
+
+                Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
+                int_query.putExtra("query",query);
+                startActivity(int_query);
+                return false;
+            }
+        };
+        searchView.setOnQueryTextListener(queryTextListener);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.search_id:
-                Intent intent = new Intent(getApplicationContext(), ProductsActivity.class);
-                startActivity(intent);
-                break;
                 case R.id.check_list_id:
                     Intent intent1 = new Intent(getApplicationContext(), CheckoutActivity.class);
                     startActivity(intent1);
@@ -126,8 +159,9 @@ public class MainActivity extends AppCompatActivity {
                                 CategoryModel categoryModel = new CategoryModel(category_id, category, status, position, product_count);
                                 categoryModels.add(categoryModel);
                             }
-                            CategoriesAdapter myAdapter = new CategoriesAdapter(categoryModels, getApplicationContext());
+                            myAdapter = new CategoriesAdapter(categoryModels, getApplicationContext());
                             recyclerView.setAdapter(myAdapter);
+                            progressDialog.cancel();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -138,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                        progressDialog.cancel();
                     }
                 }) {
             @Override
@@ -153,6 +188,19 @@ public class MainActivity extends AppCompatActivity {
         };
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
+        progressDialog = ProgressDialog.show(this, "", "Gtxovt Daelodot");
         requestQueue.add(jsonRequest);
     }
+
+    @Override
+    public void onRefresh() {
+        getJSONInfo();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 2000);
+    }
+
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irakli.soplidange.CheckoutActivity;
+import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
@@ -72,6 +73,7 @@ public class ProductDetailDialog extends DialogFragment {
 
                 }
                 Toast.makeText(getActivity(), "ganaxlda kalata", Toast.LENGTH_LONG).show();
+
                 dismiss();
             }
         });
@@ -160,10 +162,14 @@ public class ProductDetailDialog extends DialogFragment {
 
                 }
 
-
-
             }
         });
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ((ProductsActivity)getActivity()).updateListView();
     }
 }

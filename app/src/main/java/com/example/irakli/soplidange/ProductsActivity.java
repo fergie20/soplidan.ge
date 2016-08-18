@@ -1,7 +1,11 @@
 package com.example.irakli.soplidange;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,7 +15,9 @@ import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -37,14 +43,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductsActivity extends AppCompatActivity {
+public class ProductsActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
     Toolbar toolbar;
     ImageView plus;
     ImageView minus;
     TextView quantityView;
     RecyclerView gridRecycler;
     private RequestQueue requestQueue;
-    int category_id;
+    int category_id = -1;
     String category;
     String product;
     String description;
@@ -54,6 +60,13 @@ public class ProductsActivity extends AppCompatActivity {
     double price;
     String status;
     String product_code;
+    String json_url = "http://geolab.club/geolabwork/soplidan_ge/api/products?items_per_page=300&q=";
+    String query="";
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    LinearLayout layout;
+    ProductsAdapter myAdapter;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -61,19 +74,35 @@ public class ProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
-
+        gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
         initToolbar();
         initGridRecycleView();
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
+
 
         Bundle bundle = getIntent().getBundleExtra("categories");
-        category_id = bundle.getInt("category_id");
-        category = bundle.getString("category");
+        if(bundle!=null) {
+            category_id = bundle.getInt("category_id");
+            category = bundle.getString("category");
 
-        getJSONInfo();
+
+        }
+        Intent intent = getIntent();
+        if(intent!=null) {
+            query = intent.getStringExtra("query");
+        }
+
+        onRefresh();
+
+
+
 
         plus = (ImageView) findViewById(R.id.grid_plus_id);
         minus = (ImageView) findViewById(R.id.grid_minus_id);
         quantityView = (TextView) findViewById(R.id.grid_text_id);
+//        new Task().execute();
 
         
     }
@@ -106,7 +135,7 @@ public class ProductsActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("");
+         actionBar.setTitle("");
     }
 
     private void initGridRecycleView() {
@@ -115,8 +144,8 @@ public class ProductsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
     }
 
-    private void getJSONInfo() {
-        String url = "http://geolab.club/geolabwork/soplidan_ge/api/products?items_per_page=300";
+    public void getJSONInfo(String url) {
+
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -131,7 +160,22 @@ public class ProductsActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject curObj = jsonArray.getJSONObject(i);
                                 int main_category = curObj.getInt("main_category");
-                                if(main_category==category_id){
+                                if(category_id == -1 ){
+
+                                    product = curObj.getString("product");
+                                    description = "some description blabla blaa.sndadncadbcjadbcakhbchkabdcf.";
+                                    JSONObject main_pair = curObj.getJSONObject("main_pair");
+                                    JSONObject detaild = main_pair.getJSONObject("detailed");
+                                    image_path = detaild.getString("image_path");
+                                    product_id = curObj.getInt("product_id");
+                                    amount = curObj.getInt("amount");
+                                    price = curObj.getDouble("price");
+                                    status = curObj.getString("status");
+                                    product_code = curObj.getString("product_code");
+
+                                    ProductModel productModel = new ProductModel( category, product, description, image_path, product_id,amount,price,status,product_code);
+                                    productModels.add(productModel);
+                               }else if(category_id==main_category){
                                     product = curObj.getString("product");
                                     description = "some description blabla blaa.sndadncadbcjadbcakhbchkabdcf.";
                                     JSONObject main_pair = curObj.getJSONObject("main_pair");
@@ -149,7 +193,7 @@ public class ProductsActivity extends AppCompatActivity {
 
 
                             }
-                            ProductsAdapter myAdapter = new ProductsAdapter(productModels, getApplicationContext());
+                            myAdapter = new ProductsAdapter(productModels, getApplicationContext());
                             myAdapter.setMyClickListener(new ProductsAdapter.MyClickListener() {
                                 @Override
                                 public void onClick(ProductModel model) {
@@ -163,6 +207,8 @@ public class ProductsActivity extends AppCompatActivity {
                             gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
                             gridRecycler.setAdapter(myAdapter);
 
+                            progressDialog.cancel();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -172,6 +218,7 @@ public class ProductsActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                        progressDialog.cancel();
                     }
                 }) {
             @Override
@@ -187,7 +234,44 @@ public class ProductsActivity extends AppCompatActivity {
         };
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        progressDialog = ProgressDialog.show(this, "", "Gtxovt Daelodot");
         requestQueue.add(jsonRequest);
     }
+    @Override
+    public void onRefresh() {
+        if(category_id==-1){
+            getJSONInfo(json_url+query);
+        }else{
+            getJSONInfo(json_url);
+        }
 
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 2000);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        System.out.println("OnResume");
+
+        updateListView();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        System.out.println("OnPause");
+    }
+
+    public void updateListView(){
+
+        if(gridRecycler.getAdapter() != null)
+            gridRecycler.getAdapter().notifyDataSetChanged();
+    }
 }

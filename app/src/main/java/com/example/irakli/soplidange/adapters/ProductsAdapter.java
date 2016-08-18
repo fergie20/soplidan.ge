@@ -111,15 +111,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                     int quantity;
                     quantity = Integer.parseInt((String) quantityView.getText().toString());
 
-                    if (quantity >= 2) {
+                    if (quantity >= 1) {
                         quantity--;
 
                         quantityView.setText(quantity + "");
+                        model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
 
                         int newQuantity = Integer.parseInt(quantityView.getText().toString());
                         SingletonTest.getInstance().addProduct(model.getId(), model);
 
-                        if (newQuantity <= 1) {
+                        if (newQuantity < 1) {
 
                             SingletonTest.getInstance().getCartMap().remove(model.getId());
 
