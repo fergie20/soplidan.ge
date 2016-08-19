@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -65,6 +66,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         setContentView(R.layout.activity_main);
         initToolbar();
         initRecyclerView();
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    Intent addEvent = new Intent(MainActivity.this, CheckoutActivity.class);
+                    startActivity(addEvent);
+
+            }
+        });
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         getJSONInfo();
@@ -73,8 +85,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         getMenuInflater().inflate(R.menu.menu, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search_id)
-                .getActionView();
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_id).getActionView();
         if (null != searchView) {
             searchView.setSearchableInfo(searchManager
                     .getSearchableInfo(getComponentName()));
@@ -104,16 +115,16 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-                case R.id.check_list_id:
-                    Intent intent1 = new Intent(getApplicationContext(), CheckoutActivity.class);
-                    startActivity(intent1);
-                    break;
-            }
-            return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//                case R.id.check_list_id:
+//                    Intent intent1 = new Intent(getApplicationContext(), CheckoutActivity.class);
+//                    startActivity(intent1);
+//                    break;
+//            }
+//            return true;
+//    }
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_id);

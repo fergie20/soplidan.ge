@@ -1,15 +1,19 @@
 package com.example.irakli.soplidange;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.Menu;
@@ -77,6 +81,16 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
         gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
         initToolbar();
         initGridRecycleView();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent addEvent = new Intent(ProductsActivity.this, CheckoutActivity.class);
+                startActivity(addEvent);
+
+            }
+        });
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
@@ -106,14 +120,39 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
 
         
     }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
 
-        return true;
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_id)
+                .getActionView();
+        if (null != searchView) {
+            searchView.setSearchableInfo(searchManager
+                    .getSearchableInfo(getComponentName()));
+            searchView.setIconifiedByDefault(false);
+        }
+
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+            public boolean onQueryTextChange(String newText) {
+
+
+                return false;
+            }
+
+            public boolean onQueryTextSubmit(String query) {
+
+                Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
+                int_query.putExtra("query",query);
+                startActivity(int_query);
+                finish();
+                return false;
+            }
+        };
+        searchView.setOnQueryTextListener(queryTextListener);
+
+        return super.onCreateOptionsMenu(menu);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -121,10 +160,10 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
             case android.R.id.home:
                 super. onBackPressed();
                 return true;
-            case R.id.check_list_id:
-                Intent checkoutActivityIntent = new Intent(getApplicationContext() ,CheckoutActivity.class);
-                startActivity(checkoutActivityIntent);
-                break;
+//            case R.id.check_list_id:
+//                Intent checkoutActivityIntent = new Intent(getApplicationContext() ,CheckoutActivity.class);
+//                startActivity(checkoutActivityIntent);
+//                break;
         }
         return (super.onOptionsItemSelected(menuItem));
     }

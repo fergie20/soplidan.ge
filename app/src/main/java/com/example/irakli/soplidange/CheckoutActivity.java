@@ -98,8 +98,6 @@ public class CheckoutActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
 
-        MenuItem checkListIcon = menu.findItem(R.id.check_list_id);
-        checkListIcon.setVisible(false);
 
         return true;
     }
