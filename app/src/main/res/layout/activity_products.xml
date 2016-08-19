@@ -46,12 +46,13 @@
             app:borderWidth="0dp" />
 
         <TextView
+            android:id="@+id/count_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:textStyle="italic"
-            android:text="5"
+            android:text="8"
             android:elevation="7dp"
             android:textColor="@android:color/holo_red_light"
             />

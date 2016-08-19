@@ -66,6 +66,10 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
     String product_code;
     String json_url = "http://geolab.club/geolabwork/soplidan_ge/api/products?items_per_page=300&q=";
     String query="";
+    TextView count_item;
+    HashMap<Integer,ProductModel> count;
+
+
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     LinearLayout layout;
@@ -81,6 +85,9 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
         gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
         initToolbar();
         initGridRecycleView();
+        count = SingletonTest.getInstance().getCartMap();
+        count_item = (TextView) findViewById(R.id.count_item);
+        count_item.setText(count.size() + "");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
