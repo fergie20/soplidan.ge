@@ -157,7 +157,7 @@ public class ProductDetailDialog extends DialogFragment {
 
 
                 } else {
-                    sumView.setText("0");
+                    sumView.setText("0 GEL");
                     quantityView.setText("0");
 
                 }

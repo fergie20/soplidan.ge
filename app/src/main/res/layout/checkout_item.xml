@@ -4,23 +4,24 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:background="#f2f2f2"
         android:id="@+id/checkout_layout_id"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="82dp"
         android:orientation="horizontal">
 
         <ImageView
+            android:layout_gravity="center"
             android:id="@+id/checkout_image_id"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
             android:padding="3dp"
             android:src="@mipmap/ic_launcher" />
 
-        <RelativeLayout
+        <LinearLayout
             android:paddingLeft="6dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -33,54 +34,61 @@
                 android:text="პროდუქტის სახელი" />
 
             <TextView
+
                 android:id="@+id/product_price_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_marginBottom="3dp"
+                android:layout_marginTop="4dp"
                 android:textSize="13sp"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/holo_red_light"
                 android:text="5 GEL" />
 
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-
-            <ImageView
-                android:padding="7dp"
-                android:id="@+id/minus_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/quantity_id"
-                android:layout_centerVertical="true"
-                android:tint="@color/colorPrimary"
-                android:src="@drawable/ic_remove_white_24dp"
-                style="@style/ClickEffect"/>
 
             <TextView
                 android:id="@+id/quantity_id"
-                android:layout_width="46dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
                 android:layout_toLeftOf="@+id/plus_id"
                 android:background="@drawable/text_view_border"
                 android:gravity="center"
                 android:inputType="numberDecimal"
                 android:text="7" />
-
+            </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <ImageView
-                android:padding="7dp"
+                android:padding="5dp"
                 android:id="@+id/plus_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
                 android:tint="@color/colorPrimary"
                 android:src="@drawable/ic_add_white_24dp"
                 style="@style/ClickEffect"/>
+            <ImageView
+                android:padding="5dp"
+                android:id="@+id/minus_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/ic_remove_white_24dp"
+                style="@style/ClickEffect"/>
+            </LinearLayout>
 
-        </RelativeLayout>
-    </LinearLayout>
+
+
+
+        </LinearLayout>
 
     <include layout="@layout/divider"/>
 
