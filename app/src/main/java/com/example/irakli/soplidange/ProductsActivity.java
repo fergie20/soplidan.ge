@@ -177,7 +177,7 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
                                     productModels.add(productModel);
                                }else if(category_id==main_category){
                                     product = curObj.getString("product");
-                                    description = "some description blabla blaa.sndadncadbcjadbcakhbchkabdcf.";
+                                    description = curObj.getString("product");
                                     JSONObject main_pair = curObj.getJSONObject("main_pair");
                                     JSONObject detaild = main_pair.getJSONObject("detailed");
                                     image_path = detaild.getString("image_path");
