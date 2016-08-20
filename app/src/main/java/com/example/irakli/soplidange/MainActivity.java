@@ -23,6 +23,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -35,6 +36,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.adapters.CategoriesAdapter;
 import com.example.irakli.soplidange.models.CategoryModel;
+import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
 import com.squareup.picasso.Downloader;
 
@@ -50,15 +52,17 @@ import java.util.Map;
 
 
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     ArrayList<String> categoriesList;
     private RequestQueue requestQueue;
    // LinearLayout layout;
     CategoriesAdapter myAdapter;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+//    private SwipeRefreshLayout mSwipeRefreshLayout;
     private ProgressDialog progressDialog;
+    TextView count_item;
+    HashMap<Integer,ProductModel> count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +81,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
             }
         });
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
+//        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
+//        mSwipeRefreshLayout.setOnRefreshListener(this);
         getJSONInfo();
+        count();
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -193,16 +198,47 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         progressDialog = ProgressDialog.show(this, "", "Gtxovt Daelodot");
         requestQueue.add(jsonRequest);
     }
+//
+//    @Override
+//    public void onRefresh() {
+//        getJSONInfo();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                mSwipeRefreshLayout.setRefreshing(false);
+//            }
+//        }, 2000);
+//    }
+public void count() {
+    count_item = (TextView) findViewById(R.id.count_item);
+    count = SingletonTest.getInstance().getCartMap();
+    int count_sum=0;
+    ArrayList<ProductModel> cartMap = new ArrayList<>();
 
+    Iterator myVeryOwnIterator = count.keySet().iterator();
+    if(count.size()>0) {
+        while (myVeryOwnIterator.hasNext()) {
+            int key = (int) myVeryOwnIterator.next();
+            ProductModel value = count.get(key);
+            cartMap.add(value);
+        }
+
+
+        for (int i = 0; i < cartMap.size(); i++) {
+            count_sum += cartMap.get(i).getQuontity();
+        }
+        count_item.setText(count_sum + "");
+    }
+
+    else{
+        count_item.setText(count_sum + "");
+    }
+}
     @Override
-    public void onRefresh() {
-        getJSONInfo();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 2000);
+    public void onResume(){
+        super.onResume();
+        System.out.println("OnResume");
+        count();
     }
 
 }

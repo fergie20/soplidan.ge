@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -45,9 +46,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
-public class ProductsActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class ProductsActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageView plus;
     ImageView minus;
@@ -71,7 +73,9 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
 
 
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+
+
+    //  private SwipeRefreshLayout mSwipeRefreshLayout;
     LinearLayout layout;
     ProductsAdapter myAdapter;
     private ProgressDialog progressDialog;
@@ -85,9 +89,8 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
         gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
         initToolbar();
         initGridRecycleView();
-        count = SingletonTest.getInstance().getCartMap();
-        count_item = (TextView) findViewById(R.id.count_item);
-        count_item.setText(count.size() + "");
+
+        count();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,8 +101,8 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
 
             }
         });
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
+//        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
+//        mSwipeRefreshLayout.setOnRefreshListener(this);
 
 
 
@@ -115,7 +118,13 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
             query = intent.getStringExtra("query");
         }
 
-        onRefresh();
+        //onRefresh();
+
+                if(category_id==-1){
+            getJSONInfo(json_url+query);
+        }else{
+            getJSONInfo(json_url);
+        }
 
 
 
@@ -241,6 +250,7 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
                             }
                             myAdapter = new ProductsAdapter(productModels, getApplicationContext());
                             myAdapter.setMyClickListener(new ProductsAdapter.MyClickListener() {
+
                                 @Override
                                 public void onClick(ProductModel model) {
                                     ProductDetailDialog dialog = new ProductDetailDialog();
@@ -248,6 +258,12 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
                                     bundle.putSerializable("model",model);
                                     dialog.setArguments(bundle);
                                     dialog.show(getFragmentManager(),"dialog");
+                                }
+                            });
+                            myAdapter.setMycountListener(new ProductsAdapter.MyCountListener() {
+                                @Override
+                                public void countClick() {
+                                    count();
                                 }
                             });
                             gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
@@ -284,22 +300,22 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
         progressDialog = ProgressDialog.show(this, "", "Gtxovt Daelodot");
         requestQueue.add(jsonRequest);
     }
-    @Override
-    public void onRefresh() {
-        if(category_id==-1){
-            getJSONInfo(json_url+query);
-        }else{
-            getJSONInfo(json_url);
-        }
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 2000);
-    }
+//    @Override
+//    public void onRefresh() {
+//        if(category_id==-1){
+//            getJSONInfo(json_url+query);
+//        }else{
+//            getJSONInfo(json_url);
+//        }
+//
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                mSwipeRefreshLayout.setRefreshing(false);
+//            }
+//        }, 2000);
+//    }
 
     @Override
     public void onResume(){
@@ -315,9 +331,40 @@ public class ProductsActivity extends AppCompatActivity implements SwipeRefreshL
         System.out.println("OnPause");
     }
 
+
+
     public void updateListView(){
 
         if(gridRecycler.getAdapter() != null)
             gridRecycler.getAdapter().notifyDataSetChanged();
+
+
+        count();
     }
+    public void count() {
+        count_item = (TextView) findViewById(R.id.count_item);
+        count = SingletonTest.getInstance().getCartMap();
+        int count_sum=0;
+        ArrayList<ProductModel> cartMap = new ArrayList<>();
+
+        Iterator myVeryOwnIterator = count.keySet().iterator();
+        if(count.size()>0) {
+            while (myVeryOwnIterator.hasNext()) {
+                int key = (int) myVeryOwnIterator.next();
+                ProductModel value = count.get(key);
+                cartMap.add(value);
+            }
+
+
+            for (int i = 0; i < cartMap.size(); i++) {
+                count_sum += cartMap.get(i).getQuontity();
+            }
+            count_item.setText(count_sum + "");
+        }
+
+        else{
+            count_item.setText(count_sum + "");
+        }
+    }
+
 }

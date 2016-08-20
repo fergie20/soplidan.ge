@@ -67,6 +67,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         ImageView minusView;
         private ProductModel model;
         private double oldPrice;
+
         public void setMyModel(ProductModel model ){
             this.model = model;
         }

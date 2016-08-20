@@ -1,5 +1,6 @@
 package com.example.irakli.soplidange.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
@@ -11,12 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Irakli on 24.06.2016.
@@ -99,6 +102,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                     model.setQuontity(Integer.parseInt(quantityView.getText().toString()) + 1);
 
                     SingletonTest.getInstance().addProduct(model.getId(), model);
+                    mycountListener.countClick();
                     Toast.makeText(context, "daemata kalatashi", Toast.LENGTH_LONG).show();
 
                     quantityView.setText(quantity + "");
@@ -111,6 +115,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                     int quantity;
                     quantity = Integer.parseInt((String) quantityView.getText().toString());
 
+
                     if (quantity >= 1) {
                         quantity--;
 
@@ -120,11 +125,14 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                         int newQuantity = Integer.parseInt(quantityView.getText().toString());
                         SingletonTest.getInstance().addProduct(model.getId(), model);
 
+
                         if (newQuantity < 1) {
 
                             SingletonTest.getInstance().getCartMap().remove(model.getId());
+                            mycountListener.countClick();
 
                         }
+                        mycountListener.countClick();
                         Toast.makeText(context, "ganaxlda kalata", Toast.LENGTH_LONG).show();
 
                     } else {
@@ -152,5 +160,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     }
     public interface MyClickListener {
         void onClick(ProductModel model);
+    }
+
+    private MyCountListener mycountListener;
+    public void setMycountListener(MyCountListener mycountListener) {
+        this.mycountListener = mycountListener;
+    }
+    public interface MyCountListener {
+        void countClick();
     }
 }
