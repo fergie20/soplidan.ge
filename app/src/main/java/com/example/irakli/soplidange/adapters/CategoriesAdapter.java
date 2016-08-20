@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +45,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.categoryNameView.setText( categoriesList.get(position).getCategory());
-        holder.categoryNameView.setOnClickListener(new View.OnClickListener() {
+        holder.product_count.setText("("+categoriesList.get(position).getProduct_count()+")");
+        holder.click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                // Toast.makeText(context, "daechira" + position, Toast.LENGTH_LONG).show();
@@ -70,11 +72,16 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView categoryNameView;
+        RelativeLayout click;
+        TextView  product_count;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             categoryNameView = (TextView) itemView.findViewById(R.id.recycler_item_id);
+            click = (RelativeLayout) itemView.findViewById(R.id.card_view_id);
+            product_count = (TextView) itemView.findViewById(R.id.product_count);
         }
     }
 
