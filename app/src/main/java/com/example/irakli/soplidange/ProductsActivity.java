@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -89,6 +91,8 @@ public class ProductsActivity extends AppCompatActivity {
         gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
         initToolbar();
         initGridRecycleView();
+
+        isNetworkAvailable();
 
         count();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -323,6 +327,7 @@ public class ProductsActivity extends AppCompatActivity {
         System.out.println("OnResume");
 
         updateListView();
+        isNetworkAvailable();
     }
 
     @Override
@@ -364,6 +369,15 @@ public class ProductsActivity extends AppCompatActivity {
 
         else{
             count_item.setText(count_sum + "");
+        }
+    }
+    public void isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
+        } else {
+            Toast.makeText(this, "Internet Connection Is Required", Toast.LENGTH_LONG).show();
+
         }
     }
 

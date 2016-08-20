@@ -1,9 +1,12 @@
 package com.example.irakli.soplidange;
 
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +39,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.adapters.CategoriesAdapter;
+import com.example.irakli.soplidange.dialog.NetworkDialog;
+import com.example.irakli.soplidange.dialog.ProductDetailDialog;
 import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
@@ -70,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initToolbar();
         initRecyclerView();
+
+        isNetworkAvailable();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -237,8 +245,19 @@ public void count() {
     @Override
     public void onResume(){
         super.onResume();
+        isNetworkAvailable();
         System.out.println("OnResume");
         count();
     }
+    public void isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
+        } else {
+            Toast.makeText(this, "Internet Connection Is Required", Toast.LENGTH_LONG).show();
+//            NetworkDialog dialog = new NetworkDialog();
+//            dialog.show(getFragmentManager(), "dialog");
 
+        }
+    }
 }
