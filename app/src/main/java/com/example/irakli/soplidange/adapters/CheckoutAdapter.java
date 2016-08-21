@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
@@ -89,13 +91,26 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                     quantity = Integer.parseInt((String) quantityView.getText().toString());
 
                     quantity++;
-                    quantityView.setText(quantity + "");
-                    model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
 
-                    SingletonTest.getInstance().addProduct(model.getId(), model);
+                    if(quantity <= model.getRecource()){
 
-                    oldPrice = model.getPrice();
-                    listener.onClick(oldPrice);
+                        model.setQuontity(quantity);
+                        SingletonTest.getInstance().addProduct(model.getId(), model);
+
+                        oldPrice = model.getPrice();
+                        listener.onClick(oldPrice);
+                        quantityView.setText(quantity + "");
+                    }else{
+                        quantity--;
+                        model.setQuontity(quantity);
+                        SingletonTest.getInstance().addProduct(model.getId(), model);
+
+                        Toast.makeText(context, "tqvens mier motxovnili produqtis raodenoba agemateba marags", Toast.LENGTH_LONG).show();
+                        quantityView.setText(quantity + "");
+                    }
+
+
+
                 }
             });
             minusView.setOnClickListener(new View.OnClickListener() {

@@ -99,13 +99,24 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
                     quantity++;
 
-                    model.setQuontity(Integer.parseInt(quantityView.getText().toString()) + 1);
+                    if(quantity <= model.getRecource()){
+                        model.setQuontity(quantity);
+                        SingletonTest.getInstance().addProduct(model.getId(), model);
+                        mycountListener.countClick();
+                        Toast.makeText(context, "daemata kalatashi", Toast.LENGTH_LONG).show();
 
-                    SingletonTest.getInstance().addProduct(model.getId(), model);
-                    mycountListener.countClick();
-                    Toast.makeText(context, "daemata kalatashi", Toast.LENGTH_LONG).show();
+                        quantityView.setText(quantity + "");
+                    }else{
+                        quantity--;
+                        model.setQuontity(quantity );
+                        SingletonTest.getInstance().addProduct(model.getId(), model);
+                        Toast.makeText(context, "tqvens mier motxovnili produqtis raodenoba agemateba marags", Toast.LENGTH_LONG).show();
 
-                    quantityView.setText(quantity + "");
+                        quantityView.setText(quantity + "");
+
+                    }
+
+
                 }
             });
 

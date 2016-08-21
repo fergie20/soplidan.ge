@@ -117,18 +117,30 @@ public class ProductDetailDialog extends DialogFragment {
                 quantity = Integer.parseInt((String) checkQuantity);
 
                 quantity++;
+                if(quantity<=model.getRecource()) {
 
-                sum = productPrice * quantity;
+                    sum = productPrice * quantity;
 
-                NumberFormat nf = NumberFormat.getInstance(); // get instance
+                    NumberFormat nf = NumberFormat.getInstance(); // get instance
                     nf.setMaximumFractionDigits(3); // set decimal places
                     String s = nf.format(sum);
 
-                sumView.setText(s+" GEL");
-                // Toast.makeText(getApplicationContext(), "daechira" + checkQuantity, Toast.LENGTH_LONG).show();
-                quantityView.setText(quantity + "");
+                    sumView.setText(s + " GEL");
+                    quantityView.setText(quantity + "");
 
+                }else{
+                    quantity--;
+                    sum = productPrice * quantity;
 
+                    NumberFormat nf = NumberFormat.getInstance(); // get instance
+                    nf.setMaximumFractionDigits(3); // set decimal places
+                    String s = nf.format(sum);
+                    Toast.makeText(getActivity(), "tqvens mier motxovnili produqtis raodenoba agemateba marags", Toast.LENGTH_LONG).show();
+
+                    sumView.setText(s + " GEL");
+                    quantityView.setText(quantity + "");
+
+                }
 
             }
         });

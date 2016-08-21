@@ -340,8 +340,10 @@ public class ProductsActivity extends AppCompatActivity {
 
     public void updateListView(){
 
-        if(gridRecycler.getAdapter() != null)
-            gridRecycler.getAdapter().notifyDataSetChanged();
+//        if(gridRecycler.getAdapter() != null){
+//            gridRecycler.getAdapter().notifyDataSetChanged();}else{
+            gridRecycler.setAdapter(myAdapter);
+     //   }
 
 
         count();
