@@ -12,12 +12,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <ImageView
+        <net.wujingchao.android.view.SimpleTagImageView
+            xmlns:simple="http://schemas.android.com/apk/res-auto"
             android:id="@+id/image_id"
-            android:layout_width="wrap_content"
+            android:layout_margin="13dp"
+            android:layout_width="115dp"
             android:layout_height="115dp"
-            android:src="@android:drawable/ic_menu_day" />
+            android:src="@android:drawable/ic_menu_day"
+            simple:simple_tag_textSize="10sp"
+            simple:simple_corner_distance="30dp"
+            simple:simple_tag_text="sale 20%"
+            simple:simple_tag_background_color="#9eff0900"
+            simple:simple_tag_orientation="right_top"
+            simple:simple_tag_width="15dip"
+            simple:simple_tag_textColor="@android:color/white"
+            simple:simple_tag_enable="true"
+            simple:simple_tag_round_radius="3dp"/>
+
+        <!--<ImageView-->
+            <!--android:id="@+id/image_id"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="115dp"-->
+            <!--android:src="@android:drawable/ic_menu_day" />-->
 
         <TextView
             android:id="@+id/price_id"

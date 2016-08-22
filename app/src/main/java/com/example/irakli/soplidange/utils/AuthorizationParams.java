@@ -5,7 +5,7 @@ package com.example.irakli.soplidange.utils;
  */
 public class AuthorizationParams {
 
-    public static final String USERNAME = "i.lataria@geolab.edu.ge";
-    public static final String PASSWORD = "p0q2S5Qb4d0m1EWz5I6lP2kk9694WpGk";
+    public static final String USERNAME = "soplidange@geolab.edu.ge";
+    public static final String PASSWORD = "S8A4Ftg4MT696S430Ca5ugqJ45532k08";
 
 }

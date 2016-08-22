@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getJSONInfo() {
-        String url = "http://geolab.club/geolabwork/soplidan_ge/api/categories?items_per_page=80";
+        String url = "http://soplidan.ge/api/categories?items_per_page=80";
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

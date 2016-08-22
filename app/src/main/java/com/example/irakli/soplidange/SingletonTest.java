@@ -33,6 +33,7 @@ public class SingletonTest {
     public int getNumberOfItems(){
         return cartMap.size();
     }
+
     public ProductModel getProduct(int id){
         return cartMap.get(id);
     }

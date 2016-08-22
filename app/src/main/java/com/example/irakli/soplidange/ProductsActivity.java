@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -49,6 +50,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class ProductsActivity extends AppCompatActivity {
@@ -59,36 +61,42 @@ public class ProductsActivity extends AppCompatActivity {
     RecyclerView gridRecycler;
     private RequestQueue requestQueue;
     int category_id = -1;
+    Double list_discount = 0.0;
+    int list_discount_prc = 0;
     String category;
-    String product;
-    String description;
     String image_path;
-    int product_id;
-    int amount;
-    double price;
-    String status;
-    String product_code;
-    String json_url = "http://geolab.club/geolabwork/soplidan_ge/api/products?items_per_page=300&q=";
-    String query="";
+    //    String product;
+//    String description;
+//    String image_path;
+//    int product_id;
+//    int amount;
+//    double price;
+//    String status;
+//    String product_code;
+    String json_url = "http://soplidan.ge/api/products?items_per_page=300&q=";
+    String query = "";
     TextView count_item;
-    HashMap<Integer,ProductModel> count;
-
-
-
+    HashMap<Integer, ProductModel> count;
+    List<ProductModel> productModels = new ArrayList<>();
 
 
     //  private SwipeRefreshLayout mSwipeRefreshLayout;
     LinearLayout layout;
     ProductsAdapter myAdapter;
     private ProgressDialog progressDialog;
+    private Parcelable recyclerViewState;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_products);
 
         gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
+        myAdapter = new ProductsAdapter(productModels, getApplicationContext());
+
+
         initToolbar();
         initGridRecycleView();
 
@@ -109,28 +117,25 @@ public class ProductsActivity extends AppCompatActivity {
 //        mSwipeRefreshLayout.setOnRefreshListener(this);
 
 
-
         Bundle bundle = getIntent().getBundleExtra("categories");
-        if(bundle!=null) {
+        if (bundle != null) {
             category_id = bundle.getInt("category_id");
             category = bundle.getString("category");
 
 
         }
         Intent intent = getIntent();
-        if(intent!=null) {
+        if (intent != null) {
             query = intent.getStringExtra("query");
         }
 
         //onRefresh();
 
-                if(category_id==-1){
-            getJSONInfo(json_url+query);
-        }else{
+        if (category_id == -1) {
+            getJSONInfo(json_url + query);
+        } else {
             getJSONInfo(json_url);
         }
-
-
 
 
         plus = (ImageView) findViewById(R.id.grid_plus_id);
@@ -138,8 +143,9 @@ public class ProductsActivity extends AppCompatActivity {
         quantityView = (TextView) findViewById(R.id.grid_text_id);
 //        new Task().execute();
 
-        
+
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
 
@@ -162,7 +168,7 @@ public class ProductsActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
 
                 Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
-                int_query.putExtra("query",query);
+                int_query.putExtra("query", query);
                 startActivity(int_query);
                 finish();
                 return false;
@@ -178,7 +184,7 @@ public class ProductsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
-                super. onBackPressed();
+                super.onBackPressed();
                 return true;
 //            case R.id.check_list_id:
 //                Intent checkoutActivityIntent = new Intent(getApplicationContext() ,CheckoutActivity.class);
@@ -188,13 +194,13 @@ public class ProductsActivity extends AppCompatActivity {
         return (super.onOptionsItemSelected(menuItem));
     }
 
-     private void initToolbar() {
+    private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_id);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
 
         actionBar.setDisplayHomeAsUpEnabled(true);
-         actionBar.setTitle("");
+        actionBar.setTitle("");
     }
 
     private void initGridRecycleView() {
@@ -214,54 +220,79 @@ public class ProductsActivity extends AppCompatActivity {
 
                         try {
                             jsonArray = response.getJSONArray("products");
-                            ArrayList<ProductModel> productModels = new ArrayList<>();
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject curObj = jsonArray.getJSONObject(i);
                                 int main_category = curObj.getInt("main_category");
-                                if(category_id == -1 ){
+                                if (category_id == -1) {
 
-                                    product = curObj.getString("product");
-                                    description = "some description blabla blaa.sndadncadbcjadbcakhbchkabdcf.";
-                                    JSONObject main_pair = curObj.getJSONObject("main_pair");
-                                    JSONObject detaild = main_pair.getJSONObject("detailed");
-                                    image_path = detaild.getString("image_path");
-                                    product_id = curObj.getInt("product_id");
-                                    amount = curObj.getInt("amount");
-                                    price = curObj.getDouble("price");
-                                    status = curObj.getString("status");
-                                    product_code = curObj.getString("product_code");
+                                    String product = curObj.getString("product");
+                                    String description = "some description blabla blaa.sndadncadbcjadbcakhbchkabdcf.";
+                                    if (curObj.has("main_pair")) {
+                                        JSONObject main_pair = curObj.getJSONObject("main_pair");
+                                        JSONObject detaild = main_pair.getJSONObject("detailed");
+                                        image_path = detaild.getString("image_path");
+                                    } else {
+                                        image_path = "http://soplidan.ge/images/detailed/1/shavi_chai.png?t=1468584369";
+                                    }
+                                    int product_id = curObj.getInt("product_id");
+                                    int amount = curObj.getInt("amount");
+                                    Double price = curObj.getDouble("list_price");
+                                    String status = curObj.getString("status");
+                                    String product_code = curObj.getString("product_code");
+                                    Double base_price = curObj.getDouble("base_price");
+                                    if (curObj.has("list_discount")) {
+                                        list_discount = curObj.getDouble("list_discount");
+                                        list_discount_prc = curObj.getInt("list_discount_prc");
+                                    }
 
-                                    ProductModel productModel = new ProductModel( category, product, description, image_path, product_id,amount,price,status,product_code);
+                                    ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
                                     productModels.add(productModel);
-                               }else if(category_id==main_category){
-                                    product = curObj.getString("product");
-                                    description = curObj.getString("product");
-                                    JSONObject main_pair = curObj.getJSONObject("main_pair");
-                                    JSONObject detaild = main_pair.getJSONObject("detailed");
-                                    image_path = detaild.getString("image_path");
-                                    product_id = curObj.getInt("product_id");
-                                    amount = curObj.getInt("amount");
-                                    price = curObj.getDouble("price");
-                                    status = curObj.getString("status");
-                                    product_code = curObj.getString("product_code");
+                                } else if (category_id == main_category) {
+                                    String product = curObj.getString("product");
+                                    String description = curObj.getString("product");
 
-                                    ProductModel productModel = new ProductModel( category, product, description, image_path, product_id,amount,price,status,product_code);
+                                    if (curObj.has("main_pair")) {
+                                        JSONObject main_pair = curObj.getJSONObject("main_pair");
+                                        if (main_pair.has("detailed")) {
+                                            JSONObject detaild = main_pair.getJSONObject("detailed");
+                                            image_path = detaild.getString("image_path");
+                                        } else {
+                                            JSONObject detaild = main_pair.getJSONObject("icon");
+                                            image_path = detaild.getString("image_path");
+                                        }
+                                    } else {
+                                        image_path = "http://soplidan.ge/images/detailed/1/shavi_chai.png?t=1468584369";
+                                    }
+
+                                    int product_id = curObj.getInt("product_id");
+                                    int amount = curObj.getInt("amount");
+                                    Double price = curObj.getDouble("list_price");
+                                    String status = curObj.getString("status");
+                                    String product_code = curObj.getString("product_code");
+                                    Double base_price = curObj.getDouble("base_price");
+
+
+                                    if (curObj.has("list_discount")) {
+                                        list_discount = curObj.getDouble("list_discount");
+                                        list_discount_prc = curObj.getInt("list_discount_prc");
+                                    }
+                                    ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
                                     productModels.add(productModel);
                                 }
 
 
                             }
-                            myAdapter = new ProductsAdapter(productModels, getApplicationContext());
+
                             myAdapter.setMyClickListener(new ProductsAdapter.MyClickListener() {
 
                                 @Override
                                 public void onClick(ProductModel model) {
                                     ProductDetailDialog dialog = new ProductDetailDialog();
                                     Bundle bundle = new Bundle();
-                                    bundle.putSerializable("model",model);
+                                    bundle.putSerializable("model", model);
                                     dialog.setArguments(bundle);
-                                    dialog.show(getFragmentManager(),"dialog");
+                                    dialog.show(getFragmentManager(), "dialog");
                                 }
                             });
                             myAdapter.setMycountListener(new ProductsAdapter.MyCountListener() {
@@ -272,6 +303,10 @@ public class ProductsActivity extends AppCompatActivity {
                             });
                             gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
                             gridRecycler.setAdapter(myAdapter);
+                            myAdapter.notifyDataSetChanged();
+                            recyclerViewState = gridRecycler.getLayoutManager().onSaveInstanceState();
+
+                            gridRecycler.getLayoutManager().onRestoreInstanceState(recyclerViewState);
 
                             progressDialog.cancel();
 
@@ -322,11 +357,11 @@ public class ProductsActivity extends AppCompatActivity {
 //    }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         System.out.println("OnResume");
 
-        updateListView();
+//        updateListView();
         isNetworkAvailable();
     }
 
@@ -337,25 +372,30 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
 
+    public void updateListView() {
+        gridRecycler.setAdapter(myAdapter);
 
-    public void updateListView(){
+//        myAdapter.notifyDataSetChanged();
+        if(gridRecycler.getAdapter() != null){
+            gridRecycler.getAdapter().notifyDataSetChanged();
+            recyclerViewState = gridRecycler.getLayoutManager().onSaveInstanceState();
 
-//        if(gridRecycler.getAdapter() != null){
-//            gridRecycler.getAdapter().notifyDataSetChanged();}else{
-            gridRecycler.setAdapter(myAdapter);
-     //   }
+            gridRecycler.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+
+        }
 
 
         count();
     }
+
     public void count() {
         count_item = (TextView) findViewById(R.id.count_item);
         count = SingletonTest.getInstance().getCartMap();
-        int count_sum=0;
+        int count_sum = 0;
         ArrayList<ProductModel> cartMap = new ArrayList<>();
 
         Iterator myVeryOwnIterator = count.keySet().iterator();
-        if(count.size()>0) {
+        if (count.size() > 0) {
             while (myVeryOwnIterator.hasNext()) {
                 int key = (int) myVeryOwnIterator.next();
                 ProductModel value = count.get(key);
@@ -367,12 +407,11 @@ public class ProductsActivity extends AppCompatActivity {
                 count_sum += cartMap.get(i).getQuontity();
             }
             count_item.setText(count_sum + "");
-        }
-
-        else{
+        } else {
             count_item.setText(count_sum + "");
         }
     }
+
     public void isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -381,6 +420,17 @@ public class ProductsActivity extends AppCompatActivity {
             Toast.makeText(this, "Internet Connection Is Required", Toast.LENGTH_LONG).show();
 
         }
+    }
+
+    public void notifyData(){
+        productModels.clear();
+        if (category_id == -1) {
+            getJSONInfo(json_url + query);
+        } else {
+            getJSONInfo(json_url);
+        }
+
+//        myAdapter.notifyDataSetChanged();
     }
 
 }

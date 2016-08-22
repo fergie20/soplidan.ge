@@ -6,27 +6,52 @@ import java.io.Serializable;
  * Created by GeoLab on 7/10/16.
  */
 public class ProductModel implements Serializable {
-    private String categories,name,description,img, product_code;
-    private int id;
-    private int recource;
-    private double price;
-    private int quontity;
-    private String status;
+    private String categories,name,description,img, product_code,status;
+    private int id, recource, quontity,list_discount_prc;
+    private double list_price,base_price,list_discount;
 
-    public ProductModel(String categories, String name, String description, String img, int id, int recource, double price, String status, String product_code) {
+
+    public ProductModel(String categories, String name, String description, String img, int id, int recource, double price, String status, String product_code, Double base_price, Double list_discount, int list_discount_prc) {
         this.categories = categories;
         this.name = name;
         this.description = description;
         this.img = img;
         this.id = id;
         this.recource = recource;
-        this.price = price;
+        this.list_price = price;
         this.status=status;
         this.product_code=product_code;
+        this.base_price=base_price;
+        this.list_discount=list_discount;
+        this.list_discount_prc=list_discount_prc;
     }
 
     public String getProduct_code() {
         return product_code;
+    }
+
+    public double getBase_price() {
+        return base_price;
+    }
+
+    public void setBase_price(double base_price) {
+        this.base_price = base_price;
+    }
+
+    public double getList_discount() {
+        return list_discount;
+    }
+
+    public void setList_discount(double list_discount) {
+        this.list_discount = list_discount;
+    }
+
+    public int getList_discount_prc() {
+        return list_discount_prc;
+    }
+
+    public void setList_discount_prc(int list_discount_prc) {
+        this.list_discount_prc = list_discount_prc;
     }
 
     public void setProduct_code(String product_code) {
@@ -34,7 +59,7 @@ public class ProductModel implements Serializable {
     }
 
     public double getSumPrice(){
-        return  price*2;
+        return  list_price *2;
     }
 
     public int getQuontity() {
@@ -102,12 +127,12 @@ public class ProductModel implements Serializable {
         this.recource = recource;
     }
 
-    public double getPrice() {
-        return price;
+    public double getList_price() {
+        return list_price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setList_price(double list_price) {
+        this.list_price = list_price;
     }
 
 

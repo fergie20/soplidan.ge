@@ -85,7 +85,12 @@ public class CheckoutActivity extends AppCompatActivity {
     private double getTotalPrice(ArrayList<ProductModel> products){
         double price = 0;
         for (int i = 0; i < products.size(); i++) {
-            price += products.get(i).getPrice() * products.get(i).getQuontity();
+
+            if(products.get(i).getBase_price()>0) {
+                price += products.get(i).getBase_price() * products.get(i).getQuontity();
+            }else {
+                price += products.get(i).getList_price() * products.get(i).getQuontity();
+            }
 
         }
 

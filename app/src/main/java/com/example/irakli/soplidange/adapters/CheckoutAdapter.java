@@ -22,6 +22,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
 
     ArrayList<ProductModel> cartMap;
     Context context;
+    double price;
 
     public CheckoutAdapter(ArrayList<ProductModel> cartMap, Context context) {
 
@@ -41,13 +42,19 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Picasso.with(context)
                 .load(cartMap.get(position).getImg())
-                .resize(100, 100)
+                .resize(300, 300)
                 .centerCrop()
                 .into(holder.productImageView);
-        double price = cartMap.get(position).getPrice();
+
+        if(cartMap.get(position).getBase_price()>0) {
+             price = cartMap.get(position).getBase_price();
+
+        }else {
+             price = cartMap.get(position).getList_price();
+
+        }
+
         holder.setMyModel(cartMap.get(position));
-
-
         holder.productPriceView.setText( String.valueOf(price)+" GEL");
         holder.productNameView.setText(cartMap.get(position).getName());
         holder.quantityView.setText(cartMap.get(position).getQuontity() + "");
@@ -97,7 +104,11 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                         model.setQuontity(quantity);
                         SingletonTest.getInstance().addProduct(model.getId(), model);
 
-                        oldPrice = model.getPrice();
+                        if(model.getBase_price()>0) {
+                            oldPrice = model.getBase_price();
+                        }else {
+                            oldPrice = model.getList_price();
+                        }
                         listener.onClick(oldPrice);
                         quantityView.setText(quantity + "");
                     }else{
@@ -132,7 +143,12 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
 
                             model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
 
-                            oldPrice = model.getPrice();
+                            if(model.getBase_price()>0) {
+                                oldPrice = model.getBase_price();
+                            }else {
+                                oldPrice = model.getList_price();
+                            }
+
                             listener.onClick(-oldPrice);
                             return;
                         }
@@ -140,7 +156,11 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                         model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
 
                         SingletonTest.getInstance().addProduct(model.getId(), model);
-                        oldPrice = model.getPrice();
+                        if(model.getBase_price()>0) {
+                            oldPrice = model.getBase_price();
+                        }else {
+                            oldPrice = model.getList_price();
+                        }
                         listener.onClick(-oldPrice);
 
 

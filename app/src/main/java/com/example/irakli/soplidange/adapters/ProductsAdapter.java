@@ -1,36 +1,33 @@
 package com.example.irakli.soplidange.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
+import net.wujingchao.android.view.SimpleTagImageView;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Irakli on 24.06.2016.
  */
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyViewHolder>{
 
-    ArrayList<ProductModel> productModels;
+    List<ProductModel> productModels;
     Context context;
 
-    public ProductsAdapter(ArrayList<ProductModel> productModels, Context context) {
-
+    public ProductsAdapter(List<ProductModel> productModels, Context context) {
         this.productModels = productModels;
         this.context = context;
     }
@@ -45,14 +42,28 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Picasso.with(context)
-                .load(productModels.get(position).getImg())
-                .into(holder.productImageView);
-        double price = productModels.get(position).getPrice();
-        holder.setModel(productModels.get(position));
-        holder.setSavedQuantity();
-        holder.productPriceView.setText(String.valueOf(price)+"GEL");
-        holder.productNameView.setText(productModels.get(position).getName());
+
+        ProductModel product = productModels.get(position);
+
+//        Picasso.with(context)
+//                .load(productModels.get(position).getImg())
+//                .resize(200, 200)
+//                .centerCrop()
+//                .into(holder.productImageView);
+
+//        if(productModels.get(position).getList_discount()==0) {
+//            holder.productImageView.setTagEnable(true);
+//            holder.productImageView.setTagText(productModels.get(position).getBase_price()+"GEL");
+//
+//        }else {
+//            holder.productImageView.setTagEnable(true);
+//            holder.productImageView.setTagText("sale " + productModels.get(position).getList_discount_prc() + "%");
+//        }
+
+        holder.setModel(product);
+//        holder.setSavedQuantity();
+//        holder.productPriceView.setText(String.valueOf(product.getList_price()) + "GEL");
+//        holder.productNameView.setText(product.getName());
     }
 
     @Override
@@ -63,7 +74,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView productImageView;
+        SimpleTagImageView productImageView;
         TextView productNameView;
         TextView productPriceView;
         ProductModel model;
@@ -73,11 +84,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
         void setModel(ProductModel model) {
             this.model = model;
+            Picasso.with(context)
+                    .load(this.model.getImg())
+                    .resize(200, 200)
+                    .centerCrop()
+                    .into(productImageView);
         }
 
         private void setSavedQuantity(){
             if (SingletonTest.getInstance().getProduct(model.getId()) != null) {
-                quantityView.setText(SingletonTest.getInstance().getProduct(model.getId()).getQuontity() + "");
+                quantityView.setText(SingletonTest.getInstance().getProduct(model.getId()).getQuontity());
             }
         }
 
@@ -87,7 +103,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
             minus = (ImageView) itemView.findViewById(R.id.grid_minus_id);
             quantityView = (TextView) itemView.findViewById(R.id.grid_text_id);
 
-            productImageView = (ImageView) itemView.findViewById(R.id.image_id);
+            productImageView = (SimpleTagImageView) itemView.findViewById(R.id.image_id);
             productNameView = (TextView) itemView.findViewById(R.id.product_name_id);
             productPriceView = (TextView) itemView.findViewById(R.id.price_id);
 
@@ -180,4 +196,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     public interface MyCountListener {
         void countClick();
     }
+    private int mScrollY;
+    private RecyclerView.OnScrollListener mTotalScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            mScrollY += dy;
+        }
+    };
 }
