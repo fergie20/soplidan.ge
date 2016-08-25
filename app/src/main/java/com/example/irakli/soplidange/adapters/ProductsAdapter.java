@@ -98,11 +98,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
         void setModel(ProductModel model) {
             this.model = model;
-//            Picasso.with(context)
-//                    .load(this.model.getImg())
-//                    .resize(200, 200)
-//                    .centerCrop()
-//                    .into(productImageView);
         }
 
         private void setSavedQuantity(){
@@ -134,14 +129,14 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                         model.setQuontity(quantity);
                         SingletonTest.getInstance().addProduct(model.getId(), model);
                         mycountListener.countClick();
-                        Toast.makeText(context, "daemata kalatashi", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "დაემატა კალათაში", Toast.LENGTH_LONG).show();
 
                         quantityView.setText(quantity + "");
                     }else{
                         quantity--;
                         model.setQuontity(quantity );
                         SingletonTest.getInstance().addProduct(model.getId(), model);
-                        Toast.makeText(context, "tqvens mier motxovnili produqtis raodenoba agemateba marags", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "თქვენს მიერ არჩეული პროდუქციის რაოდენობა აღემატება მარაგს", Toast.LENGTH_LONG).show();
 
                         quantityView.setText(quantity + "");
 
@@ -175,7 +170,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
                         }
                         mycountListener.countClick();
-                        Toast.makeText(context, "ganaxlda kalata", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "განახლდა კალათა", Toast.LENGTH_LONG).show();
 
                     } else {
                         quantityView.setText("0");

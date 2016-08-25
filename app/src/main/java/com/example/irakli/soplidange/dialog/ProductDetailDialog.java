@@ -1,7 +1,11 @@
 package com.example.irakli.soplidange.dialog;
 
 import android.app.DialogFragment;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,8 @@ import com.example.irakli.soplidange.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
+import net.wujingchao.android.view.SimpleTagImageView;
+
 import java.text.NumberFormat;
 
 /**
@@ -27,19 +33,49 @@ public class ProductDetailDialog extends DialogFragment {
     TextView quantityView;
     TextView sumView;
     String checkQuantity;
+    TextView currentPrice;
     View rootView;
     ProductModel model;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.productdetaildialog, container, false);
         model = (ProductModel) getArguments().getSerializable("model");
         getDialog().setTitle(model.getCategories());
-        ImageView image = (ImageView) rootView.findViewById(R.id.dialog_image_id);
-        Picasso.with(getActivity())
-                .load(model.getImg())
-                .resize(300, 300)
-                .centerCrop()
-                .into(image);
+        StrikethroughSpan STRIKE_THROUGH_SPAN = new StrikethroughSpan();
+
+
+        SimpleTagImageView image = (SimpleTagImageView) rootView.findViewById(R.id.dialog_image_id);
+        if(model.getList_discount()!=0) {
+            Picasso.with(getActivity())
+                    .load(model.getImg())
+                    .centerInside()
+                    .fit()
+                    .into(image);
+            image.setTagEnable(true);
+            image.setTagText("sale: " + model.getList_discount_prc() + "%");
+            currentPrice = (TextView) rootView.findViewById(R.id.dialog_current_price_id);
+
+
+
+            currentPrice.setText("ფასი: " + model.getBase_price() + "GEL  " + model.getList_price() + "GEL", TextView.BufferType.SPANNABLE);
+            Spannable spannable = (Spannable) currentPrice.getText();
+            spannable.setSpan(STRIKE_THROUGH_SPAN, spannable.length()/2+4, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            currentPrice.setPaintFlags(currentPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else{
+            Picasso.with(getActivity())
+                    .load(model.getImg())
+                    .centerInside()
+                    .fit()
+                    .into(image);
+            image.setTagEnable(true);
+            image.setTagText("ფასი: " + model.getBase_price() + " GEL");
+
+        }
+
+
+
+
         TextView name = (TextView) rootView.findViewById(R.id.dialog_name_id);
         name.setText(model.getName());
         TextView price = (TextView) rootView.findViewById(R.id.dialog_price_id);
@@ -67,9 +103,9 @@ public class ProductDetailDialog extends DialogFragment {
 
 
                 }
-                Toast.makeText(getActivity(), "ganaxlda kalata", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "განახლდა კალათა", Toast.LENGTH_LONG).show();
 
-                ((ProductsActivity)getActivity()).updateListView();
+//                ((ProductsActivity)getActivity()).updateListView();
                 dismiss();
             }
         });
@@ -139,7 +175,7 @@ public class ProductDetailDialog extends DialogFragment {
                     NumberFormat nf = NumberFormat.getInstance(); // get instance
                     nf.setMaximumFractionDigits(3); // set decimal places
                     String s = nf.format(sum);
-                    Toast.makeText(getActivity(), "tqvens mier motxovnili produqtis raodenoba agemateba marags", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "თქვენს მიერ არჩეული პროდუქტის რაოდენობა აღემატება მარაგს", Toast.LENGTH_LONG).show();
 
                     sumView.setText(s + " GEL");
                     quantityView.setText(quantity + "");
@@ -190,6 +226,6 @@ public class ProductDetailDialog extends DialogFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        ((ProductsActivity)getActivity()).updateListView();
+        ((ProductsActivity)getActivity()).updateListView();
     }
 }

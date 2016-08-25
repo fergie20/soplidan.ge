@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-        progressDialog = ProgressDialog.show(this, "", "Gtxovt Daelodot");
+        progressDialog = ProgressDialog.show(this, "", "გთხოვთ დაელოდოთ...");
         requestQueue.add(jsonRequest);
     }
 //
@@ -254,7 +254,7 @@ public void count() {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
         } else {
-            Toast.makeText(this, "Internet Connection Is Required", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ინფორმაციის ჩამოსატვირთად საჭიროა ინტერნეტთან წვდომა", Toast.LENGTH_LONG).show();
 //            NetworkDialog dialog = new NetworkDialog();
 //            dialog.show(getFragmentManager(), "dialog");
 

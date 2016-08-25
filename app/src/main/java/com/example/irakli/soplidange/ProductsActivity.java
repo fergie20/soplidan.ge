@@ -222,8 +222,13 @@ public class ProductsActivity extends AppCompatActivity {
                                     String description = "some description blabla blaa.sndadncadbcjadbcakhbchkabdcf.";
                                     if (curObj.has("main_pair")) {
                                         JSONObject main_pair = curObj.getJSONObject("main_pair");
-                                        JSONObject detaild = main_pair.getJSONObject("detailed");
-                                        image_path = detaild.getString("image_path");
+                                        if (main_pair.has("detailed")) {
+                                            JSONObject detaild = main_pair.getJSONObject("detailed");
+                                            image_path = detaild.getString("image_path");
+                                        } else {
+                                            JSONObject detaild = main_pair.getJSONObject("icon");
+                                            image_path = detaild.getString("image_path");
+                                        }
                                     } else {
                                         image_path = "http://soplidan.ge/images/detailed/1/shavi_chai.png?t=1468584369";
                                     }
@@ -328,7 +333,7 @@ public class ProductsActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        progressDialog = ProgressDialog.show(this, "", "Gtxovt Daelodot");
+        progressDialog = ProgressDialog.show(this, "", "გთხოვთ დაელოდოთ...");
         requestQueue.add(jsonRequest);
     }
 //    @Override
@@ -353,7 +358,7 @@ public class ProductsActivity extends AppCompatActivity {
         super.onResume();
         System.out.println("OnResume");
 
-//        updateListView();
+        updateListView();
         isNetworkAvailable();
     }
 
@@ -367,11 +372,11 @@ public class ProductsActivity extends AppCompatActivity {
     public void updateListView() {
 //        gridRecycler.setAdapter(myAdapter);
 //
-//        myAdapter.notifyDataSetChanged();
-        if(gridRecycler.getAdapter() != null){
-            gridRecycler.getAdapter().notifyDataSetChanged();
-
-        }
+        myAdapter.notifyDataSetChanged();
+//        if(gridRecycler.getAdapter() != null){
+//            gridRecycler.getAdapter().notifyDataSetChanged();
+//
+//        }
         count();
     }
 
@@ -404,20 +409,9 @@ public class ProductsActivity extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
         } else {
-            Toast.makeText(this, "Internet Connection Is Required", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ინფორმაციის ჩამოსატვირთად საჭიროა ინტერნეტ კავშირი", Toast.LENGTH_LONG).show();
 
         }
-    }
-
-    public void notifyData(){
-        productModels.clear();
-        if (category_id == -1) {
-            getJSONInfo(json_url + query);
-        } else {
-            getJSONInfo(json_url);
-        }
-
-//        myAdapter.notifyDataSetChanged();
     }
 
 }

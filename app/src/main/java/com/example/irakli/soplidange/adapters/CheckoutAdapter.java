@@ -42,8 +42,8 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Picasso.with(context)
                 .load(cartMap.get(position).getImg())
-                .resize(300, 300)
-                .centerCrop()
+                .centerInside()
+                .fit()
                 .into(holder.productImageView);
 
         if(cartMap.get(position).getBase_price()>0) {
@@ -116,7 +116,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                         model.setQuontity(quantity);
                         SingletonTest.getInstance().addProduct(model.getId(), model);
 
-                        Toast.makeText(context, "tqvens mier motxovnili produqtis raodenoba agemateba marags", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "თქვენს მიერ არჩეული პროდუქციის რაოდენობა აღემატება მარაგს", Toast.LENGTH_LONG).show();
                         quantityView.setText(quantity + "");
                     }
 

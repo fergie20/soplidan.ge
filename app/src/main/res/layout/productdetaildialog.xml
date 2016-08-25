@@ -18,12 +18,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/dialog_image_id"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:src="@android:drawable/alert_dark_frame" />
+                <net.wujingchao.android.view.SimpleTagImageView
+                    xmlns:simple="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/dialog_image_id"
+                    android:layout_margin="13dp"
+                    android:layout_width="150dp"
+                    android:layout_height="180dp"
+                    android:src="@android:drawable/ic_menu_day"
+                    simple:simple_tag_textSize="10sp"
+                    simple:simple_corner_distance="50dp"
+                    simple:simple_tag_text="sale 20%"
+                    simple:simple_tag_background_color="#9eff0900"
+                    simple:simple_tag_orientation="right_top"
+                    simple:simple_tag_width="15dip"
+                    simple:simple_tag_textColor="@android:color/white"
+                    simple:simple_tag_enable="true"
+                    simple:simple_tag_round_radius="3dp"/>
+
+            <!--<ImageView-->
+                <!--android:id="@+id/dialog_image_id"-->
+                <!--android:layout_width="150dp"-->
+                <!--android:layout_height="180dp"-->
+                <!--android:src="@android:drawable/alert_dark_frame" />-->
+            <TextView
+                android:id="@+id/dialog_current_price_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_red_light"
+                android:layout_marginBottom="10dp"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
