@@ -69,6 +69,7 @@ public class ProductDetailDialog extends DialogFragment {
                 }
                 Toast.makeText(getActivity(), "ganaxlda kalata", Toast.LENGTH_LONG).show();
 
+                ((ProductsActivity)getActivity()).updateListView();
                 dismiss();
             }
         });

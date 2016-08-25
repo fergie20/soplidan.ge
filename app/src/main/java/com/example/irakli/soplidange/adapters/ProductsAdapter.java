@@ -41,29 +41,42 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        ProductModel product = productModels.get(position);
 
-//        Picasso.with(context)
-//                .load(productModels.get(position).getImg())
-//                .resize(200, 200)
-//                .centerCrop()
-//                .into(holder.productImageView);
 
-//        if(productModels.get(position).getList_discount()==0) {
-//            holder.productImageView.setTagEnable(true);
-//            holder.productImageView.setTagText(productModels.get(position).getBase_price()+"GEL");
-//
-//        }else {
-//            holder.productImageView.setTagEnable(true);
-//            holder.productImageView.setTagText("sale " + productModels.get(position).getList_discount_prc() + "%");
-//        }
+
+        int pos = getItemViewType(position);
+        ProductModel product = productModels.get(pos);
+        if(productModels.get(pos).getImg() == null) {
+
+            holder.productImageView.setVisibility(View.GONE);
+        } else {
+            Picasso.with(context)
+                    .load(productModels.get(pos).getImg())
+                    .centerInside()
+                    .fit()
+                    .into(holder.productImageView);
+        }
+
+        if(productModels.get(pos).getList_discount()==0) {
+            holder.productImageView.setTagEnable(true);
+            holder.productImageView.setTagText(productModels.get(pos).getBase_price()+"GEL");
+
+        }else {
+            holder.productImageView.setTagEnable(true);
+            holder.productImageView.setTagText("sale " + productModels.get(pos).getList_discount_prc() + "%");
+        }
 
         holder.setModel(product);
-//        holder.setSavedQuantity();
-//        holder.productPriceView.setText(String.valueOf(product.getList_price()) + "GEL");
-//        holder.productNameView.setText(product.getName());
+        holder.setSavedQuantity();
+        holder.productPriceView.setText(String.valueOf(product.getList_price()) + "GEL");
+        holder.productNameView.setText(product.getName());
     }
 
     @Override
@@ -81,19 +94,20 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
         ImageView plus;
         ImageView minus;
         TextView quantityView;
+        RecyclerView recyclerView;
 
         void setModel(ProductModel model) {
             this.model = model;
-            Picasso.with(context)
-                    .load(this.model.getImg())
-                    .resize(200, 200)
-                    .centerCrop()
-                    .into(productImageView);
+//            Picasso.with(context)
+//                    .load(this.model.getImg())
+//                    .resize(200, 200)
+//                    .centerCrop()
+//                    .into(productImageView);
         }
 
         private void setSavedQuantity(){
             if (SingletonTest.getInstance().getProduct(model.getId()) != null) {
-                quantityView.setText(SingletonTest.getInstance().getProduct(model.getId()).getQuontity());
+                quantityView.setText(SingletonTest.getInstance().getProduct(model.getId()).getQuontity()+"");
             }
         }
 
@@ -106,6 +120,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
             productImageView = (SimpleTagImageView) itemView.findViewById(R.id.image_id);
             productNameView = (TextView) itemView.findViewById(R.id.product_name_id);
             productPriceView = (TextView) itemView.findViewById(R.id.price_id);
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.recycler_grid_view_id);
 
             plus.setOnClickListener(new View.OnClickListener() {
                 @Override

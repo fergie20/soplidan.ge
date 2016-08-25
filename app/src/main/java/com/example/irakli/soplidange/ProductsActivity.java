@@ -65,14 +65,6 @@ public class ProductsActivity extends AppCompatActivity {
     int list_discount_prc = 0;
     String category;
     String image_path;
-    //    String product;
-//    String description;
-//    String image_path;
-//    int product_id;
-//    int amount;
-//    double price;
-//    String status;
-//    String product_code;
     String json_url = "http://soplidan.ge/api/products?items_per_page=300&q=";
     String query = "";
     TextView count_item;
@@ -373,18 +365,13 @@ public class ProductsActivity extends AppCompatActivity {
 
 
     public void updateListView() {
-        gridRecycler.setAdapter(myAdapter);
-
+//        gridRecycler.setAdapter(myAdapter);
+//
 //        myAdapter.notifyDataSetChanged();
         if(gridRecycler.getAdapter() != null){
             gridRecycler.getAdapter().notifyDataSetChanged();
-            recyclerViewState = gridRecycler.getLayoutManager().onSaveInstanceState();
-
-            gridRecycler.getLayoutManager().onRestoreInstanceState(recyclerViewState);
 
         }
-
-
         count();
     }
 
