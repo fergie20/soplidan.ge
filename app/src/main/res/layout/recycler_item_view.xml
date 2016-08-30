@@ -20,6 +20,9 @@
         android:paddingLeft="3dp"
         android:textSize="16sp"
         android:text="categoriebi"
+        android:maxLines="1"
+        android:maxLength="25"
+        android:ellipsize="end"
         android:textColor="@android:color/black"/>
     <TextView
         android:layout_width="wrap_content"

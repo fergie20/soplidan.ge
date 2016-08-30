@@ -1,7 +1,11 @@
 package com.example.irakli.soplidange.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +30,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
     List<ProductModel> productModels;
     Context context;
+    StrikethroughSpan STRIKE_THROUGH_SPAN = new StrikethroughSpan();
+
 
     public ProductsAdapter(List<ProductModel> productModels, Context context) {
         this.productModels = productModels;
@@ -65,17 +71,25 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
         }
 
         if(productModels.get(pos).getList_discount()==0) {
-            holder.productImageView.setTagEnable(true);
-            holder.productImageView.setTagText(productModels.get(pos).getBase_price()+"GEL");
+            holder.productImageView.setTagEnable(false);
+            holder.productPriceView.setText(String.valueOf(product.getList_price()) + " GEL");
 
-        }else {
+        } else {
             holder.productImageView.setTagEnable(true);
+            holder.productImageView.setTagBackgroundColor(Color.parseColor("#9eff0900"));
             holder.productImageView.setTagText("sale " + productModels.get(pos).getList_discount_prc() + "%");
+            holder.productPriceView.setText(String.valueOf(product.getBase_price()) + " GEL");
+
+            holder.productPriceView.setText(productModels.get(pos).getBase_price() + " GEL  " + productModels.get(pos).getList_price() + " GEL", TextView.BufferType.SPANNABLE);
+            Spannable spannable = (Spannable) holder.productPriceView.getText();
+
+            spannable.setSpan(STRIKE_THROUGH_SPAN, spannable.length() / 2 + 1, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+
+
 
         holder.setModel(product);
         holder.setSavedQuantity();
-        holder.productPriceView.setText(String.valueOf(product.getList_price()) + "GEL");
         holder.productNameView.setText(product.getName());
     }
 
@@ -134,8 +148,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                         quantityView.setText(quantity + "");
                     }else{
                         quantity--;
-                        model.setQuontity(quantity );
-                        SingletonTest.getInstance().addProduct(model.getId(), model);
+//                        model.setQuontity(quantity );
+//                        SingletonTest.getInstance().addProduct(model.getId(), model);
                         Toast.makeText(context, "თქვენს მიერ არჩეული პროდუქციის რაოდენობა აღემატება მარაგს", Toast.LENGTH_LONG).show();
 
                         quantityView.setText(quantity + "");

@@ -29,7 +29,7 @@
                     android:id="@+id/dialog_image_id"
                     android:layout_margin="13dp"
                     android:layout_width="150dp"
-                    android:layout_height="180dp"
+                    android:layout_height="150dp"
                     android:src="@android:drawable/ic_menu_day"
                     simple:simple_tag_textSize="10sp"
                     simple:simple_corner_distance="50dp"
@@ -122,6 +122,15 @@
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <View xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#abe4dada"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="5dp"
+            />
+
 
         <TextView
             android:id="@+id/dialog_description_id"

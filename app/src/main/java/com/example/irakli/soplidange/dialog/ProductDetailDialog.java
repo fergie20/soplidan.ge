@@ -43,7 +43,7 @@ public class ProductDetailDialog extends DialogFragment {
         model = (ProductModel) getArguments().getSerializable("model");
         getDialog().setTitle(model.getCategories());
         StrikethroughSpan STRIKE_THROUGH_SPAN = new StrikethroughSpan();
-
+        currentPrice = (TextView) rootView.findViewById(R.id.dialog_current_price_id);
 
         SimpleTagImageView image = (SimpleTagImageView) rootView.findViewById(R.id.dialog_image_id);
         if(model.getList_discount()!=0) {
@@ -54,7 +54,7 @@ public class ProductDetailDialog extends DialogFragment {
                     .into(image);
             image.setTagEnable(true);
             image.setTagText("sale: " + model.getList_discount_prc() + "%");
-            currentPrice = (TextView) rootView.findViewById(R.id.dialog_current_price_id);
+
 
 
 
@@ -68,14 +68,18 @@ public class ProductDetailDialog extends DialogFragment {
                     .centerInside()
                     .fit()
                     .into(image);
-            image.setTagEnable(true);
-            image.setTagText("ფასი: " + model.getBase_price() + " GEL");
-
+            image.setTagEnable(false);
+            currentPrice.setText( model.getList_price() + " GEL");
         }
 
 
 
-
+        quantityView = (TextView) rootView.findViewById(R.id.dialog_quantity_id);
+        if(model.getRecource() > 0){
+            quantityView.setText("1");
+        }else{
+            quantityView.setText("0");
+        }
         TextView name = (TextView) rootView.findViewById(R.id.dialog_name_id);
         name.setText(model.getName());
         TextView price = (TextView) rootView.findViewById(R.id.dialog_price_id);
