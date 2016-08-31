@@ -42,8 +42,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Picasso.with(context)
                 .load(cartMap.get(position).getImg())
-                .centerInside()
-                .fit()
                 .into(holder.productImageView);
 
         if(cartMap.get(position).getBase_price()>0) {
@@ -128,7 +126,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                 @Override
                 public void onClick(View view) {
                     int quantity;
-                    quantity = Integer.parseInt((String) quantityView.getText().toString());
+                    quantity = Integer.parseInt(quantityView.getText().toString());
 
                     if (quantity >= 1) {
                         quantity--;
@@ -140,6 +138,8 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                             cartMap.remove(model);
                             notifyDataSetChanged();
                             SingletonTest.getInstance().getCartMap().remove(model.getId());
+
+                            Toast.makeText(context, "პროდუქტი წაიშალა", Toast.LENGTH_SHORT).show();
 
                             model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
 

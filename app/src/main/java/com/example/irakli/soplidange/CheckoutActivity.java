@@ -27,7 +27,6 @@ public class CheckoutActivity extends AppCompatActivity {
     ImageView plusTextView;
     TextView quantityView;
     TextView sumView;
-    String checkQuantity;
     ProductModel model;
     RecyclerView recyclerView;
     HashMap<Integer,ProductModel> cartMap;
@@ -130,6 +129,7 @@ public class CheckoutActivity extends AppCompatActivity {
         }
         return (super.onOptionsItemSelected(menuItem));
     }
+
     private void find(){
         productPriceView = (TextView) findViewById(R.id.product_price_id);
         minusTextView = (ImageView) findViewById(R.id.minus_id);
@@ -137,6 +137,7 @@ public class CheckoutActivity extends AppCompatActivity {
         quantityView = (TextView) findViewById(R.id.quantity_id);
         sumView = (TextView) findViewById(R.id.sum_id);
     }
+
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.checkout_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

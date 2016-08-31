@@ -20,7 +20,6 @@ import com.squareup.picasso.Picasso;
 
 import net.wujingchao.android.view.SimpleTagImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,9 +53,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-
-
-
         int pos = getItemViewType(position);
         ProductModel product = productModels.get(pos);
         if(productModels.get(pos).getImg() == null) {
@@ -85,6 +81,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
             spannable.setSpan(STRIKE_THROUGH_SPAN, spannable.length() / 2 + 1, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+
 
 
 

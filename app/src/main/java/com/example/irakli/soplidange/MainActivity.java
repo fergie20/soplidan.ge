@@ -1,17 +1,13 @@
 package com.example.irakli.soplidange;
 
-import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,14 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,14 +27,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.adapters.CategoriesAdapter;
-import com.example.irakli.soplidange.dialog.NetworkDialog;
-import com.example.irakli.soplidange.dialog.ProductDetailDialog;
 import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
-import com.squareup.picasso.Downloader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,22 +39,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-
 
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
-    ArrayList<String> categoriesList;
     private RequestQueue requestQueue;
-   // LinearLayout layout;
+    // LinearLayout layout;
     CategoriesAdapter myAdapter;
-//    private SwipeRefreshLayout mSwipeRefreshLayout;
+    //    private SwipeRefreshLayout mSwipeRefreshLayout;
     private ProgressDialog progressDialog;
     TextView count_item;
-    HashMap<Integer,ProductModel> count;
+    HashMap<Integer, ProductModel> count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,16 +67,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                    Intent addEvent = new Intent(MainActivity.this, CheckoutActivity.class);
-                    startActivity(addEvent);
+                Intent addEvent = new Intent(MainActivity.this, CheckoutActivity.class);
+                startActivity(addEvent);
 
             }
         });
+
 //        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
 //        mSwipeRefreshLayout.setOnRefreshListener(this);
+
         getJSONInfo();
         count();
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
 
@@ -102,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         if (null != searchView) {
             searchView.setSearchableInfo(searchManager
                     .getSearchableInfo(getComponentName()));
-            searchView.setIconifiedByDefault(false);
         }
 
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
@@ -118,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
 
                 Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
-                int_query.putExtra("query",query);
+                int_query.putExtra("query", query);
                 startActivity(int_query);
                 return false;
             }
@@ -206,7 +191,8 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = ProgressDialog.show(this, "", "გთხოვთ დაელოდოთ...");
         requestQueue.add(jsonRequest);
     }
-//
+
+    //
 //    @Override
 //    public void onRefresh() {
 //        getJSONInfo();
@@ -217,38 +203,38 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }, 2000);
 //    }
-public void count() {
-    count_item = (TextView) findViewById(R.id.count_item);
-    count = SingletonTest.getInstance().getCartMap();
-    int count_sum=0;
-    ArrayList<ProductModel> cartMap = new ArrayList<>();
+    public void count() {
+        count_item = (TextView) findViewById(R.id.count_item);
+        count = SingletonTest.getInstance().getCartMap();
+        int count_sum = 0;
+        ArrayList<ProductModel> cartMap = new ArrayList<>();
 
-    Iterator myVeryOwnIterator = count.keySet().iterator();
-    if(count.size()>0) {
-        while (myVeryOwnIterator.hasNext()) {
-            int key = (int) myVeryOwnIterator.next();
-            ProductModel value = count.get(key);
-            cartMap.add(value);
+        Iterator myVeryOwnIterator = count.keySet().iterator();
+        if (count.size() > 0) {
+            while (myVeryOwnIterator.hasNext()) {
+                int key = (int) myVeryOwnIterator.next();
+                ProductModel value = count.get(key);
+                cartMap.add(value);
+            }
+
+
+            for (int i = 0; i < cartMap.size(); i++) {
+                count_sum += cartMap.get(i).getQuontity();
+            }
+            count_item.setText(count_sum + "");
+        } else {
+            count_item.setText(count_sum + "");
         }
-
-
-        for (int i = 0; i < cartMap.size(); i++) {
-            count_sum += cartMap.get(i).getQuontity();
-        }
-        count_item.setText(count_sum + "");
     }
 
-    else{
-        count_item.setText(count_sum + "");
-    }
-}
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         isNetworkAvailable();
         System.out.println("OnResume");
         count();
     }
+
     public void isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();

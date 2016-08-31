@@ -6,12 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,11 +17,9 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,11 +30,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.irakli.soplidange.ExampleData.ProductData;
-import com.example.irakli.soplidange.adapters.CategoriesAdapter;
 import com.example.irakli.soplidange.adapters.ProductsAdapter;
 import com.example.irakli.soplidange.dialog.ProductDetailDialog;
-import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
 
@@ -73,7 +65,6 @@ public class ProductsActivity extends AppCompatActivity {
 
 
     //  private SwipeRefreshLayout mSwipeRefreshLayout;
-    LinearLayout layout;
     ProductsAdapter myAdapter;
     private ProgressDialog progressDialog;
     private Parcelable recyclerViewState;
@@ -88,8 +79,6 @@ public class ProductsActivity extends AppCompatActivity {
         gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
         myAdapter = new ProductsAdapter(productModels, getApplicationContext());
 
-
-        initToolbar();
         initGridRecycleView();
 
         isNetworkAvailable();
@@ -114,7 +103,7 @@ public class ProductsActivity extends AppCompatActivity {
             category_id = bundle.getInt("category_id");
             category = bundle.getString("category");
 
-
+            System.out.println(category);
         }
         Intent intent = getIntent();
         if (intent != null) {
@@ -135,6 +124,7 @@ public class ProductsActivity extends AppCompatActivity {
         quantityView = (TextView) findViewById(R.id.grid_text_id);
 //        new Task().execute();
 
+        initToolbar();
 
     }
 
@@ -147,7 +137,6 @@ public class ProductsActivity extends AppCompatActivity {
         if (null != searchView) {
             searchView.setSearchableInfo(searchManager
                     .getSearchableInfo(getComponentName()));
-            searchView.setIconifiedByDefault(false);
         }
 
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
@@ -192,7 +181,7 @@ public class ProductsActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("");
+        actionBar.setTitle(category);
     }
 
     private void initGridRecycleView() {
