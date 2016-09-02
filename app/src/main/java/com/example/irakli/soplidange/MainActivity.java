@@ -80,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
         count();
     }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
 

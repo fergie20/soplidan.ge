@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "23.0.3"
+    buildToolsVersion "21.0.1"
+
 
     defaultConfig {
         applicationId "com.example.irakli.soplidange"
@@ -10,6 +11,11 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+    }
+    repositories {
+        maven {
+            url "https://jitpack.io"
+        }
     }
     buildTypes {
         release {
@@ -30,6 +36,6 @@ dependencies {
     compile 'com.github.supervital:swipenumberpicker:1.0.4'
     compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
     compile 'net.wujingchao.android.view:simple-tag-imageview:1.0.1'
-
+    compile 'com.github.kanytu:android-parallax-recyclerview:v1.7'
 
 }

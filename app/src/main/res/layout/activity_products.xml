@@ -12,6 +12,21 @@
 
         <include layout="@layout/toolbar_layout" />
 
+        <TextView
+            android:id="@+id/category_image"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:text="bostneuli"
+            android:layout_height="146dp"
+            android:textSize="20dp"
+            android:textColor="@android:color/white"
+            />
+        <View xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="#ffffff"
+            android:layout_alignParentBottom="true"/>
+
         <!--<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
         <!--xmlns:tools="http://schemas.android.com/tools"-->
         <!--android:id="@+id/container"-->
@@ -44,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/shopping_bag"
+            android:elevation="0dp"
             app:borderWidth="0dp" />
 
         <TextView

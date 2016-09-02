@@ -2,4 +2,44 @@
     <string name="app_name">Soplidan.ge</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="email_hint">email</string>
+
+    <string-array name="district_array">
+        <item>- აირჩიეთ უბანი -</item>
+        <item>ავლაბარი</item>
+        <item>ავჭალა</item>
+        <item>ბაგები </item>
+        <item>გლდანის მასივი</item>
+        <item>დიდი დიღომი</item>
+        <item>დიდუბე</item>
+        <item>დიღმის მასივი</item>
+        <item>ვაზისუბანი</item>
+        <item> ვაკე </item>
+        <item>ვარკეთილი</item>
+        <item>ვაშლიჯვარი</item>
+        <item>ვეძისი</item>
+        <item>ზემელი</item>
+        <item>ზღვისუბანი</item>
+        <item>ისანი</item>
+        <item>კოჯორი</item>
+        <item>კრწანისი</item>
+        <item>მთაწმინდა</item>
+        <item>მუხიანი </item>
+        <item>ნავთლუღი</item>
+        <item>ნაძალადევი</item>
+        <item>ორთაჭალა</item>
+        <item>საბურთალო</item>
+        <item>სანზონა</item>
+        <item>სვანეთისუბანი</item>
+        <item>ტაბახმელა</item>
+        <item>ფონიჭალა</item>
+        <item>ჩუღურეთი</item>
+        <item>წავკისი</item>
+        <item>წყნეთი</item>
+    </string-array>
+
+    <string-array name="city_array">
+        <item>- ქალაქი -</item>
+        <item>თბილისი</item>
+    </string-array>
 </resources>

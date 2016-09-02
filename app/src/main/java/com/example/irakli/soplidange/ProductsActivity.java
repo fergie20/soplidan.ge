@@ -62,6 +62,7 @@ public class ProductsActivity extends AppCompatActivity {
     TextView count_item;
     HashMap<Integer, ProductModel> count;
     List<ProductModel> productModels = new ArrayList<>();
+    TextView categoryImageView;
 
 
     //  private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -96,18 +97,23 @@ public class ProductsActivity extends AppCompatActivity {
         });
 //        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
 //        mSwipeRefreshLayout.setOnRefreshListener(this);
+        categoryImageView = (TextView) findViewById(R.id.category_image);
 
 
         Bundle bundle = getIntent().getBundleExtra("categories");
         if (bundle != null) {
             category_id = bundle.getInt("category_id");
             category = bundle.getString("category");
+            categoryImageView.setText(category);
+            categoryImageView.setBackgroundResource(R.drawable.imagecat);
 
             System.out.println(category);
         }
         Intent intent = getIntent();
         if (intent != null) {
             query = intent.getStringExtra("query");
+            categoryImageView.setText(category);
+            categoryImageView.setBackgroundResource(R.drawable.imagecat);
         }
 
         //onRefresh();
@@ -234,6 +240,9 @@ public class ProductsActivity extends AppCompatActivity {
 
                                     ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
                                     productModels.add(productModel);
+                                    if(productModels.size()==0){
+                                        Toast.makeText(getApplicationContext(), "არაფერი მოიძებნა", Toast.LENGTH_LONG).show();
+                                    }
                                 } else if (category_id == main_category) {
                                     String product = curObj.getString("product");
                                     String description = curObj.getString("product");

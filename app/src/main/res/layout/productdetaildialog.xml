@@ -31,6 +31,11 @@
                     android:layout_margin="13dp"
                     android:src="@android:drawable/ic_menu_day"
                     simple:simple_corner_distance="50dp"
+<<<<<<< Updated upstream
+=======
+                    android:scaleType="fitXY"
+                    simple:simple_tag_text="sale 20%"
+>>>>>>> Stashed changes
                     simple:simple_tag_background_color="#9eff0900"
                     simple:simple_tag_enable="true"
                     simple:simple_tag_orientation="right_top"

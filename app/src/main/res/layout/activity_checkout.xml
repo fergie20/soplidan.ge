@@ -34,6 +34,13 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:text="ჯამი"/>
+        <Button
+            android:id="@+id/checkout_payment_id"
+            android:text="შეკვეთის განთავსება"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/sum_id"

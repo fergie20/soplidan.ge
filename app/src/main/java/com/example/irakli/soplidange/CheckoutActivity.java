@@ -1,5 +1,6 @@
 package com.example.irakli.soplidange;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +10,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.irakli.soplidange.adapters.CheckoutAdapter;
 import com.example.irakli.soplidange.models.ProductModel;
@@ -30,6 +34,7 @@ public class CheckoutActivity extends AppCompatActivity {
     ProductModel model;
     RecyclerView recyclerView;
     HashMap<Integer,ProductModel> cartMap;
+    Button payment;
 
 
     @Override
@@ -45,6 +50,8 @@ public class CheckoutActivity extends AppCompatActivity {
         ImageView image = (ImageView) findViewById(R.id.checkout_image_id);
 
 
+
+
         initToolbar();
 
         find();
@@ -53,12 +60,24 @@ public class CheckoutActivity extends AppCompatActivity {
         for (Integer integer : cartMap.keySet()) {
             cartArray.add(cartMap.get(integer));
         }
+        if(cartArray.size()==0) {
+            Toast.makeText(this, "თქვენი კალათა ცარიელია", Toast.LENGTH_LONG).show();
+        }
 
-        CheckoutAdapter myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
-        recyclerView.setAdapter(myAdapter);
+            CheckoutAdapter myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
+            recyclerView.setAdapter(myAdapter);
 
 
         totalPrice = getTotalPrice(cartArray);
+
+        payment = (Button) findViewById(R.id.checkout_payment_id);
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(CheckoutActivity.this,Payment.class);
+                startActivity(intent);
+            }
+        });
 
 
             myAdapter.setMyPriceUpdateListener(new CheckoutAdapter.MyClickListener() {
