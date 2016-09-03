@@ -70,6 +70,12 @@
             android:layout_alignParentBottom="true"
             android:background="#fff">
 
+            <RelativeLayout
+                android:id="@+id/invisible_plus_minus_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
             <ImageView
                 android:id="@+id/grid_minus_id"
                 android:layout_width="wrap_content"
@@ -105,6 +111,16 @@
                 android:paddingRight="4dp"
                 android:src="@drawable/ic_add_circle_outline_24dp"
                 />
+            </RelativeLayout>
+            <TextView
+                android:textColor="#e74c3c"
+                android:gravity="center"
+                android:textSize="11dp"
+                android:text="არაა გაყიდვაში"
+                android:id="@+id/out_of_stock_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
         </RelativeLayout>
 
     </RelativeLayout>

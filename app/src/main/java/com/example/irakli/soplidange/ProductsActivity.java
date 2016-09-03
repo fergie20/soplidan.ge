@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -34,6 +35,8 @@ import com.example.irakli.soplidange.adapters.ProductsAdapter;
 import com.example.irakli.soplidange.dialog.ProductDetailDialog;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
+import com.example.irakli.soplidange.utils.SingletonTest;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -367,6 +370,15 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        saveShared();
+
+    }
+
+
     public void updateListView() {
 //        gridRecycler.setAdapter(myAdapter);
 //
@@ -410,6 +422,23 @@ public class ProductsActivity extends AppCompatActivity {
             Toast.makeText(this, "ინფორმაციის ჩამოსატვირთად საჭიროა ინტერნეტ კავშირი", Toast.LENGTH_LONG).show();
 
         }
+    }
+
+    public void saveShared (){
+
+        SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
+
+
+        HashMap<Integer,ProductModel> cartMap;
+
+        cartMap = SingletonTest.getInstance().getCartMap();
+
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(cartMap);
+        prefsEditor.putString("MyObject", json);
+        prefsEditor.apply();
     }
 
 }

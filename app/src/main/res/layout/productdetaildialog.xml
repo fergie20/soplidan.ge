@@ -31,11 +31,7 @@
                     android:layout_margin="13dp"
                     android:src="@android:drawable/ic_menu_day"
                     simple:simple_corner_distance="50dp"
-<<<<<<< Updated upstream
-=======
                     android:scaleType="fitXY"
-                    simple:simple_tag_text="sale 20%"
->>>>>>> Stashed changes
                     simple:simple_tag_background_color="#9eff0900"
                     simple:simple_tag_enable="true"
                     simple:simple_tag_orientation="right_top"
@@ -93,6 +89,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <RelativeLayout
+                        android:id="@+id/dialog_plus_minus_view_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
                     <ImageView
                         android:id="@+id/dialog_minus_id"
                         style="@style/ClickEffect"
@@ -101,8 +102,8 @@
                         android:layout_toLeftOf="@+id/dialog_quantity_id"
                         android:layout_marginTop="4dp"
                         android:padding="3dp"
-                        android:src="@drawable/ic_remove_white_24dp"
-                        android:tint="@color/colorPrimary" />
+                        android:src="@drawable/ic_remove_circle_outline_24dp"
+                         />
 
                     <TextView
                         android:id="@+id/dialog_quantity_id"
@@ -121,8 +122,19 @@
                         android:layout_toRightOf="@+id/dialog_quantity_id"
                         android:layout_marginTop="4dp"
                         android:padding="3dp"
-                        android:src="@drawable/ic_add_white_24dp"
-                        android:tint="@color/colorPrimary" />
+                        android:src="@drawable/ic_add_circle_outline_24dp"
+                         />
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:textColor="#e74c3c"
+                        android:gravity="center"
+                        android:textSize="13dp"
+                        android:text="არაა გაყიდვაში"
+                        android:id="@+id/dialog_out_of_stock_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

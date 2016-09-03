@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+    <item
+        android:id="@+id/blog_id"
+        android:checked="false"
+        android:title="ბლოგი" />
+
+    <item
+        android:id="@+id/about_us_id"
+        android:checked="false"
+        android:title="ჩვენს შესახებ" />
+    </group>
+
+</menu>

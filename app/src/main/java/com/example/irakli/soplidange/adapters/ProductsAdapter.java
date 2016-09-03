@@ -10,11 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irakli.soplidange.R;
-import com.example.irakli.soplidange.SingletonTest;
+import com.example.irakli.soplidange.utils.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
@@ -82,6 +83,11 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
             spannable.setSpan(STRIKE_THROUGH_SPAN, spannable.length() / 2 + 1, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
+        if(productModels.get(pos).getRecource()==0){
+            holder.outOfStockView.setVisibility(View.VISIBLE);
+            holder.plusMinusView.setVisibility(View.GONE);
+        }
+
 
 
 
@@ -106,6 +112,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
         ImageView minus;
         TextView quantityView;
         RecyclerView recyclerView;
+        RelativeLayout plusMinusView;
+        TextView outOfStockView;
 
         void setModel(ProductModel model) {
             this.model = model;
@@ -127,6 +135,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
             productNameView = (TextView) itemView.findViewById(R.id.product_name_id);
             productPriceView = (TextView) itemView.findViewById(R.id.price_id);
             recyclerView = (RecyclerView) itemView.findViewById(R.id.recycler_grid_view_id);
+            plusMinusView = (RelativeLayout) itemView.findViewById(R.id.invisible_plus_minus_id);
+            outOfStockView = (TextView) itemView.findViewById(R.id.out_of_stock_id);
+
 
             plus.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -217,12 +228,4 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     public interface MyCountListener {
         void countClick();
     }
-    private int mScrollY;
-    private RecyclerView.OnScrollListener mTotalScrollListener = new RecyclerView.OnScrollListener() {
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            super.onScrolled(recyclerView, dx, dy);
-            mScrollY += dy;
-        }
-    };
 }

@@ -1,6 +1,7 @@
 package com.example.irakli.soplidange;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 
 import com.example.irakli.soplidange.adapters.CheckoutAdapter;
 import com.example.irakli.soplidange.models.ProductModel;
+import com.example.irakli.soplidange.utils.SingletonTest;
+import com.google.gson.Gson;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -33,7 +36,7 @@ public class CheckoutActivity extends AppCompatActivity {
     TextView sumView;
     ProductModel model;
     RecyclerView recyclerView;
-    HashMap<Integer,ProductModel> cartMap;
+    HashMap<Integer, ProductModel> cartMap;
     Button payment;
 
 
@@ -42,14 +45,14 @@ public class CheckoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
+
+
         cartMap = SingletonTest.getInstance().getCartMap();
 
         initToolbar();
         initRecyclerView();
         TextView name = (TextView) findViewById(R.id.checkout_name_id);
         ImageView image = (ImageView) findViewById(R.id.checkout_image_id);
-
-
 
 
         initToolbar();
@@ -60,12 +63,12 @@ public class CheckoutActivity extends AppCompatActivity {
         for (Integer integer : cartMap.keySet()) {
             cartArray.add(cartMap.get(integer));
         }
-        if(cartArray.size()==0) {
+        if (cartArray.size() == 0) {
             Toast.makeText(this, "თქვენი კალათა ცარიელია", Toast.LENGTH_LONG).show();
         }
 
-            CheckoutAdapter myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
-            recyclerView.setAdapter(myAdapter);
+        CheckoutAdapter myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
+        recyclerView.setAdapter(myAdapter);
 
 
         totalPrice = getTotalPrice(cartArray);
@@ -74,39 +77,39 @@ public class CheckoutActivity extends AppCompatActivity {
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(CheckoutActivity.this,Payment.class);
+                Intent intent = new Intent(CheckoutActivity.this, Payment.class);
                 startActivity(intent);
             }
         });
 
 
-            myAdapter.setMyPriceUpdateListener(new CheckoutAdapter.MyClickListener() {
+        myAdapter.setMyPriceUpdateListener(new CheckoutAdapter.MyClickListener() {
 
-                @Override
-                public void onClick(double price) {
-                    NumberFormat nf = NumberFormat.getInstance(); // get instance
-                    nf.setMaximumFractionDigits(3); // set decimal places
-                    String s = nf.format(totalPrice + price);
-                    sumView.setText((s + "GEL"));
-                    totalPrice = totalPrice + price;
-                }
-            });
+            @Override
+            public void onClick(double price) {
+                NumberFormat nf = NumberFormat.getInstance(); // get instance
+                nf.setMaximumFractionDigits(3); // set decimal places
+                String s = nf.format(totalPrice + price);
+                sumView.setText((s + "GEL"));
+                totalPrice = totalPrice + price;
+            }
+        });
         NumberFormat nf = NumberFormat.getInstance(); // get instance
         nf.setMaximumFractionDigits(3); // set decimal places
-        String s = nf.format(totalPrice );
+        String s = nf.format(totalPrice);
         sumView.setText((s + "GEL"));
     }
 
     private double totalPrice;
 
 
-    private double getTotalPrice(ArrayList<ProductModel> products){
+    private double getTotalPrice(ArrayList<ProductModel> products) {
         double price = 0;
         for (int i = 0; i < products.size(); i++) {
 
-            if(products.get(i).getBase_price()>0) {
+            if (products.get(i).getBase_price() > 0) {
                 price += products.get(i).getBase_price() * products.get(i).getQuontity();
-            }else {
+            } else {
                 price += products.get(i).getList_price() * products.get(i).getQuontity();
             }
 
@@ -126,8 +129,13 @@ public class CheckoutActivity extends AppCompatActivity {
 
         return true;
     }
+    @Override
+    public void onStop() {
+        super.onStop();
+        saveShared();
+    }
 
-    private void initToolbar(){
+    private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_id);
         setSupportActionBar(toolbar);
 
@@ -140,7 +148,7 @@ public class CheckoutActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
-                super. onBackPressed();
+                super.onBackPressed();
                 return true;
 //            case R.id.search_id:
 //                Intent productsAdapterIntent = new Intent(getApplicationContext(), ProductsActivity.class);
@@ -149,7 +157,7 @@ public class CheckoutActivity extends AppCompatActivity {
         return (super.onOptionsItemSelected(menuItem));
     }
 
-    private void find(){
+    private void find() {
         productPriceView = (TextView) findViewById(R.id.product_price_id);
         minusTextView = (ImageView) findViewById(R.id.minus_id);
         plusTextView = (ImageView) findViewById(R.id.plus_id);
@@ -161,5 +169,21 @@ public class CheckoutActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.checkout_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+    }
+    public void saveShared (){
+
+        SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
+
+
+        HashMap<Integer,ProductModel> cartMap;
+
+        cartMap = SingletonTest.getInstance().getCartMap();
+
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(cartMap);
+        prefsEditor.putString("MyObject", json);
+        prefsEditor.apply();
     }
 }

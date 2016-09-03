@@ -1,7 +1,6 @@
 package com.example.irakli.soplidange.dialog;
 
 import android.app.DialogFragment;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.Spanned;
@@ -11,12 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
-import com.example.irakli.soplidange.SingletonTest;
+import com.example.irakli.soplidange.utils.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 
@@ -36,6 +36,8 @@ public class ProductDetailDialog extends DialogFragment {
     TextView currentPrice;
     View rootView;
     ProductModel model;
+    TextView outOfStockView;
+    RelativeLayout plusMinusVisibleView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class ProductDetailDialog extends DialogFragment {
         getDialog().setTitle(model.getCategories());
         StrikethroughSpan STRIKE_THROUGH_SPAN = new StrikethroughSpan();
         currentPrice = (TextView) rootView.findViewById(R.id.dialog_current_price_id);
+
+
 
         SimpleTagImageView image = (SimpleTagImageView) rootView.findViewById(R.id.dialog_image_id);
         if(model.getList_discount()!=0) {
@@ -70,6 +74,12 @@ public class ProductDetailDialog extends DialogFragment {
                     .into(image);
             image.setTagEnable(false);
             currentPrice.setText( model.getList_price() + " GEL");
+        }
+        outOfStockView = (TextView) rootView.findViewById(R.id.dialog_out_of_stock_id);
+        plusMinusVisibleView = (RelativeLayout) rootView.findViewById(R.id.dialog_plus_minus_view_id);
+        if(model.getRecource()==0){
+            outOfStockView.setVisibility(View.VISIBLE);
+            plusMinusVisibleView.setVisibility(View.GONE);
         }
 
 

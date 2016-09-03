@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irakli.soplidange.R;
-import com.example.irakli.soplidange.SingletonTest;
+import com.example.irakli.soplidange.utils.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
