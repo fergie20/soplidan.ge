@@ -5,5 +5,7 @@
     <color name="colorAccent">#ec6d46</color>
     <color name="sum">#FF6347</color>
     <color name="sale_color">#5b06fa64</color>
+    <color name="myColor">#ccff00</color>
+
 
 </resources>
