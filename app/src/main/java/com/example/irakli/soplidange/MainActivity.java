@@ -4,9 +4,9 @@ import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -37,14 +37,11 @@ import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
 import com.example.irakli.soplidange.utils.SingletonTest;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -61,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     TextView count_item;
     HashMap<Integer, ProductModel> count;
-    int checkShared =0;
+    int checkShared = 0;
+    private ActionBarDrawerToggle drawerToggle;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
@@ -70,80 +68,62 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(checkShared ==0){
-            retryShared();
-        }
-
-
-
         initToolbar();
         initRecyclerView();
 
-//        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//
-//            // This method will trigger on item Click of navigation menu
-//            @Override
-//            public boolean onNavigationItemSelected(MenuItem menuItem) {
-//
-//
-//                //Checking if the item is in checked state or not, if not make it in checked state
-//                if(menuItem.isChecked()) menuItem.setChecked(false);
-//                else menuItem.setChecked(true);
-//
-//                //Closing drawer on item click
-//                drawerLayout.closeDrawers();
-//
-//                //Check to see which item was being clicked and perform appropriate action
-//                switch (menuItem.getItemId()){
-//
-//
-//                    //Replacing the main content with ContentFragment Which is our Inbox View;
-//                    case R.id.blog_id:
-//                        String urlBlog = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
-//                        Intent blog = new Intent(Intent.ACTION_VIEW);
-//                        blog.setData(Uri.parse(urlBlog));
-//                        startActivity(blog);
-//                        return true;
-//
-//                    // For rest of the options we just show a toast on click
-//
-//                    case R.id.about_us_id:
-//                        String urlAbout = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
-//                        Intent about = new Intent(Intent.ACTION_VIEW);
-//                        about.setData(Uri.parse(urlAbout));
-//                        startActivity(about);
-//                        return true;
-//
-//
-//                    default:
-//                        Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
-//                        return true;
-//
-//                }
-//            }
-//        });
-//        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-//        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer){
-//
-//            @Override
-//            public void onDrawerClosed(View drawerView) {
-//                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
-//                super.onDrawerClosed(drawerView);
-//            }
-//
-//            @Override
-//            public void onDrawerOpened(View drawerView) {
-//                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-//
-//                super.onDrawerOpened(drawerView);
-//            }
-//        };
-//
-//        //Setting the actionbarToggle to drawer layout
-//        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view_id);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
-        //calling sync state is necessay or else your hamburger icon wont show up
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+
+                //Closing drawer on item click
+                drawerLayout.closeDrawers();
+
+                //Check to see which item was being clicked and perform appropriate action
+                switch (menuItem.getItemId()) {
+
+
+                    case R.id.blog_id:
+                        String urlBlog = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
+                        Intent blog = new Intent(Intent.ACTION_VIEW);
+                        blog.setData(Uri.parse(urlBlog));
+                        startActivity(blog);
+                        return true;
+
+                    case R.id.about_us_id:
+                        String urlAbout = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
+                        Intent about = new Intent(Intent.ACTION_VIEW);
+                        about.setData(Uri.parse(urlAbout));
+                        startActivity(about);
+                        return true;
+
+
+                    default:
+                        Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                }
+            }
+        });
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_id);
+        final ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+        };
+
+        actionBarDrawerToggle.syncState();
+
 
 
         isNetworkAvailable();
@@ -321,10 +301,10 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("OnResume");
         count();
     }
+
     @Override
     public void onStop() {
         super.onStop();
-        saveShared();
     }
 
     public void isNetworkAvailable() {
@@ -337,32 +317,6 @@ public class MainActivity extends AppCompatActivity {
 //            dialog.show(getFragmentManager(), "dialog");
 
         }
-    }
-    public void retryShared(){
-        SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-
-        checkShared=+1;
-
-
-        Gson gson = new Gson();
-        String json = mPrefs.getString("MyObject", "");
-
-        Type typeOfHashMap = new TypeToken<HashMap<Integer, ProductModel>>() { }.getType();
-        HashMap<Integer, ProductModel> newMap = gson.fromJson(json, typeOfHashMap);
-        SingletonTest.getInstance().setCart(newMap);
-    }
-    public void saveShared (){
-
-        SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        HashMap<Integer,ProductModel> cartMap;
-
-        cartMap = SingletonTest.getInstance().getCartMap();
-
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(cartMap);
-        prefsEditor.putString("MyObject", json);
-        prefsEditor.apply();
     }
 
 }
