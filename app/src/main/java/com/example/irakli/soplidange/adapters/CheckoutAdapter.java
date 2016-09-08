@@ -114,7 +114,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                         model.setQuontity(quantity);
                         SingletonTest.getInstance().addProduct(model.getId(), model);
 
-                        Toast.makeText(context, "თქვენს მიერ არჩეული პროდუქციის რაოდენობა აღემატება მარაგს", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "თქვენს მიერ არჩეული პროდუქციის რაოდენობა აღემატება მარაგს", Toast.LENGTH_SHORT).show();
                         quantityView.setText(quantity + "");
                     }
 

@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
             public boolean onQueryTextChange(String newText) {
 
-//                Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
+    //                Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
 //                int_query.putExtra("query",newText);
 //                startActivity(int_query);
 
@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
         } else {
-            Toast.makeText(this, "ინფორმაციის ჩამოსატვირთად საჭიროა ინტერნეტთან წვდომა", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ინფორმაციის ჩამოსატვირთად საჭიროა ინტერნეტთან წვდომა", Toast.LENGTH_SHORT).show();
 //            NetworkDialog dialog = new NetworkDialog();
 //            dialog.show(getFragmentManager(), "dialog");
 

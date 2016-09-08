@@ -117,7 +117,7 @@ public class ProductDetailDialog extends DialogFragment {
 
 
                 }
-                Toast.makeText(getActivity(), "განახლდა კალათა", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "განახლდა კალათა", Toast.LENGTH_SHORT).show();
 
 //                ((ProductsActivity)getActivity()).updateListView();
                 dismiss();
@@ -189,7 +189,7 @@ public class ProductDetailDialog extends DialogFragment {
                     NumberFormat nf = NumberFormat.getInstance(); // get instance
                     nf.setMaximumFractionDigits(3); // set decimal places
                     String s = nf.format(sum);
-                    Toast.makeText(getActivity(), "თქვენს მიერ არჩეული პროდუქტის რაოდენობა აღემატება მარაგს", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "თქვენს მიერ არჩეული პროდუქტის რაოდენობა აღემატება მარაგს", Toast.LENGTH_SHORT).show();
 
                     sumView.setText(s + " GEL");
                     quantityView.setText(quantity + "");

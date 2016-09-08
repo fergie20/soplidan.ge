@@ -1,50 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProductsActivity">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="192dp">
 
-        <include layout="@layout/toolbar_layout" />
-
-        <TextView
-            android:id="@+id/category_image"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:text="bostneuli"
-            android:layout_height="146dp"
-            android:textSize="20dp"
-            android:textColor="@android:color/white"
-            />
-        <View xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="#ffffff"
-            android:layout_alignParentBottom="true"/>
-
-        <!--<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--xmlns:tools="http://schemas.android.com/tools"-->
-        <!--android:id="@+id/container"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:context="com.example.swiperefreshlayouttest.MainActivity"-->
-        <!--tools:ignore="MergeRootFrame" >-->
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_grid_view_id"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll">
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:expandedTitleGravity="center"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
+            app:expandedTitleMarginTop="100dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_gravity="bottom"
+                android:scaleType="fitXY"
+                android:src="@drawable/imagecat"
+                app:layout_collapseMode="parallax" />
+
+            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:id="@+id/toolbar_id"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:titleTextColor="#fff"/>
 
         </android.support.v7.widget.RecyclerView>
         <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
+        </android.support.design.widget.CollapsingToolbarLayout>
 
     </LinearLayout>
 
@@ -59,8 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/shopping_bag"
-            android:elevation="0dp"
-            app:borderWidth="0dp" />
+            app:borderWidth="5dp" />
 
         <TextView
             android:id="@+id/count_item"
