@@ -5,10 +5,12 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -66,7 +68,7 @@ public class ProductsActivity extends AppCompatActivity {
     TextView count_item;
     HashMap<Integer, ProductModel> count;
     List<ProductModel> productModels = new ArrayList<>();
-    TextView categoryImageView;
+    CollapsingToolbarLayout collapsingToolbarLayout;
 
 
     //  private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -78,14 +80,12 @@ public class ProductsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_products);
 
         gridRecycler = (RecyclerView) findViewById(R.id.recycler_grid_view_id);
         myAdapter = new ProductsAdapter(productModels, getApplicationContext());
 
         initGridRecycleView();
-
         isNetworkAvailable();
 
         count();
@@ -101,23 +101,18 @@ public class ProductsActivity extends AppCompatActivity {
         });
 //        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
 //        mSwipeRefreshLayout.setOnRefreshListener(this);
-        categoryImageView = (TextView) findViewById(R.id.category_image);
 
 
         Bundle bundle = getIntent().getBundleExtra("categories");
         if (bundle != null) {
             category_id = bundle.getInt("category_id");
             category = bundle.getString("category");
-            categoryImageView.setText(category);
-            categoryImageView.setBackgroundResource(R.drawable.imagecat);
 
             System.out.println(category);
         }
         Intent intent = getIntent();
         if (intent != null) {
             query = intent.getStringExtra("query");
-            categoryImageView.setText(category);
-            categoryImageView.setBackgroundResource(R.drawable.imagecat);
         }
 
         //onRefresh();
@@ -135,6 +130,9 @@ public class ProductsActivity extends AppCompatActivity {
 //        new Task().execute();
 
         initToolbar();
+
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar_id);
+        collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
 
     }
 
@@ -245,7 +243,7 @@ public class ProductsActivity extends AppCompatActivity {
                                     ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
                                     productModels.add(productModel);
                                     if(productModels.size()==0){
-                                        Toast.makeText(getApplicationContext(), "არაფერი მოიძებნა", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), "არაფერი მოიძებნა", Toast.LENGTH_SHORT).show();
                                     }
                                 } else if (category_id == main_category) {
                                     String product = curObj.getString("product");
@@ -421,7 +419,7 @@ public class ProductsActivity extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
         } else {
-            Toast.makeText(this, "ინფორმაციის ჩამოსატვირთად საჭიროა ინტერნეტ კავშირი", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ინფორმაციის ჩამოსატვირთად საჭიროა ინტერნეტ კავშირი", Toast.LENGTH_SHORT).show();
 
         }
     }

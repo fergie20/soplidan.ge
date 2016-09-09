@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
 
     <item
         android:id="@+id/blog_id"
         android:checked="false"
-        android:title="ბლოგი" />
+        android:title="@string/blog" />
 
     <item
         android:id="@+id/about_us_id"
         android:checked="false"
-        android:title="ჩვენს შესახებ" />
+        android:title="@string/about_us" />
     </group>
 
 </menu>

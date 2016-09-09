@@ -151,14 +151,14 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                         model.setQuontity(quantity);
                         SingletonTest.getInstance().addProduct(model.getId(), model);
                         mycountListener.countClick();
-                        Toast.makeText(context, "დაემატა კალათაში", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "დაემატა კალათაში", Toast.LENGTH_SHORT).show();
 
                         quantityView.setText(quantity + "");
                     }else{
                         quantity--;
 //                        model.setQuontity(quantity );
 //                        SingletonTest.getInstance().addProduct(model.getId(), model);
-                        Toast.makeText(context, "თქვენს მიერ არჩეული პროდუქციის რაოდენობა აღემატება მარაგს", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "თქვენს მიერ არჩეული პროდუქციის რაოდენობა აღემატება მარაგს", Toast.LENGTH_SHORT).show();
 
                         quantityView.setText(quantity + "");
 
@@ -192,7 +192,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
                         }
                         mycountListener.countClick();
-                        Toast.makeText(context, "განახლდა კალათა", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "განახლდა კალათა", Toast.LENGTH_SHORT).show();
 
                     } else {
                         quantityView.setText("0");

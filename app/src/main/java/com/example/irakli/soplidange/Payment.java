@@ -1,56 +1,109 @@
 package com.example.irakli.soplidange;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.Button;
+import android.widget.FrameLayout;
+
+import com.example.irakli.soplidange.adapters.NewPagerAdapter;
+import com.example.irakli.soplidange.fragments.DeliveryPlaceFragment;
+import com.example.irakli.soplidange.fragments.DeliveryTermsFragment;
+import com.example.irakli.soplidange.fragments.GuestFieldsFragment;
+import com.example.irakli.soplidange.fragments.OrderedProductsFragment;
+import com.example.irakli.soplidange.fragments.PaymentMethodsFragment;
+
+import java.util.ArrayList;
 
 public class Payment extends AppCompatActivity {
-    Spinner spinCity;
-    Spinner spinDistrict;
 
+    private Button nextBtn;
+    private ViewPager viewPager;
+    private ArrayList<Fragment> fragmentArrayList;
+    private int counter = 0;
+    GuestFieldsFragment guestFieldsFragment;
+    DeliveryPlaceFragment deliveryPlaceFragment;
+    DeliveryTermsFragment deliveryTermsFragment;
+    PaymentMethodsFragment paymentMethodsFragment;
+    OrderedProductsFragment orderedProductsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+        guestFieldsFragment = new GuestFieldsFragment();
+        deliveryPlaceFragment = new DeliveryPlaceFragment();
+        deliveryTermsFragment = new DeliveryTermsFragment();
+        paymentMethodsFragment = new PaymentMethodsFragment();
+        orderedProductsFragment = new OrderedProductsFragment();
+        fragmentArrayList = new ArrayList<>();
+
+        nextBtn = (Button) findViewById(R.id.continue_btn_id);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container_id, guestFieldsFragment, guestFieldsFragment.getTag())
+                .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                .commit();
+
+        changeFragment();
 
 
-        spinCity= (Spinner) findViewById(R.id.spinCity);//fetch the spinner from layout file
-        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getResources()
-                .getStringArray(R.array.city_array));//setting the country_array to spinner
-        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinCity.setAdapter(cityAdapter);
-//if you want to set any action you can do in this listener
-        spinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int position, long id) {
-            }
+//        addPages();
+//        nextBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+//            }
+//        });
+    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
-        spinDistrict= (Spinner) findViewById(R.id.spinDistrict);//fetch the spinner from layout file
-        ArrayAdapter<String> districtAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getResources()
-                .getStringArray(R.array.district_array));//setting the country_array to spinner
-        districtAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinDistrict.setAdapter(districtAdapter);
-//if you want to set any action you can do in this listener
-        spinDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int position, long id) {
-            }
+//    private void addPages(){
+//        GuestFieldsFragment guestFieldsFragment = new GuestFieldsFragment();
+//        DeliveryPlaceFragment deliveryPlaceFragment = new DeliveryPlaceFragment();
+//        DeliveryTermsFragment deliveryTermsFragment = new DeliveryTermsFragment();
+//
+//        NewPagerAdapter newPagerAdapter = new NewPagerAdapter(getSupportFragmentManager());
+//        newPagerAdapter.addFragment(guestFieldsFragment);
+//        newPagerAdapter.addFragment(deliveryPlaceFragment);
+//        newPagerAdapter.addFragment(deliveryTermsFragment);
+//        viewPager.setAdapter(newPagerAdapter);
+//    }
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        counter--;
+    }
+
+    private void changeFragment(){
+        fragmentArrayList.add(deliveryPlaceFragment);
+        fragmentArrayList.add(deliveryTermsFragment);
+        fragmentArrayList.add(paymentMethodsFragment);
+        fragmentArrayList.add(orderedProductsFragment);
+
+        nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
+            public void onClick(View v) {
+                if (counter == 4){
+                    return;
+                }
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+                        .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                        .addToBackStack(null)
+                        .commit();
+
+                counter++;
             }
         });
     }
+
 }

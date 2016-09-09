@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -38,14 +37,11 @@ import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
 import com.example.irakli.soplidange.utils.SingletonTest;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -62,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     TextView count_item;
     HashMap<Integer, ProductModel> count;
-    int checkShared =0;
+    int checkShared = 0;
+    private ActionBarDrawerToggle drawerToggle;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
@@ -71,15 +68,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(checkShared ==0){
-            retryShared();
-        }
-
-
-
         initToolbar();
         initRecyclerView();
 
+        navigationView = (NavigationView) findViewById(R.id.navigation_view_id);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+
+<<<<<<< HEAD
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -92,14 +91,22 @@ public class MainActivity extends AppCompatActivity {
                 if(menuItem.isChecked()) menuItem.setChecked(false);
                 else menuItem.setChecked(true);
 
+=======
+>>>>>>> origin/master
                 //Closing drawer on item click
                 drawerLayout.closeDrawers();
 
                 //Check to see which item was being clicked and perform appropriate action
+<<<<<<< HEAD
                 switch (menuItem.getItemId()){
 
 
                     //Replacing the main content with ContentFragment Which is our Inbox View;
+=======
+                switch (menuItem.getItemId()) {
+
+
+>>>>>>> origin/master
                     case R.id.blog_id:
                         String urlBlog = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
                         Intent blog = new Intent(Intent.ACTION_VIEW);
@@ -107,8 +114,11 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(blog);
                         return true;
 
+<<<<<<< HEAD
                     // For rest of the options we just show a toast on click
 
+=======
+>>>>>>> origin/master
                     case R.id.about_us_id:
                         String urlAbout = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
                         Intent about = new Intent(Intent.ACTION_VIEW);
@@ -118,23 +128,36 @@ public class MainActivity extends AppCompatActivity {
 
 
                     default:
+<<<<<<< HEAD
                         Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
+=======
+                        Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
+>>>>>>> origin/master
                         return true;
 
                 }
             }
         });
+<<<<<<< HEAD
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer){
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+=======
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_id);
+        final ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+>>>>>>> origin/master
                 super.onDrawerClosed(drawerView);
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
+<<<<<<< HEAD
                 // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
 
                 super.onDrawerOpened(drawerView);
@@ -143,6 +166,14 @@ public class MainActivity extends AppCompatActivity {
 
         //Setting the actionbarToggle to drawer layout
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
+=======
+                super.onDrawerOpened(drawerView);
+            }
+
+        };
+
+        actionBarDrawerToggle.syncState();
+>>>>>>> origin/master
 
 
 
@@ -180,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
             public boolean onQueryTextChange(String newText) {
 
-//                Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
+    //                Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
 //                int_query.putExtra("query",newText);
 //                startActivity(int_query);
 
@@ -321,10 +352,10 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("OnResume");
         count();
     }
+
     @Override
     public void onStop() {
         super.onStop();
-        saveShared();
     }
 
     public void isNetworkAvailable() {
@@ -332,37 +363,11 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
         } else {
-            Toast.makeText(this, "ინფორმაციის ჩამოსატვირთად საჭიროა ინტერნეტთან წვდომა", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "ინფორმაციის ჩამოსატვირთად საჭიროა ინტერნეტთან წვდომა", Toast.LENGTH_SHORT).show();
 //            NetworkDialog dialog = new NetworkDialog();
 //            dialog.show(getFragmentManager(), "dialog");
 
         }
-    }
-    public void retryShared(){
-        SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-
-        checkShared=+1;
-
-
-        Gson gson = new Gson();
-        String json = mPrefs.getString("MyObject", "");
-
-        Type typeOfHashMap = new TypeToken<HashMap<Integer, ProductModel>>() { }.getType();
-        HashMap<Integer, ProductModel> newMap = gson.fromJson(json, typeOfHashMap);
-        SingletonTest.getInstance().setCart(newMap);
-    }
-    public void saveShared (){
-
-        SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        HashMap<Integer,ProductModel> cartMap;
-
-        cartMap = SingletonTest.getInstance().getCartMap();
-
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(cartMap);
-        prefsEditor.putString("MyObject", json);
-        prefsEditor.apply();
     }
 
 }
