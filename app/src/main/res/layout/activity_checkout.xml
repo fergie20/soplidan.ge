@@ -1,81 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".CheckoutActivity">
 
     <include layout="@layout/toolbar_layout" />
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="56dp"
         android:id="@+id/checkout_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="56dp">
 
     </android.support.v7.widget.RecyclerView>
-
-
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:paddingLeft="@dimen/activity_vertical_margin"
         android:layout_alignParentBottom="true"
         android:background="#ffffff"
-        >
+        android:paddingLeft="@dimen/activity_vertical_margin">
+
         <View
+            android:id="@+id/view"
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="#e6e7e8"
-            android:id="@+id/view"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginRight="5dp"
+            android:background="#e6e7e8" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#939598"
-            android:textSize="14sp"
-            android:text="ჯამი: "
-            android:id="@+id/textView"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            />
+            android:text="ჯამი: "
+            android:textColor="#939598"
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/sum_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_toEndOf="@+id/textView"
+            android:layout_toRightOf="@+id/textView"
+            android:text="5 GEL"
             android:textColor="#9ccc65"
             android:textSize="17sp"
-            android:text="5 GEL"
-            android:layout_alignBottom="@+id/textView"
-            android:layout_toRightOf="@+id/textView"
-            android:layout_toEndOf="@+id/textView" />
+            android:textStyle="bold" />
+
         <Button
             android:id="@+id/checkout_payment_id"
-            android:text="შეკვეთის განთავსება"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_alignEnd="@+id/view"
+            android:layout_alignRight="@+id/view"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
             android:background="@drawable/buttonshape"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="5 "
-            android:layout_marginRight="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_alignBottom="@+id/textView"
-            android:layout_alignRight="@+id/view"
-            android:layout_alignEnd="@+id/view" />
+            android:text="შეკვეთის განთავსება"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
 
 
     </RelativeLayout>
-
-
 
 
 </RelativeLayout>

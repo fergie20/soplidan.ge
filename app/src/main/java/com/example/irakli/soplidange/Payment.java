@@ -2,15 +2,11 @@ package com.example.irakli.soplidange;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 
-import com.example.irakli.soplidange.adapters.NewPagerAdapter;
 import com.example.irakli.soplidange.fragments.DeliveryPlaceFragment;
 import com.example.irakli.soplidange.fragments.DeliveryTermsFragment;
 import com.example.irakli.soplidange.fragments.GuestFieldsFragment;
@@ -22,7 +18,6 @@ import java.util.ArrayList;
 public class Payment extends AppCompatActivity {
 
     private Button nextBtn;
-    private ViewPager viewPager;
     private ArrayList<Fragment> fragmentArrayList;
     private int counter = 0;
     GuestFieldsFragment guestFieldsFragment;
@@ -52,27 +47,8 @@ public class Payment extends AppCompatActivity {
 
         changeFragment();
 
-
-//        addPages();
-//        nextBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
-//            }
-//        });
     }
 
-//    private void addPages(){
-//        GuestFieldsFragment guestFieldsFragment = new GuestFieldsFragment();
-//        DeliveryPlaceFragment deliveryPlaceFragment = new DeliveryPlaceFragment();
-//        DeliveryTermsFragment deliveryTermsFragment = new DeliveryTermsFragment();
-//
-//        NewPagerAdapter newPagerAdapter = new NewPagerAdapter(getSupportFragmentManager());
-//        newPagerAdapter.addFragment(guestFieldsFragment);
-//        newPagerAdapter.addFragment(deliveryPlaceFragment);
-//        newPagerAdapter.addFragment(deliveryTermsFragment);
-//        viewPager.setAdapter(newPagerAdapter);
-//    }
 
 
     @Override
