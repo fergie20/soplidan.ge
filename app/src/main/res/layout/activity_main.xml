@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/shopping_bag"
-                android:elevation="7dp"
+                android:elevation="5dp"
                 app:borderWidth="5dp"/>
 
             <TextView
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
-                android:elevation="5dp"
+                android:elevation="7dp"
                 android:text="5"
                 android:textColor="@android:color/white" />
 

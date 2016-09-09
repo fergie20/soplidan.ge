@@ -46,7 +46,6 @@ public class CheckoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checkout);
 
 
-
         cartMap = SingletonTest.getInstance().getCartMap();
 
         initToolbar();
@@ -129,6 +128,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         return true;
     }
+
     @Override
     public void onStop() {
         super.onStop();
@@ -170,13 +170,13 @@ public class CheckoutActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
     }
-    public void saveShared (){
+
+    public void saveShared() {
 
         SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
 
-
-        HashMap<Integer,ProductModel> cartMap;
+        HashMap<Integer, ProductModel> cartMap;
 
         cartMap = SingletonTest.getInstance().getCartMap();
 
