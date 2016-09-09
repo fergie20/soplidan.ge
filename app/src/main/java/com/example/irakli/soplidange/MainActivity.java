@@ -74,128 +74,91 @@ public class MainActivity extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation_view_id);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                    // This method will trigger on item Click of navigation menu
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
 
 
-<<<<<<< HEAD
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                        //Checking if the item is in checked state or not, if not make it in checked state
+                        if (menuItem.isChecked()) menuItem.setChecked(false);
+                        else menuItem.setChecked(true);
 
-            // This method will trigger on item Click of navigation menu
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        //Closing drawer on item click
+                        drawerLayout.closeDrawers();
 
-
-                //Checking if the item is in checked state or not, if not make it in checked state
-                if(menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
-
-=======
->>>>>>> origin/master
-                //Closing drawer on item click
-                drawerLayout.closeDrawers();
-
-                //Check to see which item was being clicked and perform appropriate action
-<<<<<<< HEAD
-                switch (menuItem.getItemId()){
+                        //Check to see which item was being clicked and perform appropriate action
+                        switch (menuItem.getItemId()) {
 
 
-                    //Replacing the main content with ContentFragment Which is our Inbox View;
-=======
-                switch (menuItem.getItemId()) {
+                            //Replacing the main content with ContentFragment Which is our Inbox View;
+
+                            case R.id.blog_id:
+                                String urlBlog = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
+                                Intent blog = new Intent(Intent.ACTION_VIEW);
+                                blog.setData(Uri.parse(urlBlog));
+                                startActivity(blog);
+                                return true;
 
 
->>>>>>> origin/master
-                    case R.id.blog_id:
-                        String urlBlog = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
-                        Intent blog = new Intent(Intent.ACTION_VIEW);
-                        blog.setData(Uri.parse(urlBlog));
-                        startActivity(blog);
-                        return true;
-
-<<<<<<< HEAD
-                    // For rest of the options we just show a toast on click
-
-=======
->>>>>>> origin/master
-                    case R.id.about_us_id:
-                        String urlAbout = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
-                        Intent about = new Intent(Intent.ACTION_VIEW);
-                        about.setData(Uri.parse(urlAbout));
-                        startActivity(about);
-                        return true;
+                            case R.id.about_us_id:
+                                String urlAbout = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
+                                Intent about = new Intent(Intent.ACTION_VIEW);
+                                about.setData(Uri.parse(urlAbout));
+                                startActivity(about);
+                                return true;
 
 
-                    default:
-<<<<<<< HEAD
-                        Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
-=======
-                        Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
->>>>>>> origin/master
-                        return true;
+                            default:
+                                Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
+                                return true;
 
-                }
-            }
-        });
-<<<<<<< HEAD
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer){
+                        }
+                    }
+                });
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
-=======
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_id);
-        final ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
->>>>>>> origin/master
-                super.onDrawerClosed(drawerView);
-            }
+            drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+            ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
 
-            @Override
-            public void onDrawerOpened(View drawerView) {
-<<<<<<< HEAD
-                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
 
-                super.onDrawerOpened(drawerView);
-            }
-        };
+                            @Override
+                            public void onDrawerOpened(View drawerView) {
+                                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
 
-        //Setting the actionbarToggle to drawer layout
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-=======
-                super.onDrawerOpened(drawerView);
-            }
+                                super.onDrawerOpened(drawerView);
+                            }
+                        };
 
-        };
-
-        actionBarDrawerToggle.syncState();
->>>>>>> origin/master
+                        //Setting the actionbarToggle to drawer layout
+                        drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
 
 
-        isNetworkAvailable();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                actionBarDrawerToggle.syncState();
 
-                Intent addEvent = new Intent(MainActivity.this, CheckoutActivity.class);
-                startActivity(addEvent);
 
-            }
-        });
+                isNetworkAvailable();
+
+                FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent addEvent = new Intent(MainActivity.this, CheckoutActivity.class);
+                        startActivity(addEvent);
+
+                    }
+                });
 
 //        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
 //        mSwipeRefreshLayout.setOnRefreshListener(this);
 
-        getJSONInfo();
-        count();
-    }
+                getJSONInfo();
+                count();
+            }
+
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
