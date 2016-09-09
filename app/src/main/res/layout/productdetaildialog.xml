@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fillViewport="true">
+    android:minHeight="@dimen/cardview_compat_inset_shadow"
+    android:minWidth="500dp"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:background="@color/cardview_light_background"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:minHeight="@dimen/cardview_compat_inset_shadow"
-        android:minWidth="500dp"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:scrollbarAlwaysDrawVerticalTrack="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/dialog_dismiss_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="0dp"
+                    app:srcCompat="@drawable/ic_clear_black_24dp"
+                    tools:ignore="MissingPrefix"/>
+
                 <net.wujingchao.android.view.SimpleTagImageView xmlns:simple="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/dialog_image_id"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_margin="13dp"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:src="@android:drawable/ic_menu_day"
                     simple:simple_corner_distance="50dp"
                     android:scaleType="fitXY"
@@ -43,132 +48,166 @@
                     simple:simple_tag_textSize="10sp"
                     simple:simple_tag_width="15dip" />
 
-                <!--<ImageView-->
-                <!--android:id="@+id/dialog_image_id"-->
-                <!--android:layout_width="150dp"-->
-                <!--android:layout_height="180dp"-->
-                <!--android:src="@android:drawable/alert_dark_frame" />-->
-                <TextView
-                    android:id="@+id/dialog_current_price_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="@color/colorAccent" />
+
             </LinearLayout>
+    <TextView
+        android:id="@+id/dialog_name_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:text="saxeli"
+        android:textSize="14dp"
+        android:textColor="#6D6F71"
+        android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+    <TextView
+        android:id="@+id/dialog_current_price_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="5gel"
+        android:textColor="#414042" />
 
-                <TextView
-                    android:id="@+id/dialog_name_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center_horizontal"
-                    android:text="saxeli"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/dialog_price_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center_horizontal"
-                    android:text="15.7 GEL"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18dp"
-                    android:textStyle="italic" />
+    <com.example.irakli.soplidange.custom.CTextView
+        android:id="@+id/dialog_price_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="end"
+        android:layout_marginRight="5dp"
+        android:text="15.7 ¢"
+        android:textColor="#9ccc65"
+        font_name="BPG_GEL_EXCELSIOR"
+        android:textSize="18dp"
+        />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <RelativeLayout
-                        android:id="@+id/dialog_plus_minus_view_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/dialog_minus_id"
-                        style="@style/ClickEffect"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/dialog_quantity_id"
-                        android:layout_marginTop="4dp"
-                        android:padding="3dp"
-                        app:srcCompat="@drawable/ic_remove_circle_outline_24dp"
-                        tools:ignore="MissingPrefix"
-                         />
+    <com.example.irakli.soplidange.utils.MaxHeightScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/dialog_scrol_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:maxHeight="100dp"
+        android:fillViewport="true"
 
-                    <TextView
-                        android:id="@+id/dialog_quantity_id"
-                        android:layout_width="46dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:background="@drawable/text_view_border"
-                        android:gravity="center"
-                        android:text="1" />
 
-                    <ImageView
-                        android:id="@+id/dialog_plus_id"
-                        style="@style/ClickEffect"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/dialog_quantity_id"
-                        android:layout_marginTop="4dp"
-                        android:padding="3dp"
-                        app:srcCompat="@drawable/ic_add_circle_outline_24dp"
-                        tools:ignore="MissingPrefix"
-                         />
-                    </RelativeLayout>
-                    <TextView
-                        android:layout_marginTop="10dp"
-                        android:textColor="#e74c3c"
-                        android:gravity="center"
-                        android:textSize="13dp"
-                        android:text="არაა გაყიდვაში"
-                        android:id="@+id/dialog_out_of_stock_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"/>
-                </RelativeLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <View xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="5dp"
-            android:background="#abe4dada" />
-
+        >
 
         <TextView
             android:id="@+id/dialog_description_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="dbchbsdhmc bhsdbch jshdv hjsvjcasjdbcj" />
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            />
+    </com.example.irakli.soplidange.utils.MaxHeightScrollView>
 
-        <Button
-            android:id="@+id/dialog_addbutton_id"
+        <ProgressBar
+            android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:background="@color/colorPrimaryDark"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="დაამატე კალათაში"
-            android:textColor="@android:color/white"
-            android:textStyle="italic" />
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_gravity="center_horizontal" />
+
+
+        <!--<Button-->
+            <!--android:id="@+id/dialog_addbutton_id"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:background="@color/colorPrimaryDark"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:paddingRight="10dp"-->
+            <!--android:text="დაამატე კალათაში"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textStyle="italic" />-->
+
+        <View xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:background="#abe6dede" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="70dp"
+            android:paddingLeft="@dimen/activity_vertical_margin"
+            android:layout_alignParentBottom="true"
+            >
+
+
+            <RelativeLayout
+                android:id="@+id/dialog_plus_minus_view_id"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/dialog_minus_id"
+                    style="@style/ClickEffect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/dialog_quantity_id"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/minus"
+                    tools:ignore="MissingPrefix"
+                    />
+
+                <TextView
+                    android:id="@+id/dialog_quantity_id"
+                    android:layout_width="46dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text="1" />
+
+                <ImageView
+                    android:id="@+id/dialog_plus_id"
+                    style="@style/ClickEffect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/dialog_quantity_id"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/pl"
+                    tools:ignore="MissingPrefix"
+                    />
+
+            </RelativeLayout>
+            <TextView
+                android:layout_marginTop="7dp"
+                android:textColor="#e74c3c"
+                android:gravity="center"
+                android:textSize="13dp"
+                android:text="არ არის გაყიდვაში"
+                android:id="@+id/dialog_out_of_stock_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/dialog_addbutton_id"
+                android:text="დაამატე კალათაში"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:padding="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:background="@drawable/buttonshape"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5 "
+                android:layout_alignTop="@+id/dialog_plus_minus_view_id"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+
+        </RelativeLayout>
+
+
 
     </LinearLayout>
-</ScrollView>

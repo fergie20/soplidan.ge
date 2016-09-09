@@ -22,39 +22,57 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:paddingLeft="@dimen/activity_vertical_margin"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary">
+        android:background="#ffffff"
+        >
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#e6e7e8"
+            android:id="@+id/view"
+            android:layout_marginRight="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#939598"
+            android:textSize="14sp"
+            android:text="ჯამი: "
+            android:id="@+id/textView"
             android:layout_centerVertical="true"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:text="ჯამი"/>
-        <Button
-            android:id="@+id/checkout_payment_id"
-            android:text="შეკვეთის განთავსება"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-
+            android:layout_marginLeft="30dp"
+            />
         <TextView
             android:id="@+id/sum_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:textStyle="bold"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp"
+            android:textColor="#9ccc65"
+            android:textSize="17sp"
             android:text="5 GEL"
-            />
+            android:layout_alignBottom="@+id/textView"
+            android:layout_toRightOf="@+id/textView"
+            android:layout_toEndOf="@+id/textView" />
+        <Button
+            android:id="@+id/checkout_payment_id"
+            android:text="შეკვეთის განთავსება"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:background="@drawable/buttonshape"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5 "
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_alignRight="@+id/view"
+            android:layout_alignEnd="@+id/view" />
+
+
     </RelativeLayout>
 
 

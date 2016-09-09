@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -79,71 +80,70 @@ public class MainActivity extends AppCompatActivity {
         initToolbar();
         initRecyclerView();
 
-//        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//
-//            // This method will trigger on item Click of navigation menu
-//            @Override
-//            public boolean onNavigationItemSelected(MenuItem menuItem) {
-//
-//
-//                //Checking if the item is in checked state or not, if not make it in checked state
-//                if(menuItem.isChecked()) menuItem.setChecked(false);
-//                else menuItem.setChecked(true);
-//
-//                //Closing drawer on item click
-//                drawerLayout.closeDrawers();
-//
-//                //Check to see which item was being clicked and perform appropriate action
-//                switch (menuItem.getItemId()){
-//
-//
-//                    //Replacing the main content with ContentFragment Which is our Inbox View;
-//                    case R.id.blog_id:
-//                        String urlBlog = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
-//                        Intent blog = new Intent(Intent.ACTION_VIEW);
-//                        blog.setData(Uri.parse(urlBlog));
-//                        startActivity(blog);
-//                        return true;
-//
-//                    // For rest of the options we just show a toast on click
-//
-//                    case R.id.about_us_id:
-//                        String urlAbout = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
-//                        Intent about = new Intent(Intent.ACTION_VIEW);
-//                        about.setData(Uri.parse(urlAbout));
-//                        startActivity(about);
-//                        return true;
-//
-//
-//                    default:
-//                        Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
-//                        return true;
-//
-//                }
-//            }
-//        });
-//        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-//        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer){
-//
-//            @Override
-//            public void onDrawerClosed(View drawerView) {
-//                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
-//                super.onDrawerClosed(drawerView);
-//            }
-//
-//            @Override
-//            public void onDrawerOpened(View drawerView) {
-//                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-//
-//                super.onDrawerOpened(drawerView);
-//            }
-//        };
-//
-//        //Setting the actionbarToggle to drawer layout
-//        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
-        //calling sync state is necessay or else your hamburger icon wont show up
+            // This method will trigger on item Click of navigation menu
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+
+                //Checking if the item is in checked state or not, if not make it in checked state
+                if(menuItem.isChecked()) menuItem.setChecked(false);
+                else menuItem.setChecked(true);
+
+                //Closing drawer on item click
+                drawerLayout.closeDrawers();
+
+                //Check to see which item was being clicked and perform appropriate action
+                switch (menuItem.getItemId()){
+
+
+                    //Replacing the main content with ContentFragment Which is our Inbox View;
+                    case R.id.blog_id:
+                        String urlBlog = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
+                        Intent blog = new Intent(Intent.ACTION_VIEW);
+                        blog.setData(Uri.parse(urlBlog));
+                        startActivity(blog);
+                        return true;
+
+                    // For rest of the options we just show a toast on click
+
+                    case R.id.about_us_id:
+                        String urlAbout = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
+                        Intent about = new Intent(Intent.ACTION_VIEW);
+                        about.setData(Uri.parse(urlAbout));
+                        startActivity(about);
+                        return true;
+
+
+                    default:
+                        Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
+                        return true;
+
+                }
+            }
+        });
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.openDrawer, R.string.closeDrawer){
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+
+                super.onDrawerOpened(drawerView);
+            }
+        };
+
+        //Setting the actionbarToggle to drawer layout
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
 
 
         isNetworkAvailable();

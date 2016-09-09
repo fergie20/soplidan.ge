@@ -20,6 +20,7 @@ import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -291,6 +292,7 @@ public class ProductsActivity extends AppCompatActivity {
                                     bundle.putSerializable("model", model);
                                     dialog.setArguments(bundle);
                                     dialog.show(getFragmentManager(), "dialog");
+
                                 }
                             });
                             myAdapter.setMycountListener(new ProductsAdapter.MyCountListener() {
