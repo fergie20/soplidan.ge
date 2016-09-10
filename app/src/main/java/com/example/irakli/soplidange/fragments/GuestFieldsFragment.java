@@ -19,6 +19,7 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View guestFieldsFragment = inflater.inflate(R.layout.guest_fragment_layout, container, false);
 
+
         return guestFieldsFragment;
     }
 }

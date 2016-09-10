@@ -2,10 +2,19 @@ package com.example.irakli.soplidange;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ScrollingView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.ScrollView;
+import android.widget.Spinner;
 
 import com.example.irakli.soplidange.fragments.DeliveryPlaceFragment;
 import com.example.irakli.soplidange.fragments.DeliveryTermsFragment;
@@ -35,6 +44,7 @@ public class Payment extends AppCompatActivity {
         deliveryTermsFragment = new DeliveryTermsFragment();
         paymentMethodsFragment = new PaymentMethodsFragment();
         orderedProductsFragment = new OrderedProductsFragment();
+
         fragmentArrayList = new ArrayList<>();
 
         nextBtn = (Button) findViewById(R.id.continue_btn_id);
@@ -50,14 +60,13 @@ public class Payment extends AppCompatActivity {
     }
 
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         counter--;
     }
 
-    private void changeFragment(){
+    private void changeFragment() {
         fragmentArrayList.add(deliveryPlaceFragment);
         fragmentArrayList.add(deliveryTermsFragment);
         fragmentArrayList.add(paymentMethodsFragment);
@@ -66,7 +75,7 @@ public class Payment extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (counter == 4){
+                if (counter == 4) {
                     return;
                 }
 
