@@ -35,7 +35,8 @@
                 android:id="@+id/toolbar_id"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:titleTextColor="#fff"/>
+                app:titleTextColor="#fff"
+                app:theme="@style/ToolbarColoredBackArrow"/>
 
 
         </android.support.design.widget.CollapsingToolbarLayout>

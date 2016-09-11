@@ -66,6 +66,8 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
+        ImageView deleteItem;
+
         ImageView productImageView;
         TextView productNameView;
         TextView productPriceView;
@@ -81,13 +83,33 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
+            deleteItem = (ImageView) itemView.findViewById(R.id.checkout_delete_item_id);
             productImageView = (ImageView) itemView.findViewById(R.id.checkout_image_id);
             productNameView = (TextView) itemView.findViewById(R.id.checkout_name_id);
             productPriceView = (TextView) itemView.findViewById(R.id.product_price_id);
             quantityView = (TextView) itemView.findViewById(R.id.quantity_id);
             plusView = (ImageView) itemView.findViewById(R.id.plus_id);
             minusView = (ImageView) itemView.findViewById(R.id.minus_id);
+
+            deleteItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cartMap.remove(model);
+                    notifyDataSetChanged();
+
+                    int quont = Integer.parseInt(quantityView.getText().toString());
+                    SingletonTest.getInstance().getCartMap().remove(model.getId());
+
+                    Toast.makeText(context, "პროდუქტი წაიშალა", Toast.LENGTH_SHORT).show();
+
+                    if(model.getBase_price()>0) {
+                        oldPrice = model.getBase_price();
+                    }else {
+                        oldPrice = model.getList_price();
+                    }
+                    listener.onClick(-oldPrice * quont);
+                }
+            });
 
             plusView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -162,8 +184,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                             oldPrice = model.getList_price();
                         }
                         listener.onClick(-oldPrice);
-
-
                     }
                 }
             });

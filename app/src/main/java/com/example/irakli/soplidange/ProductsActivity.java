@@ -70,6 +70,7 @@ public class ProductsActivity extends AppCompatActivity {
     List<ProductModel> productModels = new ArrayList<>();
     CollapsingToolbarLayout collapsingToolbarLayout;
 
+    public static int check = 0;
 
     //  private SwipeRefreshLayout mSwipeRefreshLayout;
     ProductsAdapter myAdapter;
@@ -89,12 +90,16 @@ public class ProductsActivity extends AppCompatActivity {
         isNetworkAvailable();
 
         count();
+
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent addEvent = new Intent(ProductsActivity.this, CheckoutActivity.class);
+                addEvent.putExtra("checkboolean",1);
                 startActivity(addEvent);
 
             }
@@ -380,13 +385,16 @@ public class ProductsActivity extends AppCompatActivity {
 
 
     public void updateListView() {
-//        gridRecycler.setAdapter(myAdapter);
-//
-        myAdapter.notifyDataSetChanged();
-//        if(gridRecycler.getAdapter() != null){
-//            gridRecycler.getAdapter().notifyDataSetChanged();
-//
-//        }
+
+
+
+        if (check == 1){
+            gridRecycler.setAdapter(myAdapter);
+            check = 0;
+        }else{
+            myAdapter.notifyDataSetChanged();
+        }
+
         count();
     }
 

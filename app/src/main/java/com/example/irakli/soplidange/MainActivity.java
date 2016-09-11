@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -37,11 +38,14 @@ import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
 import com.example.irakli.soplidange.utils.SingletonTest;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -67,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(checkShared == 0){
+            retryShared();
+        }
 
         initToolbar();
         initRecyclerView();
@@ -319,6 +327,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+        saveShared ();
     }
 
     public void isNetworkAvailable() {
@@ -331,6 +340,34 @@ public class MainActivity extends AppCompatActivity {
 //            dialog.show(getFragmentManager(), "dialog");
 
         }
+    }
+
+    public void saveShared (){
+
+        SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
+
+
+        HashMap<Integer,ProductModel> cartMap;
+
+        cartMap = SingletonTest.getInstance().getCartMap();
+
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(cartMap);
+        prefsEditor.putString("MyObject", json);
+        prefsEditor.apply();
+    }
+    public void retryShared(){
+        SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
+
+        Gson gson = new Gson();
+        String json = mPrefs.getString("MyObject", "");
+
+        Type typeOfHashMap = new TypeToken<HashMap<Integer, ProductModel>>() { }.getType();
+        HashMap<Integer, ProductModel> newMap = gson.fromJson(json, typeOfHashMap);
+        SingletonTest.getInstance().setCart(newMap);
     }
 
 }

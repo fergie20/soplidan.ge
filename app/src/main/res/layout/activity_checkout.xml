@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CheckoutActivity">
+    tools:context=".CheckoutActivity"
+    android:background="#ffffff">
 
     <include layout="@layout/toolbar_layout" />
 
@@ -13,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp"
-        android:layout_marginTop="56dp">
+        android:layout_marginTop="56dp"
+        android:background="#ffffff">
 
     </android.support.v7.widget.RecyclerView>
 

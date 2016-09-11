@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,6 +39,10 @@ public class CheckoutActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     HashMap<Integer, ProductModel> cartMap;
     Button payment;
+    CheckoutAdapter myAdapter;
+    final ArrayList<ProductModel> cartArray = new ArrayList<>();
+    int chek = 0;
+
 
 
     @Override
@@ -58,7 +63,11 @@ public class CheckoutActivity extends AppCompatActivity {
 
         find();
 
-        final ArrayList<ProductModel> cartArray = new ArrayList<>();
+        chek = getIntent().getIntExtra("checkboolean", 0);
+
+
+
+
         for (Integer integer : cartMap.keySet()) {
             cartArray.add(cartMap.get(integer));
         }
@@ -66,7 +75,7 @@ public class CheckoutActivity extends AppCompatActivity {
             Toast.makeText(this, "თქვენი კალათა ცარიელია", Toast.LENGTH_SHORT).show();
         }
 
-        CheckoutAdapter myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
+         myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
         recyclerView.setAdapter(myAdapter);
 
 
@@ -121,7 +130,7 @@ public class CheckoutActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu, menu);
+        menuInflater.inflate(R.menu.delete_menu, menu);
 
 //        MenuItem checkListIcon = menu.findItem(R.id.check_list_id);
 //        checkListIcon.setVisible(false);
@@ -145,14 +154,28 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ProductsActivity.check = chek;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
+                ProductsActivity.check = chek;
                 super.onBackPressed();
+
                 return true;
-//            case R.id.search_id:
-//                Intent productsAdapterIntent = new Intent(getApplicationContext(), ProductsActivity.class);
-//                startActivity(productsAdapterIntent);
+            case R.id.delete_id:
+                cartMap.clear();
+                SingletonTest.getInstance().getCartMap().clear();
+                cartArray.clear();
+                myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
+                recyclerView.setAdapter(myAdapter);
+                Toast.makeText(this, "თქვენი კალათა დაცარიელდა", Toast.LENGTH_SHORT).show();
+                sumView.setText(0+"");
+                saveShared();
         }
         return (super.onOptionsItemSelected(menuItem));
     }
