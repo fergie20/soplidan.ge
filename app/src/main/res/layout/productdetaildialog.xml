@@ -78,6 +78,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
         android:gravity="end"
+        android:layout_marginEnd="38dp"
         android:text="15.7 ¢"
         android:textColor="#9ccc65"
         android:textSize="18dp" />

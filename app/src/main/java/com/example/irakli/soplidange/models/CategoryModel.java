@@ -9,13 +9,23 @@ public class CategoryModel {
     private String status;
     private int position;
     private int product_count;
+    private int category_image;
 
-    public CategoryModel(int category_id, String category, String status, int position, int product_count) {
+    public CategoryModel(int category_id, String category, String status, int position, int product_count, int category_image) {
         this.category_id = category_id;
         this.category = category;
         this.status = status;
         this.position = position;
         this.product_count = product_count;
+        this.category_image = category_image;
+    }
+
+    public int getCategory_image() {
+        return category_image;
+    }
+
+    public void setCategory_image(int category_image) {
+        this.category_image = category_image;
     }
 
     public int getCategory_id() {

@@ -2,17 +2,22 @@ package com.example.irakli.soplidange.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.models.CategoryModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -41,7 +46,14 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.categoryNameView.setText( categoriesList.get(position).getCategory());
-        holder.product_count.setText("("+categoriesList.get(position).getProduct_count()+")");
+
+//        Picasso.with(context)
+//                .load("http://i.imgur.com/DvpvklR.png")
+//                .centerInside()
+//                .fit()
+//                .into( holder.categoryImageView);
+        holder.categoryImageView.setImageResource(categoriesList.get(position).getCategory_image());
+
         holder.click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,18 +82,16 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView categoryNameView;
-        RelativeLayout click;
-        TextView  product_count;
+        ImageView categoryImageView;
+        LinearLayout click;
 
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             categoryNameView = (TextView) itemView.findViewById(R.id.recycler_item_id);
-            click = (RelativeLayout) itemView.findViewById(R.id.card_view_id);
-            product_count = (TextView) itemView.findViewById(R.id.product_count);
+            click = (LinearLayout) itemView.findViewById(R.id.card_view_id);
+            categoryImageView = (ImageView) itemView.findViewById(R.id.category_image_id);
         }
     }
-
-
 }

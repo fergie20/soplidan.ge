@@ -5,9 +5,11 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -23,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,6 +72,9 @@ public class ProductsActivity extends AppCompatActivity {
     HashMap<Integer, ProductModel> count;
     List<ProductModel> productModels = new ArrayList<>();
     CollapsingToolbarLayout collapsingToolbarLayout;
+    ActionBar actionBar;
+    FloatingActionButton fab;
+    ImageView productCategoryImage;
 
     public static int check = 0;
 
@@ -87,13 +93,16 @@ public class ProductsActivity extends AppCompatActivity {
         myAdapter = new ProductsAdapter(productModels, getApplicationContext());
 
         initGridRecycleView();
+        initToolbar();
         isNetworkAvailable();
+
+
 
         count();
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,11 +116,175 @@ public class ProductsActivity extends AppCompatActivity {
 //        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
 //        mSwipeRefreshLayout.setOnRefreshListener(this);
 
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.product_collapsingToolbar_id);
+        collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+        productCategoryImage = (ImageView) findViewById(R.id.product_category_image);
+
 
         Bundle bundle = getIntent().getBundleExtra("categories");
         if (bundle != null) {
             category_id = bundle.getInt("category_id");
             category = bundle.getString("category");
+            actionBar.setTitle(category);
+
+            Window window = this.getWindow();
+
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            switch(category_id) {
+                case 34:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunflowerToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sunflowerToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sunflowerToolbar)));
+                    productCategoryImage.setImageDrawable(this.getResources().getDrawable(R.drawable.xorceuli));
+                    break;
+                case 33:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.fokiToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.fokiToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.fokiToolbar)));
+                    break;
+                case 32:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.bioToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.bioToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bioToolbar)));
+                    break;
+                case 30:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.puriToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.puriToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.puriToolbar)));
+                    break;
+                case 29:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.saxlebiToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.saxlebiToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.saxlebiToolbar)));
+                    break;
+                case 28:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.chaiToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.chaiToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.chaiToolbar)));
+                    break;
+                case 27:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.kalataToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.kalataToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.kalataToolbar)));
+                    break;
+                case 26:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunelebiToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sunelebiToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sunelebiToolbar)));
+                    break;
+                case 24:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sxvadasxvaToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sxvadasxvaToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sxvadasxvaToolbar)));
+                    break;
+                case 23:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.rdzeToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.rdzeToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.rdzeToolbar)));
+                    break;
+                case 21:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xiliToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xiliToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xiliToolbar)));
+                    break;
+                case 20:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.mwniliToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.mwniliToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.mwniliToolbar)));
+                    break;
+                case 12:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.bostneuliToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.bostneuliToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bostneuliToolbar)));
+                    break;
+                case 11:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sasmeliToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sasmeliToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sasmeliToolbar)));
+                    break;
+                case 9:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.zetiToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.zetiToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.zetiToolbar)));
+                    break;
+                case 6:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.nugbariToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.nugbariToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.nugbariToolbar)));
+                    break;
+                case 5:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xorciToolbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xorciToolbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xorciToolbar)));
+                    break;
+
+                default:
+                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xiliStatusbar));
+                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xiliStatusbar));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xiliStatusbar)));
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                switch(category_id) {
+                    case 34:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.sunflowerStatusBar));
+                        break;
+                    case 33:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.fokiStatusbar));
+                        break;
+                    case 32:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.bioStatusbar));
+                        break;
+                    case 30:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.puriStatusBar));
+                        break;
+                    case 29:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.saxlebiStatusbar));
+                        break;
+                    case 28:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.chaiStatusbar));
+                        break;
+                    case 27:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.kalataStatusBar));
+                        break;
+                    case 26:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.sunelebiStatusbar));
+                        break;
+                    case 24:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.sxvadasxvaStatusbar));
+                        break;
+                    case 23:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.rdzeStatusBar));
+                        break;
+                    case 21:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.xiliStatusbar));
+                        break;
+                    case 20:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.mwniliStatusbar));
+                        break;
+                    case 12:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.bostneuliStatusBar));
+                        break;
+                    case 11:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.sasmeliStatusbar));
+                        break;
+                    case 9:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.zetiStatusbar));
+                        break;
+                    case 6:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.nugbariStatusBar));
+                        break;
+                    case 5:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.xorciStatusbar));
+                        break;
+
+                    default:
+                        window.setStatusBarColor(this.getResources().getColor(R.color.xiliToolbar));
+                }
+            }
 
             System.out.println(category);
         }
@@ -133,11 +306,6 @@ public class ProductsActivity extends AppCompatActivity {
         minus = (ImageView) findViewById(R.id.grid_minus_id);
         quantityView = (TextView) findViewById(R.id.grid_text_id);
 //        new Task().execute();
-
-        initToolbar();
-
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar_id);
-        collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
 
     }
 
@@ -191,10 +359,10 @@ public class ProductsActivity extends AppCompatActivity {
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_id);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
 
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(category);
+
     }
 
     private void initGridRecycleView() {

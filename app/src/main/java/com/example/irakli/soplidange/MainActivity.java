@@ -5,24 +5,31 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +40,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.irakli.soplidange.ExampleData.ExampleData;
+import com.example.irakli.soplidange.ExampleData.ProductData;
 import com.example.irakli.soplidange.adapters.CategoriesAdapter;
 import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.models.ProductModel;
@@ -66,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+    CollapsingToolbarLayout collapsingToolbarLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +89,24 @@ public class MainActivity extends AppCompatActivity {
 
         initToolbar();
         initRecyclerView();
+
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar_id);
+        collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+
+
+        Window window = this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(this.getResources().getColor(R.color.mainStatusbar));
+        }
+
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view_id);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -202,27 +231,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//                case R.id.check_list_id:
-//                    Intent intent1 = new Intent(getApplicationContext(), CheckoutActivity.class);
-//                    startActivity(intent1);
-//                    break;
-//            }
-//            return true;
-//    }
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_id);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
+
 
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_id);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        recyclerView.setLayoutManager(gridLayoutManager);
     }
 
     private void getJSONInfo() {
@@ -239,13 +260,14 @@ public class MainActivity extends AppCompatActivity {
                             ArrayList<CategoryModel> categoryModels = new ArrayList<>();
 
                             for (int i = 0; i < jsonArray.length(); i++) {
+
                                 JSONObject curObj = jsonArray.getJSONObject(i);
                                 int category_id = curObj.getInt("category_id");
                                 String category = curObj.getString("category");
                                 String status = curObj.getString("status");
                                 int position = curObj.getInt("position");
                                 int product_count = curObj.getInt("product_count");
-                                CategoryModel categoryModel = new CategoryModel(category_id, category, status, position, product_count);
+                                CategoryModel categoryModel = new CategoryModel(category_id, category, status, position, product_count, ExampleData.productImages[i]);
                                 categoryModels.add(categoryModel);
                             }
                             myAdapter = new CategoriesAdapter(categoryModels, getApplicationContext());

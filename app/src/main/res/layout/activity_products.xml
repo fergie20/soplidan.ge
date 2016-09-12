@@ -12,7 +12,7 @@
         android:layout_height="192dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar_id"
+            android:id="@+id/product_collapsingToolbar_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="@color/colorPrimary"
@@ -22,6 +22,7 @@
             app:expandedTitleMarginTop="100dp">
 
             <ImageView
+                android:id="@+id/product_category_image"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:layout_gravity="bottom"
@@ -35,7 +36,7 @@
                 android:id="@+id/toolbar_id"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:titleTextColor="#fff"
+                app:titleTextColor="#ffffff"
                 app:theme="@style/ToolbarColoredBackArrow"/>
 
 
@@ -54,8 +55,10 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_grid_view_id"
+        android:padding="12dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ffffff"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </android.support.v7.widget.RecyclerView>
@@ -72,7 +75,7 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="5dp"
+            app:elevation="0dp"
             android:src="@drawable/shopping_bag"
             app:borderWidth="5dp" />
 
@@ -82,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="4dp"
-            android:elevation="7dp"
+            app:elevation="7dp"
             android:text="5"
             android:textColor="@android:color/white" />
 

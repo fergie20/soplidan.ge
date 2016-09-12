@@ -2,10 +2,51 @@
 <resources>
     <color name="colorPrimary">#b6d7a8</color>
     <color name="colorPrimaryDark">#7bb762</color>
-    <color name="colorAccent">#ec6d46</color>
+    <color name="colorAccent">#0d7fc3</color>
     <color name="sum">#FF6347</color>
     <color name="sale_color">#5b06fa64</color>
     <color name="myColor">#ccff00</color>
+    <color name="mainStatusbar">#ffd500</color>
+
+    <color name="sunflowerToolbar">#9c27b0</color>
+    <color name="sunflowerStatusBar">#7b1fa2</color>
+    <color name="fokiToolbar">#2196f3</color>
+    <color name="fokiStatusbar">#0876d2</color>
+    <color name="bioToolbar">#cddc39</color>
+    <color name="bioStatusbar">#afb42b</color>
+    <color name="puriToolbar">#ffeb3b</color>
+    <color name="puriStatusBar">#fbc02e</color>
+    <color name="saxlebiToolbar">#4caf50</color>
+    <color name="saxlebiStatusbar">#388e3c</color>
+    <color name="chaiToolbar">#8bc34a</color>
+    <color name="chaiStatusbar">#679f38</color>
+    <color name="kalataToolbar">#9c27b0</color>
+    <color name="kalataStatusBar">#7b1fa2</color>
+    <color name="sunelebiToolbar">#ff5722</color>
+    <color name="sunelebiStatusbar">#e64a19</color>
+    <color name="sxvadasxvaToolbar">#cddc39</color>
+    <color name="sxvadasxvaStatusbar">#afb42b</color>
+    <color name="rdzeToolbar">#ffc107</color>
+    <color name="rdzeStatusBar">#ffa001</color>
+    <color name="xiliToolbar">#e91e63</color>
+    <color name="xiliStatusbar">#c2185b</color>
+    <color name="mwniliToolbar">#607d8b</color>
+    <color name="mwniliStatusbar">#455a64</color>
+    <color name="bostneuliToolbar">#795548</color>
+    <color name="bostneuliStatusBar">#5d4037</color>
+    <color name="sasmeliToolbar">#2196f3</color>
+    <color name="sasmeliStatusbar">#0876d2</color>
+    <color name="zetiToolbar">#ff9800</color>
+    <color name="zetiStatusbar">#f57c01</color>
+    <color name="nugbariToolbar">#ffc400</color>
+    <color name="nugbariStatusBar">#ffab00</color>
+    <color name="xorciToolbar">#f44336</color>
+    <color name="xorciStatusbar">#d32f2f</color>
+
+
+
+
+
 
 
 </resources>
