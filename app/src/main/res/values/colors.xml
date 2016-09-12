@@ -24,8 +24,8 @@
     <color name="kalataStatusBar">#7b1fa2</color>
     <color name="sunelebiToolbar">#ff5722</color>
     <color name="sunelebiStatusbar">#e64a19</color>
-    <color name="sxvadasxvaToolbar">#cddc39</color>
-    <color name="sxvadasxvaStatusbar">#afb42b</color>
+    <color name="sxvadasxvaToolbar">#9e9e9e</color>
+    <color name="sxvadasxvaStatusbar">#616161</color>
     <color name="rdzeToolbar">#ffc107</color>
     <color name="rdzeStatusBar">#ffa001</color>
     <color name="xiliToolbar">#e91e63</color>
@@ -42,6 +42,9 @@
     <color name="nugbariStatusBar">#ffab00</color>
     <color name="xorciToolbar">#f44336</color>
     <color name="xorciStatusbar">#d32f2f</color>
+
+    <color name="white">#FFFFFF</color>
+
 
 
 

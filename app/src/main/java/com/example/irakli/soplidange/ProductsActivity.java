@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -20,6 +21,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextPaint;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +50,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -127,6 +130,22 @@ public class ProductsActivity extends AppCompatActivity {
             category = bundle.getString("category");
             actionBar.setTitle(category);
 
+
+
+
+            final float scale = getResources().getDisplayMetrics().density;
+            int width  = (int) (250 * scale);
+            int height = (int) (140 * scale);
+
+            collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
+            final Typeface tf = Typeface.createFromAsset(this.getAssets(), "BPG_Anna.ttf");
+            collapsingToolbarLayout.setCollapsedTitleTypeface(tf);
+            collapsingToolbarLayout.setExpandedTitleTypeface(tf);
+
+
+
+
+
             Window window = this.getWindow();
 
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -134,96 +153,129 @@ public class ProductsActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             switch(category_id) {
                 case 34:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunflowerToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunflowerToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sunflowerToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sunflowerToolbar)));
-                    productCategoryImage.setImageDrawable(this.getResources().getDrawable(R.drawable.xorceuli));
+                    productCategoryImage.setImageResource(R.drawable.cov_sunflower);
+
                     break;
                 case 33:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.fokiToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.fokiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.fokiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.fokiToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_fokismonasteri);
+
                     break;
                 case 32:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.bioToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.bioToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.bioToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bioToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_biobostneuli);
+
                     break;
                 case 30:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.puriToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.puriToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.puriToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.puriToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.pur);
+
                     break;
                 case 29:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.saxlebiToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.saxlebiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.saxlebiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.saxlebiToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_mwsaxli);
+
                     break;
                 case 28:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.chaiToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.chaiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.chaiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.chaiToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_chai);
+
                     break;
                 case 27:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.kalataToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.kalataToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.kalataToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.kalataToolbar)));
                     break;
                 case 26:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunelebiToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunelebiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sunelebiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sunelebiToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_saweblebi);
+
                     break;
                 case 24:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sxvadasxvaToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sxvadasxvaToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sxvadasxvaToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sxvadasxvaToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_sxvadasxva);
+
                     break;
                 case 23:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.rdzeToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.rdzeToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.rdzeToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.rdzeToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_kvercxi);
+
                     break;
                 case 21:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xiliToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xiliToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xiliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xiliToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_xili);
+
                     break;
                 case 20:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.mwniliToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.mwniliToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.mwniliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.mwniliToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cow_mwnili);
+
                     break;
                 case 12:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.bostneuliToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.bostneuliToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.bostneuliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bostneuliToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_bostneuli);
+
                     break;
                 case 11:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sasmeliToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sasmeliToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sasmeliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sasmeliToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_sasmeli);
+
                     break;
                 case 9:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.zetiToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.zetiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.zetiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.zetiToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_dzmari);
+
                     break;
                 case 6:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.nugbariToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.nugbariToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.nugbariToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.nugbariToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_nugbari);
+
                     break;
                 case 5:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xorciToolbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xorciToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xorciToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xorciToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_xorceuli);
+
                     break;
 
                 default:
-                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xiliStatusbar));
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xiliStatusbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xiliStatusbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xiliStatusbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_xili);
+
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -616,5 +668,18 @@ public class ProductsActivity extends AppCompatActivity {
         prefsEditor.putString("MyObject", json);
         prefsEditor.apply();
     }
+    private void makeCollapsingToolbarLayoutLooksGood(CollapsingToolbarLayout collapsingToolbarLayout) {
+        try {
+            final Field field = collapsingToolbarLayout.getClass().getDeclaredField("mCollapsingTextHelper");
+            field.setAccessible(true);
 
+            final Object object = field.get(collapsingToolbarLayout);
+            final Field tpf = object.getClass().getDeclaredField("mTextPaint");
+            tpf.setAccessible(true);
+
+            ((TextPaint) tpf.get(object)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf"));
+            ((TextPaint) tpf.get(object)).setColor(getResources().getColor(R.color.colorAccent));
+        } catch (Exception ignored) {
+        }
+    }
 }

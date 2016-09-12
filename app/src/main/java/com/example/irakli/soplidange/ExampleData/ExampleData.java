@@ -9,5 +9,5 @@ public class ExampleData {
     public static String [] categories = {"ხორცი და თევზი", "რძის ნაწარმი და კცერცხი", "ბოსტნეული", "მწვანე სახლები ლისზე", "ბიო", "თაფლი",
             "თხიეული და ჩირი", "ალკოჰოლური სასმელი", "ჩაი და პიტნის ფოთოლი", "ძმარი", "მწნილი", "პური"};
 
-    public static int [] productImages = {R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli,R.drawable.xorceuli};
+    public static int [] productImages = {R.drawable.sunflover,R.drawable.foki,R.drawable.biopro,R.drawable.puri,R.drawable.saxlebi,R.drawable.chai,R.drawable.kalata,R.drawable.sunelebi,R.drawable.sxvadasxva,R.drawable.rdze,R.drawable.xili,R.drawable.mwnili,R.drawable.bost,R.drawable.sasmeli,R.drawable.dzmari,R.drawable.nugbari,R.drawable.xorceuli};
 }

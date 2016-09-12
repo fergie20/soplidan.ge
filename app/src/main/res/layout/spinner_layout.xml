@@ -4,22 +4,25 @@
     android:layout_weight="0"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <Spinner
+        android:layout_gravity="start"
+        android:gravity="start"
+        android:layout_marginLeft="38dp"
         android:id="@+id/spinCity"
         android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
-        android:paddingLeft="8dp"
         android:popupBackground="@android:color/white"
         android:scrollbars="none"
         android:spinnerMode="dropdown" />
     <Spinner
+        android:layout_gravity="end"
+        android:gravity="end"
         android:id="@+id/spinDistrict"
         android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
-        android:paddingLeft="8dp"
         android:popupBackground="@android:color/white"
         android:scrollbars="none"
         android:spinnerMode="dropdown" />

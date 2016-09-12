@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.TextPaint;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,6 +56,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -92,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar_id);
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+
+        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
+        final Typeface tf = Typeface.createFromAsset(this.getAssets(), "BPG_Anna.ttf");
+        collapsingToolbarLayout.setCollapsedTitleTypeface(tf);
+        collapsingToolbarLayout.setExpandedTitleTypeface(tf);
 
 
         Window window = this.getWindow();
@@ -391,5 +399,18 @@ public class MainActivity extends AppCompatActivity {
         HashMap<Integer, ProductModel> newMap = gson.fromJson(json, typeOfHashMap);
         SingletonTest.getInstance().setCart(newMap);
     }
+    private void makeCollapsingToolbarLayoutLooksGood(CollapsingToolbarLayout collapsingToolbarLayout) {
+        try {
+            final Field field = collapsingToolbarLayout.getClass().getDeclaredField("mCollapsingTextHelper");
+            field.setAccessible(true);
 
+            final Object object = field.get(collapsingToolbarLayout);
+            final Field tpf = object.getClass().getDeclaredField("mTextPaint");
+            tpf.setAccessible(true);
+
+            ((TextPaint) tpf.get(object)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf"));
+            ((TextPaint) tpf.get(object)).setColor(getResources().getColor(R.color.colorAccent));
+        } catch (Exception ignored) {
+        }
+    }
 }

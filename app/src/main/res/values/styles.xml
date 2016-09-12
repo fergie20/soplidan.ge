@@ -17,6 +17,19 @@
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
     </style>
+    <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <style name="CollapsedAppBarTopic" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <style name="CollapsedCategory" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <declare-styleable name="DonutProgress">
         <attr name="donut_progress" format="integer"/>

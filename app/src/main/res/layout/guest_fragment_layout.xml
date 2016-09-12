@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/guest_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingEnd="30dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="30dp"
-        android:paddingStart="10dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/guest_fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingEnd="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingStart="10dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -31,6 +33,54 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    app:srcCompat="@drawable/email"
+                    tools:ignore="MissingPrefix"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:requiresFadingEdge="horizontal">
+
+                    <EditText
+                        android:id="@+id/guest_field_mail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:textSize="14sp" />
+
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    app:srcCompat="@drawable/saxeligvari"
+                    tools:ignore="MissingPrefix"/>
+                <LinearLayout
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -44,7 +94,8 @@
                     android:inputType="text"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -63,24 +114,22 @@
                     android:textSize="14sp" />
 
             </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:srcCompat="@drawable/misamarti"
+                tools:ignore="MissingPrefix"/>
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/guest_field_mail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Email"
-                    android:inputType="textEmailAddress"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:textSize="14sp" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
+                android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -89,14 +138,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="მისამართი"
-                    android:inputType="phone"
+                    android:inputType="textPostalAddress"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:textSize="14sp" />
 
             </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:srcCompat="@drawable/teleponi"
+                tools:ignore="MissingPrefix"/>
 
             <android.support.design.widget.TextInputLayout
+                android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -104,14 +166,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="ტელეფონი"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:textSize="14sp" />
 
             </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:srcCompat="@drawable/piradinom"
+                tools:ignore="MissingPrefix"/>
 
             <android.support.design.widget.TextInputLayout
+                android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -127,8 +202,20 @@
 
 
             </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:srcCompat="@drawable/organizaciisdasaxeleba"
+                tools:ignore="MissingPrefix"/>
 
             <android.support.design.widget.TextInputLayout
+                android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -143,8 +230,20 @@
                     android:textSize="14sp" />
 
             </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:srcCompat="@drawable/saidentipikaciokodi"
+                tools:ignore="MissingPrefix"/>
 
             <android.support.design.widget.TextInputLayout
+                android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -159,6 +258,7 @@
                     android:textSize="14sp" />
 
             </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
