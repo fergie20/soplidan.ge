@@ -7,59 +7,126 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="32dp"
         android:gravity="center"
-        android:textStyle="bold"
+        android:paddingBottom="32dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:text="მიწოდების პირობები"
+        android:textColor="#fff"
         android:textSize="15sp"
-        android:text="მიწოდების პირობები"/>
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
+        android:text="პროდუქტის მოტანა"
+        android:textColor="#01577e"
+        android:textSize="15sp" />
 
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin">
+        android:layout_marginBottom="15dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin">
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="პროდუქტის მოტანა 16:00-18:00 საათამდე - 3.00 GEL" />
+            android:text="16:00-18:00 საათამდე" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="პროდუქტის მოტანა 18:00-20:00 საათამდე - 3.00 GEL" />
+            android:text="18:00-20:00 საათამდე" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="პროდუქტის მოტანა 20:00 საათის შემდეგ - 3.00 GEL" />
+            android:text="20:00 საათის შემდეგ" />
     </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:text="3.00 ლარი"
+        android:textColor="#014565"
+        android:textSize="15sp" />
+
+    <include layout="@layout/divider" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/activity_horizontal_margin"
-            android:text="სულ: 3.00 GEL
-30 ლარამდე შეკვეთილი პროდუქტის მიწოდება თბილისში - 3 ლარი;
+            android:gravity="center"
+            android:orientation="vertical">
 
-30 ლარზე მეტი შეკვეთილი პროდუქტის მიწოდება თბილისში - უფასო;
+            <TextView
+                android:id="@+id/delivery_cost_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text=" სულ: 3.00 GEL" />
 
-თბილისის შემოგარენში (წყნეთი,კოჯორი, წავკისი და ა.შ) პროდუქტის მიწოდების ღირებულებაა-8 ლარი;
+            <TextView
+                android:id="@+id/terms_info_1_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="7dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="7dp"
+                android:text=" 30 ლარამდე შეკვეთილი პროდუქტის მიწოდება თბილისში - 3 ლარი;" />
 
-გთხოვთ, გაითვალისწინეთ, პროდუქტის ადგილზე მიწოდება ხდება შეკვეთის გაკეთების მომდევნო დღეს 16:00-ის შემდეგ. კვირა დღეს მიწოდება არ ხდება. თუ თქვენ შეკვეთას აკეთებთ შაბათს და კვირას პროდუქტებს მიიღებთ ორშაბათს 16:00-ის შემდეგ.
+            <TextView
+                android:id="@+id/terms_info_2_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="7dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="7dp"
+                android:text=" 30 ლარზე მეტი შეკვეთილი პროდუქტის მიწოდება თბილისში - უფასო;" />
+
+            <TextView
+                android:id="@+id/terms_info_3_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="7dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="7dp"
+                android:text=" თბილისის შემოგარენში (წყნეთი,კოჯორი, წავკისი და ა.შ) პროდუქტის მიწოდების ღირებულებაა-8 ლარი;" />
+
+            <TextView
+                android:id="@+id/terms_info_4_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="7dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="7dp"
+                android:text=" გთხოვთ, გაითვალისწინეთ, პროდუქტის ადგილზე მიწოდება ხდება შეკვეთის გაკეთების მომდევნო დღეს 16:00-ის შემდეგ. კვირა დღეს მიწოდება არ ხდება. თუ თქვენ შეკვეთას აკეთებთ შაბათს და კვირას პროდუქტებს მიიღებთ ორშაბათს 16:00-ის შემდეგ.
 გთხოვთ, პირადად შეამოწმოთ შეძენილი პროდუქცია, წუნის აღმოჩენის შემთხვევაში გთხოვთ დაგვიკავშირდეთ.
 თუ გაქვთ კითხვები, გთხოვთ დაგვიკავშირდეთ: 557 470 441" />
+
+        </LinearLayout>
+
+
     </ScrollView>
 
 

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingEnd="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingStart="10dp">
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:gravity="center"
         android:paddingBottom="32dp"
         android:paddingTop="@dimen/activity_horizontal_margin"
         android:text="შეკვეთის მიწოდების ადგილი"
+        android:textColor="#fff"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -24,30 +24,85 @@
         android:id="@+id/delivery_scroll_view_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingEnd="15dp"
+        android:paddingRight="15dp"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    app:srcCompat="@drawable/email"
-                    tools:ignore="MissingPrefix"/>
+                android:padding="0dp">
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_marginLeft="8dp"
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/saxeligvari"
+                    tools:ignore="MissingPrefix" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/guest_field_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="სახელი *"
+                            android:inputType="text"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="10dp"
+                            android:textSize="14sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/guest_field_last_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:hint="გვარი *"
+                            android:inputType="text"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="10dp"
+                            android:textSize="14sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/email"
+                    tools:ignore="MissingPrefix" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:requiresFadingEdge="horizontal">
 
                     <EditText
@@ -63,117 +118,68 @@
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    app:srcCompat="@drawable/saxeligvari"
-                    tools:ignore="MissingPrefix"/>
                 <LinearLayout
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/guest_field_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="სახელი"
-                            android:inputType="text"
-                            android:paddingBottom="10dp"
-                            android:paddingTop="10dp"
-                            android:textSize="14sp"
-                            />
-
-                    </android.support.design.widget.TextInputLayout>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:srcCompat="@drawable/misamarti"
+                        tools:ignore="MissingPrefix" />
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp">
 
                         <EditText
-                            android:id="@+id/guest_field_last_name"
+                            android:id="@+id/guest_field_phone_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="გვარი"
-                            android:inputType="text"
+                            android:hint="მისამართი *"
+                            android:inputType="textPostalAddress"
                             android:paddingBottom="10dp"
                             android:paddingTop="10dp"
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    app:srcCompat="@drawable/misamarti"
-                    tools:ignore="MissingPrefix"/>
-                <android.support.design.widget.TextInputLayout
-                    android:layout_marginLeft="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_weight="0">
 
-                    <EditText
-                        android:id="@+id/guest_field_phone_number"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="მისამართი"
-                        android:inputType="textPostalAddress"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
-                        android:textSize="14sp" />
-
-                </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-                <LinearLayout android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    xmlns:android="http://schemas.android.com/apk/res/android">
                     <Spinner
-                        android:layout_gravity="start"
-                        android:gravity="start"
-                        android:layout_marginLeft="38dp"
                         android:id="@+id/spinCity"
-                        android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginLeft="38dp"
                         android:layout_marginTop="1dp"
+                        android:layout_weight="1"
+                        android:gravity="start"
                         android:popupBackground="@android:color/white"
                         android:scrollbars="none"
                         android:spinnerMode="dropdown" />
+
                     <Spinner
-                        android:layout_gravity="end"
-                        android:gravity="end"
                         android:id="@+id/spinDistrict"
-                        android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="end"
                         android:layout_marginTop="1dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
                         android:popupBackground="@android:color/white"
                         android:scrollbars="none"
                         android:spinnerMode="dropdown" />
@@ -183,23 +189,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     app:srcCompat="@drawable/teleponi"
-                    tools:ignore="MissingPrefix"/>
+                    tools:ignore="MissingPrefix" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp">
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="ტელეფონი"
+                        android:hint="ტელეფონი *"
                         android:inputType="phone"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
@@ -211,25 +218,27 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     app:srcCompat="@drawable/piradinom"
-                    tools:ignore="MissingPrefix"/>
+                    tools:ignore="MissingPrefix" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_marginLeft="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp">
 
                     <EditText
                         android:id="@+id/guest_field_id_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="პირადი ნომერი"
+                        android:hint="პირადი ნომერი *"
                         android:inputType="number"
+                        android:maxLength="11"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
                         android:textSize="14sp" />
@@ -237,62 +246,11 @@
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    app:srcCompat="@drawable/organizaciisdasaxeleba"
-                    tools:ignore="MissingPrefix"/>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_marginLeft="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/guest_field_organization_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="ორგანიზაციის დასახელება"
-                        android:inputType="text"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
-                        android:textSize="14sp" />
+            <include layout="@layout/organization_radio_group_layout" />
 
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    app:srcCompat="@drawable/saidentipikaciokodi"
-                    tools:ignore="MissingPrefix"/>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_marginLeft="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/guest_field_code"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="საიდენტიფიკაციო კოდი"
-                        android:inputType="number"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
-                        android:textSize="14sp" />
-
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
+            <include layout="@layout/divider" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -303,33 +261,37 @@
                     android:id="@+id/invoice_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="italic"
-                    android:text="ინვოისის გამოგზავნის მისამართი იგივეა რაც მიწოდების მისამართი?" />
+                    android:textColor="#595959"
+                    android:text="ინვოისის გამოგზავნის მისამართი იგივეა რაც მიწოდების მისამართი?"
+                    android:textStyle="italic|bold" />
 
                 <RadioGroup
                     android:id="@+id/radio_group_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/invoice_text_id"
+                    android:layout_marginTop="10dp"
+                    android:gravity="end"
                     android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/radio_btn_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginRight="6dp"
+                        android:padding="5dp"
                         android:text="კი" />
 
                     <RadioButton
                         android:id="@+id/radio_btn_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:padding="5dp"
                         android:text="არა" />
                 </RadioGroup>
 
             </RelativeLayout>
-
 
 
             <LinearLayout
@@ -339,53 +301,54 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<ImageView-->
+                        <!--android:layout_width="30dp"-->
+                        <!--android:layout_height="30dp"-->
+                        <!--app:srcCompat="@drawable/email"-->
+                        <!--tools:ignore="MissingPrefix" />-->
+
+                    <!--<android.support.design.widget.TextInputLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="8dp"-->
+                        <!--android:requiresFadingEdge="horizontal">-->
+
+                        <!--<EditText-->
+                            <!--android:id="@+id/invoice_guest_field_mail"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:hint="Email *"-->
+                            <!--android:inputType="textEmailAddress"-->
+                            <!--android:paddingBottom="10dp"-->
+                            <!--android:paddingTop="10dp"-->
+                            <!--android:textSize="14sp" />-->
+
+                    <!--</android.support.design.widget.TextInputLayout>-->
+                <!--</LinearLayout>-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        app:srcCompat="@drawable/email"
-                        tools:ignore="MissingPrefix"/>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_marginLeft="8dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:requiresFadingEdge="horizontal">
-
-                        <EditText
-                            android:id="@+id/invoice_guest_field_mail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Email"
-                            android:inputType="textEmailAddress"
-                            android:paddingBottom="10dp"
-                            android:paddingTop="10dp"
-                            android:textSize="14sp" />
-
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         app:srcCompat="@drawable/saxeligvari"
-                        tools:ignore="MissingPrefix"/>
+                        tools:ignore="MissingPrefix" />
+
                     <LinearLayout
-                        android:layout_marginLeft="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:orientation="vertical">
-
 
 
                         <android.support.design.widget.TextInputLayout
@@ -396,12 +359,11 @@
                                 android:id="@+id/invoice_guest_field_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="სახელი"
+                                android:hint="სახელი *"
                                 android:inputType="text"
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
-                                android:textSize="14sp"
-                                />
+                                android:textSize="14sp" />
 
                         </android.support.design.widget.TextInputLayout>
 
@@ -413,7 +375,7 @@
                                 android:id="@+id/invoice_guest_field_last_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="გვარი"
+                                android:hint="გვარი *"
                                 android:inputType="text"
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -428,26 +390,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
                         <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             app:srcCompat="@drawable/misamarti"
-                            tools:ignore="MissingPrefix"/>
+                            tools:ignore="MissingPrefix" />
+
                         <android.support.design.widget.TextInputLayout
-                            android:layout_marginLeft="8dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp">
 
                             <EditText
                                 android:id="@+id/invoice_guest_field_phone_number"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="მისამართი"
+                                android:hint="მისამართი *"
                                 android:inputType="textPostalAddress"
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -455,30 +420,33 @@
 
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
-                    <LinearLayout android:layout_width="wrap_content"
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        xmlns:android="http://schemas.android.com/apk/res/android">
+                        android:layout_weight="0">
+
                         <Spinner
-                            android:layout_gravity="start"
-                            android:gravity="start"
-                            android:layout_marginLeft="38dp"
                             android:id="@+id/invoice_spinCity"
-                            android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginLeft="38dp"
                             android:layout_marginTop="1dp"
+                            android:layout_weight="1"
+                            android:gravity="start"
                             android:popupBackground="@android:color/white"
                             android:scrollbars="none"
                             android:spinnerMode="dropdown" />
+
                         <Spinner
-                            android:layout_gravity="end"
-                            android:gravity="end"
                             android:id="@+id/invoice_spinDistrict"
-                            android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="end"
                             android:layout_marginTop="1dp"
+                            android:layout_weight="1"
+                            android:gravity="end"
                             android:popupBackground="@android:color/white"
                             android:scrollbars="none"
                             android:spinnerMode="dropdown" />
@@ -488,23 +456,24 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         app:srcCompat="@drawable/teleponi"
-                        tools:ignore="MissingPrefix"/>
+                        tools:ignore="MissingPrefix" />
 
                     <android.support.design.widget.TextInputLayout
-                        android:layout_marginLeft="8dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp">
 
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="ტელეფონი"
+                            android:hint="ტელეფონი *"
                             android:inputType="phone"
                             android:paddingBottom="10dp"
                             android:paddingTop="10dp"
@@ -513,91 +482,38 @@
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        app:srcCompat="@drawable/piradinom"
-                        tools:ignore="MissingPrefix"/>
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="horizontal">-->
 
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_marginLeft="8dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <!--<ImageView-->
+                        <!--android:layout_width="30dp"-->
+                        <!--android:layout_height="30dp"-->
+                        <!--app:srcCompat="@drawable/piradinom"-->
+                        <!--tools:ignore="MissingPrefix" />-->
 
-                        <EditText
-                            android:id="@+id/invoice_guest_field_id_number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="პირადი ნომერი"
-                            android:inputType="number"
-                            android:paddingBottom="10dp"
-                            android:paddingTop="10dp"
-                            android:textSize="14sp" />
+                    <!--<android.support.design.widget.TextInputLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="8dp">-->
+
+                        <!--<EditText-->
+                            <!--android:id="@+id/invoice_guest_field_id_number"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:hint="პირადი ნომერი"-->
+                            <!--android:inputType="number"-->
+                            <!--android:paddingBottom="10dp"-->
+                            <!--android:paddingTop="10dp"-->
+                            <!--android:textSize="14sp" />-->
 
 
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        app:srcCompat="@drawable/organizaciisdasaxeleba"
-                        tools:ignore="MissingPrefix"/>
+                    <!--</android.support.design.widget.TextInputLayout>-->
+                <!--</LinearLayout>-->
 
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_marginLeft="8dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/invoice_guest_field_organization_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="ორგანიზაციის დასახელება"
-                            android:inputType="text"
-                            android:paddingBottom="10dp"
-                            android:paddingTop="10dp"
-                            android:textSize="14sp" />
-
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        app:srcCompat="@drawable/saidentipikaciokodi"
-                        tools:ignore="MissingPrefix"/>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_marginLeft="8dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/invoice_guest_field_code"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="საიდენტიფიკაციო კოდი"
-                            android:inputType="number"
-                            android:paddingBottom="10dp"
-                            android:paddingTop="10dp"
-                            android:textSize="14sp" />
-
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
+                <include layout="@layout/delivery_fragment_radio_group"/>
 
             </LinearLayout>
         </LinearLayout>

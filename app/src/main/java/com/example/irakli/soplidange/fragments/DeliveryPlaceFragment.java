@@ -10,10 +10,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 
 import com.example.irakli.soplidange.R;
+
+import static com.example.irakli.soplidange.R.id.organization_radio_group_id;
 
 
 /**
@@ -22,7 +25,11 @@ import com.example.irakli.soplidange.R;
 public class DeliveryPlaceFragment extends Fragment {
 
     private LinearLayout newAddressLayout;
-    RadioGroup radioGroup;
+    private RelativeLayout organizationLayout;
+    private RelativeLayout deliveryRadioLayout;
+    private RadioGroup deliveryRadioGroup;
+    private RadioGroup radioGroup;
+    private RadioGroup organizationRadioGroup;
 
     Spinner spinCity;
     Spinner spinDistrict;
@@ -36,9 +43,14 @@ public class DeliveryPlaceFragment extends Fragment {
         View deliveryFragment = inflater.inflate(R.layout.delivery_fragment_layout, container, false);
 
         radioGroup = (RadioGroup) deliveryFragment.findViewById(R.id.radio_group_id);
+        organizationRadioGroup = (RadioGroup) deliveryFragment.findViewById(R.id.organization_radio_group_id);
+        organizationLayout = (RelativeLayout) deliveryFragment.findViewById(R.id.organization_fields_id);
+        deliveryRadioLayout = (RelativeLayout) deliveryFragment.findViewById(R.id.delivery_organization_fields_id);
+        deliveryRadioGroup = (RadioGroup) deliveryFragment.findViewById(R.id.delivery_radio_group_id);
+
+
         newAddressLayout = (LinearLayout) deliveryFragment.findViewById(R.id.new_address_fields_id);
         scrollView = (ScrollView) deliveryFragment.findViewById(R.id.delivery_scroll_view_id);
-
 
 
         spinCity = (Spinner) deliveryFragment.findViewById(R.id.spinCity);//fetch the spinner from layout file
@@ -130,13 +142,39 @@ public class DeliveryPlaceFragment extends Fragment {
 //                        scrollView.addView(newAddressLayout);
 
                         scrollView.arrowScroll(View.FOCUS_DOWN);
-
-
                         break;
 
                 }
             }
         });
+
+        organizationRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.yes_btn_id:
+                        organizationLayout.setVisibility(View.VISIBLE);
+                        break;
+                    case R.id.no_btn_id:
+                        organizationLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        deliveryRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.yes_btn_delivery_id:
+                        deliveryRadioLayout.setVisibility(View.VISIBLE);
+                        break;
+                    case R.id.no_btn_delivery_id:
+                        deliveryRadioLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
     }
+
 
 }

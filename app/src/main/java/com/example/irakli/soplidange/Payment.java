@@ -3,8 +3,11 @@ package com.example.irakli.soplidange;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ScrollingView;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -39,6 +42,8 @@ public class Payment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+        initToolbar();
+
         guestFieldsFragment = new GuestFieldsFragment();
         deliveryPlaceFragment = new DeliveryPlaceFragment();
         deliveryTermsFragment = new DeliveryTermsFragment();
@@ -64,6 +69,26 @@ public class Payment extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         counter--;
+    }
+
+    private void initToolbar(){
+        Toolbar paymentToolbar = (Toolbar) findViewById(R.id.toolbar_payment_id);
+        setSupportActionBar(paymentToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void changeFragment() {

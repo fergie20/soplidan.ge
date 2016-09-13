@@ -1,61 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin">
 
     <TextView
         android:id="@+id/head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="გადახდის მეთოდები"
-        android:paddingBottom="32dp"
         android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="15sp"/>
+        android:paddingBottom="32dp"
+        android:text="გადახდის მეთოდები"
+        android:textColor="#fff"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:text="თანხის გადახდა"
+        android:textColor="#01577e"
+        android:textSize="15sp" />
 
     <RadioGroup
-        android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Visa/MasterCard"/>
+            android:text="Visa/MasterCard" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ბარათით გადახდა ადგილზე"/>
+            android:text="ბარათით გადახდა ადგილზე" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="საბანკო გადარიცხვა მხოლოდ იურიდიული პირებისთვის"/>
+            android:text="საბანკო გადარიცხვა მხოლოდ იურიდიული პირებისთვის" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ნაღდი ანგარიშ სწორება ადგილზე"/>
+            android:text="ნაღდი ანგარიშ სწორება ადგილზე" />
     </RadioGroup>
 
 
     <android.support.design.widget.TextInputLayout
-        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="32dp">
 
         <EditText
-            android:id="@+id/edtInput"
+            android:id="@+id/editInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="შეტყობინება"
+            android:hint="შეტყობინების დატოვება"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLength="2000"
             android:maxLines="4" />
 
     </android.support.design.widget.TextInputLayout>
+
+    <RadioButton
+        android:id="@+id/service_radio_btn_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="მონიშნეთ თქვენ ეთანხმებით მომსახურების პირობებს"/>
+
+    <TextView
+        android:id="@+id/service_terms_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorAccent"
+        android:text="მომსახურების პირობები"/>
 
 </LinearLayout>
