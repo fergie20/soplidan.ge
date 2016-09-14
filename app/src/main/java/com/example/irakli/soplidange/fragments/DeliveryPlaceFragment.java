@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.irakli.soplidange.R;
 
@@ -36,6 +38,7 @@ public class DeliveryPlaceFragment extends Fragment {
     Spinner invoiceSpinCity;
     Spinner invoiceSpinDistrict;
     ScrollView scrollView;
+    EditText invoiceGuestField;
 
     @Nullable
     @Override
@@ -47,6 +50,7 @@ public class DeliveryPlaceFragment extends Fragment {
         organizationLayout = (RelativeLayout) deliveryFragment.findViewById(R.id.organization_fields_id);
         deliveryRadioLayout = (RelativeLayout) deliveryFragment.findViewById(R.id.delivery_organization_fields_id);
         deliveryRadioGroup = (RadioGroup) deliveryFragment.findViewById(R.id.delivery_radio_group_id);
+        invoiceGuestField = (EditText) deliveryFragment.findViewById(R.id.invoice_guest_field_name);
 
 
         newAddressLayout = (LinearLayout) deliveryFragment.findViewById(R.id.new_address_fields_id);
@@ -141,7 +145,7 @@ public class DeliveryPlaceFragment extends Fragment {
                         newAddressLayout.setVisibility(View.VISIBLE);
 //                        scrollView.addView(newAddressLayout);
 
-                        scrollView.arrowScroll(View.FOCUS_DOWN);
+                        invoiceGuestField.requestFocus();
                         break;
 
                 }
@@ -175,6 +179,5 @@ public class DeliveryPlaceFragment extends Fragment {
         });
 
     }
-
 
 }

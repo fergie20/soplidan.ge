@@ -70,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:contentScrim="#ffea00"
+                app:contentScrim="#00e676"
                 android:textAlignment="center"
                 app:expandedTitleTextAppearance="@style/CollapsedAppBarTopic"
                 app:expandedTitleGravity="bottom|center_horizontal"
@@ -83,10 +83,9 @@
                     android:layout_width="match_parent"
 
                     android:layout_height="wrap_content"
-                    android:src="@drawable/main"
+                    android:src="@drawable/rsz_logo"
                     android:scaleType="centerCrop"
-
-
+                    android:layout_marginTop="56dp"
                     android:fitsSystemWindows="true"
                     app:layout_collapseMode="parallax"/>
 
@@ -95,8 +94,10 @@
                 <android.support.v7.widget.Toolbar
 
                     android:id="@+id/toolbar_id"
+                    android:background="@color/colorPrimary"
 
                     android:layout_width="match_parent"
+                    app:titleTextColor="#fff"
 
                     android:layout_height="?attr/actionBarSize"
 
@@ -149,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/shopping_bag"
                 app:elevation="0dp"
-                app:backgroundTint="#ffea00"
+                app:backgroundTint="@color/colorPrimary"
                 />
 
             <TextView

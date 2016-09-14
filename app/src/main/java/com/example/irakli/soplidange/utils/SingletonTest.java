@@ -50,9 +50,13 @@ public class SingletonTest {
     private HashMap<Integer, ProductModel> deepCopy(HashMap<Integer, ProductModel> original){
         HashMap<Integer, ProductModel> copy = new HashMap<>();
 
-        for(Map.Entry<Integer, ProductModel> entry : original.entrySet()){
-            copy.put(entry.getKey(), entry.getValue());
+        if(original !=null){
+            for(Map.Entry<Integer, ProductModel> entry : original.entrySet()){
+                copy.put(entry.getKey(), entry.getValue());
+            }
         }
+
+
 
         return copy;
     }

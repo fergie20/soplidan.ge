@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.irakli.soplidange.ExampleData.ExampleData;
+import com.example.irakli.soplidange.ExampleData.ProductData;
 import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.models.CategoryModel;
@@ -45,7 +47,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.categoryNameView.setText( categoriesList.get(position).getCategory());
+        holder.categoryNameView.setText(ExampleData.categories[position]);
 
 //        Picasso.with(context)
 //                .load("http://i.imgur.com/DvpvklR.png")

@@ -4,7 +4,7 @@
     android:id="@+id/toolbar_id"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/colorPrimary"
+    android:background="#00e676"
     app:layout_collapseMode="pin"
     app:titleTextColor="#fff"
     app:theme="@style/ToolbarColoredBackArrow">

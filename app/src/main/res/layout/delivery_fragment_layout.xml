@@ -24,8 +24,6 @@
         android:id="@+id/delivery_scroll_view_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingEnd="15dp"
-        android:paddingRight="15dp"
         android:scrollbars="none">
 
         <LinearLayout
@@ -149,7 +147,8 @@
                             android:inputType="textPostalAddress"
                             android:paddingBottom="10dp"
                             android:paddingTop="10dp"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            />
 
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>

@@ -27,8 +27,6 @@
         android:id="@+id/scroll_view_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingEnd="15dp"
-        android:paddingRight="15dp"
         android:scrollbars="none">
 
         <LinearLayout

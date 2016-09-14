@@ -13,6 +13,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -39,6 +40,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.adapters.ProductsAdapter;
 import com.example.irakli.soplidange.dialog.ProductDetailDialog;
 import com.example.irakli.soplidange.models.ProductModel;
@@ -128,7 +130,7 @@ public class ProductsActivity extends AppCompatActivity {
         if (bundle != null) {
             category_id = bundle.getInt("category_id");
             category = bundle.getString("category");
-            actionBar.setTitle(category);
+
 
 
 
@@ -141,6 +143,7 @@ public class ProductsActivity extends AppCompatActivity {
             final Typeface tf = Typeface.createFromAsset(this.getAssets(), "BPG_Anna.ttf");
             collapsingToolbarLayout.setCollapsedTitleTypeface(tf);
             collapsingToolbarLayout.setExpandedTitleTypeface(tf);
+            collapsingToolbarLayout.setExpandedTitleMargin(40,50,40,50);
 
 
 
@@ -157,6 +160,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sunflowerToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sunflowerToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_sunflower);
+                    actionBar.setTitle(ExampleData.categories[0]);
 
                     break;
                 case 33:
@@ -164,6 +168,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.fokiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.fokiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_fokismonasteri);
+                    actionBar.setTitle(ExampleData.categories[1]);
 
                     break;
                 case 32:
@@ -171,6 +176,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.bioToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bioToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_biobostneuli);
+                    actionBar.setTitle(ExampleData.categories[2]);
 
                     break;
                 case 30:
@@ -178,6 +184,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.puriToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.puriToolbar)));
                     productCategoryImage.setImageResource(R.drawable.pur);
+                    actionBar.setTitle(ExampleData.categories[3]);
 
                     break;
                 case 29:
@@ -185,25 +192,29 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.saxlebiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.saxlebiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_mwsaxli);
-
+                    actionBar.setTitle(ExampleData.categories[4]);
                     break;
                 case 28:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.chaiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.chaiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.chaiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_chai);
+                    actionBar.setTitle(ExampleData.categories[5]);
 
                     break;
                 case 27:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.kalataToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.kalataToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.kalataToolbar)));
+                    productCategoryImage.setImageResource(R.drawable.cov_kalata);
+                    actionBar.setTitle(ExampleData.categories[6]);
                     break;
                 case 26:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunelebiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sunelebiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sunelebiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_saweblebi);
+                    actionBar.setTitle(ExampleData.categories[7]);
 
                     break;
                 case 24:
@@ -211,6 +222,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sxvadasxvaToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sxvadasxvaToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_sxvadasxva);
+                    actionBar.setTitle(ExampleData.categories[8]);
 
                     break;
                 case 23:
@@ -218,6 +230,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.rdzeToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.rdzeToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_kvercxi);
+                    actionBar.setTitle(ExampleData.categories[9]);
 
                     break;
                 case 21:
@@ -225,6 +238,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xiliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xiliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_xili);
+                    actionBar.setTitle(ExampleData.categories[10]);
 
                     break;
                 case 20:
@@ -232,6 +246,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.mwniliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.mwniliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cow_mwnili);
+                    actionBar.setTitle(ExampleData.categories[11]);
 
                     break;
                 case 12:
@@ -239,6 +254,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.bostneuliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bostneuliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_bostneuli);
+                    actionBar.setTitle(ExampleData.categories[12]);
 
                     break;
                 case 11:
@@ -246,6 +262,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sasmeliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sasmeliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_sasmeli);
+                    actionBar.setTitle(ExampleData.categories[13]);
 
                     break;
                 case 9:
@@ -253,6 +270,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.zetiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.zetiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_dzmari);
+                    actionBar.setTitle(ExampleData.categories[14]);
 
                     break;
                 case 6:
@@ -260,6 +278,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.nugbariToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.nugbariToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_nugbari);
+                    actionBar.setTitle(ExampleData.categories[15]);
 
                     break;
                 case 5:
@@ -267,6 +286,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xorciToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xorciToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_xorceuli);
+                    actionBar.setTitle(ExampleData.categories[16]);
 
                     break;
 
@@ -349,6 +369,13 @@ public class ProductsActivity extends AppCompatActivity {
 
         if (category_id == -1) {
             getJSONInfo(json_url + query);
+
+            collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.colorPrimary));
+            fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.colorPrimary)));
+            productCategoryImage.setImageResource(R.drawable.imagecat);
+            actionBar.setTitle("ძებნა: " + "\""+query+"\""+"-ზე");
+
+
         } else {
             getJSONInfo(json_url);
         }
