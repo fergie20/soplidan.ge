@@ -2,6 +2,7 @@ package com.example.irakli.soplidange.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.Spanned;
@@ -69,15 +70,15 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
         if(productModels.get(pos).getList_discount()==0) {
             holder.productImageView.setTagEnable(false);
-            holder.productPriceView.setText(String.valueOf(product.getList_price()) + " GEL");
+            holder.productPriceView.setText(String.valueOf(product.getList_price()) + " ¢");
 
         } else {
             holder.productImageView.setTagEnable(true);
             holder.productImageView.setTagBackgroundColor(Color.parseColor("#9eff0900"));
-            holder.productImageView.setTagText("sale " + productModels.get(pos).getList_discount_prc() + "%");
-            holder.productPriceView.setText(String.valueOf(product.getBase_price()) + " GEL");
+            holder.productImageView.setTagText("sale " + productModels.get(pos).getList_discount_prc() + "¢");
+            holder.productPriceView.setText(String.valueOf(product.getBase_price()) + " ¢");
 
-            holder.productPriceView.setText(productModels.get(pos).getBase_price() + " GEL  " + productModels.get(pos).getList_price() + " GEL", TextView.BufferType.SPANNABLE);
+            holder.productPriceView.setText(productModels.get(pos).getBase_price() + " ¢  " + productModels.get(pos).getList_price() + " ¢", TextView.BufferType.SPANNABLE);
             Spannable spannable = (Spannable) holder.productPriceView.getText();
 
             spannable.setSpan(STRIKE_THROUGH_SPAN, spannable.length() / 2 + 1, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -134,6 +135,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
             productImageView = (SimpleTagImageView) itemView.findViewById(R.id.image_id);
             productNameView = (TextView) itemView.findViewById(R.id.product_name_id);
             productPriceView = (TextView) itemView.findViewById(R.id.price_id);
+            productPriceView.setTypeface(typeface());
+
             recyclerView = (RecyclerView) itemView.findViewById(R.id.recycler_grid_view_id);
             plusMinusView = (RelativeLayout) itemView.findViewById(R.id.invisible_plus_minus_id);
             outOfStockView = (TextView) itemView.findViewById(R.id.out_of_stock_id);
@@ -227,5 +230,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     }
     public interface MyCountListener {
         void countClick();
+    }
+
+    public Typeface typeface(){
+
+        Typeface custom_font = Typeface.createFromAsset(context.getAssets(),  "BPG_GEL_Excelsior_Caps.ttf");
+
+        return custom_font;
     }
 }

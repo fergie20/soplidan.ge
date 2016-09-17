@@ -2,6 +2,8 @@ package com.example.irakli.soplidange.dialog;
 
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spannable;
@@ -31,6 +33,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.adapters.CategoriesAdapter;
+import com.example.irakli.soplidange.custom.CTextView;
 import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
 import com.example.irakli.soplidange.utils.SingletonTest;
@@ -55,7 +58,7 @@ public class ProductDetailDialog extends DialogFragment {
     ImageView minusTextView;
     ImageView plusTextView;
     TextView quantityView;
-    TextView sumView;
+    CTextView sumView;
     String checkQuantity;
     TextView currentPrice;
     View rootView;
@@ -68,6 +71,7 @@ public class ProductDetailDialog extends DialogFragment {
     ScrollView scrollView;
     String url = "http://soplidan.ge/api/products/";
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.productdetaildialog, container, false);
@@ -76,6 +80,7 @@ public class ProductDetailDialog extends DialogFragment {
         StrikethroughSpan STRIKE_THROUGH_SPAN = new StrikethroughSpan();
         currentPrice = (TextView) rootView.findViewById(R.id.dialog_current_price_id);
         dismissDialog = (ImageView) rootView.findViewById(R.id.dialog_dismiss_id);
+
 
         dismissDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +114,7 @@ public class ProductDetailDialog extends DialogFragment {
                     .fit()
                     .into(image);
             image.setTagEnable(false);
+            currentPrice.setTypeface(typeface());
             currentPrice.setText( model.getList_price() + " ¢");
         }
         outOfStockView = (TextView) rootView.findViewById(R.id.dialog_out_of_stock_id);
@@ -176,7 +182,7 @@ public class ProductDetailDialog extends DialogFragment {
     private void calculateSum() {
         minusTextView = (ImageView) rootView.findViewById(R.id.dialog_minus_id);
         plusTextView = (ImageView) rootView.findViewById(R.id.dialog_plus_id);
-        sumView = (TextView) rootView.findViewById(R.id.dialog_price_id);
+        sumView = (CTextView) rootView.findViewById(R.id.dialog_price_id);
         quantityView = (TextView) rootView.findViewById(R.id.dialog_quantity_id);
         if (SingletonTest.getInstance().getProduct(model.getId()) != null) {
             quantityView.setText(SingletonTest.getInstance().getProduct(model.getId()).getQuontity() + "");
@@ -196,6 +202,7 @@ public class ProductDetailDialog extends DialogFragment {
         NumberFormat nf = NumberFormat.getInstance(); // get instance
         nf.setMaximumFractionDigits(3); // set decimal places
         String s = nf.format(sum);
+        sumView.setTypeface(typeface());
 
         sumView.setText(s+" ¢");
 
@@ -346,6 +353,13 @@ public class ProductDetailDialog extends DialogFragment {
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         progressBar.setVisibility(View.VISIBLE);
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public Typeface typeface(){
+
+        Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(),  "BPG_GEL_Excelsior_Caps.ttf");
+
+       return custom_font;
     }
 
 }

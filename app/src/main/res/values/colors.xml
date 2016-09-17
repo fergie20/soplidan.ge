@@ -46,7 +46,7 @@
     <color name="white">#FFFFFF</color>
     <color name="checkout">#00c853</color>
     <color name="payment">#0389d1</color>
-
+    <color name="searchcolor">#4b4b4b</color>
 
 
 </resources>

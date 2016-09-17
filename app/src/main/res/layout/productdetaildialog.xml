@@ -72,14 +72,14 @@
 
     <com.example.irakli.soplidange.custom.CTextView
         android:id="@+id/dialog_price_id"
-        font_name="BPG_GEL_EXCELSIOR"
+        font_name="BPG_EXCELSIOR_CAPS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
         android:gravity="end"
         android:layout_marginEnd="38dp"
-        android:text="15.7 ¢"
+        android:text="15.7 წ"
         android:textColor="#9ccc65"
         android:textSize="18dp" />
 

@@ -1,6 +1,7 @@
 package com.example.irakli.soplidange.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +54,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         }
 
         holder.setMyModel(cartMap.get(position));
-        holder.productPriceView.setText( String.valueOf(price)+" GEL");
+        holder.productPriceView.setText( String.valueOf(price)+" ¢");
         holder.productNameView.setText(cartMap.get(position).getName());
         holder.quantityView.setText(cartMap.get(position).getQuontity() + "");
     }
@@ -87,6 +88,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
             productImageView = (ImageView) itemView.findViewById(R.id.checkout_image_id);
             productNameView = (TextView) itemView.findViewById(R.id.checkout_name_id);
             productPriceView = (TextView) itemView.findViewById(R.id.product_price_id);
+            productPriceView.setTypeface(typeface());
             quantityView = (TextView) itemView.findViewById(R.id.quantity_id);
             plusView = (ImageView) itemView.findViewById(R.id.plus_id);
             minusView = (ImageView) itemView.findViewById(R.id.minus_id);
@@ -197,5 +199,12 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
     }
     public interface MyClickListener {
         void onClick(double price);
+    }
+
+    public Typeface typeface(){
+
+        Typeface custom_font = Typeface.createFromAsset(context.getAssets(),  "BPG_GEL_Excelsior_Caps.ttf");
+
+        return custom_font;
     }
 }

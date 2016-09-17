@@ -57,7 +57,7 @@ public class CTextView extends TextView {
             setTypeface(getFont(fontTypeNumber));
     }
 
-    private Typeface BPG_EXCELSIOR_CAPS, BPG_EXCELSIOR;
+    private Typeface BPG_EXCELSIOR_CAPS, BPG_EXCELSIOR, LARI;
 
 
     private Typeface getFont(int fontTypeNumber){
@@ -67,10 +67,13 @@ public class CTextView extends TextView {
                     BPG_EXCELSIOR_CAPS = Typeface.createFromAsset(getContext().getAssets(), "BPG_GEL_Excelsior_Caps.ttf");
                     return BPG_EXCELSIOR_CAPS;
                 case 2:
-                    BPG_EXCELSIOR = Typeface.createFromAsset(getContext().getAssets(), "BPG_GEL_Excelsior.ttf");
+                    BPG_EXCELSIOR = Typeface.createFromAsset(getContext().getAssets(), "BPG_Excelsior_Light.ttf");
                     return BPG_EXCELSIOR;
+                case 3:
+                    LARI = Typeface.createFromAsset(getContext().getAssets(), "lari.otf");
+                    return LARI;
                 default:
-                    return Typeface.createFromAsset(getContext().getAssets(), "BPG_GEL_Excelsior.ttf");
+                    return Typeface.createFromAsset(getContext().getAssets(), "BPG_Anna.ttf");
             }
         }catch (Exception e){
             e.printStackTrace();

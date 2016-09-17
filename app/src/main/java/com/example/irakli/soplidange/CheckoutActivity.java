@@ -2,6 +2,7 @@ package com.example.irakli.soplidange;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -76,11 +77,7 @@ public class CheckoutActivity extends AppCompatActivity {
         }
 
         find();
-
         chek = getIntent().getIntExtra("checkboolean", 0);
-
-
-
 
         for (Integer integer : cartMap.keySet()) {
             cartArray.add(cartMap.get(integer));
@@ -112,14 +109,14 @@ public class CheckoutActivity extends AppCompatActivity {
                 NumberFormat nf = NumberFormat.getInstance(); // get instance
                 nf.setMaximumFractionDigits(3); // set decimal places
                 String s = nf.format(totalPrice + price);
-                sumView.setText((s + "GEL"));
+                sumView.setText((s + " ¢"));
                 totalPrice = totalPrice + price;
             }
         });
         NumberFormat nf = NumberFormat.getInstance(); // get instance
         nf.setMaximumFractionDigits(3); // set decimal places
         String s = nf.format(totalPrice);
-        sumView.setText((s + "GEL"));
+        sumView.setText((s + " ¢"));
     }
 
     private double totalPrice;
@@ -188,7 +185,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
                 recyclerView.setAdapter(myAdapter);
                 Toast.makeText(this, "თქვენი კალათა დაცარიელდა", Toast.LENGTH_SHORT).show();
-                sumView.setText(0+"");
+                sumView.setText(0+" ¢");
                 saveShared();
         }
         return (super.onOptionsItemSelected(menuItem));
@@ -200,6 +197,7 @@ public class CheckoutActivity extends AppCompatActivity {
         plusTextView = (ImageView) findViewById(R.id.plus_id);
         quantityView = (TextView) findViewById(R.id.quantity_id);
         sumView = (TextView) findViewById(R.id.sum_id);
+        sumView.setTypeface(typeface());
     }
 
     private void initRecyclerView() {
@@ -222,5 +220,11 @@ public class CheckoutActivity extends AppCompatActivity {
         String json = gson.toJson(cartMap);
         prefsEditor.putString("MyObject", json);
         prefsEditor.apply();
+    }
+    public Typeface typeface(){
+
+        Typeface custom_font = Typeface.createFromAsset(this.getAssets(),  "BPG_GEL_Excelsior_Caps.ttf");
+
+        return custom_font;
     }
 }

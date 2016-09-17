@@ -2,9 +2,10 @@
 <resources>
     <declare-styleable name="CtextView">
         <attr name="font_name" format="enum">
-            <enum name="BPG_GEL_EXCELSIOR" value="1"/>
-            <enum name="BPG_ANNA" value="2"/>
-            <enum name="BPG_EXCELSIOR_LIGHT" value="0"/>
+            <enum name="BPG_EXCELSIOR_CAPS" value="1"/>
+            <enum name="BPG_EXCELSIOR_LIGHT" value="2"/>
+            <enum name="lari" value="3"/>
+            <enum name="BPG_ANNA" value="0"/>
         </attr>
 
 

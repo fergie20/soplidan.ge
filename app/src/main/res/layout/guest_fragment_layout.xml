@@ -60,7 +60,7 @@
                         android:padding="0dp">
 
                         <EditText
-                            android:id="@+id/guest_field_name"
+                            android:id="@+id/guest_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="სახელი *"
@@ -76,7 +76,7 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/guest_field_last_name"
+                            android:id="@+id/guest_last_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="გვარი *"
@@ -109,7 +109,7 @@
                     android:requiresFadingEdge="horizontal">
 
                     <EditText
-                        android:id="@+id/guest_field_mail"
+                        android:id="@+id/guest_mail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Email *"
@@ -140,7 +140,7 @@
                     android:layout_marginLeft="8dp">
 
                     <EditText
-                        android:id="@+id/guest_field_phone_number"
+                        android:id="@+id/guest_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="მისამართი"
@@ -170,6 +170,7 @@
                     android:layout_marginLeft="8dp">
 
                     <EditText
+                        android:id="@+id/guest_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="ტელეფონი *"
@@ -199,7 +200,7 @@
                     android:layout_marginLeft="8dp">
 
                     <EditText
-                        android:id="@+id/guest_field_id_number"
+                        android:id="@+id/guest_card_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="პირადი ნომერი *"
@@ -213,13 +214,119 @@
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
-            <include layout="@layout/organization_radio_group_layout"/>
-
-            <LinearLayout
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="18dp"
+                android:orientation="vertical">
+
+                <include layout="@layout/divider" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="9dp"
+                    android:textColor="#595959"
+                    android:text="ხართ ორგანიზაცია?"
+                    android:textStyle="italic|bold" />
+
+                <RadioGroup
+                    android:id="@+id/organization_radio_group_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/yes_btn_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:padding="5dp"
+                        android:text="კი" />
+
+                    <RadioButton
+                        android:id="@+id/no_btn_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="არა"
+                        />
+
+                </RadioGroup>
+
+                <RelativeLayout
+                    android:id="@+id/organization_fields_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/organization_name_id"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentTop="true"
+                        app:srcCompat="@drawable/organizaciisdasaxeleba"
+                        tools:ignore="MissingPrefix" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/delivery_field_organization_name_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/organization_name_id">
+
+                        <EditText
+                            android:id="@+id/guest_organisation_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="ორგანიზაციის დასახელება"
+                            android:inputType="text"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:textSize="14sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/code_id"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="10dp"
+                        app:srcCompat="@drawable/saidentipikaciokodi"
+                        tools:ignore="MissingPrefix" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/delivery_field_code_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/delivery_field_organization_name_id"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/code_id">
+
+                        <EditText
+                            android:id="@+id/guest_organisation_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="საიდენტიფიკაციო კოდი"
+                            android:inputType="number"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:textSize="14sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </RelativeLayout>
 
 
             </LinearLayout>

@@ -27,6 +27,7 @@ import com.example.irakli.soplidange.fragments.DeliveryTermsFragment;
 import com.example.irakli.soplidange.fragments.GuestFieldsFragment;
 import com.example.irakli.soplidange.fragments.OrderedProductsFragment;
 import com.example.irakli.soplidange.fragments.PaymentMethodsFragment;
+import com.example.irakli.soplidange.utils.CheckoutSingleton;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,7 @@ public class Payment extends AppCompatActivity {
     DeliveryTermsFragment deliveryTermsFragment;
     PaymentMethodsFragment paymentMethodsFragment;
     OrderedProductsFragment orderedProductsFragment;
+    boolean checkButton = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class Payment extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(this.getResources().getColor(R.color.payment));
         }
+
+
 
         guestFieldsFragment = new GuestFieldsFragment();
         deliveryPlaceFragment = new DeliveryPlaceFragment();
@@ -110,23 +114,87 @@ public class Payment extends AppCompatActivity {
         fragmentArrayList.add(paymentMethodsFragment);
         fragmentArrayList.add(orderedProductsFragment);
 
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (counter == 4) {
-                    return;
+
+
+
+
+            nextBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(counter == 0) {
+                        guestFieldsFragment.saveGuestInfo();
+                      if(CheckoutSingleton.getInstance().getValue("guest_name").length() > 0 &&
+                                CheckoutSingleton.getInstance().getValue("guest_last_name").length() >0 &&
+                                CheckoutSingleton.getInstance().getValue("guest_email").length() >0 &&
+                                CheckoutSingleton.getInstance().getValue("guest_phone").length() >0 &&
+                                CheckoutSingleton.getInstance().getValue("guest_card_id").length() >0){
+                          getSupportFragmentManager()
+                                  .beginTransaction()
+                                  .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+                                  .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                                  .addToBackStack(null)
+                                  .commit();
+
+                          counter++;
+                      }else{
+                          guestFieldsFragment.setError();}
+                      }
+                    if(counter == 2) {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+                                .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                                .addToBackStack(null)
+                                .commit();
+
+                           if( CheckoutSingleton.getInstance().getValue("delivery_name").length() >0 &&
+                            CheckoutSingleton.getInstance().getValue("delivery_last_name").length() >0 &&
+                            CheckoutSingleton.getInstance().getValue("delivery_address").length() >0 &&
+                            CheckoutSingleton.getInstance().getValue("delivery_phone").length() >0 &&
+                            CheckoutSingleton.getInstance().getValue("delivery_card_id").length() >0 ){
+                               getSupportFragmentManager()
+                                       .beginTransaction()
+                                       .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+                                       .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                                       .addToBackStack(null)
+                                       .commit();
+                           }else{
+                               deliveryPlaceFragment.setError();
+                           }
+
+                        }
+
+
+                    if (counter == 4) {
+                        return;
+                      }
+
+
+//
+//                    if (CheckoutSingleton.getInstance().getValue("guest_name").length() > 0 &&
+//                            CheckoutSingleton.getInstance().getValue("guest_last_name").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("guest_email").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("guest_phone").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("guest_card_id").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("delivery_name").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("delivery_last_name").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("delivery_address").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("delivery_phone").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("delivery_card_id").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("invoice_name").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("invoice_last_name").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("invoice_address").length() >0 &&
+//                            CheckoutSingleton.getInstance().getValue("invoice_phone").length() >0)
+//
+//                    {
+
+
+
+
+
                 }
+            });
 
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
-                        .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                        .addToBackStack(null)
-                        .commit();
 
-                counter++;
-            }
-        });
+        }
     }
-
-}

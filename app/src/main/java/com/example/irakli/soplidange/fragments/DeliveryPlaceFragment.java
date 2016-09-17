@@ -2,6 +2,7 @@ package com.example.irakli.soplidange.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.irakli.soplidange.R;
+import com.example.irakli.soplidange.utils.CheckoutSingleton;
 
 import static com.example.irakli.soplidange.R.id.organization_radio_group_id;
 
@@ -38,7 +40,26 @@ public class DeliveryPlaceFragment extends Fragment {
     Spinner invoiceSpinCity;
     Spinner invoiceSpinDistrict;
     ScrollView scrollView;
-    EditText invoiceGuestField;
+
+
+    EditText delivery_name;
+    EditText delivery_last_name;
+    EditText delivery_phone;
+    EditText delivery_address;
+    EditText delivery_email;
+    EditText delivery_card_id;
+    EditText delivery_organisation_name;
+    EditText delivery_organisation_code;
+    EditText invoice_name;
+    EditText invoice_last_name;
+    EditText invoice_phone;
+    EditText invoice_address;
+    EditText invoice_organisation_name;
+    EditText invoice_organisation_code;
+
+
+
+
 
     @Nullable
     @Override
@@ -50,7 +71,56 @@ public class DeliveryPlaceFragment extends Fragment {
         organizationLayout = (RelativeLayout) deliveryFragment.findViewById(R.id.organization_fields_id);
         deliveryRadioLayout = (RelativeLayout) deliveryFragment.findViewById(R.id.delivery_organization_fields_id);
         deliveryRadioGroup = (RadioGroup) deliveryFragment.findViewById(R.id.delivery_radio_group_id);
-        invoiceGuestField = (EditText) deliveryFragment.findViewById(R.id.invoice_guest_field_name);
+
+
+
+        delivery_name = (EditText) deliveryFragment.findViewById(R.id.delivery_name);
+        delivery_name.setText(CheckoutSingleton.getInstance().getValue("guest_name"));
+
+
+        delivery_last_name = (EditText) deliveryFragment.findViewById(R.id.delivery_last_name);
+        delivery_last_name.setText(CheckoutSingleton.getInstance().getValue("guest_last_name"));
+
+        delivery_phone = (EditText) deliveryFragment.findViewById(R.id.delivery_phone);
+        delivery_phone.setText(CheckoutSingleton.getInstance().getValue("guest_phone"));
+
+        delivery_address = (EditText) deliveryFragment.findViewById(R.id.delivery_address);
+        delivery_address.setText(CheckoutSingleton.getInstance().getValue("guest_address"));
+
+        delivery_email = (EditText) deliveryFragment.findViewById(R.id.delivery_email);
+        delivery_email.setText(CheckoutSingleton.getInstance().getValue("guest_email"));
+
+        delivery_card_id = (EditText) deliveryFragment.findViewById(R.id.delivery_card_id);
+        delivery_card_id.setText(CheckoutSingleton.getInstance().getValue("guest_card_id"));
+
+        delivery_organisation_name = (EditText) deliveryFragment.findViewById(R.id.delivery_organisation_name);
+        delivery_organisation_name.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_name"));
+
+        delivery_organisation_code = (EditText) deliveryFragment.findViewById(R.id.delivery_organisation_code);
+        delivery_organisation_code.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_code"));
+
+
+        invoice_name = (EditText) deliveryFragment.findViewById(R.id.invoice_name);
+        invoice_name.setText(CheckoutSingleton.getInstance().getValue("guest_name"));
+
+        invoice_last_name = (EditText) deliveryFragment.findViewById(R.id.invoice_last_name);
+        invoice_last_name.setText(CheckoutSingleton.getInstance().getValue("guest_last_name"));
+
+        invoice_phone = (EditText) deliveryFragment.findViewById(R.id.invoice_phone);
+        invoice_phone.setText(CheckoutSingleton.getInstance().getValue("guest_phone"));
+
+        invoice_address = (EditText) deliveryFragment.findViewById(R.id.invoice_address);
+        invoice_address.setText(CheckoutSingleton.getInstance().getValue("guest_address"));
+
+
+        invoice_organisation_name = (EditText) deliveryFragment.findViewById(R.id.invoice_organisation_name);
+        invoice_organisation_name.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_name"));
+
+        invoice_organisation_code = (EditText) deliveryFragment.findViewById(R.id.invoice_organisation_code);
+        invoice_organisation_code.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_code"));
+
+
+
 
 
         newAddressLayout = (LinearLayout) deliveryFragment.findViewById(R.id.new_address_fields_id);
@@ -133,6 +203,31 @@ public class DeliveryPlaceFragment extends Fragment {
         return deliveryFragment;
     }
 
+
+    public void saveDeliveriInfo() {
+
+
+        CheckoutSingleton.getInstance().addNewValue("delivery_name", delivery_name.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("delivery_last_name", delivery_last_name.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("delivery_email", delivery_email.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("delivery_address", delivery_address.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("delivery_phone", delivery_phone.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("delivery_card_id", delivery_card_id.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("delivery_organisation_name", delivery_organisation_name.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("delivery_organisation_code", delivery_organisation_code.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("spinCity", spinCity.getSelectedItem().toString());
+        CheckoutSingleton.getInstance().addNewValue("spinDistrict", spinDistrict.getSelectedItem().toString());
+
+        CheckoutSingleton.getInstance().addNewValue("invoice_name", invoice_name.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("invoice_last_name", invoice_last_name.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("invoice_address", invoice_address.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("invoice_phone", invoice_phone.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("invoice_organisation_name", invoice_organisation_name.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("invoice_organisation_code", invoice_organisation_code.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("invoiceSpinCity", invoiceSpinCity.getSelectedItem().toString());
+        CheckoutSingleton.getInstance().addNewValue("invoiceSpinDistrict", invoiceSpinDistrict.getSelectedItem().toString());
+    }
+
     private void radioBtnChecked() {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -145,7 +240,7 @@ public class DeliveryPlaceFragment extends Fragment {
                         newAddressLayout.setVisibility(View.VISIBLE);
 //                        scrollView.addView(newAddressLayout);
 
-                        invoiceGuestField.requestFocus();
+                        invoice_name.requestFocus();
                         break;
 
                 }
@@ -177,6 +272,51 @@ public class DeliveryPlaceFragment extends Fragment {
                 }
             }
         });
+
+    }
+    public void setError(){
+
+        if(delivery_name.getText().toString().length() == 0 ){
+            delivery_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+            delivery_name.requestFocus();
+            return;
+        }
+        if(delivery_last_name.getText().toString().length() == 0 ){
+            delivery_last_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+
+            delivery_last_name.requestFocus();
+            return;
+        }
+        if(delivery_email.getText().toString().length() == 0 ){
+            delivery_email.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+
+            delivery_email.requestFocus();
+            return;
+        }
+        if(delivery_phone.getText().toString().length() == 0 ){
+            delivery_phone.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+
+            delivery_phone.requestFocus();
+            return;
+        }
+        if(delivery_address.getText().toString().length() == 0 ){
+            delivery_address.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+
+            delivery_address.requestFocus();
+            return;
+        }
+        if(delivery_card_id.getText().toString().length() == 0 ){
+            delivery_card_id.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+
+            delivery_card_id.requestFocus();
+            return;
+        }
+
+//        if(guest_name.getText().toString().length() == 0 || guest_last_name.getText().toString().length() == 0 || guest_mail.getText().toString().length() == 0 || guest_phone.getText().toString().length() == 0 || guest_card_id.getText().toString().length() == 0 ){
+//            guest_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+//            guest_name.requestFocus();
+//        }
+
 
     }
 

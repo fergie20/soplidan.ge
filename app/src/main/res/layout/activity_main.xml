@@ -146,9 +146,13 @@
 
             <android.support.design.widget.FloatingActionButton xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/fab"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/shopping_bag"
+
+                app:srcCompat="@drawable/xxx"
+                tools:ignore="MissingPrefix"
+                android:scaleType="center"
                 app:elevation="0dp"
                 app:backgroundTint="@color/colorPrimary"
                 />
@@ -158,7 +162,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="-18dp"
+                android:layout_marginRight="5dp"
                 android:elevation="7dp"
                 android:text="5"
                 android:textColor="@android:color/white" />

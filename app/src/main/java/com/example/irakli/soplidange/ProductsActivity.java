@@ -39,6 +39,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.adapters.ProductsAdapter;
@@ -122,7 +123,7 @@ public class ProductsActivity extends AppCompatActivity {
 //        mSwipeRefreshLayout.setOnRefreshListener(this);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.product_collapsingToolbar_id);
-        collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+        collapsingToolbarLayout.setExpandedTitleColor(this.getResources().getColor(R.color.searchcolor));
         productCategoryImage = (ImageView) findViewById(R.id.product_category_image);
 
 
@@ -372,7 +373,7 @@ public class ProductsActivity extends AppCompatActivity {
 
             collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.colorPrimary));
             fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.colorPrimary)));
-            productCategoryImage.setImageResource(R.drawable.imagecat);
+            productCategoryImage.setImageResource(R.drawable.foodcover);
             actionBar.setTitle("ძებნა: " + "\""+query+"\""+"-ზე");
 
 
@@ -453,14 +454,15 @@ public class ProductsActivity extends AppCompatActivity {
     public void getJSONInfo(String url) {
 
 
-        JsonObjectRequest jsonRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        StringRequest jsonRequest = new StringRequest
+                (Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(String response) {
                         JSONArray jsonArray = null;
 
                         try {
-                            jsonArray = response.getJSONArray("products");
+                            JSONObject object = new JSONObject(response);
+                            jsonArray = object.getJSONArray("products");
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject curObj = jsonArray.getJSONObject(i);
@@ -694,19 +696,5 @@ public class ProductsActivity extends AppCompatActivity {
         String json = gson.toJson(cartMap);
         prefsEditor.putString("MyObject", json);
         prefsEditor.apply();
-    }
-    private void makeCollapsingToolbarLayoutLooksGood(CollapsingToolbarLayout collapsingToolbarLayout) {
-        try {
-            final Field field = collapsingToolbarLayout.getClass().getDeclaredField("mCollapsingTextHelper");
-            field.setAccessible(true);
-
-            final Object object = field.get(collapsingToolbarLayout);
-            final Field tpf = object.getClass().getDeclaredField("mTextPaint");
-            tpf.setAccessible(true);
-
-            ((TextPaint) tpf.get(object)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf"));
-            ((TextPaint) tpf.get(object)).setColor(getResources().getColor(R.color.colorAccent));
-        } catch (Exception ignored) {
-        }
     }
 }
