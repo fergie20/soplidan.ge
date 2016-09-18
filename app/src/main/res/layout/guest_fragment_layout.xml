@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingBottom="32dp"
+        android:paddingBottom="20dp"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="ავტორიზება როგორც სტუმარი"
         android:layout_marginLeft="30dp"
@@ -30,6 +30,7 @@
         android:scrollbars="none">
 
         <LinearLayout
+            android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -65,7 +66,6 @@
                             android:layout_height="wrap_content"
                             android:hint="სახელი *"
                             android:inputType="text"
-                            android:paddingBottom="5dp"
                             android:paddingTop="10dp"
                             android:textSize="14sp" />
 
@@ -82,7 +82,6 @@
                             android:hint="გვარი *"
                             android:inputType="text"
                             android:paddingBottom="10dp"
-                            android:layout_marginBottom="10dp"
                             android:paddingTop="5dp"
                             android:textSize="14sp" />
 
@@ -114,8 +113,6 @@
                         android:layout_height="wrap_content"
                         android:hint="Email *"
                         android:inputType="textEmailAddress"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
                         android:textSize="14sp" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -145,8 +142,6 @@
                         android:layout_height="wrap_content"
                         android:hint="მისამართი"
                         android:inputType="textPostalAddress"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
                         android:textSize="14sp" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -175,8 +170,6 @@
                         android:layout_height="wrap_content"
                         android:hint="ტელეფონი *"
                         android:inputType="phone"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
                         android:textSize="14sp" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -206,8 +199,6 @@
                         android:hint="პირადი ნომერი *"
                         android:inputType="number"
                         android:maxLength="11"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
                         android:textSize="14sp" />
 
 
@@ -291,8 +282,6 @@
                             android:layout_height="wrap_content"
                             android:hint="ორგანიზაციის დასახელება"
                             android:inputType="text"
-                            android:paddingBottom="10dp"
-                            android:paddingTop="10dp"
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
@@ -320,8 +309,6 @@
                             android:layout_height="wrap_content"
                             android:hint="საიდენტიფიკაციო კოდი"
                             android:inputType="number"
-                            android:paddingBottom="10dp"
-                            android:paddingTop="10dp"
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>

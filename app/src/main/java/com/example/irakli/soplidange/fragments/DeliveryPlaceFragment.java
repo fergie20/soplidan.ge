@@ -1,6 +1,7 @@
 package com.example.irakli.soplidange.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.BoolRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
@@ -56,6 +57,7 @@ public class DeliveryPlaceFragment extends Fragment {
     EditText invoice_address;
     EditText invoice_organisation_name;
     EditText invoice_organisation_code;
+    boolean checkVisibility = false;
 
 
 
@@ -203,6 +205,11 @@ public class DeliveryPlaceFragment extends Fragment {
         return deliveryFragment;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        saveDeliveriInfo();
+    }
 
     public void saveDeliveriInfo() {
 
@@ -234,12 +241,12 @@ public class DeliveryPlaceFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_btn_yes:
+                        checkVisibility=false;
                         newAddressLayout.setVisibility(View.GONE);
                         break;
                     case R.id.radio_btn_no:
                         newAddressLayout.setVisibility(View.VISIBLE);
-//                        scrollView.addView(newAddressLayout);
-
+                        checkVisibility=true;
                         invoice_name.requestFocus();
                         break;
 
@@ -311,13 +318,31 @@ public class DeliveryPlaceFragment extends Fragment {
             delivery_card_id.requestFocus();
             return;
         }
-
-//        if(guest_name.getText().toString().length() == 0 || guest_last_name.getText().toString().length() == 0 || guest_mail.getText().toString().length() == 0 || guest_phone.getText().toString().length() == 0 || guest_card_id.getText().toString().length() == 0 ){
-//            guest_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
-//            guest_name.requestFocus();
-//        }
-
-
+    }
+    public void visibleSetError(){
+        if( invoice_name.getText().toString().length() == 0 ){
+            invoice_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+            invoice_name.requestFocus();
+            return;
+        }
+        if( invoice_last_name.getText().toString().length() == 0 ){
+            invoice_last_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+            invoice_last_name.requestFocus();
+            return;
+        }
+        if( invoice_address.getText().toString().length() == 0 ){
+            invoice_address.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+            invoice_address.requestFocus();
+            return;
+        }
+        if( invoice_phone.getText().toString().length() == 0 ){
+            invoice_phone.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+            invoice_phone.requestFocus();
+            return;
+        }
+    }
+    public Boolean setCheckVisibility(){
+        return checkVisibility;
     }
 
 }

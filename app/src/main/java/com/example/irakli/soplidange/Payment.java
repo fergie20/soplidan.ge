@@ -121,8 +121,10 @@ public class Payment extends AppCompatActivity {
             nextBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(counter == 0) {
-                        guestFieldsFragment.saveGuestInfo();
+
+                    switch (counter){
+                        case 0:
+                            guestFieldsFragment.saveGuestInfo();
                       if(CheckoutSingleton.getInstance().getValue("guest_name").length() > 0 &&
                                 CheckoutSingleton.getInstance().getValue("guest_last_name").length() >0 &&
                                 CheckoutSingleton.getInstance().getValue("guest_email").length() >0 &&
@@ -134,64 +136,78 @@ public class Payment extends AppCompatActivity {
                                   .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                                   .addToBackStack(null)
                                   .commit();
-
                           counter++;
                       }else{
                           guestFieldsFragment.setError();}
-                      }
-                    if(counter == 2) {
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
-                                .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                .addToBackStack(null)
-                                .commit();
+                            break;
+                        case 1:
 
-                           if( CheckoutSingleton.getInstance().getValue("delivery_name").length() >0 &&
-                            CheckoutSingleton.getInstance().getValue("delivery_last_name").length() >0 &&
-                            CheckoutSingleton.getInstance().getValue("delivery_address").length() >0 &&
-                            CheckoutSingleton.getInstance().getValue("delivery_phone").length() >0 &&
-                            CheckoutSingleton.getInstance().getValue("delivery_card_id").length() >0 ){
+                            deliveryPlaceFragment.saveDeliveriInfo();
+
+                                 if(CheckoutSingleton.getInstance().getValue("delivery_name").length() >0 &&
+                                    CheckoutSingleton.getInstance().getValue("delivery_last_name").length() >0 &&
+                                    CheckoutSingleton.getInstance().getValue("delivery_address").length() >0 &&
+                                    CheckoutSingleton.getInstance().getValue("delivery_phone").length() >0 &&
+                                    CheckoutSingleton.getInstance().getValue("delivery_card_id").length() >0 ){
+                                     if(deliveryPlaceFragment.setCheckVisibility()==true &&
+                                             CheckoutSingleton.getInstance().getValue("invoice_name").length() >0 &&
+                                             CheckoutSingleton.getInstance().getValue("invoice_last_name").length() >0 &&
+                                             CheckoutSingleton.getInstance().getValue("invoice_address").length() >0 &&
+                                             CheckoutSingleton.getInstance().getValue("invoice_phone").length() >0) {
+                                         getSupportFragmentManager()
+                                                 .beginTransaction()
+                                                 .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+                                                 .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                                                 .addToBackStack(null)
+                                                 .commit();
+                                         counter++;
+                                     }else{
+                                         deliveryPlaceFragment.visibleSetError();
+                                     }
+                                     if(deliveryPlaceFragment.setCheckVisibility()==false){
+                                         getSupportFragmentManager()
+                                                 .beginTransaction()
+                                                 .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+                                                 .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                                                 .addToBackStack(null)
+                                                 .commit();
+                                         counter++;
+                                     }
+
+
+                            }else{
+                                deliveryPlaceFragment.setError();
+
+                            }
+                            break;
+                        case 2:
                                getSupportFragmentManager()
                                        .beginTransaction()
                                        .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
                                        .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                                        .addToBackStack(null)
                                        .commit();
-                           }else{
-                               deliveryPlaceFragment.setError();
-                           }
+                            counter++;
 
-                        }
+                            break;
+                        case 3:
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+                                    .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                                    .addToBackStack(null)
+                                    .commit();
+                            counter++;
 
+                            break;
+                        default:
+                            return;
+
+                    }
 
                     if (counter == 4) {
                         return;
                       }
-
-
-//
-//                    if (CheckoutSingleton.getInstance().getValue("guest_name").length() > 0 &&
-//                            CheckoutSingleton.getInstance().getValue("guest_last_name").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("guest_email").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("guest_phone").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("guest_card_id").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("delivery_name").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("delivery_last_name").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("delivery_address").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("delivery_phone").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("delivery_card_id").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("invoice_name").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("invoice_last_name").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("invoice_address").length() >0 &&
-//                            CheckoutSingleton.getInstance().getValue("invoice_phone").length() >0)
-//
-//                    {
-
-
-
-
-
                 }
             });
 

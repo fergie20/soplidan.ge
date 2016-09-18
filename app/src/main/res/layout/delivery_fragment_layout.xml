@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:gravity="center"
-        android:paddingBottom="32dp"
+        android:paddingBottom="20dp"
         android:paddingTop="@dimen/activity_horizontal_margin"
         android:text="შეკვეთის მიწოდების ადგილი"
         android:textColor="#fff"
@@ -29,6 +29,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -60,8 +61,6 @@
                             android:layout_height="wrap_content"
                             android:hint="სახელი *"
                             android:inputType="text"
-                            android:paddingBottom="5dp"
-                            android:paddingTop="10dp"
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
@@ -74,11 +73,8 @@
                             android:id="@+id/delivery_last_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
                             android:hint="გვარი *"
                             android:inputType="text"
-                            android:paddingBottom="5dp"
-                            android:paddingTop="10dp"
                             android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
@@ -100,8 +96,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:requiresFadingEdge="horizontal">
+                    android:layout_marginLeft = "8dp"
+                    android:requiresFadingEdge = "horizontal">
 
                     <EditText
                         android:id="@+id/delivery_email"
@@ -109,8 +105,6 @@
                         android:layout_height="wrap_content"
                         android:hint="Email"
                         android:inputType="textEmailAddress"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
                         android:textSize="14sp" />
 
                 </android.support.design.widget.TextInputLayout>
