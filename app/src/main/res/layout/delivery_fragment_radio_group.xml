@@ -14,10 +14,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="9dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/organization_question"
         android:textColor="#595959"
-        android:text="ხართ ორგანიზაცია?"
         android:textStyle="italic|bold" />
 
     <RadioGroup
@@ -31,17 +31,17 @@
             android:id="@+id/yes_btn_delivery_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="6dp"
             android:layout_marginEnd="6dp"
+            android:layout_marginRight="6dp"
             android:padding="5dp"
-            android:text="კი" />
+            android:text="@string/yes" />
 
         <RadioButton
             android:id="@+id/no_btn_delivery_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="არა" />
+            android:text="@string/no" />
 
     </RadioGroup>
 
@@ -56,8 +56,8 @@
             android:id="@+id/organization_name_id"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="10dp"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
             app:srcCompat="@drawable/organizaciisdasaxeleba"
             tools:ignore="MissingPrefix" />
 
@@ -72,7 +72,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ორგანიზაციის დასახელება"
+                android:hint="@string/organization_name"
                 android:inputType="text"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
@@ -100,7 +100,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="საიდენტიფიკაციო კოდი"
+                android:hint="@string/identification_code"
                 android:inputType="number"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"

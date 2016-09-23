@@ -15,7 +15,7 @@
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="შეკვეთის მიწოდების ადგილი"
+        android:text="@string/delivery_place"
         android:textColor="#fff"
         android:textSize="15sp"
         android:textStyle="bold" />
@@ -29,8 +29,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,7 +59,7 @@
                             android:id="@+id/delivery_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="სახელი *"
+                            android:hint="@string/edit_text_name"
                             android:inputType="text"
                             android:textSize="14sp" />
 
@@ -73,7 +73,7 @@
                             android:id="@+id/delivery_last_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="გვარი *"
+                            android:hint="@string/edit_text_last_name"
                             android:inputType="text"
                             android:textSize="14sp" />
 
@@ -96,14 +96,14 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft = "8dp"
-                    android:requiresFadingEdge = "horizontal">
+                    android:layout_marginLeft="8dp"
+                    android:requiresFadingEdge="horizontal">
 
                     <EditText
                         android:id="@+id/delivery_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Email"
+                        android:hint="@string/edit_text_email"
                         android:inputType="textEmailAddress"
                         android:textSize="14sp" />
 
@@ -137,12 +137,11 @@
                             android:id="@+id/delivery_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="მისამართი *"
+                            android:hint="@string/edit_text_address"
                             android:inputType="textPostalAddress"
                             android:paddingBottom="10dp"
                             android:paddingTop="10dp"
-                            android:textSize="14sp"
-                            />
+                            android:textSize="14sp" />
 
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -200,7 +199,7 @@
                         android:id="@+id/delivery_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="ტელეფონი *"
+                        android:hint="@string/edit_text_phone"
                         android:inputType="phone"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
@@ -230,7 +229,7 @@
                         android:id="@+id/delivery_card_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="პირადი ნომერი *"
+                        android:hint="@string/edit_text_id_number"
                         android:inputType="number"
                         android:maxLength="11"
                         android:paddingBottom="10dp"
@@ -257,10 +256,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="9dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/organization_question"
                     android:textColor="#595959"
-                    android:text="ხართ ორგანიზაცია?"
                     android:textStyle="italic|bold" />
 
                 <RadioGroup
@@ -274,19 +273,18 @@
                         android:id="@+id/yes_btn_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="6dp"
                         android:layout_marginEnd="6dp"
+                        android:layout_marginRight="6dp"
                         android:padding="5dp"
-                        android:text="კი" />
+                        android:text="@string/yes" />
 
                     <RadioButton
                         android:id="@+id/no_btn_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="არა"
                         android:checked="true"
-                        />
+                        android:padding="5dp"
+                        android:text="@string/no" />
 
                 </RadioGroup>
 
@@ -301,8 +299,8 @@
                         android:id="@+id/organization_name_id"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
                         android:layout_alignParentTop="true"
+                        android:layout_marginTop="10dp"
                         app:srcCompat="@drawable/organizaciisdasaxeleba"
                         tools:ignore="MissingPrefix" />
 
@@ -318,7 +316,7 @@
                             android:id="@+id/delivery_organisation_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="ორგანიზაციის დასახელება"
+                            android:hint="@string/organization_name"
                             android:inputType="text"
                             android:paddingBottom="10dp"
                             android:paddingTop="10dp"
@@ -347,7 +345,7 @@
                             android:id="@+id/delivery_organisation_code"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="საიდენტიფიკაციო კოდი"
+                            android:hint="@string/identification_code"
                             android:inputType="number"
                             android:paddingBottom="10dp"
                             android:paddingTop="10dp"
@@ -371,8 +369,8 @@
                     android:id="@+id/invoice_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/invoice_question"
                     android:textColor="#595959"
-                    android:text="ინვოისის გამოგზავნის მისამართი იგივეა რაც მიწოდების მისამართი?"
                     android:textStyle="italic|bold" />
 
                 <RadioGroup
@@ -390,17 +388,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="6dp"
                         android:layout_marginRight="6dp"
-                        android:padding="5dp"
-                        android:text="კი"
                         android:checked="true"
-                        />
+                        android:padding="5dp"
+                        android:text="@string/yes" />
 
                     <RadioButton
                         android:id="@+id/radio_btn_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="არა" />
+                        android:text="@string/no" />
                 </RadioGroup>
 
             </RelativeLayout>
@@ -440,7 +437,7 @@
                                 android:id="@+id/invoice_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="სახელი *"
+                                android:hint="@string/edit_text_name"
                                 android:inputType="text"
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -456,7 +453,7 @@
                                 android:id="@+id/invoice_last_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="გვარი *"
+                                android:hint="@string/edit_text_last_name"
                                 android:inputType="text"
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -493,7 +490,7 @@
                                 android:id="@+id/invoice_address"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="მისამართი *"
+                                android:hint="@string/edit_text_address"
                                 android:inputType="textPostalAddress"
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -555,7 +552,7 @@
                             android:id="@+id/invoice_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="ტელეფონი *"
+                            android:hint="@string/edit_text_phone"
                             android:inputType="phone"
                             android:paddingBottom="10dp"
                             android:paddingTop="10dp"
@@ -565,34 +562,34 @@
                 </LinearLayout>
 
                 <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center"-->
-                    <!--android:orientation="horizontal">-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="horizontal">-->
 
-                    <!--<ImageView-->
-                        <!--android:layout_width="30dp"-->
-                        <!--android:layout_height="30dp"-->
-                        <!--app:srcCompat="@drawable/piradinom"-->
-                        <!--tools:ignore="MissingPrefix" />-->
+                <!--<ImageView-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--app:srcCompat="@drawable/piradinom"-->
+                <!--tools:ignore="MissingPrefix" />-->
 
-                    <!--<android.support.design.widget.TextInputLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginLeft="8dp">-->
+                <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="8dp">-->
 
-                        <!--<EditText-->
-                            <!--android:id="@+id/invoice_guest_field_id_number"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:hint="პირადი ნომერი"-->
-                            <!--android:inputType="number"-->
-                            <!--android:paddingBottom="10dp"-->
-                            <!--android:paddingTop="10dp"-->
-                            <!--android:textSize="14sp" />-->
+                <!--<EditText-->
+                <!--android:id="@+id/invoice_guest_field_id_number"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="პირადი ნომერი"-->
+                <!--android:inputType="number"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp"-->
+                <!--android:textSize="14sp" />-->
 
 
-                    <!--</android.support.design.widget.TextInputLayout>-->
+                <!--</android.support.design.widget.TextInputLayout>-->
                 <!--</LinearLayout>-->
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -610,10 +607,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
                         android:layout_marginBottom="9dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/organization_question"
                         android:textColor="#595959"
-                        android:text="ხართ ორგანიზაცია?"
                         android:textStyle="italic|bold" />
 
                     <RadioGroup
@@ -627,19 +624,18 @@
                             android:id="@+id/yes_btn_delivery_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="6dp"
                             android:layout_marginEnd="6dp"
+                            android:layout_marginRight="6dp"
                             android:padding="5dp"
-                            android:text="კი" />
+                            android:text="@string/yes" />
 
                         <RadioButton
                             android:id="@+id/no_btn_delivery_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="არა"
                             android:checked="true"
-                            />
+                            android:padding="5dp"
+                            android:text="@string/no" />
 
                     </RadioGroup>
 
@@ -654,8 +650,8 @@
                             android:id="@+id/invoice_organization_name_id"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:layout_marginTop="10dp"
                             android:layout_alignParentTop="true"
+                            android:layout_marginTop="10dp"
                             app:srcCompat="@drawable/organizaciisdasaxeleba"
                             tools:ignore="MissingPrefix" />
 
@@ -671,7 +667,7 @@
                                 android:id="@+id/invoice_organisation_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="ორგანიზაციის დასახელება"
+                                android:hint="@string/organization_name"
                                 android:inputType="text"
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
@@ -700,7 +696,7 @@
                                 android:id="@+id/invoice_organisation_code"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="საიდენტიფიკაციო კოდი"
+                                android:hint="@string/identification_code"
                                 android:inputType="number"
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"

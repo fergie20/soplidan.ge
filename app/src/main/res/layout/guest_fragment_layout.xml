@@ -17,7 +17,7 @@
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:text="ავტორიზება როგორც სტუმარი"
+        android:text="@string/authorization_as_guest"
         android:layout_marginLeft="30dp"
         android:textColor="#fff"
         android:textSize="15sp"
@@ -64,7 +64,7 @@
                             android:id="@+id/guest_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="სახელი *"
+                            android:hint="@string/edit_text_name"
                             android:inputType="text"
                             android:paddingTop="10dp"
                             android:textSize="14sp" />
@@ -79,7 +79,7 @@
                             android:id="@+id/guest_last_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="გვარი *"
+                            android:hint="@string/edit_text_last_name"
                             android:inputType="text"
                             android:paddingBottom="10dp"
                             android:paddingTop="5dp"
@@ -111,7 +111,7 @@
                         android:id="@+id/guest_mail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Email *"
+                        android:hint="@string/edit_text_email"
                         android:inputType="textEmailAddress"
                         android:textSize="14sp" />
 
@@ -140,7 +140,7 @@
                         android:id="@+id/guest_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="მისამართი"
+                        android:hint="@string/edit_text_address"
                         android:inputType="textPostalAddress"
                         android:textSize="14sp" />
 
@@ -168,7 +168,7 @@
                         android:id="@+id/guest_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="ტელეფონი *"
+                        android:hint="@string/edit_text_phone"
                         android:inputType="phone"
                         android:textSize="14sp" />
 
@@ -196,7 +196,7 @@
                         android:id="@+id/guest_card_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="პირადი ნომერი *"
+                        android:hint="@string/edit_text_id_number"
                         android:inputType="number"
                         android:maxLength="11"
                         android:textSize="14sp" />
@@ -223,8 +223,9 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="9dp"
                     android:textColor="#595959"
-                    android:text="ხართ ორგანიზაცია?"
-                    android:textStyle="italic|bold" />
+                    android:text="@string/organization_question"
+                    android:textStyle="italic|bold"
+                    android:id="@+id/textView2" />
 
                 <RadioGroup
                     android:id="@+id/organization_radio_group_id"
@@ -240,7 +241,7 @@
                         android:layout_marginRight="6dp"
                         android:layout_marginEnd="6dp"
                         android:padding="5dp"
-                        android:text="კი"
+                        android:text="@string/yes"
                         />
 
                     <RadioButton
@@ -248,7 +249,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="არა"
+                        android:text="@string/no"
                         android:checked="true"
                         />
 
@@ -282,7 +283,7 @@
                             android:id="@+id/guest_organisation_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="ორგანიზაციის დასახელება"
+                            android:hint="@string/organization_name"
                             android:inputType="text"
                             android:textSize="14sp" />
 
@@ -309,7 +310,7 @@
                             android:id="@+id/guest_organisation_code"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="საიდენტიფიკაციო კოდი"
+                            android:hint="@string/identification_code"
                             android:inputType="number"
                             android:textSize="14sp" />
 

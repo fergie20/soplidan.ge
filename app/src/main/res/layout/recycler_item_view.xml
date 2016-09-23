@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view_id"
     android:layout_width="100dp"
     android:layout_height="116dp"
+    android:layout_marginTop="10dp"
     android:clickable="true"
-    android:layout_marginTop="10dp">
-
-
+    android:orientation="vertical">
 
 
     <ImageView
@@ -17,20 +13,19 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-      />
+        android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
 
     <TextView
         android:id="@+id/recycler_item_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:text="categoriebi"
-        android:maxLines="1"
-        android:maxLength="25"
+        android:layout_gravity="bottom"
         android:ellipsize="end"
         android:gravity="center"
-        android:layout_gravity="bottom"
-        android:textColor="#a7a9ac"/>
+        android:maxLength="25"
+        android:maxLines="1"
+        android:text="categoriebi"
+        android:textColor="#a7a9ac"
+        android:textSize="12sp" />
 
 </LinearLayout>

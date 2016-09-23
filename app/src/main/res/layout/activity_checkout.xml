@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            android:text="ჯამი: "
+            android:text="@string/checkout_sum"
             android:textColor="#939598"
             android:textSize="14sp" />
 
@@ -69,7 +69,7 @@
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="5 "
-            android:text="შეკვეთის განთავსება"
+            android:text="@string/place_order"
             android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
