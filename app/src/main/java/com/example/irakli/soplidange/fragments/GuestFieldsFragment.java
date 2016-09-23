@@ -94,36 +94,31 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment{
 
     public void setError(){
 
-        if(guest_name.getText().toString().length() == 0 ){
+        if(guest_name.getText().toString().length() < 2 ){
             guest_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
             guest_name.requestFocus();
             return;
         }
-        if(guest_last_name.getText().toString().length() == 0 ){
+        if(guest_last_name.getText().toString().length() < 3 ){
             guest_last_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
 
             guest_last_name.requestFocus();
             return;
         }
-        if(guest_mail.getText().toString().length() == 0 ){
+        if(guest_mail.getText().toString().length() < 7 ){
             guest_mail.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
 
             guest_mail.requestFocus();
             return;
         }
-        if(guest_phone.getText().toString().length() == 0 ){
+
+        if(guest_phone.getText().toString().length() < 9 ){
             guest_phone.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
 
             guest_phone.requestFocus();
             return;
         }
-        if(guest_phone.getText().toString().length() == 0 ){
-            guest_phone.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
-
-            guest_phone.requestFocus();
-            return;
-        }
-        if(guest_card_id.getText().toString().length() == 0 ){
+        if(guest_card_id.getText().toString().length() != 11 ){
             guest_card_id.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
 
             guest_card_id.requestFocus();
@@ -150,7 +145,7 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment{
         if(CheckoutSingleton.getInstance().getCartmap().containsKey("guest_name")){
             guest_name.setText(CheckoutSingleton.getInstance().getValue("guest_name"));
             guest_last_name.setText(CheckoutSingleton.getInstance().getValue("guest_last_name"));
-            guest_mail.setText(CheckoutSingleton.getInstance().getValue("guest_mail"));
+            guest_mail.setText(CheckoutSingleton.getInstance().getValue("guest_email"));
             guest_phone.setText(CheckoutSingleton.getInstance().getValue("guest_phone"));
             guest_card_id.setText(CheckoutSingleton.getInstance().getValue("guest_card_id"));
             if(CheckoutSingleton.getInstance().getCartmap().containsKey("guest_address")){

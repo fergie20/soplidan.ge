@@ -285,6 +285,7 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="არა"
+                        android:checked="true"
                         />
 
                 </RadioGroup>
@@ -390,7 +391,9 @@
                         android:layout_marginEnd="6dp"
                         android:layout_marginRight="6dp"
                         android:padding="5dp"
-                        android:text="კი" />
+                        android:text="კი"
+                        android:checked="true"
+                        />
 
                     <RadioButton
                         android:id="@+id/radio_btn_no"
@@ -634,7 +637,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
-                            android:text="არა" />
+                            android:text="არა"
+                            android:checked="true"
+                            />
 
                     </RadioGroup>
 

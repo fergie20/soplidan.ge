@@ -34,6 +34,7 @@ import java.util.ArrayList;
 public class Payment extends AppCompatActivity {
 
     private Button nextBtn;
+    private Button prevBtn;
     private ArrayList<Fragment> fragmentArrayList;
     private int counter = 0;
     GuestFieldsFragment guestFieldsFragment;
@@ -70,6 +71,14 @@ public class Payment extends AppCompatActivity {
         fragmentArrayList = new ArrayList<>();
 
         nextBtn = (Button) findViewById(R.id.continue_btn_id);
+        prevBtn = (Button) findViewById(R.id.previous_btn_id);
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -125,11 +134,11 @@ public class Payment extends AppCompatActivity {
                     switch (counter){
                         case 0:
                             guestFieldsFragment.saveGuestInfo();
-                      if(CheckoutSingleton.getInstance().getValue("guest_name").length() > 0 &&
-                                CheckoutSingleton.getInstance().getValue("guest_last_name").length() >0 &&
-                                CheckoutSingleton.getInstance().getValue("guest_email").length() >0 &&
-                                CheckoutSingleton.getInstance().getValue("guest_phone").length() >0 &&
-                                CheckoutSingleton.getInstance().getValue("guest_card_id").length() >0){
+                      if(CheckoutSingleton.getInstance().getValue("guest_name").length() > 1 &&
+                                CheckoutSingleton.getInstance().getValue("guest_last_name").length() >2 &&
+                                CheckoutSingleton.getInstance().getValue("guest_email").length() >8 &&
+                                CheckoutSingleton.getInstance().getValue("guest_phone").length() >8 &&
+                                CheckoutSingleton.getInstance().getValue("guest_card_id").length() ==11){
                           getSupportFragmentManager()
                                   .beginTransaction()
                                   .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
@@ -144,16 +153,29 @@ public class Payment extends AppCompatActivity {
 
                             deliveryPlaceFragment.saveDeliveriInfo();
 
-                                 if(CheckoutSingleton.getInstance().getValue("delivery_name").length() >0 &&
-                                    CheckoutSingleton.getInstance().getValue("delivery_last_name").length() >0 &&
-                                    CheckoutSingleton.getInstance().getValue("delivery_address").length() >0 &&
-                                    CheckoutSingleton.getInstance().getValue("delivery_phone").length() >0 &&
-                                    CheckoutSingleton.getInstance().getValue("delivery_card_id").length() >0 ){
+                                 if(CheckoutSingleton.getInstance().getValue("delivery_name").length() >1 &&
+                                    CheckoutSingleton.getInstance().getValue("delivery_last_name").length() >2 &&
+                                    CheckoutSingleton.getInstance().getValue("delivery_address").length() >2 &&
+                                    CheckoutSingleton.getInstance().getValue("delivery_phone").length() >8 &&
+                                    CheckoutSingleton.getInstance().getValue("delivery_card_id").length() == 11 &&
+                                         !CheckoutSingleton.getInstance().getValue("spinCity").equals("0") &&
+                                         !CheckoutSingleton.getInstance().getValue("spinDistrict").equals("0")){
+                                     if(deliveryPlaceFragment.setCheckVisibility()==false){
+                                         getSupportFragmentManager()
+                                                 .beginTransaction()
+                                                 .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+                                                 .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                                                 .addToBackStack(null)
+                                                 .commit();
+                                         counter++;
+                                     }
                                      if(deliveryPlaceFragment.setCheckVisibility()==true &&
-                                             CheckoutSingleton.getInstance().getValue("invoice_name").length() >0 &&
-                                             CheckoutSingleton.getInstance().getValue("invoice_last_name").length() >0 &&
-                                             CheckoutSingleton.getInstance().getValue("invoice_address").length() >0 &&
-                                             CheckoutSingleton.getInstance().getValue("invoice_phone").length() >0) {
+                                             CheckoutSingleton.getInstance().getValue("invoice_name").length() >1 &&
+                                             CheckoutSingleton.getInstance().getValue("invoice_last_name").length() >2 &&
+                                             CheckoutSingleton.getInstance().getValue("invoice_address").length() >2 &&
+                                             CheckoutSingleton.getInstance().getValue("invoice_phone").length() >8 &&
+                                             !CheckoutSingleton.getInstance().getValue("invoiceSpinCity").equals("0") &&
+                                             !CheckoutSingleton.getInstance().getValue("invoiceSpinDistrict").equals("0")) {
                                          getSupportFragmentManager()
                                                  .beginTransaction()
                                                  .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
@@ -164,16 +186,6 @@ public class Payment extends AppCompatActivity {
                                      }else{
                                          deliveryPlaceFragment.visibleSetError();
                                      }
-                                     if(deliveryPlaceFragment.setCheckVisibility()==false){
-                                         getSupportFragmentManager()
-                                                 .beginTransaction()
-                                                 .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
-                                                 .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                                 .addToBackStack(null)
-                                                 .commit();
-                                         counter++;
-                                     }
-
 
                             }else{
                                 deliveryPlaceFragment.setError();
@@ -202,7 +214,6 @@ public class Payment extends AppCompatActivity {
                             break;
                         default:
                             return;
-
                     }
 
                     if (counter == 4) {

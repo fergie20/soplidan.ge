@@ -123,7 +123,7 @@ public class ProductsActivity extends AppCompatActivity {
 //        mSwipeRefreshLayout.setOnRefreshListener(this);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.product_collapsingToolbar_id);
-        collapsingToolbarLayout.setExpandedTitleColor(this.getResources().getColor(R.color.searchcolor));
+        collapsingToolbarLayout.setExpandedTitleColor(this.getResources().getColor(R.color.white));
         productCategoryImage = (ImageView) findViewById(R.id.product_category_image);
 
 
@@ -238,7 +238,7 @@ public class ProductsActivity extends AppCompatActivity {
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xiliToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xiliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xiliToolbar)));
-                    productCategoryImage.setImageResource(R.drawable.cov_xili);
+                    productCategoryImage.setImageResource(R.drawable.fruitcover);
                     actionBar.setTitle(ExampleData.categories[10]);
 
                     break;
@@ -254,7 +254,7 @@ public class ProductsActivity extends AppCompatActivity {
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.bostneuliToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.bostneuliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bostneuliToolbar)));
-                    productCategoryImage.setImageResource(R.drawable.cov_bostneuli);
+                    productCategoryImage.setImageResource(R.drawable.vegetco);
                     actionBar.setTitle(ExampleData.categories[12]);
 
                     break;

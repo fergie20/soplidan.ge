@@ -88,15 +88,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Window window = this.getWindow();
 
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
-        }
 
         if(checkShared == 0){
             retryShared();
@@ -139,20 +133,39 @@ public class MainActivity extends AppCompatActivity {
 
                             //Replacing the main content with ContentFragment Which is our Inbox View;
 
-                            case R.id.blog_id:
-                                String urlBlog = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
-                                Intent blog = new Intent(Intent.ACTION_VIEW);
-                                blog.setData(Uri.parse(urlBlog));
-                                startActivity(blog);
+                            case R.id.info:
+                                Intent info = new Intent(MainActivity.this,AboutUs.class);
+                                startActivity(info);
                                 return true;
-
-
-                            case R.id.about_us_id:
+                            case R.id.blog:
                                 String urlAbout = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
                                 Intent about = new Intent(Intent.ACTION_VIEW);
                                 about.setData(Uri.parse(urlAbout));
                                 startActivity(about);
                                 return true;
+                            case R.id.fb:
+                                String fbUrl = "https://www.facebook.com/soplidan/";
+                                Intent fbAbout = new Intent(Intent.ACTION_VIEW);
+                                fbAbout.setData(Uri.parse(fbUrl));
+                                startActivity(fbAbout);
+                                return true;
+                            case R.id.web:
+                                String webUrl = "http://soplidan.ge/";
+                                Intent webintent = new Intent(Intent.ACTION_VIEW);
+                                webintent.setData(Uri.parse(webUrl));
+                                startActivity(webintent);
+                                return true;
+                            case R.id.email:
+                                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                        "mailto","info@soplidan.ge", null));
+
+                                startActivity(Intent.createChooser(emailIntent, "გააგზავნეთ ელ.ფოსტა"));
+                                return true;
+                            case R.id.phone:
+                                Intent phone = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "+995557470441"));
+                                startActivity(phone);
+                                return true;
+
 
 
                             default:
@@ -173,8 +186,17 @@ public class MainActivity extends AppCompatActivity {
                                 // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
 
                                 super.onDrawerOpened(drawerView);
+//                                burger();
+
+
                             }
-                        };
+
+                @Override
+                public void onDrawerClosed(View drawerView) {
+                    super.onDrawerClosed(drawerView);
+//                    statusbar();
+    }
+            };
 
                         //Setting the actionbarToggle to drawer layout
                         drawerLayout.setDrawerListener(actionBarDrawerToggle);
@@ -312,17 +334,6 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(jsonRequest);
     }
 
-    //
-//    @Override
-//    public void onRefresh() {
-//        getJSONInfo();
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                mSwipeRefreshLayout.setRefreshing(false);
-//            }
-//        }, 2000);
-//    }
     public void count() {
         count_item = (TextView) findViewById(R.id.count_item);
         count = SingletonTest.getInstance().getCartMap();
@@ -400,18 +411,24 @@ public class MainActivity extends AppCompatActivity {
         HashMap<Integer, ProductModel> newMap = gson.fromJson(json, typeOfHashMap);
         SingletonTest.getInstance().setCart(newMap);
     }
-    private void makeCollapsingToolbarLayoutLooksGood(CollapsingToolbarLayout collapsingToolbarLayout) {
-        try {
-            final Field field = collapsingToolbarLayout.getClass().getDeclaredField("mCollapsingTextHelper");
-            field.setAccessible(true);
+    public void burger(){
+        Window window = this.getWindow();
 
-            final Object object = field.get(collapsingToolbarLayout);
-            final Field tpf = object.getClass().getDeclaredField("mTextPaint");
-            tpf.setAccessible(true);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-            ((TextPaint) tpf.get(object)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf"));
-            ((TextPaint) tpf.get(object)).setColor(getResources().getColor(R.color.colorAccent));
-        } catch (Exception ignored) {
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(this.getResources().getColor(R.color.burg));
+        }
+    }
+    public void statusbar(){
+        Window window = this.getWindow();
+
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
         }
     }
 }

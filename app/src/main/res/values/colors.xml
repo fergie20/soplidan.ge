@@ -47,6 +47,6 @@
     <color name="checkout">#00c853</color>
     <color name="payment">#0389d1</color>
     <color name="searchcolor">#4b4b4b</color>
-
-
+    <color name="trans">#00000000</color>
+    <color name="burg">#CAE9C9</color>
 </resources>

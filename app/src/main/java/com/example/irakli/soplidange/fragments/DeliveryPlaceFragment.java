@@ -1,5 +1,7 @@
 package com.example.irakli.soplidange.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.BoolRes;
 import android.support.annotation.Nullable;
@@ -20,6 +22,9 @@ import android.widget.Toast;
 
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.utils.CheckoutSingleton;
+import com.google.gson.Gson;
+
+import java.util.HashMap;
 
 import static com.example.irakli.soplidange.R.id.organization_radio_group_id;
 
@@ -135,11 +140,14 @@ public class DeliveryPlaceFragment extends Fragment {
                 .getStringArray(R.array.city_array));//setting the country_array to spinner
         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinCity.setAdapter(cityAdapter);
+        spinCity.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("spinCity")));
+
 //if you want to set any action you can do in this listener
         spinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int position, long id) {
+
             }
 
             @Override
@@ -152,6 +160,8 @@ public class DeliveryPlaceFragment extends Fragment {
                 .getStringArray(R.array.district_array));//setting the country_array to spinner
         districtAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinDistrict.setAdapter(districtAdapter);
+        spinDistrict.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("spinDistrict")));
+
 //if you want to set any action you can do in this listener
         spinDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -170,6 +180,8 @@ public class DeliveryPlaceFragment extends Fragment {
                 .getStringArray(R.array.city_array));//setting the country_array to spinner
         invoiceCityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         invoiceSpinCity.setAdapter(invoiceCityAdapter);
+        invoiceSpinCity.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("invoiceSpinCity")));
+
 //if you want to set any action you can do in this listener
         invoiceSpinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -187,6 +199,8 @@ public class DeliveryPlaceFragment extends Fragment {
                 .getStringArray(R.array.district_array));//setting the country_array to spinner
         invoiceDistrictAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         invoiceSpinDistrict.setAdapter(invoiceDistrictAdapter);
+        invoiceSpinDistrict.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("spinDistrict")));
+
 //if you want to set any action you can do in this listener
         invoiceSpinDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -209,6 +223,8 @@ public class DeliveryPlaceFragment extends Fragment {
     public void onStop() {
         super.onStop();
         saveDeliveriInfo();
+        saveShared ();
+
     }
 
     public void saveDeliveriInfo() {
@@ -222,8 +238,8 @@ public class DeliveryPlaceFragment extends Fragment {
         CheckoutSingleton.getInstance().addNewValue("delivery_card_id", delivery_card_id.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("delivery_organisation_name", delivery_organisation_name.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("delivery_organisation_code", delivery_organisation_code.getText().toString());
-        CheckoutSingleton.getInstance().addNewValue("spinCity", spinCity.getSelectedItem().toString());
-        CheckoutSingleton.getInstance().addNewValue("spinDistrict", spinDistrict.getSelectedItem().toString());
+        CheckoutSingleton.getInstance().addNewValue("spinCity", String.valueOf(spinCity.getSelectedItemId()));
+        CheckoutSingleton.getInstance().addNewValue("spinDistrict", String.valueOf(spinDistrict.getSelectedItemId()));
 
         CheckoutSingleton.getInstance().addNewValue("invoice_name", invoice_name.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("invoice_last_name", invoice_last_name.getText().toString());
@@ -231,8 +247,8 @@ public class DeliveryPlaceFragment extends Fragment {
         CheckoutSingleton.getInstance().addNewValue("invoice_phone", invoice_phone.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("invoice_organisation_name", invoice_organisation_name.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("invoice_organisation_code", invoice_organisation_code.getText().toString());
-        CheckoutSingleton.getInstance().addNewValue("invoiceSpinCity", invoiceSpinCity.getSelectedItem().toString());
-        CheckoutSingleton.getInstance().addNewValue("invoiceSpinDistrict", invoiceSpinDistrict.getSelectedItem().toString());
+        CheckoutSingleton.getInstance().addNewValue("invoiceSpinCity", String.valueOf(invoiceSpinCity.getSelectedItemId()));
+        CheckoutSingleton.getInstance().addNewValue("invoiceSpinDistrict", String.valueOf(invoiceSpinDistrict.getSelectedItemId()));
     }
 
     private void radioBtnChecked() {
@@ -283,66 +299,93 @@ public class DeliveryPlaceFragment extends Fragment {
     }
     public void setError(){
 
-        if(delivery_name.getText().toString().length() == 0 ){
-            delivery_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+        if(delivery_name.getText().toString().length() < 2 ){
+            delivery_name.setError("გთხოვთ მიუთითეთ სახელი!");
             delivery_name.requestFocus();
             return;
         }
-        if(delivery_last_name.getText().toString().length() == 0 ){
-            delivery_last_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+        if(delivery_last_name.getText().toString().length() < 3 ){
+            delivery_last_name.setError("გთხოვთ მიუთითეთ გვარი!");
 
             delivery_last_name.requestFocus();
             return;
         }
-        if(delivery_email.getText().toString().length() == 0 ){
-            delivery_email.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
 
-            delivery_email.requestFocus();
-            return;
-        }
-        if(delivery_phone.getText().toString().length() == 0 ){
-            delivery_phone.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+        if(delivery_phone.getText().toString().length() < 9 ){
+            delivery_phone.setError("გთხოვთ მიუთითეთ ტელეფონი!");
 
             delivery_phone.requestFocus();
             return;
         }
-        if(delivery_address.getText().toString().length() == 0 ){
-            delivery_address.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+        if(delivery_address.getText().toString().length() < 3 ){
+            delivery_address.setError("გთხოვთ მიუთითეთ მისამართი!");
 
             delivery_address.requestFocus();
             return;
         }
-        if(delivery_card_id.getText().toString().length() == 0 ){
-            delivery_card_id.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+        if(spinCity.getSelectedItem().equals("- ქალაქი -") ){
+            delivery_address.setError("აირჩიეთ ქალაქი!");
+            delivery_address.requestFocus();
+            return;
+        }
+        if(spinDistrict.getSelectedItem().equals("- აირჩიეთ უბანი -")){
+            delivery_address.setError("აირჩიეთ უბანი!");
+            delivery_address.requestFocus();
+            return;
+        }
+        if(delivery_card_id.getText().toString().length() != 11 ){
+            delivery_card_id.setError("გთხოვთ მიუთითეთ თქვენი ID!");
 
             delivery_card_id.requestFocus();
             return;
         }
     }
     public void visibleSetError(){
-        if( invoice_name.getText().toString().length() == 0 ){
-            invoice_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+        if( invoice_name.getText().toString().length() < 2 ){
+            invoice_name.setError("გთხოვთ მიუთითეთ სახელი!");
             invoice_name.requestFocus();
             return;
         }
-        if( invoice_last_name.getText().toString().length() == 0 ){
-            invoice_last_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+        if( invoice_last_name.getText().toString().length() < 3 ){
+            invoice_last_name.setError("გთხოვთ მიუთითეთ გვარი!");
             invoice_last_name.requestFocus();
             return;
         }
-        if( invoice_address.getText().toString().length() == 0 ){
-            invoice_address.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+        if( invoice_address.getText().toString().length() < 3 ){
+            invoice_address.setError("გთხოვთ მიუთითეთ მისამართი!");
             invoice_address.requestFocus();
             return;
         }
-        if( invoice_phone.getText().toString().length() == 0 ){
-            invoice_phone.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+
+         if(invoiceSpinCity.getSelectedItem().equals("- ქალაქი -") ){
+            invoice_address.setError("აირჩიეთ ქალაქი!");
+            invoice_address.requestFocus();
+            return;
+        }
+        if( invoiceSpinDistrict.getSelectedItem().equals("- აირჩიეთ უბანი -")){
+            invoice_address.setError("აირჩიეთ უბანი!");
+            invoice_address.requestFocus();
+            return;
+        }
+        if( invoice_phone.getText().toString().length() < 9 ){
+            invoice_phone.setError("გთხოვთ მიუთითეთ ტელეფონი!");
             invoice_phone.requestFocus();
             return;
         }
     }
     public Boolean setCheckVisibility(){
         return checkVisibility;
+    }
+    public void saveShared (){
+
+        SharedPreferences mPrefs = this.getActivity().getSharedPreferences("checkout", Context.MODE_PRIVATE);
+        HashMap<String,String> cartMap;
+        cartMap = CheckoutSingleton.getInstance().getCartmap();
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(cartMap);
+        prefsEditor.putString("checkoutObjects", json);
+        prefsEditor.apply();
     }
 
 }
