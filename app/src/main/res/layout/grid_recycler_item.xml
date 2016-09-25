@@ -11,7 +11,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="160dp">
         <net.wujingchao.android.view.SimpleTagImageView
             xmlns:simple="http://schemas.android.com/apk/res-auto"
             android:id="@+id/image_id"
@@ -28,16 +28,17 @@
             simple:simple_tag_textColor="@android:color/white"
             simple:simple_tag_enable="true"
             simple:simple_tag_round_radius="2dp"
-            android:paddingBottom="2dp"/>
+            android:paddingBottom="0dp"/>
 
         <TextView
+            android:layout_marginTop="3dp"
             android:gravity="center"
             android:id="@+id/price_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/product_name_id"
+            android:layout_below="@+id/image_id"
             android:textColor="#414042"
-            android:text="4.5Gfwerferqwdfwrel"
+            android:text="4.5Gel"
             android:textSize="11dp"
             android:textStyle="bold" />
 
@@ -48,7 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="11dp"
-            android:layout_above="@+id/calculate_layout"
+            android:text="saxeli"
+            android:layout_below="@+id/price_id"
             android:textColor="#414042"
             android:gravity="center"
             android:maxLines="1"

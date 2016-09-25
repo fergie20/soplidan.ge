@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by Irakli on 24.06.2016.
  */
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyViewHolder>{
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyViewHolder> {
 
     List<ProductModel> productModels;
     Context context;

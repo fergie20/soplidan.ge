@@ -2,6 +2,7 @@ package com.example.irakli.soplidange.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,6 +40,10 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View guestFieldsFragment = inflater.inflate(R.layout.guest_fragment_layout, container, false);
 
+
+
+
+
         organizationRadioGroup = (RadioGroup) guestFieldsFragment.findViewById(R.id.organization_radio_group_id);
         organizationLayout = (RelativeLayout) guestFieldsFragment.findViewById(R.id.organization_fields_id);
 
@@ -61,9 +66,9 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
         guest_name = (EditText) guestFieldsFragment.findViewById(R.id.guest_name);
 
 
-        guest_name.setOnTouchListener(new View.OnTouchListener() {
+        guest_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 guestPersonView.setImageResource(R.drawable.guest_person);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -71,14 +76,13 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
             }
         });
 
 
-        guest_last_name.setOnTouchListener(new View.OnTouchListener() {
+        guest_last_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 guestPersonView.setImageResource(R.drawable.guest_person);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -86,14 +90,14 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
+
             }
         });
 
 
-        guest_mail.setOnTouchListener(new View.OnTouchListener() {
+        guest_mail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -101,15 +105,14 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
 
             }
         });
 
 
-        guest_address.setOnTouchListener(new View.OnTouchListener() {
+        guest_address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address);
@@ -117,15 +120,14 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
 
             }
         });
 
 
-        guest_phone.setOnTouchListener(new View.OnTouchListener() {
+        guest_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -133,15 +135,13 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
-
             }
         });
 
 
-        guest_card_id.setOnTouchListener(new View.OnTouchListener() {
+        guest_card_id.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -149,14 +149,13 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
 
             }
         });
 
-        guest_organisation_name.setOnTouchListener(new View.OnTouchListener() {
+        guest_organisation_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -164,14 +163,13 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
 
             }
         });
 
-        guest_organisation_code.setOnTouchListener(new View.OnTouchListener() {
+        guest_organisation_code.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -179,8 +177,6 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code);
-                return false;
-
             }
         });
 
@@ -207,6 +203,9 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
 
 
     public void saveGuestInfo() {
+        String allPrice = getActivity().getIntent().getExtras().getString("allPrice");
+
+        CheckoutSingleton.getInstance().addNewValue("allPrice", allPrice);
 
         CheckoutSingleton.getInstance().addNewValue("guest_name", guest_name.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("guest_last_name", guest_last_name.getText().toString());

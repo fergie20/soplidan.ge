@@ -1,5 +1,6 @@
 package com.example.irakli.soplidange;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.irakli.soplidange.adapters.CheckoutAdapter;
 import com.example.irakli.soplidange.models.ProductModel;
+import com.example.irakli.soplidange.utils.CheckoutSingleton;
 import com.example.irakli.soplidange.utils.SingletonTest;
 import com.google.gson.Gson;
 
@@ -46,6 +48,7 @@ public class CheckoutActivity extends AppCompatActivity {
     CheckoutAdapter myAdapter;
     final ArrayList<ProductModel> cartArray = new ArrayList<>();
     int chek = 0;
+    String allPrice;
 
 
 
@@ -97,6 +100,7 @@ public class CheckoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CheckoutActivity.this, Payment.class);
+                intent.putExtra("allPrice",allPrice);
                 startActivity(intent);
             }
         });
@@ -111,11 +115,14 @@ public class CheckoutActivity extends AppCompatActivity {
                 String s = nf.format(totalPrice + price);
                 sumView.setText((s + " ¢"));
                 totalPrice = totalPrice + price;
+                allPrice = s;
             }
         });
+
         NumberFormat nf = NumberFormat.getInstance(); // get instance
         nf.setMaximumFractionDigits(3); // set decimal places
         String s = nf.format(totalPrice);
+        allPrice = s;
         sumView.setText((s + " ¢"));
     }
 

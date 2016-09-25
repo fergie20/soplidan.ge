@@ -123,7 +123,7 @@ public class ProductsActivity extends AppCompatActivity {
 //        mSwipeRefreshLayout.setOnRefreshListener(this);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.product_collapsingToolbar_id);
-        collapsingToolbarLayout.setExpandedTitleColor(this.getResources().getColor(R.color.white));
+        collapsingToolbarLayout.setExpandedTitleColor(this.getResources().getColor(R.color.searchcolor));
         productCategoryImage = (ImageView) findViewById(R.id.product_category_image);
 
 
@@ -132,13 +132,6 @@ public class ProductsActivity extends AppCompatActivity {
             category_id = bundle.getInt("category_id");
             category = bundle.getString("category");
 
-
-
-
-
-            final float scale = getResources().getDisplayMetrics().density;
-            int width  = (int) (250 * scale);
-            int height = (int) (140 * scale);
 
             collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
             final Typeface tf = Typeface.createFromAsset(this.getAssets(), "BPG_Anna.ttf");
@@ -203,19 +196,12 @@ public class ProductsActivity extends AppCompatActivity {
                     actionBar.setTitle(ExampleData.categories[5]);
 
                     break;
-                case 27:
-//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.kalataToolbar));
-                    collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.kalataToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.kalataToolbar)));
-                    productCategoryImage.setImageResource(R.drawable.cov_kalata);
-                    actionBar.setTitle(ExampleData.categories[6]);
-                    break;
                 case 26:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunelebiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sunelebiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sunelebiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_saweblebi);
-                    actionBar.setTitle(ExampleData.categories[7]);
+                    actionBar.setTitle(ExampleData.categories[6]);
 
                     break;
                 case 24:
@@ -223,7 +209,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sxvadasxvaToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sxvadasxvaToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_sxvadasxva);
-                    actionBar.setTitle(ExampleData.categories[8]);
+                    actionBar.setTitle(ExampleData.categories[7]);
 
                     break;
                 case 23:
@@ -231,7 +217,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.rdzeToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.rdzeToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_kvercxi);
-                    actionBar.setTitle(ExampleData.categories[9]);
+                    actionBar.setTitle(ExampleData.categories[8]);
 
                     break;
                 case 21:
@@ -239,7 +225,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xiliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xiliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.fruitcover);
-                    actionBar.setTitle(ExampleData.categories[10]);
+                    actionBar.setTitle(ExampleData.categories[9]);
 
                     break;
                 case 20:
@@ -247,7 +233,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.mwniliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.mwniliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cow_mwnili);
-                    actionBar.setTitle(ExampleData.categories[11]);
+                    actionBar.setTitle(ExampleData.categories[10]);
 
                     break;
                 case 12:
@@ -255,7 +241,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.bostneuliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bostneuliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.vegetco);
-                    actionBar.setTitle(ExampleData.categories[12]);
+                    actionBar.setTitle(ExampleData.categories[11]);
 
                     break;
                 case 11:
@@ -263,7 +249,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sasmeliToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sasmeliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_sasmeli);
-                    actionBar.setTitle(ExampleData.categories[13]);
+                    actionBar.setTitle(ExampleData.categories[12]);
 
                     break;
                 case 9:
@@ -271,7 +257,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.zetiToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.zetiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_dzmari);
-                    actionBar.setTitle(ExampleData.categories[14]);
+                    actionBar.setTitle(ExampleData.categories[13]);
 
                     break;
                 case 6:
@@ -279,7 +265,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.nugbariToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.nugbariToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_nugbari);
-                    actionBar.setTitle(ExampleData.categories[15]);
+                    actionBar.setTitle(ExampleData.categories[14]);
 
                     break;
                 case 5:
@@ -287,7 +273,7 @@ public class ProductsActivity extends AppCompatActivity {
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xorciToolbar));
                     fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xorciToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_xorceuli);
-                    actionBar.setTitle(ExampleData.categories[16]);
+                    actionBar.setTitle(ExampleData.categories[15]);
 
                     break;
 
@@ -374,7 +360,7 @@ public class ProductsActivity extends AppCompatActivity {
             collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.colorPrimary));
             fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.colorPrimary)));
             productCategoryImage.setImageResource(R.drawable.foodcover);
-            actionBar.setTitle("ძებნა: " + "\""+query+"\""+"-ზე");
+            actionBar.setTitle("ძიება: " + query);
 
 
         } else {
@@ -390,15 +376,28 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.menu, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search_id)
-                .getActionView();
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_id).getActionView();
         if (null != searchView) {
+
             searchView.setSearchableInfo(searchManager
                     .getSearchableInfo(getComponentName()));
         }
+
+
+
+//        getMenuInflater().inflate(R.menu.menu, menu);
+//
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        SearchView searchView = (SearchView) menu.findItem(R.id.search_id)
+//                .getActionView();
+//        if (null != searchView) {
+//            searchView.setSearchableInfo(searchManager
+//                    .getSearchableInfo(getComponentName()));
+//        }
 
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
             public boolean onQueryTextChange(String newText) {

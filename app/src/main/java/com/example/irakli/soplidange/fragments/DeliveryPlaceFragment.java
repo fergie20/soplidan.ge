@@ -108,9 +108,9 @@ public class DeliveryPlaceFragment extends Fragment {
 
 
 
-        delivery_name.setOnTouchListener(new View.OnTouchListener() {
+        delivery_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -124,14 +124,13 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
             }
         });
 
 
-        delivery_last_name.setOnTouchListener(new View.OnTouchListener() {
+        delivery_last_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -145,12 +144,11 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
             }
         });
-        delivery_email.setOnTouchListener(new View.OnTouchListener() {
+        delivery_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -164,12 +162,11 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
             }
         });
-        delivery_address.setOnTouchListener(new View.OnTouchListener() {
+        delivery_address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address);
@@ -183,12 +180,12 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
+
             }
         });
-        delivery_phone.setOnTouchListener(new View.OnTouchListener() {
+        delivery_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -202,12 +199,11 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
             }
         });
-        delivery_card_id.setOnTouchListener(new View.OnTouchListener() {
+        delivery_card_id.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -221,12 +217,12 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
+
             }
         });
-        delivery_organisation_name.setOnTouchListener(new View.OnTouchListener() {
+        delivery_organisation_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent){
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -240,12 +236,12 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
+
             }
         });
-        delivery_organisation_code.setOnTouchListener(new View.OnTouchListener() {
+        delivery_organisation_code.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -259,13 +255,12 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
             }
         });
 
-        invoice_name.setOnTouchListener(new View.OnTouchListener() {
+        invoice_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -279,12 +274,11 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
             }
         });
-        invoice_last_name.setOnTouchListener(new View.OnTouchListener() {
+        invoice_last_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -298,12 +292,12 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
+
             }
         });
-        invoice_phone.setOnTouchListener(new View.OnTouchListener() {
+        invoice_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -317,12 +311,12 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
+
             }
         });
-        invoice_address.setOnTouchListener(new View.OnTouchListener() {
+        invoice_address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -336,12 +330,12 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
+
             }
         });
-        invoice_organisation_name.setOnTouchListener(new View.OnTouchListener() {
+        invoice_organisation_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -355,12 +349,11 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
-                return false;
             }
         });
-        invoice_organisation_code.setOnTouchListener(new View.OnTouchListener() {
+        invoice_organisation_code.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onFocusChange(View view, boolean b) {
                 delivery_name_image.setImageResource(R.drawable.guest_person_grey);
                 delivery_email_image.setImageResource(R.drawable.guest_email_grey);
                 delivery_address_image.setImageResource(R.drawable.guest_address_grey);
@@ -374,7 +367,6 @@ public class DeliveryPlaceFragment extends Fragment {
                 invoice_address_image.setImageResource(R.drawable.guest_address_grey);
                 invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
                 invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code);
-                return false;
             }
         });
 
@@ -468,7 +460,11 @@ public class DeliveryPlaceFragment extends Fragment {
                 .getStringArray(R.array.city_array));//setting the country_array to spinner
         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinCity.setAdapter(cityAdapter);
-        spinCity.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("spinCity")));
+        if (CheckoutSingleton.getInstance().getCartmap().containsKey("spinCity")){
+            spinCity.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("spinCity")));
+
+        }
+
 
 //if you want to set any action you can do in this listener
         spinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -488,7 +484,11 @@ public class DeliveryPlaceFragment extends Fragment {
                 .getStringArray(R.array.district_array));//setting the country_array to spinner
         districtAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinDistrict.setAdapter(districtAdapter);
-        spinDistrict.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("spinDistrict")));
+        if (CheckoutSingleton.getInstance().getCartmap().containsKey("spinDistrict")){
+            spinDistrict.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("spinDistrict")));
+
+        }
+
 
 //if you want to set any action you can do in this listener
         spinDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -508,7 +508,10 @@ public class DeliveryPlaceFragment extends Fragment {
                 .getStringArray(R.array.city_array));//setting the country_array to spinner
         invoiceCityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         invoiceSpinCity.setAdapter(invoiceCityAdapter);
-        invoiceSpinCity.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("invoiceSpinCity")));
+        if (CheckoutSingleton.getInstance().getCartmap().containsKey("invoiceSpinCity")){
+            invoiceSpinCity.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("invoiceSpinCity")));
+
+        }
 
 //if you want to set any action you can do in this listener
         invoiceSpinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -527,7 +530,10 @@ public class DeliveryPlaceFragment extends Fragment {
                 .getStringArray(R.array.district_array));//setting the country_array to spinner
         invoiceDistrictAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         invoiceSpinDistrict.setAdapter(invoiceDistrictAdapter);
-        invoiceSpinDistrict.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("spinDistrict")));
+        if (CheckoutSingleton.getInstance().getCartmap().containsKey("spinDistrict")){
+            invoiceSpinDistrict.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("spinDistrict")));
+
+        }
 
 //if you want to set any action you can do in this listener
         invoiceSpinDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

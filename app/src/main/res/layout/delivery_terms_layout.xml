@@ -26,28 +26,17 @@
         android:textSize="15sp" />
 
     <RadioGroup
+        android:id="@+id/radioGroup_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingStart="@dimen/activity_horizontal_margin">
 
-        <RadioButton
-            android:id="@+id/radio16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/_16_00_20_00_clock" />
-
-
-        <RadioButton
-            android:id="@+id/radio20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/_20_00_clock" />
     </RadioGroup>
 
     <TextView
+        android:id="@+id/delivery_price_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -56,7 +45,7 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:text="3.00 ლარი"
         android:textColor="#014565"
-        android:textSize="15sp" />
+        android:textSize="13sp" />
 
     <include layout="@layout/divider" />
 
@@ -83,36 +72,36 @@
                 android:id="@+id/terms_info_1_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="7dp"
+                android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
-                android:paddingTop="7dp"
+                android:paddingTop="5dp"
                 android:text="@string/less_then_30_lari" />
 
             <TextView
                 android:id="@+id/terms_info_2_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="7dp"
+                android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
-                android:paddingTop="7dp"
+                android:paddingTop="5dp"
                 android:text="@string/more_then_30_lari" />
 
             <TextView
                 android:id="@+id/terms_info_3_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="7dp"
+                android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
-                android:paddingTop="7dp"
+                android:paddingTop="5dp"
                 android:text="@string/delivery_tbilisi_surrounds" />
 
             <TextView
                 android:id="@+id/terms_info_4_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="7dp"
+                android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
-                android:paddingTop="7dp"
+                android:paddingTop="5dp"
                 android:text="@string/delivery_info" />
 
         </LinearLayout>

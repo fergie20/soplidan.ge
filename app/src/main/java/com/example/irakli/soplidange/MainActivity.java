@@ -317,8 +317,11 @@ public class MainActivity extends AppCompatActivity {
                                 String status = curObj.getString("status");
                                 int position = curObj.getInt("position");
                                 int product_count = curObj.getInt("product_count");
-                                CategoryModel categoryModel = new CategoryModel(category_id, category, status, position, product_count, ExampleData.productImages[i]);
-                                categoryModels.add(categoryModel);
+                                if (status.equals("A")) {
+                                    CategoryModel categoryModel = new CategoryModel(category_id, category, status, position, product_count, ExampleData.productImages[i]);
+                                    categoryModels.add(categoryModel);
+                                }
+
                             }
                             myAdapter = new CategoriesAdapter(categoryModels, getApplicationContext());
                             recyclerView.setAdapter(myAdapter);
