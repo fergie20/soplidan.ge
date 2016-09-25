@@ -58,7 +58,7 @@
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
             android:layout_alignParentTop="true"
-            app:srcCompat="@drawable/organizaciisdasaxeleba"
+            app:srcCompat="@drawable/guest_organization_grey"
             tools:ignore="MissingPrefix" />
 
         <android.support.design.widget.TextInputLayout
@@ -86,7 +86,7 @@
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
-            app:srcCompat="@drawable/saidentipikaciokodi"
+            app:srcCompat="@drawable/guest_org_code"
             tools:ignore="MissingPrefix" />
 
         <android.support.design.widget.TextInputLayout

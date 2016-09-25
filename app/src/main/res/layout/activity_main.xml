@@ -46,11 +46,10 @@
 
                     android:layout_width="match_parent"
 
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/about"
+                    android:layout_height="170dp"
+                    android:src="@drawable/soplidancover"
                     android:scaleType="fitXY"
                     android:layout_marginTop="56dp"
-                    android:fitsSystemWindows="true"
                     app:layout_collapseMode="parallax"/>
 
 
@@ -63,11 +62,20 @@
                     android:layout_width="match_parent"
                     app:titleTextColor="#fff"
 
+
                     android:layout_height="?attr/actionBarSize"
 
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
 
                     app:layout_collapseMode="pin" />
+                <TextView
+                    android:gravity="center"
+                    android:text="სოფლიდან"
+                    android:textSize="18sp"
+                    android:textColor="#fff"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"/>
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -145,7 +153,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:itemIconTint="#0D7FC3"
+        app:itemIconTint="#314171"
         app:itemTextColor="#AAAAAA"
         app:menu="@menu/navigation_view_menu"
         app:headerLayout="@layout/header"/>

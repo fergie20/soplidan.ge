@@ -494,10 +494,14 @@ public class ProductsActivity extends AppCompatActivity {
                                         list_discount_prc = curObj.getInt("list_discount_prc");
                                     }
 
-                                    ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
-                                    productModels.add(productModel);
+                                    if(status.equals("A")){
+                                        ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
+                                        productModels.add(productModel);
+                                    }
+
+
                                     if(productModels.size()==0){
-                                        Toast.makeText(getApplicationContext(), "არაფერი მოიძებნა", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "არაფერი მოიძებნა", Toast.LENGTH_LONG).show();
                                     }
                                 } else if (category_id == main_category) {
                                     String product = curObj.getString("product");
@@ -528,8 +532,11 @@ public class ProductsActivity extends AppCompatActivity {
                                         list_discount = curObj.getDouble("list_discount");
                                         list_discount_prc = curObj.getInt("list_discount_prc");
                                     }
-                                    ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
-                                    productModels.add(productModel);
+                                    if(status.equals("A")){
+                                        ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
+                                        productModels.add(productModel);
+                                    }
+
                                 }
 
 

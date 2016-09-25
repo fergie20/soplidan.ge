@@ -57,7 +57,7 @@ public class Payment extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(this.getResources().getColor(R.color.payment));
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
         }
 
 
@@ -137,7 +137,7 @@ public class Payment extends AppCompatActivity {
                       if(CheckoutSingleton.getInstance().getValue("guest_name").length() > 1 &&
                                 CheckoutSingleton.getInstance().getValue("guest_last_name").length() >2 &&
                                 CheckoutSingleton.getInstance().getValue("guest_email").length() >8 &&
-                                CheckoutSingleton.getInstance().getValue("guest_phone").length() >8 &&
+                                CheckoutSingleton.getInstance().getValue("guest_mobile").length() >8 &&
                                 CheckoutSingleton.getInstance().getValue("guest_card_id").length() ==11){
                           getSupportFragmentManager()
                                   .beginTransaction()

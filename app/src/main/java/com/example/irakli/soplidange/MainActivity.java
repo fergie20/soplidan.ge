@@ -85,12 +85,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
-
-
+        statusbar();
 
         if(checkShared == 0){
             retryShared();
@@ -101,11 +96,14 @@ public class MainActivity extends AppCompatActivity {
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar_id);
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+        collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.colorPrimary));
+
 
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
         final Typeface tf = Typeface.createFromAsset(this.getAssets(), "BPG_Anna.ttf");
         collapsingToolbarLayout.setCollapsedTitleTypeface(tf);
         collapsingToolbarLayout.setExpandedTitleTypeface(tf);
+        collapsingToolbarLayout.setTitle("");
 
 
 
@@ -159,14 +157,12 @@ public class MainActivity extends AppCompatActivity {
                                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                                         "mailto","info@soplidan.ge", null));
 
-                                startActivity(Intent.createChooser(emailIntent, "გააგზავნეთ ელ.ფოსტა"));
+                                startActivity(Intent.createChooser(emailIntent, "გააგზავნეთ ელ.ფოსტა" ));
                                 return true;
                             case R.id.phone:
                                 Intent phone = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "+995557470441"));
                                 startActivity(phone);
                                 return true;
-
-
 
                             default:
                                 Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
@@ -268,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("");
     }
 
 

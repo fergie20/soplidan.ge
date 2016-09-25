@@ -73,7 +73,7 @@ public class CheckoutActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(this.getResources().getColor(R.color.checkout));
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
         }
 
         find();

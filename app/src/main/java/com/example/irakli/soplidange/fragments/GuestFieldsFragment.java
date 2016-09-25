@@ -5,19 +5,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
-import com.example.irakli.soplidange.Payment;
-import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
-import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.CheckoutSingleton;
-import com.example.irakli.soplidange.utils.SingletonTest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -27,18 +25,13 @@ import java.util.HashMap;
 /**
  * Created by floyd on 9/8/2016.
  */
-public class GuestFieldsFragment extends android.support.v4.app.Fragment{
+public class GuestFieldsFragment extends android.support.v4.app.Fragment {
 
     private RadioGroup organizationRadioGroup;
     private RelativeLayout organizationLayout;
-    EditText guest_name;
-    EditText guest_last_name;
-    EditText guest_mail;
-    EditText guest_address;
-    EditText guest_phone;
-    EditText guest_card_id;
-    EditText guest_organisation_name;
-    EditText guest_organisation_code;
+    EditText guest_name,guest_last_name,guest_mail,guest_address,guest_phone,guest_card_id,guest_organisation_name,guest_organisation_code;
+
+    ImageView guestPersonView, guestEmailView, guestAddressView,guestPhoneView,guestCardView,guestOrganisationView,guestOrganisationCodeView; ;
 
     @Nullable
     @Override
@@ -48,15 +41,134 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment{
         organizationRadioGroup = (RadioGroup) guestFieldsFragment.findViewById(R.id.organization_radio_group_id);
         organizationLayout = (RelativeLayout) guestFieldsFragment.findViewById(R.id.organization_fields_id);
 
+        guestPersonView = (ImageView) guestFieldsFragment.findViewById(R.id.guest_person_image);
+        guestEmailView = (ImageView) guestFieldsFragment.findViewById(R.id.guest_email_image);
+        guestAddressView = (ImageView) guestFieldsFragment.findViewById(R.id.guest_address_image);
+        guestPhoneView = (ImageView) guestFieldsFragment.findViewById(R.id.guest_phone_image);
+        guestCardView = (ImageView) guestFieldsFragment.findViewById(R.id.guest_card_image);
+        guestOrganisationView = (ImageView) guestFieldsFragment.findViewById(R.id.guest_organization_image);
+        guestOrganisationCodeView = (ImageView) guestFieldsFragment.findViewById(R.id.guest_organisation_code_image);
 
-        guest_name = (EditText) guestFieldsFragment.findViewById(R.id.guest_name);
-        guest_last_name = (EditText) guestFieldsFragment.findViewById(R.id.guest_last_name);
-        guest_mail = (EditText) guestFieldsFragment.findViewById(R.id.guest_mail);
-        guest_address = (EditText) guestFieldsFragment.findViewById(R.id.guest_address);
-        guest_phone = (EditText) guestFieldsFragment.findViewById(R.id.guest_phone);
-        guest_card_id = (EditText) guestFieldsFragment.findViewById(R.id.guest_card_id);
-        guest_organisation_name = (EditText) guestFieldsFragment.findViewById(R.id.guest_organisation_name);
+
         guest_organisation_code = (EditText) guestFieldsFragment.findViewById(R.id.guest_organisation_code);
+        guest_organisation_name = (EditText) guestFieldsFragment.findViewById(R.id.guest_organisation_name);
+        guest_card_id = (EditText) guestFieldsFragment.findViewById(R.id.guest_card_id);
+        guest_phone = (EditText) guestFieldsFragment.findViewById(R.id.guest_phone);
+        guest_address = (EditText) guestFieldsFragment.findViewById(R.id.guest_address);
+        guest_mail = (EditText) guestFieldsFragment.findViewById(R.id.guest_mail);
+        guest_last_name = (EditText) guestFieldsFragment.findViewById(R.id.guest_last_name);
+        guest_name = (EditText) guestFieldsFragment.findViewById(R.id.guest_name);
+
+
+        guest_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                guestPersonView.setImageResource(R.drawable.guest_person);
+                guestEmailView.setImageResource(R.drawable.guest_email_grey);
+                guestAddressView.setImageResource(R.drawable.guest_address_grey);
+                guestPhoneView.setImageResource(R.drawable.guest_mobile_grey);
+                guestCardView.setImageResource(R.drawable.guest_card_grey);
+                guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
+                guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+
+            }
+        });
+
+
+        guest_last_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                guestPersonView.setImageResource(R.drawable.guest_person);
+                guestEmailView.setImageResource(R.drawable.guest_email_grey);
+                guestAddressView.setImageResource(R.drawable.guest_address_grey);
+                guestPhoneView.setImageResource(R.drawable.guest_mobile_grey);
+                guestCardView.setImageResource(R.drawable.guest_card_grey);
+                guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
+                guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+            }
+        });
+
+
+        guest_mail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                guestPersonView.setImageResource(R.drawable.guest_person_grey);
+                guestEmailView.setImageResource(R.drawable.guest_email);
+                guestAddressView.setImageResource(R.drawable.guest_address_grey);
+                guestPhoneView.setImageResource(R.drawable.guest_mobile_grey);
+                guestCardView.setImageResource(R.drawable.guest_card_grey);
+                guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
+                guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+            }
+        });
+
+
+        guest_address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                guestPersonView.setImageResource(R.drawable.guest_person_grey);
+                guestEmailView.setImageResource(R.drawable.guest_email_grey);
+                guestAddressView.setImageResource(R.drawable.guest_address);
+                guestPhoneView.setImageResource(R.drawable.guest_mobile_grey);
+                guestCardView.setImageResource(R.drawable.guest_card_grey);
+                guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
+                guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+            }
+        });
+
+
+        guest_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                guestPersonView.setImageResource(R.drawable.guest_person_grey);
+                guestEmailView.setImageResource(R.drawable.guest_email_grey);
+                guestAddressView.setImageResource(R.drawable.guest_address_grey);
+                guestPhoneView.setImageResource(R.drawable.guest_mobile);
+                guestCardView.setImageResource(R.drawable.guest_card_grey);
+                guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
+                guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+            }
+        });
+
+
+        guest_card_id.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                guestPersonView.setImageResource(R.drawable.guest_person_grey);
+                guestEmailView.setImageResource(R.drawable.guest_email_grey);
+                guestAddressView.setImageResource(R.drawable.guest_address_grey);
+                guestPhoneView.setImageResource(R.drawable.guest_mobile_grey);
+                guestCardView.setImageResource(R.drawable.guest_card);
+                guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
+                guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+            }
+        });
+
+        guest_organisation_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                guestPersonView.setImageResource(R.drawable.guest_person_grey);
+                guestEmailView.setImageResource(R.drawable.guest_email_grey);
+                guestAddressView.setImageResource(R.drawable.guest_address_grey);
+                guestPhoneView.setImageResource(R.drawable.guest_mobile_grey);
+                guestCardView.setImageResource(R.drawable.guest_card_grey);
+                guestOrganisationView.setImageResource(R.drawable.guest_organization);
+                guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+            }
+        });
+
+        guest_organisation_code.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                guestPersonView.setImageResource(R.drawable.guest_person_grey);
+                guestEmailView.setImageResource(R.drawable.guest_email_grey);
+                guestAddressView.setImageResource(R.drawable.guest_address_grey);
+                guestPhoneView.setImageResource(R.drawable.guest_mobile_grey);
+                guestCardView.setImageResource(R.drawable.guest_card_grey);
+                guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
+                guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code);
+            }
+        });
 
 
         radioBtnChecked();
@@ -86,7 +198,7 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment{
         CheckoutSingleton.getInstance().addNewValue("guest_last_name", guest_last_name.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("guest_email", guest_mail.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("guest_address", guest_address.getText().toString());
-        CheckoutSingleton.getInstance().addNewValue("guest_phone", guest_phone.getText().toString());
+        CheckoutSingleton.getInstance().addNewValue("guest_mobile", guest_phone.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("guest_card_id", guest_card_id.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("guest_organisation_name", guest_organisation_name.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("guest_organisation_code", guest_organisation_code.getText().toString());
@@ -95,12 +207,13 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment{
     public void setError(){
 
         if(guest_name.getText().toString().length() < 2 ){
-            guest_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+            guest_name.setError("გთხოვთ მიუთითეთ სახელი!");
+
             guest_name.requestFocus();
             return;
         }
         if(guest_last_name.getText().toString().length() < 3 ){
-            guest_last_name.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+            guest_last_name.setError("გთხოვთ მიუთითეთ გვარი!");
 
             guest_last_name.requestFocus();
             return;
@@ -113,13 +226,13 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment{
         }
 
         if(guest_phone.getText().toString().length() < 9 ){
-            guest_phone.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+            guest_phone.setError("გთხოვთ მიუთითეთ ტელეფონი!");
 
             guest_phone.requestFocus();
             return;
         }
         if(guest_card_id.getText().toString().length() != 11 ){
-            guest_card_id.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+            guest_card_id.setError("გთხოვთ მიუთითეთ თქვენი ID!");
 
             guest_card_id.requestFocus();
             return;
@@ -146,7 +259,7 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment{
             guest_name.setText(CheckoutSingleton.getInstance().getValue("guest_name"));
             guest_last_name.setText(CheckoutSingleton.getInstance().getValue("guest_last_name"));
             guest_mail.setText(CheckoutSingleton.getInstance().getValue("guest_email"));
-            guest_phone.setText(CheckoutSingleton.getInstance().getValue("guest_phone"));
+            guest_phone.setText(CheckoutSingleton.getInstance().getValue("guest_mobile"));
             guest_card_id.setText(CheckoutSingleton.getInstance().getValue("guest_card_id"));
             if(CheckoutSingleton.getInstance().getCartmap().containsKey("guest_address")){
                 guest_address.setText(CheckoutSingleton.getInstance().getValue("guest_address"));
@@ -183,4 +296,5 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment{
         HashMap<String, String> newMap = gson.fromJson(json, typeOfHashMap);
         CheckoutSingleton.getInstance().setCart(newMap);
     }
+
 }

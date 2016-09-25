@@ -89,7 +89,7 @@ public class DeliveryPlaceFragment extends Fragment {
         delivery_last_name.setText(CheckoutSingleton.getInstance().getValue("guest_last_name"));
 
         delivery_phone = (EditText) deliveryFragment.findViewById(R.id.delivery_phone);
-        delivery_phone.setText(CheckoutSingleton.getInstance().getValue("guest_phone"));
+        delivery_phone.setText(CheckoutSingleton.getInstance().getValue("guest_mobile"));
 
         delivery_address = (EditText) deliveryFragment.findViewById(R.id.delivery_address);
         delivery_address.setText(CheckoutSingleton.getInstance().getValue("guest_address"));
@@ -114,7 +114,7 @@ public class DeliveryPlaceFragment extends Fragment {
         invoice_last_name.setText(CheckoutSingleton.getInstance().getValue("guest_last_name"));
 
         invoice_phone = (EditText) deliveryFragment.findViewById(R.id.invoice_phone);
-        invoice_phone.setText(CheckoutSingleton.getInstance().getValue("guest_phone"));
+        invoice_phone.setText(CheckoutSingleton.getInstance().getValue("guest_mobile"));
 
         invoice_address = (EditText) deliveryFragment.findViewById(R.id.invoice_address);
         invoice_address.setText(CheckoutSingleton.getInstance().getValue("guest_address"));
