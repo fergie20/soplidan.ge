@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -60,9 +61,9 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
         guest_name = (EditText) guestFieldsFragment.findViewById(R.id.guest_name);
 
 
-        guest_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        guest_name.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 guestPersonView.setImageResource(R.drawable.guest_person);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -70,14 +71,14 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
-
+                return false;
             }
         });
 
 
-        guest_last_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        guest_last_name.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 guestPersonView.setImageResource(R.drawable.guest_person);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -85,13 +86,14 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
             }
         });
 
 
-        guest_mail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        guest_mail.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -99,13 +101,15 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+
             }
         });
 
 
-        guest_address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        guest_address.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address);
@@ -113,13 +117,15 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+
             }
         });
 
 
-        guest_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        guest_phone.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -127,13 +133,15 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+
             }
         });
 
 
-        guest_card_id.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        guest_card_id.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -141,12 +149,14 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+
             }
         });
 
-        guest_organisation_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        guest_organisation_name.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -154,12 +164,14 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+
             }
         });
 
-        guest_organisation_code.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        guest_organisation_code.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 guestPersonView.setImageResource(R.drawable.guest_person_grey);
                 guestEmailView.setImageResource(R.drawable.guest_email_grey);
                 guestAddressView.setImageResource(R.drawable.guest_address_grey);
@@ -167,6 +179,8 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
                 guestCardView.setImageResource(R.drawable.guest_card_grey);
                 guestOrganisationView.setImageResource(R.drawable.guest_organization_grey);
                 guestOrganisationCodeView.setImageResource(R.drawable.guest_org_code);
+                return false;
+
             }
         });
 

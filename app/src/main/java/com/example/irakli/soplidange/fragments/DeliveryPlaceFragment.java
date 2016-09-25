@@ -8,11 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -35,33 +37,19 @@ import static com.example.irakli.soplidange.R.id.organization_radio_group_id;
 public class DeliveryPlaceFragment extends Fragment {
 
     private LinearLayout newAddressLayout;
-    private RelativeLayout organizationLayout;
-    private RelativeLayout deliveryRadioLayout;
-    private RadioGroup deliveryRadioGroup;
-    private RadioGroup radioGroup;
-    private RadioGroup organizationRadioGroup;
+    private RelativeLayout organizationLayout,deliveryRadioLayout;
+    private RadioGroup deliveryRadioGroup,radioGroup,organizationRadioGroup;
 
-    Spinner spinCity;
-    Spinner spinDistrict;
-    Spinner invoiceSpinCity;
-    Spinner invoiceSpinDistrict;
+    Spinner spinCity,spinDistrict,invoiceSpinCity,invoiceSpinDistrict;
+
     ScrollView scrollView;
 
+    EditText delivery_name,delivery_last_name,delivery_phone,delivery_address,delivery_email,delivery_card_id,delivery_organisation_name,
+    delivery_organisation_code, invoice_last_name, invoice_name,invoice_phone,invoice_address,invoice_organisation_name,invoice_organisation_code;
 
-    EditText delivery_name;
-    EditText delivery_last_name;
-    EditText delivery_phone;
-    EditText delivery_address;
-    EditText delivery_email;
-    EditText delivery_card_id;
-    EditText delivery_organisation_name;
-    EditText delivery_organisation_code;
-    EditText invoice_name;
-    EditText invoice_last_name;
-    EditText invoice_phone;
-    EditText invoice_address;
-    EditText invoice_organisation_name;
-    EditText invoice_organisation_code;
+    ImageView delivery_name_image,delivery_phone_image,delivery_address_image,delivery_email_image,delivery_card_id_image,delivery_organisation_name_image,
+            delivery_organisation_code_image, invoice_name_image,invoice_phone_image,invoice_address_image,invoice_organisation_name_image,invoice_organisation_code_image;
+
     boolean checkVisibility = false;
 
 
@@ -82,50 +70,391 @@ public class DeliveryPlaceFragment extends Fragment {
 
 
         delivery_name = (EditText) deliveryFragment.findViewById(R.id.delivery_name);
-        delivery_name.setText(CheckoutSingleton.getInstance().getValue("guest_name"));
-
-
         delivery_last_name = (EditText) deliveryFragment.findViewById(R.id.delivery_last_name);
-        delivery_last_name.setText(CheckoutSingleton.getInstance().getValue("guest_last_name"));
-
         delivery_phone = (EditText) deliveryFragment.findViewById(R.id.delivery_phone);
-        delivery_phone.setText(CheckoutSingleton.getInstance().getValue("guest_mobile"));
-
         delivery_address = (EditText) deliveryFragment.findViewById(R.id.delivery_address);
-        delivery_address.setText(CheckoutSingleton.getInstance().getValue("guest_address"));
-
         delivery_email = (EditText) deliveryFragment.findViewById(R.id.delivery_email);
-        delivery_email.setText(CheckoutSingleton.getInstance().getValue("guest_email"));
-
         delivery_card_id = (EditText) deliveryFragment.findViewById(R.id.delivery_card_id);
-        delivery_card_id.setText(CheckoutSingleton.getInstance().getValue("guest_card_id"));
-
         delivery_organisation_name = (EditText) deliveryFragment.findViewById(R.id.delivery_organisation_name);
-        delivery_organisation_name.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_name"));
-
         delivery_organisation_code = (EditText) deliveryFragment.findViewById(R.id.delivery_organisation_code);
-        delivery_organisation_code.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_code"));
-
 
         invoice_name = (EditText) deliveryFragment.findViewById(R.id.invoice_name);
-        invoice_name.setText(CheckoutSingleton.getInstance().getValue("guest_name"));
-
         invoice_last_name = (EditText) deliveryFragment.findViewById(R.id.invoice_last_name);
-        invoice_last_name.setText(CheckoutSingleton.getInstance().getValue("guest_last_name"));
-
         invoice_phone = (EditText) deliveryFragment.findViewById(R.id.invoice_phone);
-        invoice_phone.setText(CheckoutSingleton.getInstance().getValue("guest_mobile"));
-
         invoice_address = (EditText) deliveryFragment.findViewById(R.id.invoice_address);
-        invoice_address.setText(CheckoutSingleton.getInstance().getValue("guest_address"));
-
-
         invoice_organisation_name = (EditText) deliveryFragment.findViewById(R.id.invoice_organisation_name);
-        invoice_organisation_name.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_name"));
-
         invoice_organisation_code = (EditText) deliveryFragment.findViewById(R.id.invoice_organisation_code);
-        invoice_organisation_code.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_code"));
+        fillEditText();
 
+        delivery_name_image = (ImageView) deliveryFragment.findViewById(R.id.delivery_person_image);
+        delivery_phone_image = (ImageView) deliveryFragment.findViewById(R.id.delivery_phone_image);
+        delivery_address_image = (ImageView) deliveryFragment.findViewById(R.id.delivery_address_image);
+        delivery_email_image = (ImageView) deliveryFragment.findViewById(R.id.delivery_email_image);
+        delivery_card_id_image = (ImageView) deliveryFragment.findViewById(R.id.delivery_card_image);
+        delivery_organisation_name_image = (ImageView) deliveryFragment.findViewById(R.id.delivery_organisation_image);
+        delivery_organisation_code_image = (ImageView) deliveryFragment.findViewById(R.id.delivery_organisation_code_image);
+
+        invoice_name_image = (ImageView) deliveryFragment.findViewById(R.id.invoice_person_image);
+        invoice_phone_image = (ImageView) deliveryFragment.findViewById(R.id.invoice_phone_image);
+        invoice_address_image = (ImageView) deliveryFragment.findViewById(R.id.invoice_address_image);
+        invoice_organisation_name_image = (ImageView) deliveryFragment.findViewById(R.id.invoice_organisation_image);
+        invoice_organisation_code_image = (ImageView) deliveryFragment.findViewById(R.id.invoice_organisation_code_image);
+
+        spinCity = (Spinner) deliveryFragment.findViewById(R.id.spinCity);
+        spinDistrict = (Spinner) deliveryFragment.findViewById(R.id.spinDistrict);
+        invoiceSpinCity = (Spinner) deliveryFragment.findViewById(R.id.invoice_spinCity);
+        invoiceSpinDistrict = (Spinner) deliveryFragment.findViewById(R.id.invoice_spinDistrict);
+
+
+
+
+        delivery_name.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+
+
+        delivery_last_name.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        delivery_email.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        delivery_address.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        delivery_phone.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        delivery_card_id.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        delivery_organisation_name.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent){
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        delivery_organisation_code.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+
+        invoice_name.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        invoice_last_name.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        invoice_phone.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        invoice_address.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        invoice_organisation_name.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        invoice_organisation_code.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code);
+                return false;
+            }
+        });
+
+        spinCity.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+
+        spinDistrict.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address_grey);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        invoiceSpinCity.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
+        invoiceSpinDistrict.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                delivery_name_image.setImageResource(R.drawable.guest_person_grey);
+                delivery_email_image.setImageResource(R.drawable.guest_email_grey);
+                delivery_address_image.setImageResource(R.drawable.guest_address_grey);
+                delivery_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                delivery_card_id_image.setImageResource(R.drawable.guest_card_grey);
+                delivery_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                delivery_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+
+                invoice_name_image.setImageResource(R.drawable.guest_person_grey);
+                invoice_phone_image.setImageResource(R.drawable.guest_mobile_grey);
+                invoice_address_image.setImageResource(R.drawable.guest_address);
+                invoice_organisation_name_image.setImageResource(R.drawable.guest_organization_grey);
+                invoice_organisation_code_image.setImageResource(R.drawable.guest_org_code_grey);
+                return false;
+            }
+        });
 
 
 
@@ -133,8 +462,7 @@ public class DeliveryPlaceFragment extends Fragment {
         newAddressLayout = (LinearLayout) deliveryFragment.findViewById(R.id.new_address_fields_id);
         scrollView = (ScrollView) deliveryFragment.findViewById(R.id.delivery_scroll_view_id);
 
-
-        spinCity = (Spinner) deliveryFragment.findViewById(R.id.spinCity);//fetch the spinner from layout file
+        //fetch the spinner from layout file
         ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(deliveryFragment.getContext(),
                 android.R.layout.simple_spinner_item, getResources()
                 .getStringArray(R.array.city_array));//setting the country_array to spinner
@@ -154,7 +482,7 @@ public class DeliveryPlaceFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-        spinDistrict = (Spinner) deliveryFragment.findViewById(R.id.spinDistrict);//fetch the spinner from layout file
+        //fetch the spinner from layout file
         ArrayAdapter<String> districtAdapter = new ArrayAdapter<String>(deliveryFragment.getContext(),
                 android.R.layout.simple_spinner_item, getResources()
                 .getStringArray(R.array.district_array));//setting the country_array to spinner
@@ -174,7 +502,7 @@ public class DeliveryPlaceFragment extends Fragment {
             }
         });
 
-        invoiceSpinCity = (Spinner) deliveryFragment.findViewById(R.id.invoice_spinCity);//fetch the spinner from layout file
+        //fetch the spinner from layout file
         ArrayAdapter<String> invoiceCityAdapter = new ArrayAdapter<String>(deliveryFragment.getContext(),
                 android.R.layout.simple_spinner_item, getResources()
                 .getStringArray(R.array.city_array));//setting the country_array to spinner
@@ -193,7 +521,7 @@ public class DeliveryPlaceFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-        invoiceSpinDistrict = (Spinner) deliveryFragment.findViewById(R.id.invoice_spinDistrict);//fetch the spinner from layout file
+        //fetch the spinner from layout file
         ArrayAdapter<String> invoiceDistrictAdapter = new ArrayAdapter<String>(deliveryFragment.getContext(),
                 android.R.layout.simple_spinner_item, getResources()
                 .getStringArray(R.array.district_array));//setting the country_array to spinner
@@ -249,6 +577,25 @@ public class DeliveryPlaceFragment extends Fragment {
         CheckoutSingleton.getInstance().addNewValue("invoice_organisation_code", invoice_organisation_code.getText().toString());
         CheckoutSingleton.getInstance().addNewValue("invoiceSpinCity", String.valueOf(invoiceSpinCity.getSelectedItemId()));
         CheckoutSingleton.getInstance().addNewValue("invoiceSpinDistrict", String.valueOf(invoiceSpinDistrict.getSelectedItemId()));
+    }
+
+    public void fillEditText(){
+        delivery_name.setText(CheckoutSingleton.getInstance().getValue("guest_name"));
+        delivery_phone.setText(CheckoutSingleton.getInstance().getValue("guest_mobile"));
+        delivery_last_name.setText(CheckoutSingleton.getInstance().getValue("guest_last_name"));
+        delivery_address.setText(CheckoutSingleton.getInstance().getValue("guest_address"));
+        delivery_email.setText(CheckoutSingleton.getInstance().getValue("guest_email"));
+        delivery_card_id.setText(CheckoutSingleton.getInstance().getValue("guest_card_id"));
+        delivery_organisation_name.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_name"));
+        delivery_organisation_code.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_code"));
+
+        invoice_name.setText(CheckoutSingleton.getInstance().getValue("guest_name"));
+        invoice_last_name.setText(CheckoutSingleton.getInstance().getValue("guest_last_name"));
+        invoice_phone.setText(CheckoutSingleton.getInstance().getValue("guest_mobile"));
+        invoice_address.setText(CheckoutSingleton.getInstance().getValue("guest_address"));
+        invoice_organisation_name.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_name"));
+        invoice_organisation_code.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_code"));
+
     }
 
     private void radioBtnChecked() {

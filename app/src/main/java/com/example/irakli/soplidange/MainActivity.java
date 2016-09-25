@@ -29,6 +29,7 @@ import android.text.TextPaint;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -231,12 +232,33 @@ public class MainActivity extends AppCompatActivity {
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search_id).getActionView();
         if (null != searchView) {
+
             searchView.setSearchableInfo(searchManager
                     .getSearchableInfo(getComponentName()));
         }
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView soplidan = (TextView) findViewById(R.id.soplidan_id);
+                soplidan.setVisibility(View.GONE);
+            }
+        }) ;
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                TextView soplidan = (TextView) findViewById(R.id.soplidan_id);
+                soplidan.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+
+
+
 
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
             public boolean onQueryTextChange(String newText) {
+
 
     //                Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
 //                int_query.putExtra("query",newText);
@@ -407,16 +429,6 @@ public class MainActivity extends AppCompatActivity {
         Type typeOfHashMap = new TypeToken<HashMap<Integer, ProductModel>>() { }.getType();
         HashMap<Integer, ProductModel> newMap = gson.fromJson(json, typeOfHashMap);
         SingletonTest.getInstance().setCart(newMap);
-    }
-    public void burger(){
-        Window window = this.getWindow();
-
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(this.getResources().getColor(R.color.burg));
-        }
     }
     public void statusbar(){
         Window window = this.getWindow();
