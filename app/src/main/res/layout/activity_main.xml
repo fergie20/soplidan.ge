@@ -43,39 +43,21 @@
 
                     android:id="@+id/product_category_image"
                     android:layout_width="match_parent"
-<<<<<<< HEAD
-
-                    android:layout_height="170dp"
-                    android:src="@drawable/soplidancover"
-                    android:scaleType="fitXY"
-                    android:layout_marginTop="56dp"
-                    app:layout_collapseMode="parallax"/>
-
-=======
                     android:layout_height="wrap_content"
                     android:layout_marginTop="56dp"
                     android:fitsSystemWindows="true"
                     android:scaleType="fitXY"
                     android:src="@drawable/about"
                     app:layout_collapseMode="parallax" />
->>>>>>> origin/master
 
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar_id"
                     android:layout_width="match_parent"
-<<<<<<< HEAD
                     app:titleTextColor="#fff"
-
-
-=======
->>>>>>> origin/master
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/colorPrimary"
-                    app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-<<<<<<< HEAD
-
                     app:layout_collapseMode="pin" />
                 <TextView
                     android:gravity="center"
@@ -85,9 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"/>
-=======
                     app:titleTextColor="#fff" />
->>>>>>> origin/master
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -158,15 +138,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-<<<<<<< HEAD
         app:itemIconTint="#314171"
-=======
         android:background="#fff"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme"
         app:headerLayout="@layout/header"
-        app:itemIconTint="#0D7FC3"
->>>>>>> origin/master
         app:itemTextColor="#AAAAAA"
         app:menu="@menu/navigation_view_menu" />
 

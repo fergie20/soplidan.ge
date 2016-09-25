@@ -57,13 +57,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentTop="true"
-<<<<<<< HEAD
-            app:srcCompat="@drawable/guest_organization_grey"
-=======
-            android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/organizaciisdasaxeleba"
->>>>>>> origin/master
-            tools:ignore="MissingPrefix" />
+            app:srcCompat="@drawable/guest_organization_grey"/>
+
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/delivery_field_organization_name_id"
