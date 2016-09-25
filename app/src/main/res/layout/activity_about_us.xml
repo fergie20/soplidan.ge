@@ -4,97 +4,101 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-   
+
     tools:context="com.example.irakli.soplidange.AboutUs">
 
-    <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/about_toolbar_id"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/trans"
-        android:elevation="7dp"
-        >
+        android:elevation="7dp">
 
     </android.support.v7.widget.Toolbar>
+
     <ImageView
         android:id="@+id/about_us_image"
-        android:src="@drawable/about"
         android:layout_width="match_parent"
-        android:layout_height="160dp" />
+        android:layout_height="160dp"
+        android:src="@drawable/about" />
 
     <ScrollView
-        android:layout_below="@id/about_us_image"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/about_us_image">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/fff"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="16dp"
-        android:layout_below="@+id/about_us_image"
-        android:text="ჩვენს შესახებ"
-        android:textSize="16sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#314171"/>
-    <View
-    android:layout_below="@+id/fff"
-    android:id="@+id/divider_id"
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:background="#e7ede9e9" />
+            <TextView
+                android:id="@+id/fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/about_us_image"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="16dp"
+                android:text="@string/about_us"
+                android:textColor="#314171"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/divider_id"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/fff"
+                android:background="#e7ede9e9" />
 
 
-        <TextView
-            android:layout_below="@+id/divider_id"
-            android:id="@+id/text13"
-            android:paddingTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:text="შპს სოფლიდან 2015 წელს დაარსდა. (ს/კ 405102053) კომპანიის მიზანია თბილისის მოსახლეობისათვის ჯანსაღი პროდუქტის მიწოდება. ყველა ოჯახს, რომელსაც სურვილი აქვს იკვებებოდეს ნატურალური პროდუქტით, შეუძლია ადგილზე მიიღოს ყველაფერი, რასაც საიტზე შეიძენს. კომპანია აკონტროლებს და იცავს პროდუქტის ტრანსპორტირების, შენახვის და დაფასოების წესებს სურსათის ეროვნული სააგენტოს ნორმებით. პროდუქტების შეძენა ხდება გლეხებისგან და ფერმერებისგან საქართველოს სხვადასხვა კუთხეში. პროდუქტები დაფასოებული და შეფუთულია."/>
+            <TextView
+                android:id="@+id/text13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider_id"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:paddingTop="5dp"
+                android:text="@string/about_us_text" />
 
-    <TextView
-        android:id="@+id/text1"
-        android:textSize="16sp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/text13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ჩვენი პარტნიორები"
-        android:textColor="#314171"/>
-    <ImageView
-        android:id="@+id/geopay_id"
-        android:layout_marginLeft="32dp"
-        android:layout_below="@+id/text1"
-        android:src="@drawable/partgeo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <ImageView
-        android:id="@+id/farmer_id"
-        android:layout_marginRight="32dp"
-        android:src="@drawable/partfarmers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/enpard_id"
-        android:layout_alignRight="@+id/enpard_id"
-        android:layout_alignEnd="@+id/enpard_id" />
-    <ImageView
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text13"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/our_partnerships"
+                android:textColor="#314171"
+                android:textSize="16sp" />
 
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="7dp"
-        android:layout_below="@+id/geopay_id"
-        android:src="@drawable/enpard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/enpard_id"
-        android:layout_marginBottom="10dp"/>
+            <ImageView
+                android:id="@+id/geopay_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text1"
+                android:layout_marginLeft="32dp"
+                android:src="@drawable/partgeo" />
+
+            <ImageView
+                android:id="@+id/farmer_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/enpard_id"
+                android:layout_alignEnd="@+id/enpard_id"
+                android:layout_alignRight="@+id/enpard_id"
+                android:layout_marginRight="32dp"
+                android:src="@drawable/partfarmers" />
+
+            <ImageView
+
+                android:id="@+id/enpard_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/geopay_id"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="7dp"
+                android:src="@drawable/enpard" />
         </RelativeLayout>
 
     </ScrollView>

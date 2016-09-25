@@ -10,7 +10,7 @@
         android:gravity="center"
         android:paddingBottom="32dp"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:text="მიწოდების პირობები"
+        android:text="@string/delivery_terms"
         android:textColor="#fff"
         android:textSize="15sp"
         android:textStyle="bold" />
@@ -21,7 +21,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="35dp"
         android:layout_marginStart="35dp"
-        android:text="პროდუქტის მოტანა"
+        android:text="@string/delivery_product"
         android:textColor="#01577e"
         android:textSize="15sp" />
 
@@ -36,16 +36,15 @@
             android:id="@+id/radio16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="16:00-20:00 საათამდე"
             android:checked="true"
-            />
+            android:text="@string/_16_00_20_00_clock" />
 
 
         <RadioButton
             android:id="@+id/radio20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20:00 საათის შემდეგ" />
+            android:text="@string/_20_00_clock" />
     </RadioGroup>
 
     <TextView
@@ -87,7 +86,7 @@
                 android:paddingBottom="7dp"
                 android:paddingLeft="20dp"
                 android:paddingTop="7dp"
-                android:text=" 30 ლარამდე შეკვეთილი პროდუქტის მიწოდება თბილისში - 3 ლარი;" />
+                android:text="@string/less_then_30_lari" />
 
             <TextView
                 android:id="@+id/terms_info_2_id"
@@ -96,7 +95,7 @@
                 android:paddingBottom="7dp"
                 android:paddingLeft="20dp"
                 android:paddingTop="7dp"
-                android:text=" 30 ლარზე მეტი შეკვეთილი პროდუქტის მიწოდება თბილისში - უფასო;" />
+                android:text="@string/more_then_30_lari" />
 
             <TextView
                 android:id="@+id/terms_info_3_id"
@@ -105,7 +104,7 @@
                 android:paddingBottom="7dp"
                 android:paddingLeft="20dp"
                 android:paddingTop="7dp"
-                android:text=" თბილისის შემოგარენში (წყნეთი,კოჯორი, წავკისი და ა.შ) პროდუქტის მიწოდების ღირებულებაა-8 ლარი;" />
+                android:text="@string/delivery_tbilisi_surrounds" />
 
             <TextView
                 android:id="@+id/terms_info_4_id"
@@ -114,9 +113,7 @@
                 android:paddingBottom="7dp"
                 android:paddingLeft="20dp"
                 android:paddingTop="7dp"
-                android:text=" გთხოვთ, გაითვალისწინეთ, პროდუქტის ადგილზე მიწოდება ხდება შეკვეთის გაკეთების მომდევნო დღეს 16:00-ის შემდეგ. კვირა დღეს მიწოდება არ ხდება. თუ თქვენ შეკვეთას აკეთებთ შაბათს და კვირას პროდუქტებს მიიღებთ ორშაბათს 16:00-ის შემდეგ.
-გთხოვთ, პირადად შეამოწმოთ შეძენილი პროდუქცია, წუნის აღმოჩენის შემთხვევაში გთხოვთ დაგვიკავშირდეთ.
-თუ გაქვთ კითხვები, გთხოვთ დაგვიკავშირდეთ: 557 470 441" />
+                android:text="@string/delivery_info" />
 
         </LinearLayout>
 

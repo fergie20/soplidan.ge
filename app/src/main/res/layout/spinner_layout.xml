@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_weight="0"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_weight="0">
+
     <Spinner
-        android:layout_gravity="start"
-        android:gravity="start"
-        android:layout_marginLeft="38dp"
         android:id="@+id/spinCity"
-        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="38dp"
         android:layout_marginTop="1dp"
+        android:layout_weight="1"
+        android:gravity="start"
         android:popupBackground="@android:color/white"
         android:scrollbars="none"
         android:spinnerMode="dropdown" />
+
     <Spinner
-        android:layout_gravity="end"
-        android:gravity="end"
         android:id="@+id/spinDistrict"
-        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
         android:layout_marginTop="1dp"
+        android:layout_weight="1"
+        android:gravity="end"
         android:popupBackground="@android:color/white"
         android:scrollbars="none"
         android:spinnerMode="dropdown" />

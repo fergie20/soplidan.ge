@@ -76,9 +76,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:layout_marginEnd="38dp"
         android:layout_marginRight="5dp"
         android:gravity="end"
-        android:layout_marginEnd="38dp"
         android:text="15.7 წ"
         android:textColor="#9ccc65"
         android:textSize="18dp" />
@@ -89,10 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
-        app:maxHeight="100dp"
-
-
-        >
+        app:maxHeight="100dp">
 
         <TextView
             android:id="@+id/dialog_description_id"
@@ -196,7 +193,7 @@
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="5 "
-            android:text="დაამატე კალათაში"
+            android:text="@string/add_to_basket"
             android:textColor="#FFFFFF"
             android:textSize="12sp" />
 

@@ -6,8 +6,8 @@
     android:layout_height="?attr/actionBarSize"
     android:background="@color/colorPrimary"
     app:layout_collapseMode="pin"
-    app:titleTextColor="#fff"
-    app:theme="@style/ToolbarColoredBackArrow">
+    app:theme="@style/ToolbarColoredBackArrow"
+    app:titleTextColor="#fff">
 
 
 </android.support.v7.widget.Toolbar>

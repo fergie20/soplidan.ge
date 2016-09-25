@@ -1,41 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="none">
 
+
         <item
-        android:id="@+id/info"
-        android:icon="@drawable/info"
-        android:title="ჩვენს შესახებ" />
-
-
-
+            android:id="@+id/info"
+            android:icon="@drawable/info"
+            android:title="@string/menu_item_about_us" />
         <item
             android:id="@+id/fb"
             android:icon="@drawable/fb"
-            android:title="www.facebook.com/soplidan" />
+            android:title="@string/menu_item_fb" />
 
         <item
             android:id="@+id/web"
             android:icon="@drawable/web"
-            android:title="www.soplidan.ge" />
+            android:title="@string/menu_item_soplidan_ge" />
 
         <item
             android:id="@+id/email"
             android:icon="@drawable/burgermail"
-            android:title="info@soplidan.ge" />
+            android:title="@string/menu_item_info" />
 
         <item
             android:id="@+id/phone"
             android:icon="@drawable/mobil"
-            android:title="+995 557 470 441" />
+            android:title="@string/menu_item_phone_number" />
 
         <item
             android:id="@+id/blog"
             android:icon="@drawable/blog"
-            android:title="ბლოგი" />
+            android:title="@string/menu_item_blog" />
 
 
     </group>

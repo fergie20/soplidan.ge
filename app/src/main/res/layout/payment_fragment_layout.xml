@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="32dp"
-        android:text="გადახდის მეთოდები"
+        android:text="@string/payment_methods"
         android:textColor="#fff"
         android:textSize="15sp"
         android:textStyle="bold" />
@@ -22,7 +22,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="30dp"
         android:layout_marginStart="30dp"
-        android:text="თანხის გადახდა"
+        android:text="@string/paying"
         android:textColor="#01577e"
         android:textSize="15sp" />
 
@@ -34,22 +34,22 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Visa/MasterCard" />
+            android:text="@string/payment_in_place" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ბარათით გადახდა ადგილზე" />
+            android:text="@string/card_payment_in_place" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="საბანკო გადარიცხვა მხოლოდ იურიდიული პირებისთვის" />
+            android:text="@string/bank_payment" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ნაღდი ანგარიშ სწორება ადგილზე" />
+            android:text="@string/visa_mastercard" />
     </RadioGroup>
 
 
@@ -63,7 +63,7 @@
             android:id="@+id/editInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="შეტყობინების დატოვება"
+            android:hint="@string/leave_message"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLength="2000"
             android:maxLines="4" />
@@ -75,14 +75,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="მონიშნეთ თქვენ ეთანხმებით მომსახურების პირობებს"/>
+        android:text="@string/accept_terms_and_conditions" />
 
     <TextView
         android:id="@+id/service_terms_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="@color/colorAccent"
-        android:text="მომსახურების პირობები"/>
+        android:text="@string/terms_and_conditions"
+        android:textColor="@color/colorAccent" />
 
 </LinearLayout>

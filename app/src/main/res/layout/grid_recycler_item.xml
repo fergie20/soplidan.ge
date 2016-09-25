@@ -115,7 +115,7 @@
                 android:textColor="#e74c3c"
                 android:gravity="center"
                 android:textSize="11dp"
-                android:text="არაა გაყიდვაში"
+                android:text="@string/not_in_sale"
                 android:id="@+id/out_of_stock_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
