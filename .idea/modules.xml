@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/soplidan.ge.iml" filepath="$PROJECT_DIR$/soplidan.ge.iml" />
       <module fileurl="file://$PROJECT_DIR$/soplidan13.ge.iml" filepath="$PROJECT_DIR$/soplidan13.ge.iml" />
     </modules>
   </component>

@@ -95,32 +95,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/geopay_id"
-                android:layout_marginBottom="6dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="7dp"
                 android:src="@drawable/enpard" />
-
-            <ImageView
-                android:id="@+id/fchain_id"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/enpard_id"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="32dp"
-                android:paddingBottom="5dp"
-                android:src="@drawable/fchain" />
-
-            <ImageView
-                android:id="@+id/partners_id"
-                android:layout_width="100dp"
-                android:layout_height="68dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/fff"
-                android:layout_toRightOf="@+id/fff"
-                android:src="@drawable/partners" />
-
         </RelativeLayout>
 
     </ScrollView>
