@@ -54,9 +54,9 @@ public class PaymentMethodsFragment extends Fragment {
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup rg, int checkedId) {
-                for(int i=0; i<rg.getChildCount(); i++) {
+                for (int i = 0; i < rg.getChildCount(); i++) {
                     RadioButton btn = (RadioButton) rg.getChildAt(i);
-                    if(btn.getId() == checkedId) {
+                    if (btn.getId() == checkedId) {
                         String text = String.valueOf(btn.getText());
                         System.out.println(text + "iiii");
                         return;
@@ -76,9 +76,9 @@ public class PaymentMethodsFragment extends Fragment {
         });
 
 
-
         return paymentMethodFragment;
     }
+
     private void getJSONInfo() {
         String url = "http://soplidan.ge/api/payments?items_per_page=80";
 
@@ -102,7 +102,7 @@ public class PaymentMethodsFragment extends Fragment {
                                     RadioButton radioButton = new RadioButton(getActivity());
                                     radioButton.setText(shipping);
                                     radioButton.setId(+i);
-                                    rprms= new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+                                    rprms = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
                                     radioGroup.addView(radioButton, rprms);
                                 }
 
