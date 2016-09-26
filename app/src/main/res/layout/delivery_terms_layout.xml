@@ -72,36 +72,36 @@
                 android:id="@+id/terms_info_1_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
+                android:paddingBottom="3dp"
                 android:paddingLeft="20dp"
-                android:paddingTop="5dp"
+                android:paddingTop="3dp"
                 android:text="@string/less_then_30_lari" />
 
             <TextView
                 android:id="@+id/terms_info_2_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
+                android:paddingBottom="3dp"
                 android:paddingLeft="20dp"
-                android:paddingTop="5dp"
+                android:paddingTop="3dp"
                 android:text="@string/more_then_30_lari" />
 
             <TextView
                 android:id="@+id/terms_info_3_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
+                android:paddingBottom="3dp"
                 android:paddingLeft="20dp"
-                android:paddingTop="5dp"
+                android:paddingTop="3dp"
                 android:text="@string/delivery_tbilisi_surrounds" />
 
             <TextView
                 android:id="@+id/terms_info_4_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
+                android:paddingBottom="3dp"
                 android:paddingLeft="20dp"
-                android:paddingTop="5dp"
+                android:paddingTop="3dp"
                 android:text="@string/delivery_info" />
 
         </LinearLayout>

@@ -90,6 +90,9 @@ public class DeliveryTermsFragment extends Fragment {
             }
         });
 
+        String dot = "<font color='#028bca'>\u25CF </font>";
+
+
         totalPrice = Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));
 
 
@@ -98,33 +101,20 @@ public class DeliveryTermsFragment extends Fragment {
                 CheckoutSingleton.getInstance().getValue("spinDistrict").equals("30")){
             deliveryPrice.setText("ტრანსპორტირების ღირებულება 8 ¢");
             double z = 8 + Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));
-            deliveryCost.setText("სულ: "+CheckoutSingleton.getInstance().getValue("allPrice")+" ¢ + 8 ¢ = "+ z +" ¢" );
+            deliveryCost.setText(Html.fromHtml(dot + " სულ: "+CheckoutSingleton.getInstance().getValue("allPrice")+" ¢ + 8 ¢ = "+ z +" ¢" ));
 
 
         }else{
             if (totalPrice < 30.0){
                 deliveryPrice.setText("ტრანსპორტირების ღირებულება 3 ¢");
                 double x = 3 + Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));
-                deliveryCost.setText("სულ: "+CheckoutSingleton.getInstance().getValue("allPrice")+" ¢ + 3 ¢ = "+ x +" ¢" );
+                deliveryCost.setText(Html.fromHtml(dot + " სულ: "+CheckoutSingleton.getInstance().getValue("allPrice")+" ¢ + 3 ¢ = "+ x +" ¢" ));
             }else {
                 deliveryPrice.setText("ტრანსპორტირების ღირებულება 0 ¢");
                 double y = 0 + Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));
-                deliveryCost.setText("სულ: "+CheckoutSingleton.getInstance().getValue("allPrice")+" ¢ + 0 ¢ = "+ y +" ¢" );
+                deliveryCost.setText(Html.fromHtml(dot + " სულ: "+CheckoutSingleton.getInstance().getValue("allPrice")+" ¢ + 0 ¢ = "+ y +" ¢" ));
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-        String dot = "<font color='#028bca'>\u25CF </font>";
-
         termsInfo1.setText(Html.fromHtml(dot + termsInfo1.getText()));
         termsInfo2.setText(Html.fromHtml(dot + termsInfo2.getText()));
         termsInfo3.setText(Html.fromHtml(dot + termsInfo3.getText()));
