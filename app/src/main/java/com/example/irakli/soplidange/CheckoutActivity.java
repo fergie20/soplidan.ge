@@ -1,17 +1,17 @@
 package com.example.irakli.soplidange;
 
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.example.irakli.soplidange.adapters.CheckoutAdapter;
 import com.example.irakli.soplidange.models.ProductModel;
-import com.example.irakli.soplidange.utils.CheckoutSingleton;
 import com.example.irakli.soplidange.utils.SingletonTest;
 import com.google.gson.Gson;
 
@@ -49,7 +48,6 @@ public class CheckoutActivity extends AppCompatActivity {
     final ArrayList<ProductModel> cartArray = new ArrayList<>();
     int chek = 0;
     String allPrice;
-
 
 
     @Override
@@ -89,7 +87,7 @@ public class CheckoutActivity extends AppCompatActivity {
             Toast.makeText(this, "თქვენი კალათა ცარიელია", Toast.LENGTH_SHORT).show();
         }
 
-         myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
+        myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
         recyclerView.setAdapter(myAdapter);
 
 
@@ -100,7 +98,7 @@ public class CheckoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CheckoutActivity.this, Payment.class);
-                intent.putExtra("allPrice",allPrice);
+                intent.putExtra("allPrice", allPrice);
                 startActivity(intent);
             }
         });
@@ -186,14 +184,30 @@ public class CheckoutActivity extends AppCompatActivity {
 
                 return true;
             case R.id.delete_id:
-                cartMap.clear();
-                SingletonTest.getInstance().getCartMap().clear();
-                cartArray.clear();
-                myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
-                recyclerView.setAdapter(myAdapter);
-                Toast.makeText(this, "თქვენი კალათა დაცარიელდა", Toast.LENGTH_SHORT).show();
-                sumView.setText(0+" ¢");
-                saveShared();
+                new AlertDialog.Builder(CheckoutActivity.this)
+                        .setMessage("გსურთ კალათის დაცარიელება?")
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                cartMap.clear();
+                                SingletonTest.getInstance().getCartMap().clear();
+                                cartArray.clear();
+                                myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
+                                recyclerView.setAdapter(myAdapter);
+                                Toast.makeText(CheckoutActivity.this, "თქვენი კალათა დაცარიელდა", Toast.LENGTH_SHORT).show();
+                                sumView.setText(0 + " ¢");
+                                saveShared();
+                            }
+                        })
+                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .show();
+
+
+
+
         }
         return (super.onOptionsItemSelected(menuItem));
     }
@@ -228,9 +242,10 @@ public class CheckoutActivity extends AppCompatActivity {
         prefsEditor.putString("MyObject", json);
         prefsEditor.apply();
     }
-    public Typeface typeface(){
 
-        Typeface custom_font = Typeface.createFromAsset(this.getAssets(),  "BPG_GEL_Excelsior_Caps.ttf");
+    public Typeface typeface() {
+
+        Typeface custom_font = Typeface.createFromAsset(this.getAssets(), "BPG_GEL_Excelsior_Caps.ttf");
 
         return custom_font;
     }

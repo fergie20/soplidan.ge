@@ -6,14 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -22,7 +20,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextPaint;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,7 +35,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.ExampleData.ExampleData;
@@ -53,7 +49,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -103,9 +98,7 @@ public class ProductsActivity extends AppCompatActivity {
         isNetworkAvailable();
 
 
-
         count();
-
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -114,7 +107,7 @@ public class ProductsActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent addEvent = new Intent(ProductsActivity.this, CheckoutActivity.class);
-                addEvent.putExtra("checkboolean",1);
+                addEvent.putExtra("checkboolean", 1);
                 startActivity(addEvent);
 
             }
@@ -137,10 +130,7 @@ public class ProductsActivity extends AppCompatActivity {
             final Typeface tf = Typeface.createFromAsset(this.getAssets(), "BPG_Anna.ttf");
             collapsingToolbarLayout.setCollapsedTitleTypeface(tf);
             collapsingToolbarLayout.setExpandedTitleTypeface(tf);
-            collapsingToolbarLayout.setExpandedTitleMargin(40,50,40,50);
-
-
-
+            collapsingToolbarLayout.setExpandedTitleMargin(40, 50, 40, 50);
 
 
             Window window = this.getWindow();
@@ -148,7 +138,7 @@ public class ProductsActivity extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            switch(category_id) {
+            switch (category_id) {
                 case 34:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunflowerToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sunflowerToolbar));
@@ -287,7 +277,7 @@ public class ProductsActivity extends AppCompatActivity {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-                switch(category_id) {
+                switch (category_id) {
                     case 34:
                         window.setStatusBarColor(this.getResources().getColor(R.color.sunflowerStatusBar));
                         break;
@@ -386,7 +376,6 @@ public class ProductsActivity extends AppCompatActivity {
             searchView.setSearchableInfo(searchManager
                     .getSearchableInfo(getComponentName()));
         }
-
 
 
 //        getMenuInflater().inflate(R.menu.menu, menu);
@@ -493,13 +482,13 @@ public class ProductsActivity extends AppCompatActivity {
                                         list_discount_prc = curObj.getInt("list_discount_prc");
                                     }
 
-                                    if(status.equals("A")){
+                                    if (status.equals("A")) {
                                         ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
                                         productModels.add(productModel);
                                     }
 
 
-                                    if(productModels.size()==0){
+                                    if (productModels.size() == 0) {
                                         Toast.makeText(getApplicationContext(), "არაფერი მოიძებნა", Toast.LENGTH_LONG).show();
                                     }
                                 } else if (category_id == main_category) {
@@ -531,7 +520,7 @@ public class ProductsActivity extends AppCompatActivity {
                                         list_discount = curObj.getDouble("list_discount");
                                         list_discount_prc = curObj.getInt("list_discount_prc");
                                     }
-                                    if(status.equals("A")){
+                                    if (status.equals("A")) {
                                         ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
                                         productModels.add(productModel);
                                     }
@@ -597,6 +586,7 @@ public class ProductsActivity extends AppCompatActivity {
         progressDialog = ProgressDialog.show(this, "", "გთხოვთ დაელოდოთ...");
         requestQueue.add(jsonRequest);
     }
+
 //    @Override
 //    public void onRefresh() {
 //        if(category_id==-1){
@@ -642,11 +632,10 @@ public class ProductsActivity extends AppCompatActivity {
     public void updateListView() {
 
 
-
-        if (check == 1){
+        if (check == 1) {
             gridRecycler.setAdapter(myAdapter);
             check = 0;
-        }else{
+        } else {
             myAdapter.notifyDataSetChanged();
         }
 
@@ -687,13 +676,12 @@ public class ProductsActivity extends AppCompatActivity {
         }
     }
 
-    public void saveShared (){
+    public void saveShared() {
 
         SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
 
-
-        HashMap<Integer,ProductModel> cartMap;
+        HashMap<Integer, ProductModel> cartMap;
 
         cartMap = SingletonTest.getInstance().getCartMap();
 
