@@ -196,6 +196,8 @@ public class CheckoutActivity extends AppCompatActivity {
                                 Toast.makeText(CheckoutActivity.this, "თქვენი კალათა დაცარიელდა", Toast.LENGTH_SHORT).show();
                                 sumView.setText(0 + " ¢");
                                 saveShared();
+
+                                onBackPressed();
                             }
                         })
                         .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {

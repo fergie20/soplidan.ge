@@ -3,6 +3,7 @@ package com.example.irakli.soplidange.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.Spanned;
@@ -16,8 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irakli.soplidange.R;
-import com.example.irakli.soplidange.utils.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
+import com.example.irakli.soplidange.utils.SingletonTest;
 import com.squareup.picasso.Picasso;
 
 import net.wujingchao.android.view.SimpleTagImageView;
@@ -57,7 +58,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
         int pos = getItemViewType(position);
         ProductModel product = productModels.get(pos);
-        if(productModels.get(pos).getImg() == null) {
+        if (productModels.get(pos).getImg() == null) {
 
             holder.productImageView.setVisibility(View.GONE);
         } else {
@@ -68,7 +69,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                     .into(holder.productImageView);
         }
 
-        if(productModels.get(pos).getList_discount()==0) {
+        if (productModels.get(pos).getList_discount() == 0) {
             holder.productImageView.setTagEnable(false);
             holder.productPriceView.setText(String.valueOf(product.getList_price()) + " ¢");
 
@@ -84,12 +85,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
             spannable.setSpan(STRIKE_THROUGH_SPAN, spannable.length() / 2 + 1, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
-        if(productModels.get(pos).getRecource()==0){
+        if (productModels.get(pos).getRecource() == 0) {
             holder.outOfStockView.setVisibility(View.VISIBLE);
             holder.plusMinusView.setVisibility(View.GONE);
         }
-
-
 
 
         holder.setModel(product);
@@ -103,7 +102,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     }
 
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         SimpleTagImageView productImageView;
         TextView productNameView;
@@ -120,9 +119,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
             this.model = model;
         }
 
-        private void setSavedQuantity(){
+        private void setSavedQuantity() {
             if (SingletonTest.getInstance().getProduct(model.getId()) != null) {
-                quantityView.setText(SingletonTest.getInstance().getProduct(model.getId()).getQuontity()+"");
+                quantityView.setText(SingletonTest.getInstance().getProduct(model.getId()).getQuontity() + "");
             }
         }
 
@@ -150,14 +149,15 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
                     quantity++;
 
-                    if(quantity <= model.getRecource()){
+                    if (quantity <= model.getRecource()) {
                         model.setQuontity(quantity);
                         SingletonTest.getInstance().addProduct(model.getId(), model);
                         mycountListener.countClick();
                         Toast.makeText(context, "დაემატა კალათაში", Toast.LENGTH_SHORT).show();
 
+
                         quantityView.setText(quantity + "");
-                    }else{
+                    } else {
                         quantity--;
 //                        model.setQuontity(quantity );
 //                        SingletonTest.getInstance().addProduct(model.getId(), model);
@@ -208,7 +208,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
             productImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (listener != null){
+                    if (listener != null) {
                         listener.onClick((model));
                     }
                 }
@@ -217,24 +217,28 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     }
 
     private MyClickListener listener;
+
     public void setMyClickListener(MyClickListener listener) {
         this.listener = listener;
     }
+
     public interface MyClickListener {
         void onClick(ProductModel model);
     }
 
     private MyCountListener mycountListener;
+
     public void setMycountListener(MyCountListener mycountListener) {
         this.mycountListener = mycountListener;
     }
+
     public interface MyCountListener {
         void countClick();
     }
 
-    public Typeface typeface(){
+    public Typeface typeface() {
 
-        Typeface custom_font = Typeface.createFromAsset(context.getAssets(),  "BPG_GEL_Excelsior_Caps.ttf");
+        Typeface custom_font = Typeface.createFromAsset(context.getAssets(), "BPG_GEL_Excelsior_Caps.ttf");
 
         return custom_font;
     }

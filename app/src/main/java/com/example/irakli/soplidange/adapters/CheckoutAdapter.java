@@ -1,6 +1,7 @@
 package com.example.irakli.soplidange.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,16 +11,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.irakli.soplidange.MainActivity;
+import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
-import com.example.irakli.soplidange.utils.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
+import com.example.irakli.soplidange.utils.SingletonTest;
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+
+import static android.content.Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
 
 /**
  * Created by Irakli on 24.06.2016.
  */
-public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyViewHolder>{
+public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyViewHolder> {
 
     ArrayList<ProductModel> cartMap;
     Context context;
@@ -45,16 +53,16 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                 .load(cartMap.get(position).getImg())
                 .into(holder.productImageView);
 
-        if(cartMap.get(position).getBase_price()>0) {
-             price = cartMap.get(position).getBase_price();
+        if (cartMap.get(position).getBase_price() > 0) {
+            price = cartMap.get(position).getBase_price();
 
-        }else {
-             price = cartMap.get(position).getList_price();
+        } else {
+            price = cartMap.get(position).getList_price();
 
         }
 
         holder.setMyModel(cartMap.get(position));
-        holder.productPriceView.setText( String.valueOf(price)+" ¢");
+        holder.productPriceView.setText(String.valueOf(price) + " ¢");
         holder.productNameView.setText(cartMap.get(position).getName());
         holder.quantityView.setText(cartMap.get(position).getQuontity() + "");
     }
@@ -78,7 +86,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         private ProductModel model;
         private double oldPrice;
 
-        public void setMyModel(ProductModel model ){
+        public void setMyModel(ProductModel model) {
             this.model = model;
         }
 
@@ -104,9 +112,9 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
 
                     Toast.makeText(context, "პროდუქტი წაიშალა", Toast.LENGTH_SHORT).show();
 
-                    if(model.getBase_price()>0) {
+                    if (model.getBase_price() > 0) {
                         oldPrice = model.getBase_price();
-                    }else {
+                    } else {
                         oldPrice = model.getList_price();
                     }
                     listener.onClick(-oldPrice * quont);
@@ -121,19 +129,19 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
 
                     quantity++;
 
-                    if(quantity <= model.getRecource()){
+                    if (quantity <= model.getRecource()) {
 
                         model.setQuontity(quantity);
                         SingletonTest.getInstance().addProduct(model.getId(), model);
 
-                        if(model.getBase_price()>0) {
+                        if (model.getBase_price() > 0) {
                             oldPrice = model.getBase_price();
-                        }else {
+                        } else {
                             oldPrice = model.getList_price();
                         }
                         listener.onClick(oldPrice);
                         quantityView.setText(quantity + "");
-                    }else{
+                    } else {
                         quantity--;
                         model.setQuontity(quantity);
                         SingletonTest.getInstance().addProduct(model.getId(), model);
@@ -141,7 +149,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                         Toast.makeText(context, "თქვენს მიერ არჩეული პროდუქციის რაოდენობა აღემატება მარაგს", Toast.LENGTH_SHORT).show();
                         quantityView.setText(quantity + "");
                     }
-
 
 
                 }
@@ -167,9 +174,9 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
 
                             model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
 
-                            if(model.getBase_price()>0) {
+                            if (model.getBase_price() > 0) {
                                 oldPrice = model.getBase_price();
-                            }else {
+                            } else {
                                 oldPrice = model.getList_price();
                             }
 
@@ -180,9 +187,9 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
                         model.setQuontity(Integer.parseInt(quantityView.getText().toString()));
 
                         SingletonTest.getInstance().addProduct(model.getId(), model);
-                        if(model.getBase_price()>0) {
+                        if (model.getBase_price() > 0) {
                             oldPrice = model.getBase_price();
-                        }else {
+                        } else {
                             oldPrice = model.getList_price();
                         }
                         listener.onClick(-oldPrice);
@@ -193,17 +200,20 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         }
 
     }
+
     private MyClickListener listener;
-    public void setMyPriceUpdateListener(MyClickListener listener){
+
+    public void setMyPriceUpdateListener(MyClickListener listener) {
         this.listener = listener;
     }
+
     public interface MyClickListener {
         void onClick(double price);
     }
 
-    public Typeface typeface(){
+    public Typeface typeface() {
 
-        Typeface custom_font = Typeface.createFromAsset(context.getAssets(),  "BPG_GEL_Excelsior_Caps.ttf");
+        Typeface custom_font = Typeface.createFromAsset(context.getAssets(), "BPG_GEL_Excelsior_Caps.ttf");
 
         return custom_font;
     }
