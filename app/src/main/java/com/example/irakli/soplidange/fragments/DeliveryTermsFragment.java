@@ -83,6 +83,7 @@ public class DeliveryTermsFragment extends Fragment {
                     RadioButton btn = (RadioButton) rg.getChildAt(i);
                     if(btn.getId() == checkedId) {
                         String text = String.valueOf(btn.getText());
+                        CheckoutSingleton.getInstance().addNewValue("order_time_radioButton",text);
                         System.out.println(text + "iiii");
                         return;
                     }
@@ -100,6 +101,7 @@ public class DeliveryTermsFragment extends Fragment {
                 CheckoutSingleton.getInstance().getValue("spinDistrict").equals("29") ||
                 CheckoutSingleton.getInstance().getValue("spinDistrict").equals("30")){
             deliveryPrice.setText("ტრანსპორტირების ღირებულება 8 ¢");
+
             double z = 8 + Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));
             deliveryCost.setText(Html.fromHtml(dot + " სულ: "+CheckoutSingleton.getInstance().getValue("allPrice")+" ¢ + 8 ¢ = "+ z +" ¢" ));
 
@@ -133,7 +135,7 @@ public class DeliveryTermsFragment extends Fragment {
         String url = "http://soplidan.ge/api/shippings?items_per_page=80";
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                (url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         JSONArray jsonArray = null;
@@ -148,7 +150,7 @@ public class DeliveryTermsFragment extends Fragment {
                                 String status = curObj.getString("status");
                                 String shipping = curObj.getString("shipping");
 
-                                if (status.equals("A")) {
+                                if (status.equals("A"))   {
                                     RadioButton radioButton = new RadioButton(getActivity());
                                     radioButton.setText(shipping);
                                     radioButton.setId(+i);
@@ -161,6 +163,7 @@ public class DeliveryTermsFragment extends Fragment {
                             progressDialog.cancel();
 
                         } catch (JSONException e) {
+                            progressDialog.cancel();
                             e.printStackTrace();
                         }
                     }
@@ -204,5 +207,32 @@ public class DeliveryTermsFragment extends Fragment {
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(),  "BPG_GEL_Excelsior_Caps.ttf");
 
         return custom_font;
+    }
+    public void saveShippingTotal(){
+
+
+        if(CheckoutSingleton.getInstance().getValue("spinDistrict").equals("16") ||
+                CheckoutSingleton.getInstance().getValue("spinDistrict").equals("29") ||
+                CheckoutSingleton.getInstance().getValue("spinDistrict").equals("30")){
+            deliveryPrice.setText("ტრანსპორტირების ღირებულება 8 ¢");
+
+            double z = 8 + Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));
+            CheckoutSingleton.getInstance().addNewValue("shipping_price", "8 ¢");
+            CheckoutSingleton.getInstance().addNewValue("total_price", String.valueOf(z)+" ¢");
+
+
+        }else{
+            if (totalPrice < 30.0){
+                deliveryPrice.setText("ტრანსპორტირების ღირებულება 3 ¢");
+                double x = 3 + Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));
+                CheckoutSingleton.getInstance().addNewValue("shipping_price", "3 ¢");
+                CheckoutSingleton.getInstance().addNewValue("total_price", String.valueOf(x)+" ¢");
+            }else {
+                deliveryPrice.setText("ტრანსპორტირების ღირებულება 0 ¢");
+                double y = 0 + Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));
+                CheckoutSingleton.getInstance().addNewValue("shipping_price", "0 ¢");
+                CheckoutSingleton.getInstance().addNewValue("total_price", String.valueOf(y)+" ¢");
+            }
+        }
     }
 }

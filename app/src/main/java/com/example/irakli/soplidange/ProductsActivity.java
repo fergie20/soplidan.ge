@@ -13,9 +13,11 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -24,6 +26,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextPaint;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,8 +47,10 @@ import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.adapters.ProductsAdapter;
 import com.example.irakli.soplidange.dialog.ProductDetailDialog;
+import com.example.irakli.soplidange.models.ChangeStatusBar;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
+import com.example.irakli.soplidange.utils.ChangeStatusBarColor;
 import com.example.irakli.soplidange.utils.SingletonTest;
 import com.google.gson.Gson;
 
@@ -78,6 +83,7 @@ public class ProductsActivity extends AppCompatActivity {
     HashMap<Integer, ProductModel> count;
     List<ProductModel> productModels = new ArrayList<>();
     CollapsingToolbarLayout collapsingToolbarLayout;
+
     ActionBar actionBar;
     FloatingActionButton fab;
     ImageView productCategoryImage;
@@ -88,6 +94,7 @@ public class ProductsActivity extends AppCompatActivity {
     ProductsAdapter myAdapter;
     private ProgressDialog progressDialog;
     private Parcelable recyclerViewState;
+
 
 
     @Override
@@ -139,8 +146,7 @@ public class ProductsActivity extends AppCompatActivity {
             collapsingToolbarLayout.setExpandedTitleTypeface(tf);
             collapsingToolbarLayout.setExpandedTitleMargin(40,50,40,50);
 
-
-
+//            change(category_id);
 
 
             Window window = this.getWindow();
@@ -148,6 +154,8 @@ public class ProductsActivity extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+
             switch(category_id) {
                 case 34:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunflowerToolbar));
@@ -355,14 +363,14 @@ public class ProductsActivity extends AppCompatActivity {
         //onRefresh();
 
         if (category_id == -1) {
+
             getJSONInfo(json_url + query);
 
             collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.colorPrimary));
             fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.colorPrimary)));
             productCategoryImage.setImageResource(R.drawable.foodcover);
             actionBar.setTitle("ძიება: " + query);
-
-
+            collapsingToolbarLayout.setExpandedTitleColor(this.getResources().getColor(R.color.sxvadasxvaStatusbar));
         } else {
             getJSONInfo(json_url);
         }
@@ -380,42 +388,30 @@ public class ProductsActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search_id).getActionView();
-        if (null != searchView) {
+        final SearchView searchView = (SearchView) menu.findItem(R.id.search_id).getActionView();
 
+
+        if (null != searchView) {
             searchView.setSearchableInfo(searchManager
                     .getSearchableInfo(getComponentName()));
         }
 
-
-
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//
-//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.search_id)
-//                .getActionView();
-//        if (null != searchView) {
-//            searchView.setSearchableInfo(searchManager
-//                    .getSearchableInfo(getComponentName()));
-//        }
-
-        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
-            public boolean onQueryTextChange(String newText) {
-
-
-                return false;
-            }
-
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
             public boolean onQueryTextSubmit(String query) {
-
                 Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
                 int_query.putExtra("query", query);
                 startActivity(int_query);
                 finish();
                 return false;
             }
-        };
-        searchView.setOnQueryTextListener(queryTextListener);
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+//
+                return false;
+            }
+        });
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -439,7 +435,6 @@ public class ProductsActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar_id);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
-
         actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
@@ -449,16 +444,15 @@ public class ProductsActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(gridLayoutManager);
     }
-
+//http://soplidan.ge/api/products?items_per_page=300&q=
     public void getJSONInfo(String url) {
 
-
+        Log.e("querylog",url);
         StringRequest jsonRequest = new StringRequest
                 (Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        JSONArray jsonArray = null;
-
+                        JSONArray jsonArray;
                         try {
                             JSONObject object = new JSONObject(response);
                             jsonArray = object.getJSONArray("products");
@@ -497,11 +491,6 @@ public class ProductsActivity extends AppCompatActivity {
                                         ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
                                         productModels.add(productModel);
                                     }
-
-
-                                    if(productModels.size()==0){
-                                        Toast.makeText(getApplicationContext(), "არაფერი მოიძებნა", Toast.LENGTH_LONG).show();
-                                    }
                                 } else if (category_id == main_category) {
                                     String product = curObj.getString("product");
                                     String description = curObj.getString("product");
@@ -536,6 +525,10 @@ public class ProductsActivity extends AppCompatActivity {
                                         productModels.add(productModel);
                                     }
 
+//                                    if(productModels.size()==0){
+//                                        Toast.makeText(getApplicationContext(), "არაფერი მოიძებნა", Toast.LENGTH_SHORT).show();
+//                                        break;
+//                                    }
                                 }
 
 
@@ -582,11 +575,12 @@ public class ProductsActivity extends AppCompatActivity {
                 }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
+                Map<String, String> map = new HashMap<>();
                 String key = "Authorization";
                 String encodedString = Base64.encodeToString(String.format("%s:%s", AuthorizationParams.USERNAME, AuthorizationParams.PASSWORD).getBytes(), Base64.NO_WRAP);
                 String value = String.format("Basic %s", encodedString);
                 System.out.println("Shit:   " + value + "  -  " + encodedString);
+
                 map.put(key, value);
                 return map;
             }
@@ -703,4 +697,21 @@ public class ProductsActivity extends AppCompatActivity {
         prefsEditor.putString("MyObject", json);
         prefsEditor.apply();
     }
+
+    public void change(Integer category_id){
+
+        ExampleData.setHashMap();
+//        ChangeStatusBarColor.getInstance().getProduct(category_id);
+
+
+//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunflowerToolbar));
+                collapsingToolbarLayout.setContentScrimColor(ChangeStatusBarColor.getInstance().getProduct(category_id).getColor());
+                fab.setBackgroundTintList(ColorStateList.valueOf(ChangeStatusBarColor.getInstance().getProduct(category_id).getColor()));
+                productCategoryImage.setImageResource(ChangeStatusBarColor.getInstance().getProduct(category_id).getImage());
+                actionBar.setTitle(ChangeStatusBarColor.getInstance().getProduct(category_id).getTitle());
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            window.setStatusBarColor(ChangeStatusBarColor.getInstance().getProduct(category_id).getStatusbarcolor());
+//           }
+        }
 }

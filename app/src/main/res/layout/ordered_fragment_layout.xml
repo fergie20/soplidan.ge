@@ -60,12 +60,15 @@
         android:text="@string/sum" />
 
     <TextView
+        android:id="@+id/total_price_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@id/promo_code_id"
+        android:textColor="@color/colorPrimary"
         android:layout_marginTop="30dp"
+        android:textSize="18sp"
         android:text="6GEL" />
 
 

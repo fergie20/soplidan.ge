@@ -10,6 +10,8 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
+import com.example.irakli.soplidange.utils.CheckoutSingleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +44,7 @@ public class PaymentMethodsFragment extends Fragment {
     private ProgressDialog progressDialog;
     private RequestQueue requestQueue;
     RadioGroup radioGroup;
+    CheckBox checkBox;
 
     @Nullable
     @Override
@@ -49,6 +53,20 @@ public class PaymentMethodsFragment extends Fragment {
         url = "http://soplidan.ge/terms-and-conditions/";
 
         radioGroup = (RadioGroup) paymentMethodFragment.findViewById(R.id.payment_radio_id);
+        checkBox = (CheckBox) paymentMethodFragment.findViewById(R.id.service_radio_btn_id);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    CheckoutSingleton.getInstance().addNewValue("confirm","Yes");
+                }else{
+                    CheckoutSingleton.getInstance().addNewValue("confirm","No");
+                }
+
+            }
+        });
+
+
 
         getJSONInfo();
 
@@ -58,6 +76,7 @@ public class PaymentMethodsFragment extends Fragment {
                     RadioButton btn = (RadioButton) rg.getChildAt(i);
                     if (btn.getId() == checkedId) {
                         String text = String.valueOf(btn.getText());
+                        CheckoutSingleton.getInstance().addNewValue("payment_radioButton",text);
                         System.out.println(text + "iiii");
                         return;
                     }
@@ -75,6 +94,9 @@ public class PaymentMethodsFragment extends Fragment {
             }
         });
 
+        CheckoutSingleton.getInstance().getCartmap().remove("order_time_radioButton");
+
+
 
         return paymentMethodFragment;
     }
@@ -83,7 +105,7 @@ public class PaymentMethodsFragment extends Fragment {
         String url = "http://soplidan.ge/api/payments?items_per_page=80";
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                (url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         JSONArray jsonArray = null;
@@ -98,7 +120,7 @@ public class PaymentMethodsFragment extends Fragment {
                                 String status = curObj.getString("status");
                                 String shipping = curObj.getString("payment");
 
-                                if (status.equals("A")) {
+                                if (status.equals("A") && !curObj.getString("payment_id").equals("12")) {
                                     RadioButton radioButton = new RadioButton(getActivity());
                                     radioButton.setText(shipping);
                                     radioButton.setId(+i);
@@ -137,5 +159,20 @@ public class PaymentMethodsFragment extends Fragment {
         requestQueue = Volley.newRequestQueue(getActivity());
         progressDialog = ProgressDialog.show(getActivity(), "", "გთხოვთ დაელოდოთ...");
         requestQueue.add(jsonRequest);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        CheckoutSingleton.getInstance().getCartmap().remove("order_time_radioButton");
+
+    }
+
+    public void check() {
+        if(checkBox.isChecked()){
+            CheckoutSingleton.getInstance().addNewValue("confirm","Yes");
+        }else{
+            CheckoutSingleton.getInstance().addNewValue("confirm","No");
+        }
     }
 }

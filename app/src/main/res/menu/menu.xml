@@ -7,7 +7,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     android:title="search"
     android:icon="@mipmap/ic_search_white_24dp"
     app:actionViewClass="android.support.v7.widget.SearchView"
-    app:showAsAction="ifRoom"
+    app:showAsAction="ifRoom|collapseActionView"
     />
 
 

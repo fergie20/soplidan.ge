@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.irakli.soplidange.fragments.DeliveryPlaceFragment;
 import com.example.irakli.soplidange.fragments.DeliveryTermsFragment;
@@ -183,25 +184,44 @@ public class Payment extends AppCompatActivity {
                         }
                         break;
                     case 2:
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
-                                .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
-                                .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                .addToBackStack(null)
-                                .commit();
-                        counter++;
+                        if (CheckoutSingleton.getInstance().getCartmap().containsKey("order_time_radioButton")  ){
+                            deliveryTermsFragment.saveShippingTotal();
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
+                                    .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+                                    .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                                    .addToBackStack(null)
+                                    .commit();
+                            counter++;
+                        }else{
+                            Toast.makeText(getApplicationContext(), "გთხოვთ მონიშნოთ თქვენთვის სასურველი დრო !", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
 
                         break;
                     case 3:
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
-                                .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
-                                .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                .addToBackStack(null)
-                                .commit();
-                        counter++;
+                        if (CheckoutSingleton.getInstance().getCartmap().containsKey("payment_radioButton") ){
+                            paymentMethodsFragment.check();
+                            if(CheckoutSingleton.getInstance().getValue("confirm").equals("Yes")) {
+                                getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
+                                        .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+                                        .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                                        .addToBackStack(null)
+                                        .commit();
+                                counter++;
+                            }else {
+                                Toast.makeText(getApplicationContext(), "მონიშნეთ თუ თქვენ ეთანხმებით მომსახურების პირობებს !", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }else{
+                            Toast.makeText(getApplicationContext(), "გთხოვთ მონიშნოთ თქვენთვის სასურველი გადახდის მეთოდი !", Toast.LENGTH_SHORT).show();
+
+                        }
 
                         break;
                     default:

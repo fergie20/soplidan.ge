@@ -297,47 +297,45 @@ public class ProductDetailDialog extends DialogFragment {
 
     private void getJSONInfo(String url) {
 
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        try {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
 
 
-                            String fullDesc = response.getString("full_description");
+                    String fullDesc = response.getString("full_description");
 
-                            scrollView = (ScrollView) rootView.findViewById(R.id.dialog_scrol_id);
+                    scrollView = (ScrollView) rootView.findViewById(R.id.dialog_scrol_id);
 
-                                if(fullDesc.equals("")){
-                                scrollView.setVisibility(View.GONE);
-                            }
-
-                            String str_without_html=Html.fromHtml(fullDesc).toString();
-
-
-
-
-
-                            TextView description = (TextView) rootView.findViewById(R.id.dialog_description_id);
-                            description.setText(str_without_html);
-
-                            progressBar.setVisibility(View.GONE);
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    if(fullDesc.equals("")){
+                        scrollView.setVisibility(View.GONE);
                     }
-                }, new Response.ErrorListener() {
 
+                    String str_without_html=Html.fromHtml(fullDesc).toString();
+
+
+
+
+
+                    TextView description = (TextView) rootView.findViewById(R.id.dialog_description_id);
+                    description.setText(str_without_html);
+
+                    progressBar.setVisibility(View.GONE);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
                         progressBar.setVisibility(View.GONE);
                     }
-                }) {
+                }
+
+        ){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
@@ -349,7 +347,6 @@ public class ProductDetailDialog extends DialogFragment {
                 return map;
             }
         };
-
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         progressBar.setVisibility(View.VISIBLE);
         requestQueue.add(jsonObjectRequest);

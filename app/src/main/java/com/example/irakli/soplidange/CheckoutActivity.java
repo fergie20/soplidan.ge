@@ -96,13 +96,19 @@ public class CheckoutActivity extends AppCompatActivity {
         totalPrice = getTotalPrice(cartArray);
 
         payment = (Button) findViewById(R.id.checkout_payment_id);
+
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(SingletonTest.getInstance().getCartMap().size() == 0){
+                    Toast.makeText(getApplicationContext(), "თქვენი კალათა ცარიელია", Toast.LENGTH_SHORT).show();
+                }else{
+
                 Intent intent = new Intent(CheckoutActivity.this, Payment.class);
                 intent.putExtra("allPrice",allPrice);
                 startActivity(intent);
-            }
+            }}
         });
 
 

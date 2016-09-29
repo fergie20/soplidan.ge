@@ -6,8 +6,9 @@
     android:orientation="vertical">
 
     <ImageView
+        android:layout_margin="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerInside"
-        android:src="@drawable/partners" />
+        android:src="@drawable/blogcard" />
 </LinearLayout>
