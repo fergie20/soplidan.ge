@@ -12,11 +12,8 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-<<<<<<< HEAD
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.BottomSheetDialog;
-=======
->>>>>>> origin/master
+
+
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
@@ -49,10 +46,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.adapters.ProductsAdapter;
 import com.example.irakli.soplidange.dialog.ProductDetailDialog;
-import com.example.irakli.soplidange.models.ChangeStatusBar;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
-import com.example.irakli.soplidange.utils.ChangeStatusBarColor;
 import com.example.irakli.soplidange.utils.SingletonTest;
 import com.google.gson.Gson;
 
@@ -143,13 +138,10 @@ public class ProductsActivity extends AppCompatActivity {
             final Typeface tf = Typeface.createFromAsset(this.getAssets(), "BPG_Anna.ttf");
             collapsingToolbarLayout.setCollapsedTitleTypeface(tf);
             collapsingToolbarLayout.setExpandedTitleTypeface(tf);
-<<<<<<< HEAD
             collapsingToolbarLayout.setExpandedTitleMargin(40,50,40,50);
 
 //            change(category_id);
-=======
             collapsingToolbarLayout.setExpandedTitleMargin(40, 50, 40, 50);
->>>>>>> origin/master
 
 
             Window window = this.getWindow();
@@ -157,13 +149,9 @@ public class ProductsActivity extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-<<<<<<< HEAD
 
 
-            switch(category_id) {
-=======
             switch (category_id) {
->>>>>>> origin/master
                 case 34:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunflowerToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sunflowerToolbar));
@@ -404,30 +392,8 @@ public class ProductsActivity extends AppCompatActivity {
             searchView.setSearchableInfo(searchManager
                     .getSearchableInfo(getComponentName()));
         }
-
-<<<<<<< HEAD
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-=======
-
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//
-//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.search_id)
-//                .getActionView();
-//        if (null != searchView) {
-//            searchView.setSearchableInfo(searchManager
-//                    .getSearchableInfo(getComponentName()));
-//        }
-
-        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
-            public boolean onQueryTextChange(String newText) {
-
-
-                return false;
-            }
-
->>>>>>> origin/master
             public boolean onQueryTextSubmit(String query) {
                 Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
                 int_query.putExtra("query", query);
@@ -438,28 +404,12 @@ public class ProductsActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-//
                 return false;
             }
         });
-
-        return super.onCreateOptionsMenu(menu);
+                return super.onCreateOptionsMenu(menu);
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case android.R.id.home:
-                super.onBackPressed();
-                return true;
-//            case R.id.check_list_id:
-//                Intent checkoutActivityIntent = new Intent(getApplicationContext() ,CheckoutActivity.class);
-//                startActivity(checkoutActivityIntent);
-//                break;
-        }
-        return (super.onOptionsItemSelected(menuItem));
-    }
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_id);
@@ -521,14 +471,11 @@ public class ProductsActivity extends AppCompatActivity {
                                         ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
                                         productModels.add(productModel);
                                     }
-<<<<<<< HEAD
-=======
 
 
                                     if (productModels.size() == 0) {
                                         Toast.makeText(getApplicationContext(), "არაფერი მოიძებნა", Toast.LENGTH_LONG).show();
                                     }
->>>>>>> origin/master
                                 } else if (category_id == main_category) {
                                     String product = curObj.getString("product");
                                     String description = curObj.getString("product");
@@ -765,23 +712,5 @@ public class ProductsActivity extends AppCompatActivity {
         prefsEditor.apply();
     }
 
-<<<<<<< HEAD
-    public void change(Integer category_id){
 
-        ExampleData.setHashMap();
-//        ChangeStatusBarColor.getInstance().getProduct(category_id);
-
-
-//                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunflowerToolbar));
-                collapsingToolbarLayout.setContentScrimColor(ChangeStatusBarColor.getInstance().getProduct(category_id).getColor());
-                fab.setBackgroundTintList(ColorStateList.valueOf(ChangeStatusBarColor.getInstance().getProduct(category_id).getColor()));
-                productCategoryImage.setImageResource(ChangeStatusBarColor.getInstance().getProduct(category_id).getImage());
-                actionBar.setTitle(ChangeStatusBarColor.getInstance().getProduct(category_id).getTitle());
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            window.setStatusBarColor(ChangeStatusBarColor.getInstance().getProduct(category_id).getStatusbarcolor());
-//           }
-        }
-=======
->>>>>>> origin/master
 }
