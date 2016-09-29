@@ -29,6 +29,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,15 +76,16 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     CollapsingToolbarLayout collapsingToolbarLayout;
+    FloatingActionButton categoriesFab;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        statusbar();
+        statusBar();
 
-        if(checkShared == 0){
+        if (checkShared == 0) {
             retryShared();
         }
 
@@ -101,123 +104,117 @@ public class MainActivity extends AppCompatActivity {
         collapsingToolbarLayout.setTitle("");
 
 
-
-
-
         navigationView = (NavigationView) findViewById(R.id.navigation_view_id);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
 
-                    // This method will trigger on item Click of navigation menu
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+            // This method will trigger on item Click of navigation menu
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
 
 
-                        //Checking if the item is in checked state or not, if not make it in checked state
-                        if (menuItem.isChecked()) menuItem.setChecked(false);
-                        else menuItem.setChecked(true);
+                //Checking if the item is in checked state or not, if not make it in checked state
+                if (menuItem.isChecked()) menuItem.setChecked(false);
+                else menuItem.setChecked(true);
 
-                        //Closing drawer on item click
-                        drawerLayout.closeDrawers();
+                //Closing drawer on item click
+                drawerLayout.closeDrawers();
 
-                        //Check to see which item was being clicked and perform appropriate action
-                        switch (menuItem.getItemId()) {
-
-
-                            //Replacing the main content with ContentFragment Which is our Inbox View;
-
-                            case R.id.info:
-                                Intent info = new Intent(MainActivity.this,AboutUs.class);
-                                startActivity(info);
-                                return true;
-                            case R.id.blog:
-                                String urlAbout = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
-                                Intent about = new Intent(Intent.ACTION_VIEW);
-                                about.setData(Uri.parse(urlAbout));
-                                startActivity(about);
-                                return true;
-                            case R.id.fb:
-                                String fbUrl = "https://www.facebook.com/soplidan/";
-                                Intent fbAbout = new Intent(Intent.ACTION_VIEW);
-                                fbAbout.setData(Uri.parse(fbUrl));
-                                startActivity(fbAbout);
-                                return true;
-                            case R.id.web:
-                                String webUrl = "http://soplidan.ge/";
-                                Intent webintent = new Intent(Intent.ACTION_VIEW);
-                                webintent.setData(Uri.parse(webUrl));
-                                startActivity(webintent);
-                                return true;
-                            case R.id.email:
-                                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                                        "mailto","info@soplidan.ge", null));
-
-                                startActivity(Intent.createChooser(emailIntent, "გააგზავნეთ ელ.ფოსტა" ));
-                                return true;
-                            case R.id.phone:
-                                Intent phone = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "+995557470441"));
-                                startActivity(phone);
-                                return true;
-
-                            default:
-                                Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
-                                return true;
-
-                        }
-                    }
-                });
+                //Check to see which item was being clicked and perform appropriate action
+                switch (menuItem.getItemId()) {
 
 
-            drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-            ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
+                    //Replacing the main content with ContentFragment Which is our Inbox View;
+
+                    case R.id.info:
+                        Intent info = new Intent(MainActivity.this, AboutUs.class);
+                        startActivity(info);
+                        return true;
+                    case R.id.blog:
+                        String urlAbout = "http://soplidan.ge/%E1%83%91%E1%83%9A%E1%83%9D%E1%83%92%E1%83%98/";
+                        Intent about = new Intent(Intent.ACTION_VIEW);
+                        about.setData(Uri.parse(urlAbout));
+                        startActivity(about);
+                        return true;
+                    case R.id.fb:
+                        String fbUrl = "https://www.facebook.com/soplidan/";
+                        Intent fbAbout = new Intent(Intent.ACTION_VIEW);
+                        fbAbout.setData(Uri.parse(fbUrl));
+                        startActivity(fbAbout);
+                        return true;
+                    case R.id.web:
+                        String webUrl = "http://soplidan.ge/";
+                        Intent webintent = new Intent(Intent.ACTION_VIEW);
+                        webintent.setData(Uri.parse(webUrl));
+                        startActivity(webintent);
+                        return true;
+                    case R.id.email:
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                "mailto", "info@soplidan.ge", null));
+
+                        startActivity(Intent.createChooser(emailIntent, "გააგზავნეთ ელ.ფოსტა"));
+                        return true;
+                    case R.id.phone:
+                        Intent phone = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "+995557470441"));
+                        startActivity(phone);
+                        return true;
+
+                    default:
+                        Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
+                        return true;
+
+                }
+            }
+        });
 
 
-                            @Override
-                            public void onDrawerOpened(View drawerView) {
-                                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer) {
 
-                                super.onDrawerOpened(drawerView);
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+
+                super.onDrawerOpened(drawerView);
 //                                burger();
 
 
-                            }
+            }
 
-                @Override
-                public void onDrawerClosed(View drawerView) {
-                    super.onDrawerClosed(drawerView);
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
 //                    statusbar();
-    }
-            };
+            }
+        };
 
-                        //Setting the actionbarToggle to drawer layout
-                        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
-
+        //Setting the actionbarToggle to drawer layout
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
 
-                actionBarDrawerToggle.syncState();
+        actionBarDrawerToggle.syncState();
 
 
-                isNetworkAvailable();
+        isNetworkAvailable();
 
-                FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-                fab.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+        categoriesFab = (FloatingActionButton) findViewById(R.id.fab);
+        categoriesFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                        Intent addEvent = new Intent(MainActivity.this, CheckoutActivity.class);
-                        startActivity(addEvent);
+                Intent addEvent = new Intent(MainActivity.this, CheckoutActivity.class);
+                startActivity(addEvent);
 
-                    }
-                });
+            }
+        });
 
 //        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
 //        mSwipeRefreshLayout.setOnRefreshListener(this);
 
-                getJSONInfo();
-                count();
-            }
-
+        getJSONInfo();
+        count();
+    }
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -236,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView soplidan = (TextView) findViewById(R.id.soplidan_id);
                 soplidan.setVisibility(View.GONE);
             }
-        }) ;
+        });
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
@@ -247,14 +244,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
             public boolean onQueryTextChange(String newText) {
 
 
-    //                Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
+                //                Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
 //                int_query.putExtra("query",newText);
 //                startActivity(int_query);
 
@@ -356,6 +350,37 @@ public class MainActivity extends AppCompatActivity {
         int count_sum = 0;
         ArrayList<ProductModel> cartMap = new ArrayList<>();
 
+        if (SingletonTest.getInstance().getNumberOfItems() == 0) {
+            categoriesFab.hide();
+            categoriesFab.animate().translationY(categoriesFab.getHeight() + 16).setInterpolator(new AccelerateInterpolator(2)).start();
+
+        } else {
+            categoriesFab.show();
+            categoriesFab.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
+
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        categoriesFab.show();
+                        categoriesFab.animate().setStartDelay(300);
+                    }
+
+                    super.onScrollStateChanged(recyclerView, newState);
+                }
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    if (dy > 0 || dy < 0 && categoriesFab.isShown()) {
+                        categoriesFab.animate().setStartDelay(0);
+                        categoriesFab.hide();
+                    }
+
+                    super.onScrolled(recyclerView, dx, dy);
+                }
+            });
+        }
+
         Iterator myVeryOwnIterator = count.keySet().iterator();
         if (count.size() > 0) {
             while (myVeryOwnIterator.hasNext()) {
@@ -385,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        saveShared ();
+        saveShared();
     }
 
     public void isNetworkAvailable() {
@@ -400,13 +425,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void saveShared (){
+    public void saveShared() {
 
         SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
 
-
-        HashMap<Integer,ProductModel> cartMap;
+        HashMap<Integer, ProductModel> cartMap;
 
         cartMap = SingletonTest.getInstance().getCartMap();
 
@@ -416,18 +440,21 @@ public class MainActivity extends AppCompatActivity {
         prefsEditor.putString("MyObject", json);
         prefsEditor.apply();
     }
-    public void retryShared(){
+
+    public void retryShared() {
         SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
 
         Gson gson = new Gson();
         String json = mPrefs.getString("MyObject", "");
 
-        Type typeOfHashMap = new TypeToken<HashMap<Integer, ProductModel>>() { }.getType();
+        Type typeOfHashMap = new TypeToken<HashMap<Integer, ProductModel>>() {
+        }.getType();
         HashMap<Integer, ProductModel> newMap = gson.fromJson(json, typeOfHashMap);
         SingletonTest.getInstance().setCart(newMap);
     }
-    public void statusbar(){
+
+    public void statusBar() {
         Window window = this.getWindow();
 
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -437,4 +464,6 @@ public class MainActivity extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
         }
     }
+
+
 }

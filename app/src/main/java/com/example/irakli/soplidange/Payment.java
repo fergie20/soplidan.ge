@@ -159,13 +159,7 @@ public class Payment extends AppCompatActivity {
                                         .commit();
                                 counter++;
                             }
-                            if (deliveryPlaceFragment.setCheckVisibility() == true &&
-                                    CheckoutSingleton.getInstance().getValue("invoice_name").length() > 1 &&
-                                    CheckoutSingleton.getInstance().getValue("invoice_last_name").length() > 2 &&
-                                    CheckoutSingleton.getInstance().getValue("invoice_address").length() > 2 &&
-                                    CheckoutSingleton.getInstance().getValue("invoice_phone").length() > 8 &&
-                                    !CheckoutSingleton.getInstance().getValue("invoiceSpinCity").equals("0") &&
-                                    !CheckoutSingleton.getInstance().getValue("invoiceSpinDistrict").equals("0")) {
+                            if (true) {
                                 getSupportFragmentManager()
                                         .beginTransaction()
                                         .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)

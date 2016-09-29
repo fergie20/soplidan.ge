@@ -6,15 +6,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+<<<<<<< HEAD
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomSheetDialog;
+=======
+>>>>>>> origin/master
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
@@ -24,7 +26,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextPaint;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -32,6 +33,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +44,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.ExampleData.ExampleData;
@@ -58,7 +60,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -85,7 +86,7 @@ public class ProductsActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
 
     ActionBar actionBar;
-    FloatingActionButton fab;
+    FloatingActionButton productsFab;
     ImageView productCategoryImage;
 
     public static int check = 0;
@@ -109,23 +110,21 @@ public class ProductsActivity extends AppCompatActivity {
         initToolbar();
         isNetworkAvailable();
 
-
-
-        count();
-
-
-
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        productsFab = (FloatingActionButton) findViewById(R.id.fab);
+        productsFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent addEvent = new Intent(ProductsActivity.this, CheckoutActivity.class);
-                addEvent.putExtra("checkboolean",1);
+                addEvent.putExtra("checkboolean", 1);
                 startActivity(addEvent);
 
             }
         });
+
+//        animateFabOnScroll();
+        count();
+
 //        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.container);
 //        mSwipeRefreshLayout.setOnRefreshListener(this);
 
@@ -144,9 +143,13 @@ public class ProductsActivity extends AppCompatActivity {
             final Typeface tf = Typeface.createFromAsset(this.getAssets(), "BPG_Anna.ttf");
             collapsingToolbarLayout.setCollapsedTitleTypeface(tf);
             collapsingToolbarLayout.setExpandedTitleTypeface(tf);
+<<<<<<< HEAD
             collapsingToolbarLayout.setExpandedTitleMargin(40,50,40,50);
 
 //            change(category_id);
+=======
+            collapsingToolbarLayout.setExpandedTitleMargin(40, 50, 40, 50);
+>>>>>>> origin/master
 
 
             Window window = this.getWindow();
@@ -154,13 +157,17 @@ public class ProductsActivity extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+<<<<<<< HEAD
 
 
             switch(category_id) {
+=======
+            switch (category_id) {
+>>>>>>> origin/master
                 case 34:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunflowerToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sunflowerToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sunflowerToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sunflowerToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_sunflower);
                     actionBar.setTitle(ExampleData.categories[0]);
 
@@ -168,7 +175,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 33:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.fokiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.fokiToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.fokiToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.fokiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_fokismonasteri);
                     actionBar.setTitle(ExampleData.categories[1]);
 
@@ -176,7 +183,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 32:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.bioToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.bioToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bioToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bioToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_biobostneuli);
                     actionBar.setTitle(ExampleData.categories[2]);
 
@@ -184,7 +191,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 30:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.puriToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.puriToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.puriToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.puriToolbar)));
                     productCategoryImage.setImageResource(R.drawable.pur);
                     actionBar.setTitle(ExampleData.categories[3]);
 
@@ -192,14 +199,14 @@ public class ProductsActivity extends AppCompatActivity {
                 case 29:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.saxlebiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.saxlebiToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.saxlebiToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.saxlebiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_mwsaxli);
                     actionBar.setTitle(ExampleData.categories[4]);
                     break;
                 case 28:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.chaiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.chaiToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.chaiToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.chaiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_chai);
                     actionBar.setTitle(ExampleData.categories[5]);
 
@@ -207,7 +214,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 26:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sunelebiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sunelebiToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sunelebiToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sunelebiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_saweblebi);
                     actionBar.setTitle(ExampleData.categories[6]);
 
@@ -215,7 +222,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 24:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sxvadasxvaToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sxvadasxvaToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sxvadasxvaToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sxvadasxvaToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_sxvadasxva);
                     actionBar.setTitle(ExampleData.categories[7]);
 
@@ -223,7 +230,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 23:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.rdzeToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.rdzeToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.rdzeToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.rdzeToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_kvercxi);
                     actionBar.setTitle(ExampleData.categories[8]);
 
@@ -231,7 +238,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 21:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xiliToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xiliToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xiliToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xiliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.fruitcover);
                     actionBar.setTitle(ExampleData.categories[9]);
 
@@ -239,7 +246,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 20:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.mwniliToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.mwniliToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.mwniliToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.mwniliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cow_mwnili);
                     actionBar.setTitle(ExampleData.categories[10]);
 
@@ -247,7 +254,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 12:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.bostneuliToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.bostneuliToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bostneuliToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.bostneuliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.vegetco);
                     actionBar.setTitle(ExampleData.categories[11]);
 
@@ -255,7 +262,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 11:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.sasmeliToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.sasmeliToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sasmeliToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.sasmeliToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_sasmeli);
                     actionBar.setTitle(ExampleData.categories[12]);
 
@@ -263,7 +270,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 9:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.zetiToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.zetiToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.zetiToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.zetiToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_dzmari);
                     actionBar.setTitle(ExampleData.categories[13]);
 
@@ -271,7 +278,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 6:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.nugbariToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.nugbariToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.nugbariToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.nugbariToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_nugbari);
                     actionBar.setTitle(ExampleData.categories[14]);
 
@@ -279,7 +286,7 @@ public class ProductsActivity extends AppCompatActivity {
                 case 5:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xorciToolbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xorciToolbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xorciToolbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xorciToolbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_xorceuli);
                     actionBar.setTitle(ExampleData.categories[15]);
 
@@ -288,14 +295,14 @@ public class ProductsActivity extends AppCompatActivity {
                 default:
 //                    toolbar.setBackgroundColor(this.getResources().getColor(R.color.xiliStatusbar));
                     collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.xiliStatusbar));
-                    fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xiliStatusbar)));
+                    productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.xiliStatusbar)));
                     productCategoryImage.setImageResource(R.drawable.cov_xili);
 
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-                switch(category_id) {
+                switch (category_id) {
                     case 34:
                         window.setStatusBarColor(this.getResources().getColor(R.color.sunflowerStatusBar));
                         break;
@@ -367,7 +374,7 @@ public class ProductsActivity extends AppCompatActivity {
             getJSONInfo(json_url + query);
 
             collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.colorPrimary));
-            fab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.colorPrimary)));
+            productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.colorPrimary)));
             productCategoryImage.setImageResource(R.drawable.foodcover);
             actionBar.setTitle("ძიება: " + query);
             collapsingToolbarLayout.setExpandedTitleColor(this.getResources().getColor(R.color.sxvadasxvaStatusbar));
@@ -380,6 +387,8 @@ public class ProductsActivity extends AppCompatActivity {
         minus = (ImageView) findViewById(R.id.grid_minus_id);
         quantityView = (TextView) findViewById(R.id.grid_text_id);
 //        new Task().execute();
+
+
 
     }
 
@@ -396,8 +405,29 @@ public class ProductsActivity extends AppCompatActivity {
                     .getSearchableInfo(getComponentName()));
         }
 
+<<<<<<< HEAD
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
+=======
+
+//        getMenuInflater().inflate(R.menu.menu, menu);
+//
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        SearchView searchView = (SearchView) menu.findItem(R.id.search_id)
+//                .getActionView();
+//        if (null != searchView) {
+//            searchView.setSearchableInfo(searchManager
+//                    .getSearchableInfo(getComponentName()));
+//        }
+
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+            public boolean onQueryTextChange(String newText) {
+
+
+                return false;
+            }
+
+>>>>>>> origin/master
             public boolean onQueryTextSubmit(String query) {
                 Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
                 int_query.putExtra("query", query);
@@ -487,10 +517,18 @@ public class ProductsActivity extends AppCompatActivity {
                                         list_discount_prc = curObj.getInt("list_discount_prc");
                                     }
 
-                                    if(status.equals("A")){
+                                    if (status.equals("A")) {
                                         ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
                                         productModels.add(productModel);
                                     }
+<<<<<<< HEAD
+=======
+
+
+                                    if (productModels.size() == 0) {
+                                        Toast.makeText(getApplicationContext(), "არაფერი მოიძებნა", Toast.LENGTH_LONG).show();
+                                    }
+>>>>>>> origin/master
                                 } else if (category_id == main_category) {
                                     String product = curObj.getString("product");
                                     String description = curObj.getString("product");
@@ -520,7 +558,7 @@ public class ProductsActivity extends AppCompatActivity {
                                         list_discount = curObj.getDouble("list_discount");
                                         list_discount_prc = curObj.getInt("list_discount_prc");
                                     }
-                                    if(status.equals("A")){
+                                    if (status.equals("A")) {
                                         ProductModel productModel = new ProductModel(category, product, description, image_path, product_id, amount, price, status, product_code, base_price, list_discount, list_discount_prc);
                                         productModels.add(productModel);
                                     }
@@ -591,6 +629,7 @@ public class ProductsActivity extends AppCompatActivity {
         progressDialog = ProgressDialog.show(this, "", "გთხოვთ დაელოდოთ...");
         requestQueue.add(jsonRequest);
     }
+
 //    @Override
 //    public void onRefresh() {
 //        if(category_id==-1){
@@ -623,7 +662,6 @@ public class ProductsActivity extends AppCompatActivity {
         System.out.println("OnPause");
     }
 
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -632,15 +670,13 @@ public class ProductsActivity extends AppCompatActivity {
 
     }
 
-
     public void updateListView() {
 
 
-
-        if (check == 1){
+        if (check == 1) {
             gridRecycler.setAdapter(myAdapter);
             check = 0;
-        }else{
+        } else {
             myAdapter.notifyDataSetChanged();
         }
 
@@ -653,8 +689,40 @@ public class ProductsActivity extends AppCompatActivity {
         int count_sum = 0;
         ArrayList<ProductModel> cartMap = new ArrayList<>();
 
+        if (SingletonTest.getInstance().getNumberOfItems() == 0){
+            productsFab.hide();
+            productsFab.animate().translationY(productsFab.getHeight() + 16).setInterpolator(new AccelerateInterpolator(1)).start();
+        }else {
+            productsFab.show();
+            productsFab.animate().translationY(0).setInterpolator(new DecelerateInterpolator(1)).start();
+
+            gridRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    if (dy > 0 || dy < 0 && productsFab.isShown()){
+                        productsFab.animate().setStartDelay(0);
+                        productsFab.hide();
+                    }
+
+                    super.onScrolled(recyclerView, dx, dy);
+                }
+
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE){
+
+                        productsFab.animate().setStartDelay(450);
+                        productsFab.show();
+                    }
+
+                    super.onScrollStateChanged(recyclerView, newState);
+                }
+            });
+        }
+
         Iterator myVeryOwnIterator = count.keySet().iterator();
         if (count.size() > 0) {
+
             while (myVeryOwnIterator.hasNext()) {
                 int key = (int) myVeryOwnIterator.next();
                 ProductModel value = count.get(key);
@@ -681,13 +749,12 @@ public class ProductsActivity extends AppCompatActivity {
         }
     }
 
-    public void saveShared (){
+    public void saveShared() {
 
         SharedPreferences mPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
 
-
-        HashMap<Integer,ProductModel> cartMap;
+        HashMap<Integer, ProductModel> cartMap;
 
         cartMap = SingletonTest.getInstance().getCartMap();
 
@@ -698,6 +765,7 @@ public class ProductsActivity extends AppCompatActivity {
         prefsEditor.apply();
     }
 
+<<<<<<< HEAD
     public void change(Integer category_id){
 
         ExampleData.setHashMap();
@@ -714,4 +782,6 @@ public class ProductsActivity extends AppCompatActivity {
 //            window.setStatusBarColor(ChangeStatusBarColor.getInstance().getProduct(category_id).getStatusbarcolor());
 //           }
         }
+=======
+>>>>>>> origin/master
 }
