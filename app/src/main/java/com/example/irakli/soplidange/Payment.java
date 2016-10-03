@@ -36,6 +36,7 @@ public class Payment extends AppCompatActivity {
     OrderedProductsFragment orderedProductsFragment;
     boolean checkButton = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +87,7 @@ public class Payment extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         counter--;
+//        System.out.println(counter);
     }
 
     private void initToolbar() {
@@ -124,7 +126,7 @@ public class Payment extends AppCompatActivity {
                         guestFieldsFragment.saveGuestInfo();
                         if (CheckoutSingleton.getInstance().getValue("guest_name").length() > 1 &&
                                 CheckoutSingleton.getInstance().getValue("guest_last_name").length() > 2 &&
-                                CheckoutSingleton.getInstance().getValue("guest_email").length() > 8 &&
+                                CheckoutSingleton.getInstance().getValue("guest_email").length() > 1 &&
                                 CheckoutSingleton.getInstance().getValue("guest_mobile").length() > 8 &&
                                 CheckoutSingleton.getInstance().getValue("guest_card_id").length() == 11) {
                             getSupportFragmentManager()
@@ -138,8 +140,8 @@ public class Payment extends AppCompatActivity {
                             guestFieldsFragment.setError();
                         }
                         break;
-                    case 1:
 
+                    case 1:
                         deliveryPlaceFragment.saveDeliveriInfo();
 
                         if (CheckoutSingleton.getInstance().getValue("delivery_name").length() > 1 &&
@@ -149,7 +151,7 @@ public class Payment extends AppCompatActivity {
                                 CheckoutSingleton.getInstance().getValue("delivery_card_id").length() == 11 &&
                                 !CheckoutSingleton.getInstance().getValue("spinCity").equals("0") &&
                                 !CheckoutSingleton.getInstance().getValue("spinDistrict").equals("0")) {
-                            if (deliveryPlaceFragment.setCheckVisibility() == false) {
+
                                 getSupportFragmentManager()
                                         .beginTransaction()
                                         .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
@@ -158,27 +160,28 @@ public class Payment extends AppCompatActivity {
                                         .addToBackStack(null)
                                         .commit();
                                 counter++;
-                            }
-                            if (true) {
-                                getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
-                                        .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
-                                        .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                        .addToBackStack(null)
-                                        .commit();
-                                counter++;
-                            } else {
-                                deliveryPlaceFragment.visibleSetError();
-                            }
+
+//                            if (true) {
+//                                getSupportFragmentManager()
+//                                        .beginTransaction()
+//                                        .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
+//                                        .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+//                                        .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+//                                        .addToBackStack(null)
+//                                        .commit();
+//                                counter++;
+//                            } else {
+//                                deliveryPlaceFragment.visibleSetError();
+//                            }
 
                         } else {
                             deliveryPlaceFragment.setError();
 
                         }
                         break;
+
                     case 2:
-                        if (CheckoutSingleton.getInstance().getCartmap().containsKey("order_time_radioButton")  ){
+                        if (CheckoutSingleton.getInstance().getCartmap().containsKey("order_time_radioButton")) {
                             deliveryTermsFragment.saveShippingTotal();
                             getSupportFragmentManager()
                                     .beginTransaction()
@@ -188,18 +191,17 @@ public class Payment extends AppCompatActivity {
                                     .addToBackStack(null)
                                     .commit();
                             counter++;
-                        }else{
+                        } else {
                             Toast.makeText(getApplicationContext(), "გთხოვთ მონიშნოთ თქვენთვის სასურველი დრო !", Toast.LENGTH_SHORT).show();
 
                         }
 
-
-
                         break;
+
                     case 3:
-                        if (CheckoutSingleton.getInstance().getCartmap().containsKey("payment_radioButton") ){
+                        if (CheckoutSingleton.getInstance().getCartmap().containsKey("payment_radioButton")) {
                             paymentMethodsFragment.check();
-                            if(CheckoutSingleton.getInstance().getValue("confirm").equals("Yes")) {
+                            if (CheckoutSingleton.getInstance().getValue("confirm").equals("Yes")) {
                                 getSupportFragmentManager()
                                         .beginTransaction()
                                         .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
@@ -208,16 +210,16 @@ public class Payment extends AppCompatActivity {
                                         .addToBackStack(null)
                                         .commit();
                                 counter++;
-                            }else {
+                            } else {
                                 Toast.makeText(getApplicationContext(), "მონიშნეთ თუ თქვენ ეთანხმებით მომსახურების პირობებს !", Toast.LENGTH_SHORT).show();
 
                             }
-                        }else{
+                        } else {
                             Toast.makeText(getApplicationContext(), "გთხოვთ მონიშნოთ თქვენთვის სასურველი გადახდის მეთოდი !", Toast.LENGTH_SHORT).show();
 
                         }
-
                         break;
+
                     default:
                         return;
                 }
