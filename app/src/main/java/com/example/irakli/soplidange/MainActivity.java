@@ -46,6 +46,7 @@ import com.example.irakli.soplidange.adapters.CategoriesAdapter;
 import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
+import com.example.irakli.soplidange.utils.CheckoutSingleton;
 import com.example.irakli.soplidange.utils.SingletonTest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         statusBar();
+
 
         if (checkShared == 0) {
             retryShared();

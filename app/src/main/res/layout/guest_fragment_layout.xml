@@ -14,11 +14,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:text="@string/authorization_as_guest"
-        android:layout_marginLeft="30dp"
         android:textColor="#fff"
         android:textSize="15sp"
         android:textStyle="bold" />
@@ -30,10 +30,10 @@
         android:scrollbars="none">
 
         <LinearLayout
-            android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="10dp">
 
 
             <LinearLayout
@@ -223,14 +223,14 @@
 
 
                 <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="9dp"
-                    android:textColor="#595959"
+                    android:layout_marginTop="20dp"
                     android:text="@string/organization_question"
-                    android:textStyle="italic|bold"
-                    android:id="@+id/textView2" />
+                    android:textColor="#595959"
+                    android:textStyle="italic|bold" />
 
                 <RadioGroup
                     android:id="@+id/organization_radio_group_id"
@@ -243,20 +243,18 @@
                         android:id="@+id/yes_btn_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="6dp"
                         android:layout_marginEnd="6dp"
+                        android:layout_marginRight="6dp"
                         android:padding="5dp"
-                        android:text="@string/yes"
-                        />
+                        android:text="@string/yes" />
 
                     <RadioButton
                         android:id="@+id/no_btn_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="@string/no"
                         android:checked="true"
-                        />
+                        android:padding="5dp"
+                        android:text="@string/no" />
 
                 </RadioGroup>
 
@@ -271,8 +269,8 @@
                         android:id="@+id/guest_organization_image"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
                         android:layout_alignParentTop="true"
+                        android:layout_marginTop="10dp"
                         app:srcCompat="@drawable/guest_organization_grey"
                         tools:ignore="MissingPrefix" />
 
