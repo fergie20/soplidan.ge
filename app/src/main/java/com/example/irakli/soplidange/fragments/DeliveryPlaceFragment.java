@@ -632,6 +632,15 @@ public class DeliveryPlaceFragment extends Fragment {
         SharedPreferences mPrefs = this.getActivity().getSharedPreferences("checkout", Context.MODE_PRIVATE);
         HashMap<String, String> cartMap;
         cartMap = CheckoutSingleton.getInstance().getCartmap();
+        if (CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_organization_group_checked")){
+            cartMap.remove("delivery_organization_group_checked");
+        }
+        if (CheckoutSingleton.getInstance().getCartmap().containsKey("invoice_radio_group_checked")){
+            cartMap.remove("invoice_radio_group_checked");
+        }
+        if (CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_radio_group_second")){
+            cartMap.remove("delivery_radio_group_second");
+        }
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(cartMap);

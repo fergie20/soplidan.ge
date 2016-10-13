@@ -273,6 +273,9 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
         SharedPreferences mPrefs = this.getActivity().getSharedPreferences("checkout", Context.MODE_PRIVATE);
         HashMap<String, String> cartMap;
         cartMap = CheckoutSingleton.getInstance().getCartmap();
+        if (CheckoutSingleton.getInstance().getCartmap().containsKey("organization_group_checked")){
+            cartMap.remove("organization_group_checked");
+        }
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(cartMap);
