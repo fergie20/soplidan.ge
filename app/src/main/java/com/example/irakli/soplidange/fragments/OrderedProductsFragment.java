@@ -34,7 +34,6 @@ public class OrderedProductsFragment extends Fragment {
         totalPrice.setText(CheckoutSingleton.getInstance().getValue("total_price"));
 
 
-
         return orderedProductsFragment;
     }
 

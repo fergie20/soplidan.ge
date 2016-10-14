@@ -2,6 +2,7 @@ package com.example.irakli.soplidange;
 
 import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -56,7 +57,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.security.Key;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -313,7 +317,43 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
                             }
-                            myAdapter = new CategoriesAdapter(categoryModels, getApplicationContext());
+
+
+
+
+                            ArrayList<CategoryModel> foradaptermodels = new ArrayList<>();
+
+                            HashMap<Integer,CategoryModel> hashPosition = new HashMap<>();
+
+                            for (int i = 0; i < categoryModels.size(); i++) {
+                                hashPosition.put(categoryModels.get(i).getPosition(),categoryModels.get(i));
+                            }
+
+
+
+                            for (int i = 0; i < categoryModels.size(); i++) {
+
+                                int keyOfMax = Collections.max(
+                                        hashPosition.entrySet(),
+                                        new Comparator<Map.Entry<Integer,CategoryModel>>(){
+                                            @Override
+                                            public int compare(Map.Entry<Integer, CategoryModel> o1, Map.Entry<Integer, CategoryModel> o2) {
+                                                return o1.getKey() < o2.getKey()? 1:-1;
+                                            }
+                                        }).getKey();
+
+
+                                foradaptermodels.add(hashPosition.get(keyOfMax));
+
+                                hashPosition.remove(keyOfMax);
+
+                                System.out.println("position = " +keyOfMax);
+
+                            }
+
+
+
+                            myAdapter = new CategoriesAdapter(foradaptermodels, getApplicationContext());
                             recyclerView.setAdapter(myAdapter);
                             progressDialog.cancel();
 
@@ -366,6 +406,7 @@ public class MainActivity extends AppCompatActivity {
                     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                         categoriesFab.show();
                         categoriesFab.animate().setStartDelay(300);
+                        count_item.setVisibility(View.VISIBLE);
                     }
 
                     super.onScrollStateChanged(recyclerView, newState);
@@ -376,6 +417,7 @@ public class MainActivity extends AppCompatActivity {
                     if (dy > 0 || dy < 0 && categoriesFab.isShown()) {
                         categoriesFab.animate().setStartDelay(0);
                         categoriesFab.hide();
+                        count_item.setVisibility(View.GONE);
                     }
 
                     super.onScrolled(recyclerView, dx, dy);
@@ -466,6 +508,23 @@ public class MainActivity extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
         }
     }
+    public class NewClass4 {
+        public void main(String[] args)
+        {
+            HashMap<Integer,Integer>map=new HashMap<Integer, Integer>();
+            map.put(1, 50);
+            map.put(2, 60);
+            map.put(3, 30);
+            map.put(4, 60);
+            map.put(5, 60);
+            int maxValueInMap=(Collections.max(map.keySet()));  // This will return max value in the Hashmap
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {  // Itrate through hashmap
+                if (entry.getValue()==maxValueInMap) {
+                    System.out.println(entry.getKey());     // Print the key with max value
+                }
+            }
 
+        }
+    }
 
 }

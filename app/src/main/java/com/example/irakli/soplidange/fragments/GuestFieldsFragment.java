@@ -189,15 +189,15 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
             guestPersonView.setImageResource(R.drawable.error_person);
             return;
         }
-        if (guest_mail.getText().toString().length() < 7) {
-            guest_mail.setError("გთხოვთ შეავსოთ აუცილებელი ველი!");
+        if (guest_mail.getText().toString().length() < 7 || !guest_mail.getText().toString().contains("@") || !guest_mail.getText().toString().contains(".") || guest_mail.getText().toString().contains(" ")) {
+            guest_mail.setError("გთხოვთ მიუთითოთ სწორი ელ.ფოსტა!");
             guest_mail.requestFocus();
             guestEmailView.setImageResource(R.drawable.error_email);
             return;
         }
 
-        if (guest_phone.getText().toString().length() < 9) {
-            guest_phone.setError("გთხოვთ მიუთითეთ ტელეფონი!");
+        if (guest_phone.getText().toString().length() != 9) {
+            guest_phone.setError("გთხოვთ მიუთითეთ სწორი ფორმატით: 599XXXXXX!");
 
             guest_phone.requestFocus();
             guestPhoneView.setImageResource(R.drawable.error_phone);

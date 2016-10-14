@@ -2,6 +2,7 @@ package com.example.irakli.soplidange.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -92,8 +93,15 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
             super(itemView);
 
             categoryNameView = (TextView) itemView.findViewById(R.id.recycler_item_id);
+            categoryNameView.setTypeface(typeface());
             click = (LinearLayout) itemView.findViewById(R.id.card_view_id);
             categoryImageView = (ImageView) itemView.findViewById(R.id.category_image_id);
         }
+    }
+    public Typeface typeface() {
+
+        Typeface custom_font = Typeface.createFromAsset(context.getAssets(), "BPG_GEL_Excelsior_Caps.ttf");
+
+        return custom_font;
     }
 }

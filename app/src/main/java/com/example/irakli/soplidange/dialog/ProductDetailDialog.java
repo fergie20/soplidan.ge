@@ -100,8 +100,7 @@ public class ProductDetailDialog extends DialogFragment {
             image.setTagEnable(true);
             image.setTagText("sale: " + model.getList_discount_prc() + "%");
 
-
-
+            currentPrice.setTypeface(typeface());
 
             currentPrice.setText("ფასი: " + model.getBase_price() + "¢  " + model.getList_price() + "¢", TextView.BufferType.SPANNABLE);
             Spannable spannable = (Spannable) currentPrice.getText();

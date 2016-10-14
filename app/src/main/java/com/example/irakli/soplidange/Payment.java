@@ -136,8 +136,11 @@ public class Payment extends AppCompatActivity {
 //                        System.out.println(CheckoutSingleton.getInstance().getValue("organization_group_checked"));
                         if (CheckoutSingleton.getInstance().getValue("guest_name").length() > 1 &&
                                 CheckoutSingleton.getInstance().getValue("guest_last_name").length() > 2 &&
-                                CheckoutSingleton.getInstance().getValue("guest_email").length() > 1 &&
-                                CheckoutSingleton.getInstance().getValue("guest_mobile").length() > 8 &&
+                                CheckoutSingleton.getInstance().getValue("guest_email").length() > 7 &&
+                                CheckoutSingleton.getInstance().getValue("guest_email").toString().contains("@") &&
+                                CheckoutSingleton.getInstance().getValue("guest_email").toString().contains(".") &&
+                                !CheckoutSingleton.getInstance().getValue("guest_email").toString().contains(" ") &&
+                                CheckoutSingleton.getInstance().getValue("guest_mobile").length() == 9 &&
                                 CheckoutSingleton.getInstance().getValue("guest_card_id").length() == 11) {
 
                             if (CheckoutSingleton.getInstance().getValue("organization_group_checked").equals("no")) {
@@ -176,13 +179,12 @@ public class Payment extends AppCompatActivity {
                         if (CheckoutSingleton.getInstance().getValue("delivery_name").length() > 1 &&
                                 CheckoutSingleton.getInstance().getValue("delivery_last_name").length() > 2 &&
                                 CheckoutSingleton.getInstance().getValue("delivery_address").length() > 2 &&
-                                CheckoutSingleton.getInstance().getValue("delivery_phone").length() > 8 &&
+                                CheckoutSingleton.getInstance().getValue("delivery_phone").length() ==9 &&
                                 CheckoutSingleton.getInstance().getValue("delivery_card_id").length() == 11 &&
                                 !CheckoutSingleton.getInstance().getValue("spinCity").equals("0") &&
                                 !CheckoutSingleton.getInstance().getValue("spinDistrict").equals("0")) {
 //                            System.out.println(CheckoutSingleton.getInstance().getValue("delivery_organization_group_checked"));
 
-                            if (CheckoutSingleton.getInstance().getValue("delivery_organization_group_checked").equals("no")) {
 
                                 if (CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("yes")) {
                                     getSupportFragmentManager()
@@ -194,11 +196,11 @@ public class Payment extends AppCompatActivity {
                                             .commit();
                                     counter++;
                                 } else if (CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no") &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_name")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_last_name")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_address")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_phone")) &&
-//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_organisation_name")) &&
+                                        CheckoutSingleton.getInstance().getValue("invoice_name").length() > 1 &&
+                                        CheckoutSingleton.getInstance().getValue("invoice_last_name").length() > 2 &&
+                                        CheckoutSingleton.getInstance().getValue("invoice_address").length() > 2 &&
+                                        CheckoutSingleton.getInstance().getValue("invoice_phone").length() == 11 &&
+//                                        !TextUtils.iEmpty(CheckoutSingleton.getInstance().getValue("invoice_organisation_name")) &&
 //                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_organisation_code")) &&
                                         !CheckoutSingleton.getInstance().getValue("invoiceSpinCity").equals("0") &&
                                         !CheckoutSingleton.getInstance().getValue("invoiceSpinDistrict").equals("0")) {
@@ -214,76 +216,75 @@ public class Payment extends AppCompatActivity {
                                 } else {
                                     deliveryPlaceFragment.setError();
                                 }
-                            }
 
 
 //                            System.out.println(CheckoutSingleton.getInstance().getValue("delivery_organization_group_checked"));
 
-                            if (CheckoutSingleton.getInstance().getValue("delivery_organization_group_checked").equals("yes")) {
-
-                                if (!TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_name")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_code")) &&
-                                        CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("yes")) {
-                                    getSupportFragmentManager()
-                                            .beginTransaction()
-                                            .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
-                                            .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
-                                            .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                            .addToBackStack(null)
-                                            .commit();
-                                    counter++;
-                                } else {
-//                                    deliveryPlaceFragment.setError();
-                                }
-
-                                if (CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no") &&
-                                        CheckoutSingleton.getInstance().getValue("delivery_radio_group_second").equals("no") &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_name")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_code")) &&
+//                            if (CheckoutSingleton.getInstance().getValue("delivery_organization_group_checked").equals("yes")) {
+//
+//                                if (!TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_name")) &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_code")) &&
+//                                        CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("yes")) {
+//                                    getSupportFragmentManager()
+//                                            .beginTransaction()
+//                                            .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
+//                                            .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+//                                            .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+//                                            .addToBackStack(null)
+//                                            .commit();
+//                                    counter++;
+//                                } else {
+////                                    deliveryPlaceFragment.setError();
+//                                }
+//
+//                                if (CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no") &&
+//                                        CheckoutSingleton.getInstance().getValue("delivery_radio_group_second").equals("no") &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_name")) &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_code")) &&
+////                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_organisation_name")) &&
+////                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_organisation_code")) &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_name")) &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_last_name")) &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_address")) &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_phone")) &&
+//                                        !CheckoutSingleton.getInstance().getValue("invoiceSpinCity").equals("0") &&
+//                                        !CheckoutSingleton.getInstance().getValue("invoiceSpinDistrict").equals("0")) {
+//
+//                                    getSupportFragmentManager()
+//                                            .beginTransaction()
+//                                            .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
+//                                            .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+//                                            .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+//                                            .addToBackStack(null)
+//                                            .commit();
+//                                    counter++;
+//                                } else if (CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no") &&
+//                                        CheckoutSingleton.getInstance().getValue("delivery_radio_group_second").equals("yes") &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_name")) &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_code")) &&
 //                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_organisation_name")) &&
 //                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_organisation_code")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_name")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_last_name")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_address")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_phone")) &&
-                                        !CheckoutSingleton.getInstance().getValue("invoiceSpinCity").equals("0") &&
-                                        !CheckoutSingleton.getInstance().getValue("invoiceSpinDistrict").equals("0")) {
-
-                                    getSupportFragmentManager()
-                                            .beginTransaction()
-                                            .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
-                                            .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
-                                            .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                            .addToBackStack(null)
-                                            .commit();
-                                    counter++;
-                                } else if (CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no") &&
-                                        CheckoutSingleton.getInstance().getValue("delivery_radio_group_second").equals("yes") &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_name")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("delivery_organisation_code")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_organisation_name")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_organisation_code")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_name")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_last_name")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_address")) &&
-                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_phone")) &&
-                                        !CheckoutSingleton.getInstance().getValue("invoiceSpinCity").equals("0") &&
-                                        !CheckoutSingleton.getInstance().getValue("invoiceSpinDistrict").equals("0")) {
-
-                                    getSupportFragmentManager()
-                                            .beginTransaction()
-                                            .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
-                                            .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
-                                            .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                            .addToBackStack(null)
-                                            .commit();
-                                    counter++;
-
-                                } else {
-                                    deliveryPlaceFragment.setError();
-                                }
-
-                            }
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_name")) &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_last_name")) &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_address")) &&
+//                                        !TextUtils.isEmpty(CheckoutSingleton.getInstance().getValue("invoice_phone")) &&
+//                                        !CheckoutSingleton.getInstance().getValue("invoiceSpinCity").equals("0") &&
+//                                        !CheckoutSingleton.getInstance().getValue("invoiceSpinDistrict").equals("0")) {
+//
+//                                    getSupportFragmentManager()
+//                                            .beginTransaction()
+//                                            .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
+//                                            .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+//                                            .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+//                                            .addToBackStack(null)
+//                                            .commit();
+//                                    counter++;
+//
+//                                } else {
+//                                    deliveryPlaceFragment.setError();
+//                                }
+//
+//                            }
 
 //                            if (true) {
 //                                getSupportFragmentManager()
@@ -305,15 +306,18 @@ public class Payment extends AppCompatActivity {
 
                     case 2:
                         if (CheckoutSingleton.getInstance().getCartmap().containsKey("order_time_radioButton")) {
-                            deliveryTermsFragment.saveShippingTotal();
-                            getSupportFragmentManager()
-                                    .beginTransaction()
-                                    .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
-                                    .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
-                                    .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                    .addToBackStack(null)
-                                    .commit();
-                            counter++;
+                            if (CheckoutSingleton.getInstance().getValue("order_time_radioButton") != ""){
+                                deliveryTermsFragment.saveShippingTotal();
+                                getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_left_enter)
+                                        .replace(R.id.fragment_container_id, fragmentArrayList.get(counter), fragmentArrayList.get(counter).getTag())
+                                        .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                                        .addToBackStack(null)
+                                        .commit();
+                                counter++;
+                            }
+
                         } else {
                             Toast.makeText(getApplicationContext(), "გთხოვთ მონიშნოთ თქვენთვის სასურველი დრო !", Toast.LENGTH_SHORT).show();
 

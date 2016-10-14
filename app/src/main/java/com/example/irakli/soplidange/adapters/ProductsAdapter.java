@@ -76,7 +76,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
         } else {
             holder.productImageView.setTagEnable(true);
             holder.productImageView.setTagBackgroundColor(Color.parseColor("#9eff0900"));
-            holder.productImageView.setTagText("sale " + productModels.get(pos).getList_discount_prc() + "¢");
+            holder.productImageView.setTagText("sale " + productModels.get(pos).getList_discount_prc() + "%");
             holder.productPriceView.setText(String.valueOf(product.getBase_price()) + " ¢");
 
             holder.productPriceView.setText(productModels.get(pos).getBase_price() + " ¢  " + productModels.get(pos).getList_price() + " ¢", TextView.BufferType.SPANNABLE);

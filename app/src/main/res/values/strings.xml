@@ -62,7 +62,8 @@
     <string name="delivery_place">შეკვეთის მიწოდების ადგილი</string>
     <string name="edit_text_name">სახელი *</string>
     <string name="edit_text_last_name">გვარი *</string>
-    <string name="edit_text_email">Email *</string>
+    <string name="edit_text_email_required">Email *</string>
+    <string name="edit_text_email">Email</string>
     <string name="edit_text_address">მისამართი *</string>
     <string name="guest_edit_text_address">მისამართი</string>
     <string name="edit_text_phone">ტელეფონი *</string>
@@ -100,4 +101,6 @@
     <string name="add_to_basket">დაამატე კალათაში</string>
     <string name="about_us_text">შპს "სოფლიდან" 2015 წელს დაარსდა. (ს/კ 405102053) კომპანიის მიზანია თბილისის მოსახლეობისათვის ჯანსაღი პროდუქტის მიწოდება. ყველა ოჯახს, რომელსაც სურვილი აქვს იკვებებოდეს ნატურალური პროდუქტით, შეუძლია ადგილზე მიიღოს ყველაფერი, რასაც საიტზე შეიძენს. კომპანია აკონტროლებს და იცავს პროდუქტის ტრანსპორტირების, შენახვის და დაფასოების წესებს სურსათის ეროვნული სააგენტოს ნორმებით. პროდუქტების შეძენა ხდება გლეხებისგან და ფერმერებისგან საქართველოს სხვადასხვა კუთხეში. პროდუქტები დაფასოებული და შეფუთულია.</string>
     <string name="our_partnerships">ჩვენი პარტნიორები</string>
+    <string name="Sunflower">Sunflower</string>
+    <string name="foki">ფოკის მონასტერი</string>
 </resources>

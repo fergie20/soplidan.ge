@@ -66,18 +66,21 @@ public class PaymentMethodsFragment extends Fragment {
             }
         });
 
-
-
         getJSONInfo();
+
+
+
+
+
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup rg, int checkedId) {
                 for (int i = 0; i < rg.getChildCount(); i++) {
                     RadioButton btn = (RadioButton) rg.getChildAt(i);
+
                     if (btn.getId() == checkedId) {
                         String text = String.valueOf(btn.getText());
                         CheckoutSingleton.getInstance().addNewValue("payment_radioButton",text);
-                        System.out.println(text + "iiii");
                         return;
                     }
                 }
@@ -93,9 +96,6 @@ public class PaymentMethodsFragment extends Fragment {
                 startActivity(serviceIntent);
             }
         });
-
-        CheckoutSingleton.getInstance().getCartmap().remove("order_time_radioButton");
-
 
 
         return paymentMethodFragment;
@@ -120,6 +120,7 @@ public class PaymentMethodsFragment extends Fragment {
                                 String status = curObj.getString("status");
                                 String shipping = curObj.getString("payment");
 
+
                                 if (status.equals("A") && !curObj.getString("payment_id").equals("12")) {
                                     RadioButton radioButton = new RadioButton(getActivity());
                                     radioButton.setText(shipping);
@@ -127,7 +128,6 @@ public class PaymentMethodsFragment extends Fragment {
                                     rprms = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
                                     radioGroup.addView(radioButton, rprms);
                                 }
-
                             }
 
                             progressDialog.cancel();
@@ -161,12 +161,7 @@ public class PaymentMethodsFragment extends Fragment {
         requestQueue.add(jsonRequest);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        CheckoutSingleton.getInstance().getCartmap().remove("order_time_radioButton");
 
-    }
 
     public void check() {
         if(checkBox.isChecked()){

@@ -320,18 +320,18 @@ public class DeliveryPlaceFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_organization_group_checked") ) {
-            CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "no");
-        }
-
+//        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_organization_group_checked") ) {
+//            CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "no");
+//        }
+//
         if (!CheckoutSingleton.getInstance().getCartmap().containsKey("invoice_radio_group_checked") ) {
             CheckoutSingleton.getInstance().addNewValue("invoice_radio_group_checked", "yes");
 //            System.out.println(CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked"));
         }
-
-        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_radio_group_second") ) {
-            CheckoutSingleton.getInstance().addNewValue("delivery_radio_group_second", "no");
-        }
+//
+//        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_radio_group_second") ) {
+//            CheckoutSingleton.getInstance().addNewValue("delivery_radio_group_second", "no");
+//        }
     }
 
     @Override
@@ -411,11 +411,11 @@ public class DeliveryPlaceFragment extends Fragment {
                 switch (checkedId) {
                     case R.id.yes_btn_id:
                         organizationLayout.setVisibility(View.VISIBLE);
-                        CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "yes");
+//                        CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "yes");
                         break;
                     case R.id.no_btn_id:
                         organizationLayout.setVisibility(View.GONE);
-                        CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "no");
+//                        CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "no");
                 }
             }
         });
@@ -425,11 +425,11 @@ public class DeliveryPlaceFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.yes_btn_delivery_id:
-                        CheckoutSingleton.getInstance().addNewValue("delivery_radio_group_second", "yes");
+//                        CheckoutSingleton.getInstance().addNewValue("delivery_radio_group_second", "yes");
                         deliveryRadioLayout.setVisibility(View.VISIBLE);
                         break;
                     case R.id.no_btn_delivery_id:
-                        CheckoutSingleton.getInstance().addNewValue("delivery_radio_group_second", "no");
+//                        CheckoutSingleton.getInstance().addNewValue("delivery_radio_group_second", "no");
                         deliveryRadioLayout.setVisibility(View.GONE);
                 }
             }
@@ -454,8 +454,8 @@ public class DeliveryPlaceFragment extends Fragment {
             return;
         }
 
-        if (delivery_phone.getText().toString().length() < 9) {
-            delivery_phone.setError("გთხოვთ მიუთითეთ ტელეფონი!");
+        if (delivery_phone.getText().toString().length() != 9) {
+            delivery_phone.setError("გთხოვთ მიუთითეთ სწორი ფორმატით: 599XXXXXX!");
             delivery_phone.requestFocus();
             delivery_phone_image.setImageResource(R.drawable.error_phone);
             return;
@@ -489,21 +489,9 @@ public class DeliveryPlaceFragment extends Fragment {
             return;
         }
 
-        if (TextUtils.isEmpty(delivery_organisation_name.getText()) &&
-                CheckoutSingleton.getInstance().getValue("delivery_organization_group_checked").equals("yes")){
-            delivery_organisation_name.setError("გთხოვთ მიუთითოთ ორგანიზაციის დასახელება");
 
-            delivery_organisation_name.requestFocus();
-            return;
-        }
 
-        if (TextUtils.isEmpty(delivery_organisation_code.getText()) &&
-                CheckoutSingleton.getInstance().getValue("delivery_organization_group_checked").equals("yes")){
-            delivery_organisation_code.setError("გთხოვთ მიუთითოთ საიდენტიფიკაციო კოდადგსფდი");
 
-            delivery_organisation_code.requestFocus();
-            return;
-        }
 //        System.out.println( CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked"));
         if (TextUtils.isEmpty(invoice_name.getText()) &&
                 CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no")){
@@ -550,29 +538,14 @@ public class DeliveryPlaceFragment extends Fragment {
             return;
         }
 
-        if (invoice_phone.getText().toString().length() < 9 &&
+        if (invoice_phone.getText().toString().length() != 9 &&
                 CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no")) {
-            invoice_phone.setError("გთხოვთ მიუთითეთ ტელეფონი");
+            invoice_phone.setError("გთხოვთ მიუთითეთ სწორი ფორმატით: 599XXXXXX!");
             invoice_phone.requestFocus();
             invoice_phone_image.setImageResource(R.drawable.error_phone);
             return;
         }
 
-        if (TextUtils.isEmpty(invoice_organisation_name.getText()) &&
-                CheckoutSingleton.getInstance().getValue("delivery_radio_group_second").equals("yes")){
-            invoice_organisation_name.setError("გთხოვთ მიუთითოთ ორგანიზაციის დასახელება");
-
-            invoice_organisation_name.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(invoice_organisation_code.getText()) &&
-                CheckoutSingleton.getInstance().getValue("delivery_radio_group_second").equals("yes")){
-            invoice_organisation_code.setError("გთხოვთ მიუთითოთ საიდენთიფიკაციო კოდი");
-
-            invoice_organisation_code.requestFocus();
-            return;
-        }
 
     }
 

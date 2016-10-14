@@ -78,7 +78,6 @@ public class DeliveryTermsFragment extends Fragment {
                     if (btn.getId() == checkedId) {
                         String text = String.valueOf(btn.getText());
                         CheckoutSingleton.getInstance().addNewValue("order_time_radioButton", text);
-                        System.out.println(text + "iiii");
                         return;
                     }
                 }
@@ -153,6 +152,13 @@ public class DeliveryTermsFragment extends Fragment {
                                 }
 
                             }
+
+                                RadioButton btn = (RadioButton) radioGroup.getChildAt(0);
+                                btn.setChecked(true);
+                                CheckoutSingleton.getInstance().addNewValue("order_time_radioButton", String.valueOf(btn.getText()));
+
+
+
 
                             progressDialog.cancel();
 
