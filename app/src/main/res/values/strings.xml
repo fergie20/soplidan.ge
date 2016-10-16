@@ -103,4 +103,20 @@
     <string name="our_partnerships">ჩვენი პარტნიორები</string>
     <string name="Sunflower">Sunflower</string>
     <string name="foki">ფოკის მონასტერი</string>
+    <string name="meat">ხორცი</string>
+    <string name="milk_eggs">რძე და კვერცხი</string>
+    <string name="vegetables">ბოსტნეული</string>
+    <string name="green_lisi">მწვანე ლისი</string>
+    <string name="bio_vegetables">ბიო ბოსტნეული</string>
+    <string name="sunflower">Sunflower</string>
+    <string name="fokis_monastery">ფოკის მონასტერი</string>
+    <string name="fruit">ხილი</string>
+    <string name="sweets">ნუგბარი</string>
+    <string name="drinks">სასმელი</string>
+    <string name="oil_vinegar">ზეთი და ძმარი</string>
+    <string name="tea">ჩაი</string>
+    <string name="marinade">მწნილი</string>
+    <string name="flavour">სუნელები</string>
+    <string name="flour">ფქვილეული</string>
+    <string name="other">სხვადასხვა</string>
 </resources>

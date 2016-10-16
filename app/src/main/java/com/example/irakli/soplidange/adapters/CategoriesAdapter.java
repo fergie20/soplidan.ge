@@ -3,24 +3,19 @@ package com.example.irakli.soplidange.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.irakli.soplidange.ExampleData.ExampleData;
-import com.example.irakli.soplidange.ExampleData.ProductData;
 import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.models.CategoryModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
