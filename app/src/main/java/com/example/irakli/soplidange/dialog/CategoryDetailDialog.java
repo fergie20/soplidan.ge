@@ -82,11 +82,11 @@ public class CategoryDetailDialog extends DialogFragment {
 
                     String fullDesc = response.getString("description");
 
-//                    scrollView = (ScrollView) rootView.findViewById(R.id.dialog_scrol_id);
+                    scrollView = (ScrollView) rootView.findViewById(R.id.dialog_scrol_id);
 
-//                    if(fullDesc.equals("")){
-//                        scrollView.setVisibility(View.GONE);
-//                    }
+                    if(fullDesc.equals("")){
+                        scrollView.setVisibility(View.GONE);
+                    }
 
                     String str_without_html= Html.fromHtml(fullDesc).toString();
 

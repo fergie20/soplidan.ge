@@ -39,24 +39,25 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:textStyle="italic|bold"
+            android:layout_marginBottom="5dp"
             android:text="categoriis dasaxeleba"/>
 
 
 
-    <!--<com.example.irakli.soplidange.utils.MaxHeightScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--android:id="@+id/dialog_scrol_id"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:fillViewport="true"-->
-        <!--app:maxHeight="300dp">-->
+    <com.example.irakli.soplidange.utils.MaxHeightScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/dialog_scrol_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:maxHeight="500dp">
 
         <TextView
             android:id="@+id/dialog_description_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp" />
-    <!--</com.example.irakli.soplidange.utils.MaxHeightScrollView>-->
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp" />
+    </com.example.irakli.soplidange.utils.MaxHeightScrollView>
 
     <ProgressBar
         android:id="@+id/progress"

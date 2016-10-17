@@ -48,14 +48,33 @@
             android:layout_height="wrap_content"
             android:hint="@string/promo_code"
             android:inputType="text"
-            android:id="@+id/editText" />
+            android:id="@+id/promo_code" />
 
     </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/check_promo_button"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:visibility="gone"
+        android:background="@drawable/buttonshape"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5 "
+        android:clickable="true"
+        android:text="შეამოწმეთ პრომო კოდი"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:elevation="0dp"
+        android:layout_below="@+id/promo_code_id"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/promo_code_id"
+        android:layout_below="@id/check_promo_button"
         android:layout_marginTop="30dp"
         android:text="@string/sum" />
 
@@ -65,11 +84,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/promo_code_id"
+        android:layout_below="@id/check_promo_button"
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="30dp"
         android:textSize="18sp"
         android:text="6GEL" />
+
 
 
 </RelativeLayout>

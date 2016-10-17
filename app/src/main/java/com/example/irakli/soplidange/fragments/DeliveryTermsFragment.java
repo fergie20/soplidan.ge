@@ -224,21 +224,21 @@ public class DeliveryTermsFragment extends Fragment {
             deliveryPrice.setText("ტრანსპორტირების ღირებულება 8 ¢");
 
             double z = 8 + Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));
-            CheckoutSingleton.getInstance().addNewValue("shipping_price", "8 ¢");
-            CheckoutSingleton.getInstance().addNewValue("total_price", String.valueOf(z) + " ¢");
+            CheckoutSingleton.getInstance().addNewValue("shipping_price", "8");
+            CheckoutSingleton.getInstance().addNewValue("total_price", String.valueOf(z));
 
 
         } else {
             if (totalPrice < 30.0) {
                 deliveryPrice.setText("ტრანსპორტირების ღირებულება 3 ¢");
                 double x = 3 + Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));
-                CheckoutSingleton.getInstance().addNewValue("shipping_price", "3 ¢");
-                CheckoutSingleton.getInstance().addNewValue("total_price", String.valueOf(x) + " ¢");
+                CheckoutSingleton.getInstance().addNewValue("shipping_price", "3");
+                CheckoutSingleton.getInstance().addNewValue("total_price", String.valueOf(x));
             } else {
                 deliveryPrice.setText("ტრანსპორტირების ღირებულება 0 ¢");
                 double y = 0 + Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));
-                CheckoutSingleton.getInstance().addNewValue("shipping_price", "0 ¢");
-                CheckoutSingleton.getInstance().addNewValue("total_price", String.valueOf(y) + " ¢");
+                CheckoutSingleton.getInstance().addNewValue("shipping_price", "0");
+                CheckoutSingleton.getInstance().addNewValue("total_price", String.valueOf(y));
             }
         }
     }
