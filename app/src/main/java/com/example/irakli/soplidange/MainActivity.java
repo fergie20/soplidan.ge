@@ -228,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search_id).getActionView();
+        searchView.setQueryHint("ძიება საიტზე");
         if (null != searchView) {
 
             searchView.setSearchableInfo(searchManager
@@ -506,24 +507,6 @@ public class MainActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
-        }
-    }
-    public class NewClass4 {
-        public void main(String[] args)
-        {
-            HashMap<Integer,Integer>map=new HashMap<Integer, Integer>();
-            map.put(1, 50);
-            map.put(2, 60);
-            map.put(3, 30);
-            map.put(4, 60);
-            map.put(5, 60);
-            int maxValueInMap=(Collections.max(map.keySet()));  // This will return max value in the Hashmap
-            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {  // Itrate through hashmap
-                if (entry.getValue()==maxValueInMap) {
-                    System.out.println(entry.getKey());     // Print the key with max value
-                }
-            }
-
         }
     }
 

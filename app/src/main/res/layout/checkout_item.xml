@@ -109,9 +109,10 @@
 
             <ImageView
                 android:id="@+id/checkout_delete_item_id"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_gravity="top"
+                android:padding="4dp"
                 android:layout_marginRight="20dp"
                 app:srcCompat="@drawable/ic_cancel_black_24dp"
                 tools:ignore="MissingPrefix" />

@@ -27,6 +27,6 @@
         android:maxLines="1"
         android:text="categoriebi"
         android:textColor="#a7a9ac"
-        android:textSize="12sp" />
+        android:textSize="11sp" />
 
 </LinearLayout>

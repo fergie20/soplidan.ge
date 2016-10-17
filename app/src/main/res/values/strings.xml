@@ -119,4 +119,6 @@
     <string name="flavour">სუნელები</string>
     <string name="flour">ფქვილეული</string>
     <string name="other">სხვადასხვა</string>
+    <string name="search_hint">ძიება საიტზე</string>
+
 </resources>

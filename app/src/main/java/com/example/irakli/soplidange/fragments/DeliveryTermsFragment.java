@@ -91,6 +91,7 @@ public class DeliveryTermsFragment extends Fragment {
 
 
         if (CheckoutSingleton.getInstance().getValue("spinDistrict").equals("16") ||
+                CheckoutSingleton.getInstance().getValue("spinDistrict").equals("26") ||
                 CheckoutSingleton.getInstance().getValue("spinDistrict").equals("29") ||
                 CheckoutSingleton.getInstance().getValue("spinDistrict").equals("30")) {
             deliveryPrice.setText("ტრანსპორტირების ღირებულება 8 ¢");
@@ -215,9 +216,11 @@ public class DeliveryTermsFragment extends Fragment {
     public void saveShippingTotal() {
 
 
+
         if (CheckoutSingleton.getInstance().getValue("spinDistrict").equals("16") ||
+                CheckoutSingleton.getInstance().getValue("spinDistrict").equals("26") ||
                 CheckoutSingleton.getInstance().getValue("spinDistrict").equals("29") ||
-                CheckoutSingleton.getInstance().getValue("spinDistrict").equals("30")) {
+                CheckoutSingleton.getInstance().getValue("spinDistrict").equals("30")){
             deliveryPrice.setText("ტრანსპორტირების ღირებულება 8 ¢");
 
             double z = 8 + Double.parseDouble(CheckoutSingleton.getInstance().getValue("allPrice"));

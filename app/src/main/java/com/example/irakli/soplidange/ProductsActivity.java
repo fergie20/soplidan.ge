@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -25,6 +26,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -43,6 +45,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.adapters.ProductsAdapter;
+import com.example.irakli.soplidange.dialog.CategoryDetailDialog;
 import com.example.irakli.soplidange.dialog.ProductDetailDialog;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
@@ -78,6 +81,7 @@ public class ProductsActivity extends AppCompatActivity {
     HashMap<Integer, ProductModel> count;
     List<ProductModel> productModels = new ArrayList<>();
     CollapsingToolbarLayout collapsingToolbarLayout;
+    AppBarLayout appBarLayout;
 
     ActionBar actionBar;
     FloatingActionButton productsFab;
@@ -89,6 +93,7 @@ public class ProductsActivity extends AppCompatActivity {
     ProductsAdapter myAdapter;
     private ProgressDialog progressDialog;
     private Parcelable recyclerViewState;
+    View category_info;
 
 
     @Override
@@ -123,7 +128,9 @@ public class ProductsActivity extends AppCompatActivity {
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.product_collapsingToolbar_id);
         collapsingToolbarLayout.setExpandedTitleColor(this.getResources().getColor(R.color.searchcolor));
+        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
         productCategoryImage = (ImageView) findViewById(R.id.product_category_image);
+
 
 
         Bundle bundle = getIntent().getBundleExtra("categories");
@@ -362,6 +369,8 @@ public class ProductsActivity extends AppCompatActivity {
 
             getJSONInfo(json_url + query);
 
+
+
             collapsingToolbarLayout.setContentScrimColor(this.getResources().getColor(R.color.colorPrimary));
             productsFab.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.colorPrimary)));
             productCategoryImage.setImageResource(R.drawable.foodcover);
@@ -382,19 +391,48 @@ public class ProductsActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu, menu);
+        if (category_id != -1){
+            getMenuInflater().inflate(R.menu.category_info_menu, menu);
+        }else{
+            getMenuInflater().inflate(R.menu.menu, menu);
+        }
+
+
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         final SearchView searchView = (SearchView) menu.findItem(R.id.search_id).getActionView();
+        searchView.setQueryHint("ძიება საიტზე");
 
 
         if (null != searchView) {
             searchView.setSearchableInfo(searchManager
                     .getSearchableInfo(getComponentName()));
         }
+
+
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                appBarLayout.setExpanded(false);
+            }
+        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                appBarLayout.setExpanded(true);
+                return false;
+            }
+        });
+
+
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 Intent int_query = new Intent(getApplicationContext(), ProductsActivity.class);
                 int_query.putExtra("query", query);
                 startActivity(int_query);
@@ -529,7 +567,6 @@ public class ProductsActivity extends AppCompatActivity {
                                     bundle.putSerializable("model", model);
                                     dialog.setArguments(bundle);
                                     dialog.show(getFragmentManager(), "dialog");
-
                                 }
                             });
                             myAdapter.setMycountListener(new ProductsAdapter.MyCountListener() {
@@ -721,7 +758,17 @@ public class ProductsActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 break;
+            case R.id.category_info:
+                CategoryDetailDialog dialog = new CategoryDetailDialog();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("category_id", category_id );
+                bundle.putSerializable("category_name", category);
+                dialog.setArguments(bundle);
+                dialog.show(getFragmentManager(), "dialog");
+                break;
         }
+
+
 
         return super.onOptionsItemSelected(item);
     }
