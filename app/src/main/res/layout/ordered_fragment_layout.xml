@@ -72,6 +72,7 @@
 
 
     <TextView
+        android:id="@+id/totalSum_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/check_promo_button"
@@ -87,6 +88,27 @@
         android:layout_below="@id/check_promo_button"
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="30dp"
+        android:textSize="18sp"
+        android:text="6GEL" />
+    <TextView
+        android:id="@+id/sale_id"
+        android:textColor="@color/colorPrimary"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/total_price_id"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+        android:id="@+id/promo_price_id"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/total_price_id"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="20dp"
         android:textSize="18sp"
         android:text="6GEL" />
 

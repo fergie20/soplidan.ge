@@ -105,7 +105,7 @@ public class ProductDetailDialog extends DialogFragment {
             currentPrice.setText("ფასი: " + model.getBase_price() + "¢  " + model.getList_price() + "¢", TextView.BufferType.SPANNABLE);
             Spannable spannable = (Spannable) currentPrice.getText();
             spannable.setSpan(STRIKE_THROUGH_SPAN, spannable.length()/2+4, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//            currentPrice.setPaintFlags(currentPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
         }else{
             Picasso.with(getActivity())
                     .load(model.getImg())
