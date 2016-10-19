@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,8 +169,6 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
     }
 
 
-
-
     public void setError() {
 
         if (guest_name.getText().toString().length() < 2) {
@@ -222,8 +219,8 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
 //        System.out.println(CheckoutSingleton.getInstance().getValue("organization_group_checked"));
 //        System.out.println(guest_organisation_code.getText().toString().length());
         if (CheckoutSingleton.getInstance().getValue("organization_group_checked").equals("yes") &&
-                guest_organisation_code.getText().toString().length() < 2) {
-            guest_organisation_code.setError("გთხოვთ მიუთითეთ საიდენტიფიკაციო კოდი");
+                guest_organisation_code.getText().toString().length() != 9) {
+            guest_organisation_code.setError(getString(R.string.identification_code_error));
             guest_organisation_code.requestFocus();
         }
 
@@ -273,7 +270,7 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
         SharedPreferences mPrefs = this.getActivity().getSharedPreferences("checkout", Context.MODE_PRIVATE);
         HashMap<String, String> cartMap;
         cartMap = CheckoutSingleton.getInstance().getCartmap();
-        if (CheckoutSingleton.getInstance().getCartmap().containsKey("organization_group_checked")){
+        if (CheckoutSingleton.getInstance().getCartmap().containsKey("organization_group_checked")) {
             cartMap.remove("organization_group_checked");
         }
         SharedPreferences.Editor prefsEditor = mPrefs.edit();

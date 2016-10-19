@@ -314,6 +314,7 @@
                             android:id="@+id/guest_organisation_code"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:maxLength="9"
                             android:hint="@string/identification_code"
                             android:inputType="number"
                             android:textSize="14sp" />

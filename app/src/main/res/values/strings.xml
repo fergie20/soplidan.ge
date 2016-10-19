@@ -120,5 +120,6 @@
     <string name="flour">ფქვილეული</string>
     <string name="other">სხვადასხვა</string>
     <string name="search_hint">ძიება საიტზე</string>
+    <string name="identification_code_error">გთხოვთ მიუთითეთ საიდენთიფიკაციო კოდი</string>
 
 </resources>

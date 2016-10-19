@@ -205,9 +205,9 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/edit_text_phone"
                         android:inputType="phone"
+                        android:maxLength="9"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
-                        android:maxLength="9"
                         android:textSize="14sp" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -306,8 +306,8 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_alignParentTop="true"
-                        app:srcCompat="@drawable/guest_organization_grey"
                         android:layout_marginTop="10dp"
+                        app:srcCompat="@drawable/guest_organization_grey"
                         tools:ignore="MissingPrefix" />
 
                     <android.support.design.widget.TextInputLayout
@@ -353,6 +353,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/identification_code"
                             android:inputType="number"
+                            android:maxLength="9"
                             android:paddingBottom="10dp"
                             android:paddingTop="10dp"
                             android:textSize="14sp" />
@@ -563,8 +564,8 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/edit_text_phone"
                             android:inputType="phone"
-                            android:paddingBottom="10dp"
                             android:maxLength="9"
+                            android:paddingBottom="10dp"
                             android:paddingTop="10dp"
                             android:textSize="14sp" />
 
@@ -572,34 +573,34 @@
                 </LinearLayout>
 
                 <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center"-->
-                    <!--android:orientation="horizontal">-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="horizontal">-->
 
-                    <!--<ImageView-->
-                        <!--android:layout_width="30dp"-->
-                        <!--android:layout_height="30dp"-->
-                        <!--app:srcCompat="@drawable/guest_card_grey"-->
-                        <!--tools:ignore="MissingPrefix" />-->
+                <!--<ImageView-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--app:srcCompat="@drawable/guest_card_grey"-->
+                <!--tools:ignore="MissingPrefix" />-->
 
-                    <!--<android.support.design.widget.TextInputLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginLeft="8dp">-->
+                <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="8dp">-->
 
-                        <!--<EditText-->
-                            <!--android:id="@+id/invoice_guest_field_id_number"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:hint="პირადი ნომერი"-->
-                            <!--android:inputType="number"-->
-                            <!--android:paddingBottom="10dp"-->
-                            <!--android:paddingTop="10dp"-->
-                            <!--android:textSize="14sp" />-->
+                <!--<EditText-->
+                <!--android:id="@+id/invoice_guest_field_id_number"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="პირადი ნომერი"-->
+                <!--android:inputType="number"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp"-->
+                <!--android:textSize="14sp" />-->
 
 
-                    <!--</android.support.design.widget.TextInputLayout>-->
+                <!--</android.support.design.widget.TextInputLayout>-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:gravity="center"-->
@@ -689,8 +690,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_alignParentTop="true"
-                            app:srcCompat="@drawable/guest_organization_grey"
                             android:layout_marginTop="10dp"
+                            app:srcCompat="@drawable/guest_organization_grey"
                             tools:ignore="MissingPrefix" />
 
                         <android.support.design.widget.TextInputLayout
@@ -736,6 +737,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/identification_code"
                                 android:inputType="number"
+                                android:maxLength="9"
                                 android:paddingBottom="10dp"
                                 android:paddingTop="10dp"
                                 android:textSize="14sp" />

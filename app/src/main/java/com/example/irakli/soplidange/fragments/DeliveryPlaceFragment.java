@@ -33,7 +33,7 @@ public class DeliveryPlaceFragment extends Fragment {
 
     private LinearLayout newAddressLayout;
     private RelativeLayout organizationLayout, deliveryRadioLayout;
-    private RadioGroup deliveryRadioGroup, radioGroup, organizationRadioGroup;
+    private RadioGroup deliveryRadioGroup, invoiceRadioGroup, organizationRadioGroup;
 
     Spinner spinCity, spinDistrict, invoiceSpinCity, invoiceSpinDistrict;
 
@@ -45,7 +45,9 @@ public class DeliveryPlaceFragment extends Fragment {
     ImageView delivery_name_image, delivery_phone_image, delivery_address_image, delivery_email_image, delivery_card_id_image, delivery_organisation_name_image,
             delivery_organisation_code_image, invoice_name_image, invoice_phone_image, invoice_address_image, invoice_organisation_name_image, invoice_organisation_code_image;
 
-    boolean checkVisibility = false;
+    boolean invoiceRadioVisibility = false;
+    boolean organizationRadioVisibility = false;
+    boolean subOrganizationVisibility = false;
 
 
     @Nullable
@@ -53,7 +55,7 @@ public class DeliveryPlaceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View deliveryFragment = inflater.inflate(R.layout.delivery_fragment_layout, container, false);
         System.out.println(CheckoutSingleton.getInstance().getValue("organization_group_checked"));
-        radioGroup = (RadioGroup) deliveryFragment.findViewById(R.id.radio_group_id);
+        invoiceRadioGroup = (RadioGroup) deliveryFragment.findViewById(R.id.radio_group_id);
         organizationRadioGroup = (RadioGroup) deliveryFragment.findViewById(R.id.organization_radio_group_id);
         organizationLayout = (RelativeLayout) deliveryFragment.findViewById(R.id.organization_fields_id);
         deliveryRadioLayout = (RelativeLayout) deliveryFragment.findViewById(R.id.delivery_organization_fields_id);
@@ -320,14 +322,14 @@ public class DeliveryPlaceFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_organization_group_checked") ) {
-            CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "no");
-        }
-
-        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("invoice_radio_group_checked") ) {
-            CheckoutSingleton.getInstance().addNewValue("invoice_radio_group_checked", "yes");
-            System.out.println(CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked"));
-        }
+//        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_organization_group_checked") ) {
+//            CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "no");
+//        }
+//
+//        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("invoice_radio_group_checked") ) {
+//            CheckoutSingleton.getInstance().addNewValue("invoice_radio_group_checked", "yes");
+//            System.out.println(CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked"));
+//        }
 //
 //        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_radio_group_second") ) {
 //            CheckoutSingleton.getInstance().addNewValue("delivery_radio_group_second", "no");
@@ -339,7 +341,6 @@ public class DeliveryPlaceFragment extends Fragment {
         super.onStop();
         saveDeliveriInfo();
         saveShared();
-
     }
 
     public void saveDeliveriInfo() {
@@ -385,19 +386,19 @@ public class DeliveryPlaceFragment extends Fragment {
     }
 
     private void radioBtnChecked() {
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        invoiceRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_btn_yes:
-                        checkVisibility = false;
+                        invoiceRadioVisibility = false;
                         newAddressLayout.setVisibility(View.GONE);
-                        CheckoutSingleton.getInstance().addNewValue("invoice_radio_group_checked", "yes");
+//                        CheckoutSingleton.getInstance().addNewValue("invoice_radio_group_checked", "yes");
                         break;
                     case R.id.radio_btn_no:
                         newAddressLayout.setVisibility(View.VISIBLE);
-                        CheckoutSingleton.getInstance().addNewValue("invoice_radio_group_checked", "no");
-                        checkVisibility = true;
+//                        CheckoutSingleton.getInstance().addNewValue("invoice_radio_group_checked", "no");
+                        invoiceRadioVisibility = true;
                         invoice_name.requestFocus();
                         break;
 
@@ -411,10 +412,12 @@ public class DeliveryPlaceFragment extends Fragment {
                 switch (checkedId) {
                     case R.id.yes_btn_id:
                         organizationLayout.setVisibility(View.VISIBLE);
+                        organizationRadioVisibility = true;
 //                        CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "yes");
                         break;
                     case R.id.no_btn_id:
                         organizationLayout.setVisibility(View.GONE);
+                        organizationRadioVisibility = false;
 //                        CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "no");
                 }
             }
@@ -427,10 +430,12 @@ public class DeliveryPlaceFragment extends Fragment {
                     case R.id.yes_btn_delivery_id:
 //                        CheckoutSingleton.getInstance().addNewValue("delivery_radio_group_second", "yes");
                         deliveryRadioLayout.setVisibility(View.VISIBLE);
+                        subOrganizationVisibility = true;
                         break;
                     case R.id.no_btn_delivery_id:
 //                        CheckoutSingleton.getInstance().addNewValue("delivery_radio_group_second", "no");
                         deliveryRadioLayout.setVisibility(View.GONE);
+                        subOrganizationVisibility = false;
                 }
             }
         });
@@ -489,12 +494,28 @@ public class DeliveryPlaceFragment extends Fragment {
             return;
         }
 
+        if (delivery_organisation_name.getText().toString().length() <= 1 &&
+                organizationRadioVisibility) {
+            delivery_organisation_name.setError("გთხოვთ მიუთითეთ ორგანიზაციის დასახელება");
 
+            delivery_organisation_name.requestFocus();
+//            delivery_organisation_name_image.setImageResource(R.drawable.error_card);
+            return;
+        }
+
+        if (delivery_organisation_code.getText().toString().length() != 9 &&
+                organizationRadioVisibility) {
+            delivery_organisation_code.setError(getString(R.string.identification_code_error));
+
+            delivery_organisation_code.requestFocus();
+//            delivery_organisation_code_image.setImageResource(R.drawable.error_card);
+            return;
+        }
 
 
 //        System.out.println( CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked"));
         if (TextUtils.isEmpty(invoice_name.getText()) &&
-                CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no")){
+                invoiceRadioVisibility) {
             invoice_name.setError("გთხოვთ მიუთითოთ სახელი");
 
             invoice_name_image.setImageResource(R.drawable.error_person);
@@ -503,7 +524,7 @@ public class DeliveryPlaceFragment extends Fragment {
         }
 
         if (TextUtils.isEmpty(invoice_last_name.getText()) &&
-                CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no")){
+                invoiceRadioVisibility) {
             invoice_last_name.setError("გთხოვთ მიუთითოთ გვარი");
 
             invoice_name_image.setImageResource(R.drawable.error_person);
@@ -512,7 +533,7 @@ public class DeliveryPlaceFragment extends Fragment {
         }
 
         if (TextUtils.isEmpty(invoice_address.getText()) &&
-                CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no")){
+                invoiceRadioVisibility) {
             invoice_address.setError("გთხოვთ მიუთითოთ მისამართი");
 
             invoice_address_image.setImageResource(R.drawable.error_address);
@@ -521,7 +542,7 @@ public class DeliveryPlaceFragment extends Fragment {
         }
 
         if (invoiceSpinCity.getSelectedItem().equals("- ქალაქი -") &&
-                CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no")) {
+                invoiceRadioVisibility) {
             invoice_address.setError("აირჩიეთ ქალაქი!");
 
             invoice_address.requestFocus();
@@ -530,7 +551,7 @@ public class DeliveryPlaceFragment extends Fragment {
         }
 
         if (invoiceSpinDistrict.getSelectedItem().equals("- აირჩიეთ უბანი -") &&
-                CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no")) {
+                invoiceRadioVisibility) {
             invoice_address.setError("აირჩიეთ უბანი!");
 
             invoice_address.requestFocus();
@@ -539,10 +560,30 @@ public class DeliveryPlaceFragment extends Fragment {
         }
 
         if (invoice_phone.getText().toString().length() != 9 &&
-                CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("no")) {
+                invoiceRadioVisibility) {
             invoice_phone.setError("გთხოვთ მიუთითეთ სწორი ფორმატით: 599XXXXXX!");
             invoice_phone.requestFocus();
             invoice_phone_image.setImageResource(R.drawable.error_phone);
+        }
+
+
+        if (invoice_organisation_name.getText().toString().length() <= 1 &&
+                invoiceRadioVisibility &&
+                subOrganizationVisibility) {
+            invoice_organisation_name.setError("გთხოვთ მიუთითეთ ორგანიზაციის დასახელება");
+
+            invoice_organisation_name.requestFocus();
+//            invoice_organisation_name_image.setImageResource(R.drawable.error_card);
+            return;
+        }
+
+        if (invoice_organisation_code.getText().toString().length() != 9 &&
+                invoiceRadioVisibility &&
+                subOrganizationVisibility) {
+            invoice_organisation_code.setError(getString(R.string.identification_code_error));
+
+            invoice_organisation_code.requestFocus();
+//            invoice_organisation_code_image.setImageResource(R.drawable.error_card);
             return;
         }
 
@@ -596,8 +637,16 @@ public class DeliveryPlaceFragment extends Fragment {
 //        }
 //    }
 
-    public Boolean setCheckVisibility() {
-        return checkVisibility;
+    public Boolean getInvoiceRadioVisibility() {
+        return invoiceRadioVisibility;
+    }
+
+    public Boolean getOrganizationRadioVisibility() {
+        return organizationRadioVisibility;
+    }
+
+    public Boolean getSubOrganizationVisibility() {
+        return subOrganizationVisibility;
     }
 
     public void saveShared() {
@@ -605,15 +654,15 @@ public class DeliveryPlaceFragment extends Fragment {
         SharedPreferences mPrefs = this.getActivity().getSharedPreferences("checkout", Context.MODE_PRIVATE);
         HashMap<String, String> cartMap;
         cartMap = CheckoutSingleton.getInstance().getCartmap();
-        if (CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_organization_group_checked")){
-            cartMap.remove("delivery_organization_group_checked");
-        }
-        if (CheckoutSingleton.getInstance().getCartmap().containsKey("invoice_radio_group_checked")){
-            cartMap.remove("invoice_radio_group_checked");
-        }
-        if (CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_radio_group_second")){
-            cartMap.remove("delivery_radio_group_second");
-        }
+//        if (CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_organization_group_checked")){
+//            cartMap.remove("delivery_organization_group_checked");
+//        }
+//        if (CheckoutSingleton.getInstance().getCartmap().containsKey("invoice_radio_group_checked")){
+//            cartMap.remove("invoice_radio_group_checked");
+//        }
+//        if (CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_radio_group_second")){
+//            cartMap.remove("delivery_radio_group_second");
+//        }
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(cartMap);
