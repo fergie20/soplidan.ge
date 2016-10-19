@@ -175,7 +175,7 @@ public class Payment extends AppCompatActivity {
                     case 1:
                         deliveryPlaceFragment.saveDeliveriInfo();
 
-//                        System.out.println(CheckoutSingleton.getInstance().getValue("delivery_organization_group_checked"));
+                        System.out.println(CheckoutSingleton.getInstance().getValue("delivery_organization_group_checked"));
                         if (CheckoutSingleton.getInstance().getValue("delivery_name").length() > 1 &&
                                 CheckoutSingleton.getInstance().getValue("delivery_last_name").length() > 2 &&
                                 CheckoutSingleton.getInstance().getValue("delivery_address").length() > 2 &&
@@ -183,7 +183,7 @@ public class Payment extends AppCompatActivity {
                                 CheckoutSingleton.getInstance().getValue("delivery_card_id").length() == 11 &&
                                 !CheckoutSingleton.getInstance().getValue("spinCity").equals("0") &&
                                 !CheckoutSingleton.getInstance().getValue("spinDistrict").equals("0")) {
-//                            System.out.println(CheckoutSingleton.getInstance().getValue("delivery_organization_group_checked"));
+                            System.out.println(CheckoutSingleton.getInstance().getValue("delivery_organization_group_checked"));
 
 
                                 if (CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked").equals("yes")) {

@@ -52,7 +52,7 @@ public class DeliveryPlaceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View deliveryFragment = inflater.inflate(R.layout.delivery_fragment_layout, container, false);
-//        System.out.println(CheckoutSingleton.getInstance().getValue("organization_group_checked"));
+        System.out.println(CheckoutSingleton.getInstance().getValue("organization_group_checked"));
         radioGroup = (RadioGroup) deliveryFragment.findViewById(R.id.radio_group_id);
         organizationRadioGroup = (RadioGroup) deliveryFragment.findViewById(R.id.organization_radio_group_id);
         organizationLayout = (RelativeLayout) deliveryFragment.findViewById(R.id.organization_fields_id);
@@ -320,13 +320,13 @@ public class DeliveryPlaceFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_organization_group_checked") ) {
-//            CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "no");
-//        }
-//
+        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_organization_group_checked") ) {
+            CheckoutSingleton.getInstance().addNewValue("delivery_organization_group_checked", "no");
+        }
+
         if (!CheckoutSingleton.getInstance().getCartmap().containsKey("invoice_radio_group_checked") ) {
             CheckoutSingleton.getInstance().addNewValue("invoice_radio_group_checked", "yes");
-//            System.out.println(CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked"));
+            System.out.println(CheckoutSingleton.getInstance().getValue("invoice_radio_group_checked"));
         }
 //
 //        if (!CheckoutSingleton.getInstance().getCartmap().containsKey("delivery_radio_group_second") ) {
