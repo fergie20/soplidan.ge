@@ -1,63 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="160dp"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="5dp"
-    android:clickable="true"
-    android:foreground="?attr/selectableItemBackground"
-    android:orientation="vertical">
 
     <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <net.wujingchao.android.view.SimpleTagImageView
-            xmlns:simple="http://schemas.android.com/apk/res-auto"
+        android:layout_height="160dp"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground">
+
+        <net.wujingchao.android.view.SimpleTagImageView xmlns:simple="http://schemas.android.com/apk/res-auto"
             android:id="@+id/image_id"
-            android:layout_margin="0dp"
             android:layout_width="120dp"
             android:layout_height="105dp"
+            android:layout_margin="0dp"
+            android:paddingBottom="0dp"
             android:src="@android:drawable/ic_menu_day"
-            simple:simple_tag_textSize="10sp"
             simple:simple_corner_distance="30dp"
-            simple:simple_tag_text="sale 20%"
             simple:simple_tag_background_color="#9eff0900"
-            simple:simple_tag_orientation="right_top"
-            simple:simple_tag_width="15dip"
-            simple:simple_tag_textColor="@android:color/white"
             simple:simple_tag_enable="true"
+            simple:simple_tag_orientation="right_top"
             simple:simple_tag_round_radius="2dp"
-            android:paddingBottom="0dp"/>
+            simple:simple_tag_text="sale 20%"
+            simple:simple_tag_textColor="@android:color/white"
+            simple:simple_tag_textSize="10sp"
+            simple:simple_tag_width="15dip" />
 
         <TextView
-            android:layout_marginTop="3dp"
-            android:gravity="center"
             android:id="@+id/price_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/image_id"
-            android:textColor="#414042"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
             android:text="4.5Gel"
+            android:textColor="#414042"
             android:textSize="11dp"
             android:textStyle="bold" />
-
 
 
         <TextView
             android:id="@+id/product_name_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="11dp"
-            android:text="saxeli"
             android:layout_below="@+id/price_id"
-            android:textColor="#414042"
-            android:gravity="center"
-            android:maxLines="1"
-            android:maxLength="16"
             android:ellipsize="end"
-            android:paddingBottom="0dp"/>
-
+            android:gravity="center"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:paddingBottom="0dp"
+            android:text="saxeli"
+            android:textColor="#414042"
+            android:textSize="11dp" />
 
 
         <RelativeLayout
@@ -70,60 +65,56 @@
             <RelativeLayout
                 android:id="@+id/invisible_plus_minus_id"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/grid_minus_id"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="4dp"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:clickable="true"
-                app:srcCompat="@drawable/minus"
-                tools:ignore="MissingPrefix"
-                 />
+                <ImageView
+                    android:id="@+id/grid_minus_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="4dp"
+                    android:clickable="true"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    app:srcCompat="@drawable/minus"
+                    tools:ignore="MissingPrefix" />
 
-            <TextView
-                android:id="@+id/grid_text_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="#ccc"
-                android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/grid_text_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#ccc"
+                    android:textSize="15sp" />
 
-            <ImageView
-                android:id="@+id/grid_plus_id"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="4dp"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:clickable="true"
-                app:srcCompat="@drawable/pl"
-                tools:ignore="MissingPrefix"
-                />
+                <ImageView
+                    android:id="@+id/grid_plus_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp"
+                    android:clickable="true"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    app:srcCompat="@drawable/pl"
+                    tools:ignore="MissingPrefix" />
             </RelativeLayout>
+
             <TextView
-                android:textColor="#e74c3c"
-                android:gravity="center"
-                android:textSize="11dp"
-                android:text="@string/not_in_sale"
                 android:id="@+id/out_of_stock_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"/>
+                android:gravity="center"
+                android:text="@string/not_in_sale"
+                android:textColor="#e74c3c"
+                android:textSize="11dp"
+                android:visibility="gone" />
         </RelativeLayout>
 
     </RelativeLayout>
-
-</LinearLayout>

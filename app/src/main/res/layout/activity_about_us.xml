@@ -17,24 +17,24 @@
     </android.support.v7.widget.Toolbar>
 
     <ImageView
-        android:layout_marginTop="10dp"
         android:id="@+id/about_us_image"
         android:layout_width="match_parent"
         android:layout_height="170dp"
+        android:layout_marginTop="10dp"
         android:scaleType="centerInside"
         android:src="@drawable/soplidange" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/about_us_image"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/scrollView2">
+        android:layout_below="@+id/about_us_image">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/fff"
@@ -42,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:text="@string/about_us"
                 android:textColor="#314171"
                 android:textSize="16sp" />
@@ -79,46 +80,45 @@
                 android:id="@+id/fchain_id"
                 android:layout_width="120dp"
                 android:layout_height="65dp"
-                android:src="@drawable/fchain"
-                android:layout_marginTop="0dp"
-                android:layout_below="@+id/text1"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_below="@+id/text1"
+                android:layout_marginTop="0dp"
+                android:src="@drawable/fchain" />
 
             <ImageView
                 android:id="@+id/farmer_id"
                 android:layout_width="120dp"
                 android:layout_height="65dp"
-                android:src="@drawable/gfa"
-                android:layout_alignTop="@+id/geopay_id"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/geopay_id"
+                android:src="@drawable/gfa" />
 
             <ImageView
                 android:id="@+id/geopay_id"
                 android:layout_width="120dp"
                 android:layout_height="65dp"
-                android:src="@drawable/partgeo"
                 android:layout_alignTop="@+id/fchain_id"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/partgeo" />
 
             <ImageView
 
                 android:id="@+id/enpard_id"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:src="@drawable/enpard"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="3dp"
-                android:layout_below="@+id/fchain_id"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/fchain_id"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/enpard" />
 
 
         </RelativeLayout>
 
     </ScrollView>
-
 
 
 </RelativeLayout>

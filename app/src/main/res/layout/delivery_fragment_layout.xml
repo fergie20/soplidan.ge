@@ -265,8 +265,8 @@
                     android:layout_marginBottom="9dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/organization_question"
-                    android:textColor="#595959"
-                    android:textStyle="italic|bold" />
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
 
                 <RadioGroup
                     android:id="@+id/organization_radio_group_id"
@@ -377,8 +377,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/invoice_question"
-                    android:textColor="#595959"
-                    android:textStyle="italic|bold" />
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
 
                 <RadioGroup
                     android:id="@+id/radio_group_id"
@@ -649,8 +649,8 @@
                         android:layout_marginBottom="9dp"
                         android:layout_marginTop="20dp"
                         android:text="@string/organization_question"
-                        android:textColor="#595959"
-                        android:textStyle="italic|bold" />
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
 
                     <RadioGroup
                         android:id="@+id/delivery_radio_group_id"
