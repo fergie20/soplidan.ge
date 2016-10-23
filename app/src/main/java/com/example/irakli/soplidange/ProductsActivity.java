@@ -144,6 +144,8 @@ public class ProductsActivity extends AppCompatActivity {
             collapsingToolbarLayout.setCollapsedTitleTypeface(tf);
             collapsingToolbarLayout.setExpandedTitleTypeface(tf);
             collapsingToolbarLayout.setExpandedTitleMargin(40, 50, 40, 50);
+            collapsingToolbarLayout.setExpandedTitleColor(this.getResources().getColor(R.color.white));
+
 
 //            change(category_id);
             collapsingToolbarLayout.setExpandedTitleMargin(40, 50, 40, 50);

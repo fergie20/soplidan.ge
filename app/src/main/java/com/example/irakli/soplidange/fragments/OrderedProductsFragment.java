@@ -127,6 +127,7 @@ public class OrderedProductsFragment extends Fragment {
                                 }else {
                                     Toast.makeText(getActivity(), "იმისათვის რომ გაგიაქტიურდეთ პრომო კოდი, თქვენი კალათის ღირებულება უნდა არემატებოდეს 50 ლარს", Toast.LENGTH_LONG).show();
                                     promoCodePrice.setVisibility(View.GONE);
+                                    theWholeOf.setVisibility(View.VISIBLE);
                                 }
 
                                 break;
@@ -144,6 +145,7 @@ public class OrderedProductsFragment extends Fragment {
                                 }else {
                                     Toast.makeText(getActivity(), "იმისათვის რომ გაგიაქტიურდეთ პრომო კოდი, თქვენი კალათის ღირებულება უნდა არემატებოდეს 50 ლარს", Toast.LENGTH_LONG).show();
                                     promoCodePrice.setVisibility(View.GONE);
+                                    theWholeOf.setVisibility(View.VISIBLE);
                                 }
 
                                 break;
@@ -161,6 +163,7 @@ public class OrderedProductsFragment extends Fragment {
                                 }else {
                                     Toast.makeText(getActivity(), "იმისათვის რომ გაგიაქტიურდეთ პრომო კოდი, თქვენი კალათის ღირებულება უნდა არემატებოდეს 100 ლარს", Toast.LENGTH_LONG).show();
                                     promoCodePrice.setVisibility(View.GONE);
+                                    theWholeOf.setVisibility(View.VISIBLE);
                                 }
 
                                 break;
@@ -178,9 +181,6 @@ public class OrderedProductsFragment extends Fragment {
 
             }
         });
-
-
-
         return orderedProductsFragment;
     }
 

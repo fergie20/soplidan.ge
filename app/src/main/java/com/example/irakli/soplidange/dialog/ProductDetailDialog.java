@@ -30,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.adapters.CategoriesAdapter;
@@ -38,7 +39,6 @@ import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
 import com.example.irakli.soplidange.utils.SingletonTest;
 import com.example.irakli.soplidange.models.ProductModel;
-import com.squareup.picasso.Picasso;
 
 import net.wujingchao.android.view.SimpleTagImageView;
 
@@ -92,10 +92,12 @@ public class ProductDetailDialog extends DialogFragment {
 
         SimpleTagImageView image = (SimpleTagImageView) rootView.findViewById(R.id.dialog_image_id);
         if(model.getList_discount()!=0) {
-            Picasso.with(getActivity())
+
+
+            Glide.with(getActivity())
                     .load(model.getImg())
-                    .centerInside()
-                    .fit()
+                    .centerCrop()
+                    .fitCenter()
                     .into(image);
             image.setTagEnable(true);
             image.setTagText("sale: " + model.getList_discount_prc() + "%");
@@ -107,10 +109,10 @@ public class ProductDetailDialog extends DialogFragment {
             spannable.setSpan(STRIKE_THROUGH_SPAN, spannable.length()/2+4, spannable.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         }else{
-            Picasso.with(getActivity())
+            Glide.with(getActivity())
                     .load(model.getImg())
-                    .centerInside()
-                    .fit()
+                    .centerCrop()
+                    .fitCenter()
                     .into(image);
             image.setTagEnable(false);
             currentPrice.setTypeface(typeface());
@@ -169,7 +171,6 @@ public class ProductDetailDialog extends DialogFragment {
                 }
                 Toast.makeText(getActivity(), "განახლდა კალათა", Toast.LENGTH_SHORT).show();
 
-//                ((ProductsActivity)getActivity()).updateListView();
                 dismiss();
             }
         });
@@ -357,5 +358,6 @@ public class ProductDetailDialog extends DialogFragment {
 
        return custom_font;
     }
+//                ((ProductsActivity)getActivity()).updateListView();
 
 }

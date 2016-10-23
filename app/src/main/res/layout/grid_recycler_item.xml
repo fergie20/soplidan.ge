@@ -27,6 +27,7 @@
             simple:simple_tag_textSize="10sp"
             simple:simple_tag_width="15dip" />
 
+
         <TextView
             android:id="@+id/price_id"
             android:layout_width="match_parent"

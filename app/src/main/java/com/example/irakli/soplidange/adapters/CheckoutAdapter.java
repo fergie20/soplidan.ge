@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.irakli.soplidange.MainActivity;
 import com.example.irakli.soplidange.ProductsActivity;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.SingletonTest;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -49,9 +49,10 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Picasso.with(context)
+        Glide.with(context)
                 .load(cartMap.get(position).getImg())
                 .into(holder.productImageView);
+
 
         if (cartMap.get(position).getBase_price() > 0) {
             price = cartMap.get(position).getBase_price();

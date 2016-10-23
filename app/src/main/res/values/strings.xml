@@ -83,8 +83,8 @@
     <string name="delivery_tbilisi_surrounds">თბილისის შემოგარენში (წყნეთი,კოჯორი, წავკისი და ა.შ) პროდუქტის მიწოდების ღირებულებაა-8 ლარი;</string>
     <string name="delivery_info">გთხოვთ, გაითვალისწინეთ, პროდუქტის ადგილზე მიწოდება ხდება შეკვეთის გაკეთების მომდევნო დღეს 16:00-ის შემდეგ. კვირა დღეს მიწოდება არ ხდება. თუ თქვენ შეკვეთას აკეთებთ შაბათს და კვირას პროდუქტებს მიიღებთ ორშაბათს 16:00-ის შემდეგ. გთხოვთ, პირადად შეამოწმოთ შეძენილი პროდუქცია, წუნის აღმოჩენის შემთხვევაში გთხოვთ დაგვიკავშირდეთ. თუ გაქვთ კითხვები, გთხოვთ დაგვიკავშირდეთ: 557 470 441</string>
     <string name="authorization_as_guest">ავტორიზება როგორც სტუმარი</string>
-    <string name="no_internet_connection">No Internet Connection</string>
-    <string name="please_check_your_connection">please check your connection</string>
+    <string name="no_internet_connection">ინტერნეტთან კავშირი ვერ ხერხდება</string>
+    <string name="please_check_your_connection">ინფორმაცის სერვერიდან ჩამოსატვირთად აუცილებელია ინტერნეტთან წვდომა, გთხოვთ შეამოწმოთ თქვენი ინტერნეტ  კავშირი</string>
     <string name="ordered_products">შეკვეთილი პროდუქცია</string>
     <string name="transportation_cost">ტრანსპორტირების ღირებულება</string>
     <string name="promo_code">პრომო-კოდი</string>
@@ -120,6 +120,6 @@
     <string name="flour">ფქვილეული</string>
     <string name="other">სხვადასხვა</string>
     <string name="search_hint">ძიება საიტზე</string>
-    <string name="identification_code_error">გთხოვთ მიუთითეთ საიდენთიფიკაციო კოდი</string>
+    <string name="identification_code_error">გთხოვთ მიუთითეთ საიდენთიფიკაციო კოდი(9 სიმბოლო)</string>
 
 </resources>

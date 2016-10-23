@@ -44,6 +44,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.adapters.CategoriesAdapter;
+import com.example.irakli.soplidange.dialog.CategoryDetailDialog;
+import com.example.irakli.soplidange.dialog.NetworkDialog;
 import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
@@ -291,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
     }
 
-    private void getJSONInfo() {
+    public void getJSONInfo() {
         String url = "http://soplidan.ge/api/categories?items_per_page=80";
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
@@ -463,10 +465,8 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
         } else {
-            Toast.makeText(this, "ინფორმაციის ჩამოსატვირთად საჭიროა ინტერნეტთან წვდომა", Toast.LENGTH_SHORT).show();
-//            NetworkDialog dialog = new NetworkDialog();
-//            dialog.show(getFragmentManager(), "dialog");
-
+            NetworkDialog dialog = new NetworkDialog();
+            dialog.show(getFragmentManager(), "dialog");
         }
     }
 

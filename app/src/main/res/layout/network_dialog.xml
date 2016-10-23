@@ -2,19 +2,65 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardview_light_background"
+    android:minHeight="@dimen/cardview_compat_inset_shadow"
+    android:minWidth="290dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:gravity="center"
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/no_internet_id"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/no_internet_connection"
-        android:textSize="20dp" />
+        android:textSize="11dp" />
 
     <TextView
+        android:id="@+id/no_internet_desc_id"
+        android:textSize="11dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/please_check_your_connection" />
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/loading_gif_id"
+        android:layout_marginTop="10dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/loading"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/loading_text_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:text="@string/please_check_your_connection" />
+        android:text="იტვირთება..."
+        android:visibility="gone"/>
+
+
+    <View xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="#e6e6e6"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:id="@+id/try_again_id"
+        android:text="კიდევ სცადეთ"
+        android:textColor="@color/fokiStatusbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

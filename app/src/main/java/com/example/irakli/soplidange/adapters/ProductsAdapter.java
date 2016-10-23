@@ -1,6 +1,7 @@
 package com.example.irakli.soplidange.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
@@ -16,10 +17,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.BitmapEncoder;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.SingletonTest;
-import com.squareup.picasso.Picasso;
+
 
 import net.wujingchao.android.view.SimpleTagImageView;
 
@@ -62,10 +65,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
             holder.productImageView.setVisibility(View.GONE);
         } else {
-            Picasso.with(context)
+            Glide.with(context)
                     .load(productModels.get(pos).getImg())
-                    .centerInside()
-                    .fit()
+                    .centerCrop()
+                    .fitCenter()
                     .into(holder.productImageView);
         }
 

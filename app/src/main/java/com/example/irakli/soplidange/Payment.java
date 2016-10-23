@@ -226,7 +226,7 @@ public class Payment extends AppCompatActivity {
                                         CheckoutSingleton.getInstance().getValue("invoice_name").length() > 1 &&
                                         CheckoutSingleton.getInstance().getValue("invoice_last_name").length() > 1 &&
                                         CheckoutSingleton.getInstance().getValue("invoice_address").length() > 1 &&
-                                        CheckoutSingleton.getInstance().getValue("invoice_phone").length() > 1 &&
+                                        CheckoutSingleton.getInstance().getValue("invoice_phone").length() > 8 &&
                                         !CheckoutSingleton.getInstance().getValue("invoiceSpinCity").equals("0") &&
                                         !CheckoutSingleton.getInstance().getValue("invoiceSpinDistrict").equals("0")) {
 
