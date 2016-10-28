@@ -4,14 +4,18 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -22,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.irakli.soplidange.Payment;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
 import com.example.irakli.soplidange.utils.CheckoutSingleton;
@@ -51,12 +56,16 @@ public class DeliveryTermsFragment extends Fragment {
     private RequestQueue requestQueue;
     TextView deliveryPrice, deliveryCost;
     double totalPrice;
+    View deliveryTermsFragment;
+    LinearLayout delivery;
+
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View deliveryTermsFragment = inflater.inflate(R.layout.delivery_terms_layout, container, false);
+        deliveryTermsFragment = inflater.inflate(R.layout.delivery_terms_layout, container, false);
+
 
 
         deliveryCost = (TextView) deliveryTermsFragment.findViewById(R.id.delivery_cost_id);
@@ -125,7 +134,11 @@ public class DeliveryTermsFragment extends Fragment {
         retryShared();
     }
 
-    private void getJSONInfo() {
+    public void getJSONInfo() {
+
+
+
+
         String url = "http://soplidan.ge/api/shippings?items_per_page=80";
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
@@ -242,4 +255,5 @@ public class DeliveryTermsFragment extends Fragment {
             }
         }
     }
+
 }

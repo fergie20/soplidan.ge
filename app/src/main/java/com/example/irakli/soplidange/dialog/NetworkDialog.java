@@ -40,10 +40,11 @@ public class NetworkDialog extends DialogFragment {
 
                 check = false;
                 check();
+                ((MainActivity)getActivity()).getJSONInfo();
+
+
             }
         });
-
-
         return rootView;
     }
 

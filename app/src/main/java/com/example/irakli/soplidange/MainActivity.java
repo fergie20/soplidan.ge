@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -86,11 +87,25 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton categoriesFab;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         statusBar();
+
+        View parentLayout = findViewById(R.id.drawer);
+        Snackbar.make(parentLayout, "არაა ინტერნეტი!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("გადატვირთვა", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getJSONInfo();
+                    }
+                })
+                .setActionTextColor(getResources().getColor(R.color.colorPrimary ))
+                .show();
+
+
 
 
         if (checkShared == 0) {
@@ -295,6 +310,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getJSONInfo() {
         String url = "http://soplidan.ge/api/categories?items_per_page=80";
+        isNetworkAvailable();
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
                 (url, null, new Response.Listener<JSONObject>() {
@@ -360,6 +376,8 @@ public class MainActivity extends AppCompatActivity {
                             recyclerView.setAdapter(myAdapter);
                             progressDialog.cancel();
 
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -370,6 +388,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
                         progressDialog.cancel();
+
                     }
                 }) {
             @Override
@@ -450,7 +469,6 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         isNetworkAvailable();
-        System.out.println("OnResume");
         count();
     }
 
@@ -464,9 +482,19 @@ public class MainActivity extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
+
+
         } else {
-            NetworkDialog dialog = new NetworkDialog();
-            dialog.show(getFragmentManager(), "dialog");
+            View parentLayout = findViewById(R.id.drawer);
+            Snackbar.make(parentLayout, "არაა ინტერნეტი!", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("გადატვირთვა", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getJSONInfo();
+                        }
+                    })
+                    .setActionTextColor(getResources().getColor(R.color.colorPrimary ))
+                    .show();
         }
     }
 

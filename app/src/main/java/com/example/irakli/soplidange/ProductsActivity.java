@@ -15,6 +15,7 @@ import android.os.Parcelable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -106,7 +107,6 @@ public class ProductsActivity extends AppCompatActivity {
 
         initGridRecycleView();
         initToolbar();
-        isNetworkAvailable();
 
         productsFab = (FloatingActionButton) findViewById(R.id.fab);
         productsFab.setOnClickListener(new View.OnClickListener() {
@@ -467,8 +467,7 @@ public class ProductsActivity extends AppCompatActivity {
 
     //http://soplidan.ge/api/products?items_per_page=300&q=
     public void getJSONInfo(String url) {
-
-        Log.e("querylog", url);
+        isNetworkAvailable();
         StringRequest jsonRequest = new StringRequest
                 (Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
@@ -640,7 +639,6 @@ public class ProductsActivity extends AppCompatActivity {
         System.out.println("OnResume");
 
         updateListView();
-        isNetworkAvailable();
     }
 
     @Override
@@ -732,9 +730,29 @@ public class ProductsActivity extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
-        } else {
-            Toast.makeText(this, "ინფორმაციის ჩამოსატვირთად საჭიროა ინტერნეტ კავშირი", Toast.LENGTH_SHORT).show();
 
+
+        } else {
+            View parentLayout = findViewById(R.id.coordinate);
+            Snackbar.make(parentLayout, "არაა ინტერნეტი!", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("გადატვირთვა", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = getIntent();
+                            if (intent != null) {
+                                query = intent.getStringExtra("query");
+                            }
+
+                            if (category_id == -1) {
+
+                                getJSONInfo(json_url + query);
+                            } else {
+                                getJSONInfo(json_url);
+                            }
+                        }
+                    })
+                    .setActionTextColor(getResources().getColor(R.color.colorPrimary ))
+                    .show();
         }
     }
 

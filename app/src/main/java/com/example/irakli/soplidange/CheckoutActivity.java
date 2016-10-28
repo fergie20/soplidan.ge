@@ -1,11 +1,15 @@
 package com.example.irakli.soplidange;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -56,6 +60,8 @@ public class CheckoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checkout);
 
 
+
+
         cartMap = SingletonTest.getInstance().getCartMap();
 
         initToolbar();
@@ -73,6 +79,8 @@ public class CheckoutActivity extends AppCompatActivity {
 
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
+        isNetworkAvailable();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
         }
@@ -87,8 +95,7 @@ public class CheckoutActivity extends AppCompatActivity {
             Toast.makeText(this, "თქვენი კალათა ცარიელია", Toast.LENGTH_SHORT).show();
         }
 
-        myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
-        recyclerView.setAdapter(myAdapter);
+
 
 
         totalPrice = getTotalPrice(cartArray);
@@ -109,19 +116,6 @@ public class CheckoutActivity extends AppCompatActivity {
             }}
         });
 
-
-        myAdapter.setMyPriceUpdateListener(new CheckoutAdapter.MyClickListener() {
-
-            @Override
-            public void onClick(double price) {
-                NumberFormat nf = NumberFormat.getInstance(); // get instance
-                nf.setMaximumFractionDigits(3); // set decimal places
-                String s = nf.format(totalPrice + price);
-                sumView.setText((s + " ¢"));
-                totalPrice = totalPrice + price;
-                allPrice = s;
-            }
-        });
 
         NumberFormat nf = NumberFormat.getInstance(); // get instance
         nf.setMaximumFractionDigits(3); // set decimal places
@@ -256,5 +250,40 @@ public class CheckoutActivity extends AppCompatActivity {
         Typeface custom_font = Typeface.createFromAsset(this.getAssets(), "BPG_GEL_Excelsior_Caps.ttf");
 
         return custom_font;
+    }
+    public void isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
+
+            myAdapter = new CheckoutAdapter(cartArray, getApplicationContext());
+            recyclerView.setAdapter(myAdapter);
+
+            myAdapter.setMyPriceUpdateListener(new CheckoutAdapter.MyClickListener() {
+
+                @Override
+                public void onClick(double price) {
+                    NumberFormat nf = NumberFormat.getInstance(); // get instance
+                    nf.setMaximumFractionDigits(3); // set decimal places
+                    String s = nf.format(totalPrice + price);
+                    sumView.setText((s + " ¢"));
+                    totalPrice = totalPrice + price;
+                    allPrice = s;
+                }
+            });
+
+
+        } else {
+            View parentLayout = findViewById(R.id.checkout_root_id);
+            Snackbar.make(parentLayout, "არაა ინტერნეტი!", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("გადატვირთვა", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            isNetworkAvailable();
+                        }
+                    })
+                    .setActionTextColor(getResources().getColor(R.color.colorPrimary ))
+                    .show();
+        }
     }
 }
