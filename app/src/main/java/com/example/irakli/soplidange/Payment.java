@@ -1,6 +1,8 @@
 package com.example.irakli.soplidange;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -11,6 +13,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -19,14 +22,36 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.irakli.soplidange.ExampleData.ExampleData;
+import com.example.irakli.soplidange.adapters.CategoriesAdapter;
 import com.example.irakli.soplidange.fragments.DeliveryPlaceFragment;
 import com.example.irakli.soplidange.fragments.DeliveryTermsFragment;
 import com.example.irakli.soplidange.fragments.GuestFieldsFragment;
 import com.example.irakli.soplidange.fragments.OrderedProductsFragment;
 import com.example.irakli.soplidange.fragments.PaymentMethodsFragment;
+import com.example.irakli.soplidange.models.CategoryModel;
+import com.example.irakli.soplidange.utils.AuthorizationParams;
 import com.example.irakli.soplidange.utils.CheckoutSingleton;
+import com.example.irakli.soplidange.utils.SingletonTest;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class Payment extends AppCompatActivity {
 
@@ -43,6 +68,8 @@ public class Payment extends AppCompatActivity {
     boolean checkInvoiceRadioVisibility = false;
     boolean checkOrganizationVisibility = false;
     boolean checkSubVisibility = false;
+    private RequestQueue requestQueue;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -89,6 +116,8 @@ public class Payment extends AppCompatActivity {
                 .commit();
 
         changeFragment();
+
+
 
     }
 
@@ -353,14 +382,102 @@ public class Payment extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "გთხოვთ მონიშნოთ თქვენთვის სასურველი გადახდის მეთოდი !", Toast.LENGTH_SHORT).show();
                                 }
                                 break;
+                            case 4:
+
+                                /////////////////
+
+                                JSONObject jsonObject = new JSONObject();
+
+
+                                JSONObject productsDetail = new JSONObject();
+
+
+
+                                JSONObject products = new JSONObject();
+
+//        Set<Integer> keys = SingletonTest.getInstance().getCartMap().keySet();
+//        for(Integer key: keys){
+//            System.out.println("key "+key);
+//        }
+//
+//        for (int i = 0; i < keys.size(); i++) {
+//            System.out.println("quon "+SingletonTest.getInstance().getCartMap().get(keys.toArray()[i]).getQuontity());
+//
+//        }
+
+
+                                try {
+
+                                    Set<Integer> keys = SingletonTest.getInstance().getCartMap().keySet();
+                                    for (int i = 0; i < keys.size(); i++) {
+                                        productsDetail.put("product_id", keys.toArray()[i]);
+                                        productsDetail.put("amount",SingletonTest.getInstance().getCartMap().get(keys.toArray()[i]).getQuontity());
+
+                                        System.out.println(productsDetail+"detail before");
+                                        System.out.println(products +"products before");
+
+                                        products.put(String.valueOf(keys.toArray()[i]),productsDetail);
+                                        productsDetail.remove("i");
+
+                                        System.out.println(products +"products after");
+                                        System.out.println(productsDetail+"detail after");
+
+                                    }
+
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                JSONObject user_data_detail = new JSONObject();
+                                try {
+                                    user_data_detail.put("email",CheckoutSingleton.getInstance().getCartmap().get("guest_email"));
+                                    user_data_detail.put("firstname",CheckoutSingleton.getInstance().getCartmap().get("guest_name"));
+                                    user_data_detail.put("lastname",CheckoutSingleton.getInstance().getCartmap().get("guest_last_name"));
+                                    user_data_detail.put("s_firstname",CheckoutSingleton.getInstance().getCartmap().get("delivery_name"));
+                                    user_data_detail.put("s_lastname",CheckoutSingleton.getInstance().getCartmap().get("delivery_last_name"));
+                                    user_data_detail.put("s_country","Georgia");
+                                    user_data_detail.put("s_city",CheckoutSingleton.getInstance().getCartmap().get("spinCity"));
+                                    user_data_detail.put("s_state",CheckoutSingleton.getInstance().getCartmap().get("spinDistrict"));
+                                    user_data_detail.put("s_zipcode","");
+                                    user_data_detail.put("s_address",CheckoutSingleton.getInstance().getCartmap().get("delivery_address"));
+                                    user_data_detail.put("b_firstname",CheckoutSingleton.getInstance().getCartmap().get("invoice_name"));
+                                    user_data_detail.put("b_lastname",CheckoutSingleton.getInstance().getCartmap().get("invoice_last_name"));
+                                    user_data_detail.put("b_country","Georgia");
+                                    user_data_detail.put("b_city",CheckoutSingleton.getInstance().getCartmap().get("invoiceSpinCity"));
+                                    user_data_detail.put("b_state",CheckoutSingleton.getInstance().getCartmap().get("invoiceSpinDistrict"));
+                                    user_data_detail.put("b_zipcode","");
+                                    user_data_detail.put("b_address",CheckoutSingleton.getInstance().getCartmap().get("invoice_address"));
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                                try {
+                                    jsonObject.put("user_id",0);
+                                    jsonObject.put("payment_id",Integer.parseInt(CheckoutSingleton.getInstance().getCartmap().get("payment_radioButton")) );
+                                    jsonObject.put("shipping_id",Integer.parseInt(CheckoutSingleton.getInstance().getCartmap().get("order_time_radioButton")));
+                                    jsonObject.put("products",products);
+                                    jsonObject.put("user_data",user_data_detail);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                System.out.println(jsonObject+"    jsopp");
+
+                                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                startActivity(intent);
+
 
                             default:
                                 return;
                         }
 
-                        if (counter == 4) {
-                            return;
-                        }
+//                        if (counter == 5) {
+//                            return;
+//                        }
 
 
                     } else {
@@ -409,5 +526,152 @@ public class Payment extends AppCompatActivity {
         }
 
     }
+    public void getJSONInfo() {
+        String url = "http://soplidan.ge/api/stores/1/orders";
 
+        JSONObject jsonObject = new JSONObject();
+
+
+        JSONObject productsDetail = new JSONObject();
+
+
+
+        JSONObject products = new JSONObject();
+
+//        Set<Integer> keys = SingletonTest.getInstance().getCartMap().keySet();
+//        for(Integer key: keys){
+//            System.out.println("key "+key);
+//        }
+//
+//        for (int i = 0; i < keys.size(); i++) {
+//            System.out.println("quon "+SingletonTest.getInstance().getCartMap().get(keys.toArray()[i]).getQuontity());
+//
+//        }
+
+
+        try {
+
+            Set<Integer> keys = SingletonTest.getInstance().getCartMap().keySet();
+            for (int i = 0; i < keys.size(); i++) {
+                productsDetail.put("product_id", keys.toArray()[i]);
+                productsDetail.put("amount",SingletonTest.getInstance().getCartMap().get(keys.toArray()[i]).getQuontity());
+
+                products.put(String.valueOf(keys.toArray()[i]),productsDetail);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    productsDetail.remove("i");
+                }
+            }
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            jsonObject.put("user_id",0);
+            jsonObject.put("payment_id",CheckoutSingleton.getInstance().getCartmap().get("payment_radioButton"));
+            jsonObject.put("shipping_id",CheckoutSingleton.getInstance().getCartmap().get("order_time_radioButton"));
+            jsonObject.put("products",products);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+        JsonObjectRequest jsonRequest = new JsonObjectRequest
+                (url,  new JSONObject((Map) jsonObject), new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        JSONArray jsonArray = null;
+
+                        try {
+
+                            jsonArray = response.getJSONArray("categories");
+                            ArrayList<CategoryModel> categoryModels = new ArrayList<>();
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject curObj = jsonArray.getJSONObject(i);
+                                int category_id = curObj.getInt("category_id");
+                                String category = curObj.getString("category");
+                                String status = curObj.getString("status");
+                                int position = curObj.getInt("position");
+                                int product_count = curObj.getInt("product_count");
+                                if (status.equals("A")) {
+                                    CategoryModel categoryModel = new CategoryModel(category_id, category, status, position, product_count, ExampleData.productImages[i]);
+                                    categoryModels.add(categoryModel);
+                                }
+
+                            }
+
+
+
+
+                            ArrayList<CategoryModel> foradaptermodels = new ArrayList<>();
+
+                            HashMap<Integer,CategoryModel> hashPosition = new HashMap<>();
+
+                            for (int i = 0; i < categoryModels.size(); i++) {
+                                hashPosition.put(categoryModels.get(i).getPosition(),categoryModels.get(i));
+                            }
+
+
+
+                            for (int i = 0; i < categoryModels.size(); i++) {
+
+                                int keyOfMax = Collections.max(
+                                        hashPosition.entrySet(),
+                                        new Comparator<Map.Entry<Integer,CategoryModel>>(){
+                                            @Override
+                                            public int compare(Map.Entry<Integer, CategoryModel> o1, Map.Entry<Integer, CategoryModel> o2) {
+                                                return o1.getKey() < o2.getKey()? 1:-1;
+                                            }
+                                        }).getKey();
+
+
+                                foradaptermodels.add(hashPosition.get(keyOfMax));
+
+                                hashPosition.remove(keyOfMax);
+
+                                System.out.println("position = " +keyOfMax);
+
+                            }
+                            progressDialog.cancel();
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        progressDialog.cancel();
+
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                String key = "Authorization";
+                String encodedString = Base64.encodeToString(String.format("%s:%s", AuthorizationParams.USERNAME, AuthorizationParams.PASSWORD).getBytes(), Base64.NO_WRAP);
+                String value = String.format("Basic %s", encodedString);
+                System.out.println("Shit:   " + value + "  -  " + encodedString);
+                map.put(key, value);
+                return map;
+            }
+        };
+
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        progressDialog = ProgressDialog.show(this, "", "გთხოვთ დაელოდოთ...");
+        requestQueue.add(jsonRequest);
+    }
 }

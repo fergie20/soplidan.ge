@@ -19,6 +19,8 @@ import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.SingletonTest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import static android.content.Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -63,6 +65,9 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.MyView
         }
 
         holder.setMyModel(cartMap.get(position));
+
+
+
         holder.productPriceView.setText(String.valueOf(price) + " ¢");
         holder.productNameView.setText(cartMap.get(position).getName());
         holder.quantityView.setText(cartMap.get(position).getQuontity() + "");

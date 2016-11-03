@@ -46,7 +46,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.irakli.soplidange.ExampleData.ExampleData;
 import com.example.irakli.soplidange.adapters.CategoriesAdapter;
 import com.example.irakli.soplidange.dialog.CategoryDetailDialog;
-import com.example.irakli.soplidange.dialog.NetworkDialog;
 import com.example.irakli.soplidange.models.CategoryModel;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.AuthorizationParams;
@@ -54,11 +53,9 @@ import com.example.irakli.soplidange.utils.CheckoutSingleton;
 import com.example.irakli.soplidange.utils.SingletonTest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.lang.reflect.Type;
 import java.security.Key;
 import java.util.ArrayList;
@@ -67,6 +64,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -114,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
 
         initToolbar();
         initRecyclerView();
+
+
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar_id);
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
@@ -313,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
         isNetworkAvailable();
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest
-                (url, null, new Response.Listener<JSONObject>() {
+                (url, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         JSONArray jsonArray = null;

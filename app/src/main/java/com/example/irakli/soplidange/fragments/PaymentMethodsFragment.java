@@ -79,7 +79,7 @@ public class PaymentMethodsFragment extends Fragment {
                     RadioButton btn = (RadioButton) rg.getChildAt(i);
 
                     if (btn.getId() == checkedId) {
-                        String text = String.valueOf(btn.getText());
+                        String text = String.valueOf(btn.getId());
                         CheckoutSingleton.getInstance().addNewValue("payment_radioButton",text);
                         return;
                     }
@@ -119,12 +119,14 @@ public class PaymentMethodsFragment extends Fragment {
                                 JSONObject curObj = jsonArray.getJSONObject(i);
                                 String status = curObj.getString("status");
                                 String shipping = curObj.getString("payment");
+                                String payment_id = curObj.getString("payment_id");
 
 
                                 if (status.equals("A") && !curObj.getString("payment_id").equals("12")) {
                                     RadioButton radioButton = new RadioButton(getActivity());
                                     radioButton.setText(shipping);
-                                    radioButton.setId(+i);
+
+                                    radioButton.setId(Integer.parseInt(payment_id));
                                     rprms = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
                                     radioGroup.addView(radioButton, rprms);
                                 }

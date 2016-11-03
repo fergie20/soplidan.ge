@@ -186,7 +186,7 @@ public class GuestFieldsFragment extends android.support.v4.app.Fragment {
             guestPersonView.setImageResource(R.drawable.error_person);
             return;
         }
-        if (guest_mail.getText().toString().length() < 7 || !guest_mail.getText().toString().contains("@") || !guest_mail.getText().toString().contains(".") || guest_mail.getText().toString().contains(" ")) {
+        if (guest_mail.getText().toString().length() <= 7 || !guest_mail.getText().toString().contains("@") || !guest_mail.getText().toString().contains(".") || guest_mail.getText().toString().contains(" ")) {
             guest_mail.setError("გთხოვთ მიუთითოთ სწორი ელ.ფოსტა!");
             guest_mail.requestFocus();
             guestEmailView.setImageResource(R.drawable.error_email);

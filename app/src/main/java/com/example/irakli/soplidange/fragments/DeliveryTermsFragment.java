@@ -58,6 +58,7 @@ public class DeliveryTermsFragment extends Fragment {
     double totalPrice;
     View deliveryTermsFragment;
     LinearLayout delivery;
+    String shipping_id;
 
 
 
@@ -85,8 +86,10 @@ public class DeliveryTermsFragment extends Fragment {
                 for (int i = 0; i < rg.getChildCount(); i++) {
                     RadioButton btn = (RadioButton) rg.getChildAt(i);
                     if (btn.getId() == checkedId) {
-                        String text = String.valueOf(btn.getText());
-                        CheckoutSingleton.getInstance().addNewValue("order_time_radioButton", text);
+
+                        String text = String.valueOf(btn.getId());
+                        CheckoutSingleton.getInstance().addNewValue("order_time_radioButton",text);
+
                         return;
                     }
                 }
@@ -156,11 +159,13 @@ public class DeliveryTermsFragment extends Fragment {
                                 JSONObject curObj = jsonArray.getJSONObject(i);
                                 String status = curObj.getString("status");
                                 String shipping = curObj.getString("shipping");
+                                shipping_id = curObj.getString("shipping_id");
+
 
                                 if (status.equals("A")) {
                                     RadioButton radioButton = new RadioButton(getActivity());
                                     radioButton.setText(shipping);
-                                    radioButton.setId(+i);
+                                    radioButton.setId(Integer.parseInt(shipping_id));
                                     rprms = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
                                     radioGroup.addView(radioButton, rprms);
                                 }
@@ -169,7 +174,7 @@ public class DeliveryTermsFragment extends Fragment {
 
                                 RadioButton btn = (RadioButton) radioGroup.getChildAt(0);
                                 btn.setChecked(true);
-                                CheckoutSingleton.getInstance().addNewValue("order_time_radioButton", String.valueOf(btn.getText()));
+                                CheckoutSingleton.getInstance().addNewValue("order_time_radioButton", String.valueOf(btn.getId()));
 
 
 

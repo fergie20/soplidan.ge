@@ -274,10 +274,10 @@ public class DeliveryPlaceFragment extends Fragment {
                 .getStringArray(R.array.city_array));//setting the country_array to spinner
         invoiceCityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         invoiceSpinCity.setAdapter(invoiceCityAdapter);
-        if (CheckoutSingleton.getInstance().getCartmap().containsKey("invoiceSpinCity")) {
-            invoiceSpinCity.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("invoiceSpinCity")));
-
-        }
+//        if (CheckoutSingleton.getInstance().getCartmap().containsKey("invoiceSpinCity")) {
+//            invoiceSpinCity.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("invoiceSpinCity")));
+//
+//        }
 
 //if you want to set any action you can do in this listener
         invoiceSpinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -296,10 +296,10 @@ public class DeliveryPlaceFragment extends Fragment {
                 .getStringArray(R.array.district_array));//setting the country_array to spinner
         invoiceDistrictAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         invoiceSpinDistrict.setAdapter(invoiceDistrictAdapter);
-        if (CheckoutSingleton.getInstance().getCartmap().containsKey("spinDistrict")) {
-            invoiceSpinDistrict.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("spinDistrict")));
-
-        }
+//        if (CheckoutSingleton.getInstance().getCartmap().containsKey("spinDistrict")) {
+//            invoiceSpinDistrict.setSelection(Integer.parseInt(CheckoutSingleton.getInstance().getValue("spinDistrict")));
+//
+//        }
 
 //if you want to set any action you can do in this listener
         invoiceSpinDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -380,8 +380,8 @@ public class DeliveryPlaceFragment extends Fragment {
 //        invoice_last_name.setText(CheckoutSingleton.getInstance().getValue("guest_last_name"));
 //        invoice_phone.setText(CheckoutSingleton.getInstance().getValue("guest_mobile"));
 //        invoice_address.setText(CheckoutSingleton.getInstance().getValue("guest_address"));
-        invoice_organisation_name.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_name"));
-        invoice_organisation_code.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_code"));
+//        invoice_organisation_name.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_name"));
+//        invoice_organisation_code.setText(CheckoutSingleton.getInstance().getValue("guest_organisation_code"));
 
     }
 

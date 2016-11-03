@@ -27,6 +27,8 @@ public class SingletonTest {
         cartMap.put(productId, model);
     }
 
+
+
     public void removeProduct(Integer product) {
         cartMap.remove(product);
     }

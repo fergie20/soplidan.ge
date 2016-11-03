@@ -11,7 +11,10 @@ public class ProductModel implements Serializable {
     private double list_price,base_price,list_discount;
 
 
-    public ProductModel(String categories, String name, String description, String img, int id, int recource, double price, String status, String product_code, Double base_price, Double list_discount, int list_discount_prc) {
+    public ProductModel(String categories, String name, String description,
+                        String img, int id, int recource, double price, String status,
+                        String product_code, Double base_price, Double list_discount,
+                        int list_discount_prc) {
         this.categories = categories;
         this.name = name;
         this.description = description;
