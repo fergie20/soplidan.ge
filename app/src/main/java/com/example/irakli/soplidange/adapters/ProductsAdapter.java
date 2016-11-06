@@ -22,6 +22,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapEncoder;
 import com.example.irakli.soplidange.R;
 import com.example.irakli.soplidange.models.ProductModel;
 import com.example.irakli.soplidange.utils.SingletonTest;
+import com.squareup.picasso.Picasso;
 
 
 import net.wujingchao.android.view.SimpleTagImageView;
@@ -70,6 +71,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
                     .centerCrop()
                     .fitCenter()
                     .into(holder.productImageView);
+//            Picasso.with(context)
+//                    .load(productModels.get(pos).getImg())
+//                    .into(holder.productImageView);
         }
 
         if (productModels.get(pos).getList_discount() == 0) {

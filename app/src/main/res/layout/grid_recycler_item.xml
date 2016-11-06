@@ -10,13 +10,13 @@
         android:clickable="true"
         android:foreground="?attr/selectableItemBackground">
 
-        <net.wujingchao.android.view.SimpleTagImageView xmlns:simple="http://schemas.android.com/apk/res-auto"
+        <net.wujingchao.android.view.SimpleTagImageView
+            xmlns:simple="http://schemas.android.com/apk/res-auto"
             android:id="@+id/image_id"
             android:layout_width="120dp"
             android:layout_height="105dp"
             android:layout_margin="0dp"
             android:paddingBottom="0dp"
-            android:src="@android:drawable/ic_menu_day"
             simple:simple_corner_distance="30dp"
             simple:simple_tag_background_color="#9eff0900"
             simple:simple_tag_enable="true"
